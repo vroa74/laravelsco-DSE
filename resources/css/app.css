@@ -1,0 +1,15 @@
+@import '@fontsource/arimo'; /* Alternativa similar a Arial */
+@import '@fontsource/roboto';
+@import "flowbite";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+[x-cloak] {
+    display: none;
+}
