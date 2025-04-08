@@ -42,7 +42,7 @@
         <table class="two-column-table ">
             <tr>
                 <!-- Columna del 70% -->
-                <td class="col-70 mb-12 pt-6">
+                <td class="pt-6 mb-12 col-70">
                     <div>
 
                         <div style="
@@ -75,15 +75,15 @@
                 <td class="col-30 tableRoundx">
 
                     <table style="width: 96%" >
-                        <tr class=" mb-2">
+                        <tr class="mb-2 ">
                             <td class="tableRoundMS" style="height: 20px; line-height: 12px; padding: 2px; vertical-align: middle;">
                                 <p class="text-center text-10px" style=" margin: 0.5rem; padding: 0.15rem;">
                                     Área de sello
                                 </p>
                             </td>
                         </tr>
-                        <tr class="  mb-2" >
-                            <td class=" tableRoundMS  text-lg">
+                        <tr class="mb-2 " >
+                            <td class="text-lg  tableRoundMS">
                                 <p class="text-xs" ></p>
                                 <p class="text-xs" ></p>
                                 <p class="text-xs" ></p>
@@ -103,10 +103,10 @@
                             </td>
                         </tr>
                         <tr class="mb-4" >
-                            <td class="text-center text-sm tableRoundMS leading-none p-0" >
-                                <p class="text-center text-10px m-0 p-0">Nombre y Firma</p>
-                                <p class="m-0 p-0">&nbsp;</p>
-                                <p class="m-0 p-0">&nbsp;</p>
+                            <td class="p-0 text-sm leading-none text-center tableRoundMS" >
+                                <p class="p-0 m-0 text-center text-10px">Nombre y Firma</p>
+                                <p class="p-0 m-0">&nbsp;</p>
+                                <p class="p-0 m-0">&nbsp;</p>
                             </td>
                         </tr>
                         <
@@ -120,10 +120,10 @@
     </div>
 
 <div class="body">
-    <table class="table4 mb-2 ">
+    <table class="mb-2 table4 ">
         <tr  >
             <td  >
-            <p class="text-10px pl-2 ">
+            <p class="pl-2 text-10px ">
                 @if (!empty($registro->id))
                     <span class="font-bold">Número de oficio: </span> {{ $registro->id }}
                 @endif
@@ -140,7 +140,7 @@
         </tr>
         <tr>
             <td >
-                <p class="text-10px pl-2 ">
+                <p class="pl-2 text-10px ">
                     @if (!empty($registro->fcap))
                         <span class="font-bold">Fecha del documento:</span>
                         {{ \Carbon\Carbon::parse($registro->fcap)->format('d/m/Y') }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -160,27 +160,27 @@
         </tr>
     </table>
 
-    <table class="table4 mb-2 ">
+    <table class="mb-2 table4 ">
         <tr  >
             <td  >
                 @if (!empty($registro->rem_nombre))
-                    <p class="text-10px pl-2  ">
+                    <p class="pl-2 text-10px ">
                     <span class="font-bold">Nombre :</span> {{ $registro->rem_nombre }}
                     </p>
                 @endif
                     @if (!empty($registro->rem_cargo))
-                        <p class="text-10px pl-2 ">
+                        <p class="pl-2 text-10px ">
                         <span class="font-bold">Cargo: </span> {{ $registro->rem_cargo}}
                         </p>
                     @endif
                     @if (!empty($registro->rem_deporg))
-                        <p class="text-10px pl-2 ">
+                        <p class="pl-2 text-10px ">
                         <span class="font-bold">Dependencia u Organismo: </span> {{ $registro->rem_deporg }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </p>
                     @endif
 
                     @if (!empty($registro->rem_dir))
-                        <p class="text-10px pl-2 ">
+                        <p class="pl-2 text-10px ">
                         <span class="font-bold">Domicilio: </span> {{ $registro->rem_dir }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </p>
                     @endif
@@ -190,43 +190,43 @@
         </tr>
     </table>
 
-    <table class="table4 mb-2 ">
+    <table class="mb-2 table4 ">
         <tr  >
             <td>
 
                     @if (!empty($registro->tcor))
-                    <p class="text-10px pl-2  ">
+                    <p class="pl-2 text-10px ">
                         <span class="font-bold">Tipo del documento: </span> {{ $registro->tcor }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </p>
                     @endif
                     @if (!empty($registro->ccor))
-                    <p class="text-10px pl-2  ">
+                    <p class="pl-2 text-10px ">
                         <span class="font-bold"> clasificación del documento: </span> {{ $registro->ccor }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </p>
                     @endif
                     @if (!empty($registro->des))
-                    <p class="text-10px pl-2  ">
+                    <p class="pl-2 text-10px ">
                         <span class="font-bold"> Descripción del asunto: </span> {{ $registro->des }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </p>
                     @endif
                     @if (!empty($registro->seguimiento))
-                    <p class="text-10px pl-2  ">
+                    <p class="pl-2 text-10px ">
                         <span class="font-bold"> clasificación del documento: </span> {{ $registro->seguimiento }}
                     </p>
                     @endif
                 <hr>
                     @if (!empty($registro->rem_nombre))
-                            <p class="text-10px pl-2  ">
+                            <p class="pl-2 text-10px ">
                         <span class="font-bold">Nombre: </span> {{ $registro->rem_nombre }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </p>
                     @endif
                     @if (!empty($registro->rem_cargo))
-                            <p class="text-10px pl-2  ">
+                            <p class="pl-2 text-10px ">
                         <span class="font-bold">Cargo: </span> {{ $registro->rem_cargo}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </p>
                     @endif
                     @if (!empty($registro->rem_deporg))
-                            <p class="text-10px pl-2  ">
+                            <p class="pl-2 text-10px ">
                         <span class="font-bold">Dependencia u Organismo: </span> {{ $registro->rem_deporg }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </p>
                     @endif
@@ -235,15 +235,5 @@
     </table>
 
  </div>
-
-{{--<div>--}}
-{{--    @for($i=0; $i<= 10; $i++)--}}
-{{--        <div>--}}
-{{--            <div class="cuadro text-sm">--}}
-{{--                {{$i}}--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    @endfor--}}
-{{--</div>--}}
 </body>
 </html>

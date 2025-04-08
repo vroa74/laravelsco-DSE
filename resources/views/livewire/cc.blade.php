@@ -11,11 +11,16 @@
             @endforeach
         </select>
     </div>
+{{--    <br>--}}
+{{--    <hr>--}}
+{{--     tcc: {{$tccc}} - ccc: {{$tccctxt}}--}}
+{{--    <hr>--}}
+{{--    <br>--}}
 
     <!-- Mostrar los valores de ncor y ccor -->
     <div class="pt-2">
         @if($tccc && $tccctxt)
-            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">NCOR: {{ $tccc }}</p>
+            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">TCOR: {{ $tccc }}</p>
             <p class="text-sm font-medium text-gray-700 dark:text-gray-300">CCOR: {{ $tccctxt }}</p>
         @endif
     </div>

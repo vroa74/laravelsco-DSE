@@ -77,7 +77,7 @@ class Rg extends Component
         // Renderizar la vista con los datos
         $pdf = Pdf::loadView($view, ['registro' => $registro]);
         // Guardar el PDF en el almacenamiento local (opcional)
-        $filename = "reporte-{$tipoReporte}-{$registro->id}.pdf";
+        $filename = "reporte-{$tipoReporte}-{$registro->id}.PDF";
         Storage::put("public/reports/{$filename}", $pdf->output());
         // Descarga directa del archivo
         return Response::streamDownload(fn () => print($pdf->stream()), $filename );

@@ -1,7 +1,7 @@
 <div class="text-stone-200">
 
 
-    <div id="accordion-collapse" class="text-center items-center w-full mx-auto">
+    <div id="accordion-collapse" class="items-center w-full mx-auto text-center">
         <h2 id="accordion-collapse-heading-1">
             <div class="relative">
                 <div class="flex items-center justify-between w-full">
@@ -30,26 +30,35 @@
                     <!-- Contenedor de los botones adicionales centrados -->
                     <div class="flex gap-2 justify-center items-center absolute top-1/2 right-[50%] -translate-y-1/2">
                         <button wire:click="openInsertModal"
-
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                          <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 
+                                        overflow-hidden text-sm font-medium text-gray-900 rounded-lg 
+                                        group bg-gradient-to-br from-green-400 to-blue-600 
+                                        group-hover:from-green-400 group-hover:to-blue-600 
+                                        hover:text-white dark:text-white focus:ring-4 
+                                        focus:outline-none focus:ring-green-200 
+                                        dark:focus:ring-green-800">
+                          <span class="relative px-2 py-1 transition-all duration-75 ease-in 
+                                    bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                               <i class="fa-regular fa-square-plus"></i>
                           </span>
+                          {{-- agregar --}}
                         </button>
 
 
                         <button wire:click="exportPDF"
                                 class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                          <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                              <i class="fa-solid fa-file-export"></i>
+                          <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
+                              <i class="fa-solid fa-file-export"></i> 
                           </span>
+                          {{-- exportar --}}
                         </button>
 
                         <button wire:click="openViewQuery"
                                 class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                          <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                          <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                               <i class="fa-solid fa-filter"></i>
                           </span>
+                          {{-- filtro --}}
                         </button>
                     </div>
                 </div>
@@ -61,13 +70,13 @@
             {{--      begin section containes filter--}}
 
                 {{-------------------------------------------------------------------------------------------------------------------------------------------------------------------}}
-                <div class="grid grid-cols-4 gap-1 w-full h-full px-4 ">
-                    <div class="border-2 border-red-400 rounded-lg p-1 items-center text-center space-y-1">
+                <div class="grid w-full h-full grid-cols-4 gap-1 px-4 ">
+                    <div class="items-center p-1 space-y-1 text-center border-2 border-red-400 rounded-lg">
                         {{-- inline-block se usa para un tamaño especifico           --}}
                         Mostrar:: <select
                             id="countries"
                             wire:model.live="NumPag"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-md focus:ring-blue-500 focus:border-blue-500 inline-block w-auto p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="inline-block w-auto p-1 text-xs text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="10" selected>Registros a mostrar</option>
                             <option value="10">10</option>
                             <option value="20">20</option>
@@ -80,7 +89,7 @@
                     </div>
                     {{--   fin  numero de registros a mostrar----------------------------------------------------}}
                     {{--            filtrar por id y por folio ya sea un registro o por un intervalo --------------------------------------------------------}}
-                    <div class="border-2 border-blue-400 rounded-lg p-1 text-center flex flex-col items-center space-y-1">
+                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-blue-400 rounded-lg">
                         {{-- Public folioinit, foliofin --}}
                         <div class="flex items-center space-x-1">
                             <span class="text-sm">Folio</span>
@@ -97,7 +106,7 @@
                     </div>
                     {{--           fin filtrar por id y por folio ya sea un registro o por un intervalo --------------------------------------------------------}}
                     {{--        filtro por descripcion u por seguimiento -----------------------------------------------------------}}
-                    <div class="border-2 border-green-400 rounded-lg p-1 text-center flex flex-col items-center space-y-1">
+                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-green-400 rounded-lg">
                         <div class="flex items-center space-x-1">
                             <span class="text-sm">Des.</span>
                             <input type="text"
@@ -113,14 +122,14 @@
                     </div>
                     {{--        fin filtro por descripcion u por seguimiento -----------------------------------------------------------}}
                     {{--        filtro por estatus de la correspondencia ------------------------------------------------------}}
-                    <div class="border-2 border-yellow-400 rounded-lg p-1 text-center">
+                    <div class="p-1 text-center border-2 border-yellow-400 rounded-lg">
                         {{-- estatus --}}
                         <p>Total de registros: {{ $cos->total() }}</p>
                         <p>{{ $myquery }}</p>
                     </div>
                     {{--        fin filtro por estatus de la correspondencia ------------------------------------------------------}}
                     {{--         filtro por fechas ---------------------------------------------------------------------------}}
-                    <div class="border-2 border-purple-400 rounded-lg p-1 text-center flex flex-col items-center space-y-1">
+                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-purple-400 rounded-lg">
                         <div class="flex items-center space-x-2">
                             <label for="fcapini" class="text-xs font-medium text-gray-700 dark:text-gray-300">F. Cap.</label>
                             <div class="relative">
@@ -182,7 +191,7 @@
                     </div>
                     {{--       fin  filtro por fechas ---------------------------------------------------------------------------}}
                     {{--            filtro por remitente ------------------------------------------------------}}
-                    <div class="border-2 border-pink-400 rounded-lg p-1 text-center flex flex-col items-center space-y-1">
+                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-pink-400 rounded-lg">
                         <div class="flex items-center p-0 space-x-1">
                             <span class="text-sm">Rem. Nom.</span>
                             <input type="text"
@@ -207,7 +216,7 @@
                     </div>
                     {{--          fin  filtro por remitente ------------------------------------------------------}}
                     {{--                filtro por elementos turnado -------------------------------------------------}}
-                    <div class="border-2 border-teal-400 rounded-lg p-1 text-center flex flex-col items-center space-y-1">
+                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-teal-400 rounded-lg">
                         <div class="flex items-center p-0 space-x-1">
                             <span class="text-sm">Tur. Nom.</span>
                             <input type="text"
@@ -231,8 +240,8 @@
                         </div>
                     </div>
                     {{--             fin   filtro por elementos turnado -------------------------------------------------}}
-                    <div class="border-2 border-orange-400 rounded-lg p-1 text-center flex flex-col items-center space-y-1">
-                        <div class="flex items-center space-x-2 max-w-sm mx-auto">
+                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-orange-400 rounded-lg">
+                        <div class="flex items-center max-w-sm mx-auto space-x-2">
                             <!-- Label -->
                             <label for="nnncor" class="text-xs font-medium text-gray-900 dark:text-white">N. Cor.</label>
                             <!-- Select -->
@@ -245,7 +254,7 @@
 
                             </select>
                         </div>
-                        <div class="flex items-center space-x-2 max-w-sm mx-auto">
+                        <div class="flex items-center max-w-sm mx-auto space-x-2">
                             <!-- Label -->
                             <label for="tttcor" class="text-xs font-medium text-gray-900 dark:text-white">T. Cor.</label>
                             <!-- Select -->
@@ -257,7 +266,7 @@
                                 <option value="DE">Germany</option>
                             </select>
                         </div>
-                        <div class="flex items-center space-x-2 max-w-sm mx-auto">
+                        <div class="flex items-center max-w-sm mx-auto space-x-2">
                             <!-- Label -->
                             <label for="cccor" class="text-xs font-medium text-gray-900 dark:text-white">Clas. Cor</label>
                             <!-- Select -->
@@ -285,8 +294,8 @@
 
 {{--     numero de registros a mostrar----------------------------------------------------}}
 
-    <div class=" pt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-xs text-center rtl:text-right bg-blue-900 text-gray-500 dark:text-gray-400 dark:hover:font-bold dark:hover:bg-blue-950"  >
+    <div class="relative pt-4 overflow-x-auto shadow-md  sm:rounded-lg">
+        <table class="w-full text-xs text-center text-gray-500 bg-blue-900 rtl:text-right dark:text-gray-400 dark:hover:font-bold dark:hover:bg-blue-950"  >
             <tr>
                 <th scope="col" class="px-6 py-3 w-[4%]">
                     id
@@ -320,9 +329,9 @@
             <tbody class="text-center">
             @foreach ($cos as $co)
                 @if($co->estatus)
-                       <tr class="bg-white border-b dark:bg-red-950 dark:border-red-800 hover:bg-gray-50 dark:hover:bg-red-900  dark:hover:text-base ">
+                       <tr class="bg-white border-b dark:bg-red-950 dark:border-red-800 hover:bg-gray-50 dark:hover:bg-red-900 dark:hover:text-base ">
                       @else
-                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600  dark:hover:text-black  dark:hover:text-base "  >
+                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:text-black dark:hover:text-base "  >
                 @endif
                 <td class="px-1 py-1">
                     {{$co->id}}
@@ -397,8 +406,7 @@
                            bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400
                            group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4
                            focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                        <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white
-                            dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                              <i class="fa-regular fa-eye"></i> {{--  show record--}}
                         </span>
                     </button>{{--                    boton de show--}}
@@ -410,8 +418,7 @@
                                    group-hover:to-orange-600 hover:text-white dark:text-white focus:ring-4
                                    focus:outline-none focus:ring-orange-600 dark:focus:ring-orange-800">
 
-                          <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white
-                                       dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                          <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                             <i class="fa-solid fa-pencil"></i>{{-- Edit--}}
                           </span>
                     </button> {{--                    boton de edit--}}
@@ -421,7 +428,7 @@
                                    from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
                                    hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
                                    dark:focus:ring-purple-800">
-                           <span class="relative px-2 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                           <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                             <i class="fa-regular fa-rectangle-list"></i>
                             </span>
                     </a>
@@ -431,7 +438,7 @@
                                    from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
                                    hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
                                    dark:focus:ring-purple-800">
-                           <span class="relative px-2 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                           <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                             <i class="fa-solid fa-bars"></i>
                             </span>
                     </a>
@@ -441,7 +448,7 @@
                                    from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
                                    hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
                                    dark:focus:ring-purple-800">
-                           <span class="relative px-2 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                           <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                             <i class="fa-solid fa-list"></i>
                             </span>
                     </a>

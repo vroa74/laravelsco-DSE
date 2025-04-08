@@ -142,7 +142,7 @@ class People extends Component
             }
         }
         $this->deleteRecordId = null; // Restablece la variable
-        $this->datadelete = null;
+        $this->recordToDelete = null; // Restablece la variable del registro a borrar
         session()->flash('message', 'Registro eliminado correctamente.');
     }
 //--------- end borrar registro -----------------------------------------------------------------------------
@@ -258,14 +258,24 @@ class People extends Component
 
     public function edit($id)
     {
-        $this->editing = $id;
+        $this->editRecordId = $id;
         $record = Age::findOrFail($id);
-
-        $this->fill($record->toArray());
+        
+        $this->editTitulo = $record->titulo;
+        $this->editNombre = $record->nombre;
+        $this->editApaterno = $record->apaterno;
+        $this->editAmaterno = $record->amaterno;
+        $this->editCargo = $record->cargo;
+        $this->editDeporg = $record->deporg;
+        $this->editTelefono = $record->telefono;
+        $this->editEmail = $record->email;
+        $this->editDir = $record->dir;
+        
         $this->toggleAccordion();
     }
+    
 
-    public function resetForm() {
+    public function resetForm()    {
         $this->reset([
             'titulo',
             'nombre',
