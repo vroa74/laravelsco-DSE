@@ -1,10 +1,9 @@
 <div>
-
-    <div class="mx-1 mx-auto bg-gray-900 rounded-lg shadow-md max-w-2sm border-amber-200">
+    <div class="mx-auto bg-gray-900 rounded-lg shadow-md max-w-2sm border-amber-200">
         <h2 class="mb-0 font-bold text-center text-white text-md">Formulario de Registro</h2>
+        {{-- //! Formulario de Registro --}}
         <form  method="POST" class="m-4 text-white ">
             @csrf
-{{-------------------------------------------------------------------------------------------------------}}
             <div>
                 <label
                     for="lleg"
@@ -22,7 +21,7 @@
                     @endforeach
                 </select>
             </div>
-           {{---------------------------------------------------------------------------------------------}}
+            {{---------------------------------------------------------------------------------------------}}
             <div class="grid grid-cols-4 grid-rows-2 gap-4">
                 <!-- Columna 1 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
@@ -39,7 +38,6 @@
                         wire:model.live="fcap"
                         class="w-3/4 p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
-
                 <!-- Columna 2 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
                     <label
@@ -58,14 +56,15 @@
                         Nivel de Correspondencia
                     </label>
                     <select
-                             id="nncor"
-                             wire:model.live="ncor"
-                             class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            id="nncor"
+                            wire:model.live="ncor"
+                            class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Selecione el Nivel:</option>
                         @foreach($ncors as $item)
                             <option value="{{$item->ncor}}"> {{$item->ncor}} </option>
                         @endforeach
                     </select>
+                    {{ $ncor }} 
                 </div>
                 <!-- Columna 4 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
@@ -76,13 +75,16 @@
                         </label>
                         <select id="tcorSelect"
                                 class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                wire:model.live="tcccid">
+                                wire:model.live="tcccid"
+                                x-data="{ selectedText: '' }"
+                                x-on:change="selectedText = $event.target.options[$event.target.selectedIndex].text">
                             <option value="">Seleccione una opción</option>
                             @foreach($tcc as $items)
-                                <option value="{{ $items->id }}">{{ $items->tcor }}</option>
+                                <option value="{{ $items->id }}" data-text="{{ $items->tcor }}">{{ $items->tcor }}</option>
                             @endforeach
                         </select>
-
+                        
+                        <input type="hidden" wire:model="tccctext" x-bind:value="selectedText">
                 </div>
                 <!-- Fila 2 - Columna 1 ---------------------------------------------------------------------------------------------------------->
                 <div class="flex items-center w-full col-span-1 gap-2">
@@ -92,15 +94,17 @@
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Clasificacion de Correspondencia
                     </label>
-                    <select id="cccor" class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select id="cccor" 
+                            wire:model.live="ccor"
+                            class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            @if(!$isCccorEnabled) disabled @endif>
                         <option selected>Selecione la Clasificacion:</option>
-                        @foreach($ccors as $item)
+                        @foreach($filteredCcor as $item)
                             <option value="{{$item->tcor}}"> {{$item->ccor}} </option>
                         @endforeach
                     </select>
-                </div>
+                </div>  
                 <!-- Fila 2 - Columna 2 -->
-
                 <div class="flex items-center w-full col-span-1 gap-2">
                         <label
                             for="nnh"
@@ -126,7 +130,6 @@
                             wire:model.live="nofi"
                             class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
-
                 <!-- Fila 2 - Columna 4 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
                         <label
@@ -156,14 +159,14 @@
                         lang="es"
                         wire:model.live="des"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escribe tus pensamientos aquí..."></textarea>
+                        placeholder="Escribe aquí..."></textarea>
                     <button
-                             data-modal-target="modal_des"
-                             data-modal-toggle="modal_des"
-                             class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
-                                     font-medium rounded-lg text-xs px-2 py-1 m-0.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700
-                                     dark:focus:ring-blue-800"
-                             type="button">
+                            data-modal-target="modal_des"
+                            data-modal-toggle="modal_des"
+                            class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
+                                    font-medium rounded-lg text-xs px-2 py-1 m-0.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700
+                                    dark:focus:ring-blue-800"
+                            type="button">
                         Ins. Nombre
                     </button>
 
@@ -234,7 +237,9 @@
                     </label>
                     <textarea id="seg"
                             rows="4"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                            placeholder="Escribe aquí...">
+                        </textarea>
                     <button
                         type="button"
                         class="px-3 py-2 m-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Extra small</button>
@@ -268,7 +273,6 @@
                         Buscar Turnado (Agenda)
                     </button>
                 </div>
-
             </div>
             {{-- {{$users}} --}}
             {{-- {{$users->email}} {{$users->name}} {{$users->id}} --}}
@@ -346,7 +350,7 @@
     {{-- =============================== --}}
     @if($isAgeModalOpen)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75">
-            <div class="w-full max-w-4xl p-6 mx-4 bg-white rounded-lg shadow-xl dark:bg-gray-800">
+            <div class="w-full max-w-5xl p-6 mx-4 bg-white rounded-lg shadow-xl dark:bg-gray-800">
                 <div class="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-700">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Seleccionar de Agenda ({{ $currentAgeAction }})</h3>
                     <button wire:click="closeAgeModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">

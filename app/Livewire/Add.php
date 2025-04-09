@@ -20,6 +20,9 @@ class Add extends Component
     public $selectedLegislaturaId, $ffcap, $fncor, $ftcor, $ftcorid;
     public $legislatura, $fcap, $frec, $ncor, $tcor, $ccor, $fofi, $nofi, $nhoj, $rem_nombre, $rem_cargo, $rem_deporg, $rem_dir;
     public $des, $seguimiento, $tur_nom, $tur_cargo, $tur_deporg, $creo, $modifico, $reporte, $estatus;
+    public $tcccid = null;
+    public $tccctext = '';
+    public $filteredCcor = []; // Nueva propiedad para almacenar las clasificaciones filtradas
     // Quitar $selectedId y $selectedTcor si ya no se usan globalmente
     // public $selectedId = null;
     // public $selectedTcor = null;
@@ -28,6 +31,7 @@ class Add extends Component
     public $isAgeModalOpen = false;
     public $modalAgeFilter = '';
     public $currentAgeAction = ''; // Para saber qué hacer al seleccionar ('fillRemitente', 'fillTurnado', etc.)
+    public $isCccorEnabled = false; // Para controlar si el select de clasificación está habilitado
     // No necesitamos una propiedad separada para $modalAges, filtraremos $this->ages en render
     // ------------------------------------------
 
@@ -46,6 +50,10 @@ class Add extends Component
         if ($actualLegislatura) {
             $this->selectedLegislaturaId = $actualLegislatura->id;
         }
+
+        // Inicializar el estado de isCccorEnabled basado en tcccid
+        $this->isCccorEnabled = !empty($this->tcccid);
+        $this->updateFilteredCcor();
     }
     // Mantener la función selectCorrespondence optimizada
     public function selectCorrespondence($fid, $fttcor)
@@ -96,6 +104,30 @@ class Add extends Component
             }
         }
         $this->closeAgeModal(); // Cierra el modal después de seleccionar
+    }
+
+    // --- Método para actualizar el estado de habilitación del select de clasificación ---
+    public function updatedTcccid($value)
+    {
+        $this->isCccorEnabled = !empty($value);
+        if (!$this->isCccorEnabled) {
+            $this->ccor = ''; // Resetear el valor de clasificación si se deshabilita
+            $this->tccctext = ''; // Resetear el texto
+        } else {
+            // Obtener el texto del tipo de correspondencia seleccionado
+            $selectedTcor = $this->tcors->find($value);
+            $this->tccctext = $selectedTcor ? $selectedTcor->tcor : '';
+        }
+        $this->updateFilteredCcor();
+    }
+
+    protected function updateFilteredCcor()
+    {
+        if ($this->tcccid) {
+            $this->filteredCcor = $this->ccors->where('tcor', $this->tcccid);
+        } else {
+            $this->filteredCcor = collect([]);
+        }
     }
     // -------------------------------------
 
