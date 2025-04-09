@@ -1,8 +1,30 @@
 <div>
+    @if (session()->has('success'))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session()->has('error'))
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="mx-auto bg-gray-900 rounded-lg shadow-md max-w-2sm border-amber-200">
         <h2 class="mb-0 font-bold text-center text-white text-md">Formulario de Registro</h2>
         {{-- //! Formulario de Registro --}}
-        <form  method="POST" class="m-4 text-white ">
+        <form wire:submit="save" class="m-4 text-white ">
             @csrf
             <div>
                 <label
@@ -47,6 +69,7 @@
                     <input
                         type="date"
                         id="ffrec"
+                        wire:model.live="frec"
                         class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="flex items-center w-full col-span-1 gap-2">
@@ -143,7 +166,7 @@
                             wire:model.live="fofi"
                             class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></div>
             </div>
-{{------------------------------------------------------------------------------------------------------------------}}
+    {{------------------------------------------------------------------------------------------------------------------}}
             <div class="grid grid-cols-2 grid-rows-2 gap-4">
                 <!-- Fila 1 - Columna 1 -->
                 <div class="col-span-1">
@@ -160,15 +183,10 @@
                         wire:model.live="des"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe aquí..."></textarea>
-                    <button
-                            data-modal-target="modal_des"
-                            data-modal-toggle="modal_des"
-                            class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
-                                    font-medium rounded-lg text-xs px-2 py-1 m-0.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700
-                                    dark:focus:ring-blue-800"
-                            type="button">
-                        Ins. Nombre
-                    </button>
+                        <button type="button" wire:click="openAgeModal('DES')"
+                        class="px-3 py-2 m-1 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            Buscar Usuario
+                        </button>
 
                 </div>
                 <div class="col-span-1 m-4">
@@ -219,16 +237,12 @@
                                 wire:model="rem_dir"
                                 class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
-                    <button
-                        type="button"
-                        class="px-3 py-2 m-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Buscar
-                    </button>
                     {{-- Botón para abrir modal y llenar Remitente --}}
-                    <button type="button" wire:click="openAgeModal('fillRemitente')"
+                    <button type="button" wire:click="openAgeModal('REM')"
                             class="px-3 py-2 m-1 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                        Buscar Remitente (Agenda)
+                        Buscar Usuario
                     </button>
+                    
                 </div>
                 <div class="col-span-1 ">
                     <label for="seg"
@@ -237,13 +251,17 @@
                     </label>
                     <textarea id="seg"
                             rows="4"
+                            spellcheck="true"
+                            lang="es"
+                            wire:model.live="seguimiento"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                             placeholder="Escribe aquí...">
                         </textarea>
-                    <button
-                        type="button"
-                        class="px-3 py-2 m-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Extra small</button>
-                </div>
+                        <button type="button" wire:click="openAgeModal('SEG')"
+                        class="px-3 py-2 m-1 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            Buscar Usuario
+                        </button>
+            </div>
                 <div class="col-span-1 ">
                     <p>Turnado</p>
                     <div class="flex items-center m-1 space-x-4 ">
@@ -268,9 +286,9 @@
                                 class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     {{-- Botón para abrir modal y llenar Turnado --}}
-                    <button type="button" wire:click="openAgeModal('fillTurnado')"
+                    <button type="button" wire:click="openAgeModal('TUR')"
                             class="px-3 py-2 m-1 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                        Buscar Turnado (Agenda)
+                        Buscar Usuario
                     </button>
                 </div>
             </div>
@@ -352,7 +370,7 @@
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75">
             <div class="w-full max-w-5xl p-6 mx-4 bg-white rounded-lg shadow-xl dark:bg-gray-800">
                 <div class="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-700">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Seleccionar de Agenda ({{ $currentAgeAction }})</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Seleccionar de Agenda - {{ $accion }}</h3>
                     <button wire:click="closeAgeModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
                         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                         <span class="sr-only">Cerrar modal</span>
