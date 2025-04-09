@@ -29,7 +29,7 @@
 
                     <!-- Contenedor de los botones adicionales centrados -->
                     <div class="flex gap-2 justify-center items-center absolute top-1/2 right-[50%] -translate-y-1/2">
-                        <button wire:click="openInsertModal"
+                        <a href="{{ route('add') }}"
                                 class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 
                                         overflow-hidden text-sm font-medium text-gray-900 rounded-lg 
                                         group bg-gradient-to-br from-green-400 to-blue-600 
@@ -37,12 +37,11 @@
                                         hover:text-white dark:text-white focus:ring-4 
                                         focus:outline-none focus:ring-green-200 
                                         dark:focus:ring-green-800">
-                          <span class="relative px-2 py-1 transition-all duration-75 ease-in 
-                                    bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
+                          <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                               <i class="fa-regular fa-square-plus"></i>
-                          </span>
+                          </span> 
                           {{-- agregar --}}
-                        </button>
+                        </a>
 
 
                         <button wire:click="exportPDF"
@@ -294,7 +293,7 @@
 
 {{--     numero de registros a mostrar----------------------------------------------------}}
 
-    <div class="relative pt-4 overflow-x-auto shadow-md  sm:rounded-lg">
+    <div class="relative pt-4 overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-xs text-center text-gray-500 bg-blue-900 rtl:text-right dark:text-gray-400 dark:hover:font-bold dark:hover:bg-blue-950"  >
             <tr>
                 <th scope="col" class="px-6 py-3 w-[4%]">

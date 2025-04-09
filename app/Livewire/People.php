@@ -274,7 +274,6 @@ class People extends Component
         $this->toggleAccordion();
     }
     
-
     public function resetForm()    {
         $this->reset([
             'titulo',
