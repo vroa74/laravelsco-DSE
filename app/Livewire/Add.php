@@ -23,17 +23,34 @@ class Add extends Component
     public $des, $seguimiento, $tur_nom, $tur_cargo, $tur_deporg, $creo, $modifico, $reporte, $estatus;
     public $tcccid = null;
     public $tccctext = '';
-    public $filteredCcor = []; // Nueva propiedad para almacenar las clasificaciones filtradas
-    public $accion = ''; // Nueva propiedad para almacenar la acción
-    // Quitar $selectedId y $selectedTcor si ya no se usan globalmente
-    // public $selectedId = null;
-    // public $selectedTcor = null;
+    public $filteredCcor = [];
+    public $accion = '';
+
+    // Variables para los componentes de la tabla
+    public $textarea_1 = 'Hola';
+    public $textarea_2 = 'Hola';
+    public $input_3_1 = 'Hola';
+    public $input_3_2 = 'Hola';
+    public $input_3_3 = 'Hola';
+    public $input_3_4 = 'Hola';
+    public $input_4_1 = 'Hola';
+    public $input_4_2 = 'Hola';
+    public $input_4_3 = 'Hola';
+    public $input_4_4 = 'Hola';
+
+    // Propiedades para el modal de Ages
+    public $showModalAgent = false;
+    public $searchNombre = '';
+    public $searchCargo = '';
+    public $searchDeporg = '';
+    public $perPage = 10;
 
     // --- Propiedades para el Modal de Ages ---
     public $isAgeModalOpen = false;
     public $modalAgeFilter = '';
     public $currentAgeAction = ''; // Para saber qué hacer al seleccionar ('fillRemitente', 'fillTurnado', etc.)
     public $isCccorEnabled = false; // Para controlar si el select de clasificación está habilitado
+    public $selectedColumn = null; // Para almacenar la columna seleccionada
     // No necesitamos una propiedad separada para $modalAges, filtraremos $this->ages en render
     // ------------------------------------------
 
@@ -54,6 +71,18 @@ class Add extends Component
         $this->nhoj = 1;
         $this->nofi = '1';
 
+        // Inicializar variables de la tabla
+        $this->textarea_1 = 'Hola';
+        $this->textarea_2 = 'Hola';
+        $this->input_3_1 = 'Hola';
+        $this->input_3_2 = 'Hola';
+        $this->input_3_3 = 'Hola';
+        $this->input_3_4 = 'Hola';
+        $this->input_4_1 = 'Hola';
+        $this->input_4_2 = 'Hola';
+        $this->input_4_3 = 'Hola';
+        $this->input_4_4 = 'Hola';
+
         // Encontrar la legislatura actual y preseleccionar su ID
         $actualLegislatura = $this->legs->firstWhere('actual', true);
         if ($actualLegislatura) {
@@ -73,12 +102,13 @@ class Add extends Component
     }
 
     // --- Métodos para el Modal de Ages ---
-    public function openAgeModal($action)
+    public function openAgeModal($action, $column = null)
     {
         $this->currentAgeAction = $action;
         $this->accion = $action; // Establecer la acción
         $this->modalAgeFilter = '';
         $this->isAgeModalOpen = true;
+        $this->selectedColumn = $column; // Guardar la columna seleccionada
     }
 
     public function closeAgeModal()
@@ -93,34 +123,31 @@ class Add extends Component
     {
         $selectedAge = Age::find($ageId);
         if ($selectedAge) {
-            // Realizar acción basada en $accion
-            switch ($this->accion) {
-                case 'REM':
-                    // Llenar campos de Remitente
-                    $this->rem_nombre = trim($selectedAge->titulo . ' ' . $selectedAge->nombre . ' ' . $selectedAge->apaterno . ' ' . $selectedAge->amaterno);
-                    $this->rem_cargo = $selectedAge->cargo;
-                    $this->rem_deporg = $selectedAge->deporg;
-                    $this->rem_dir = $selectedAge->dir;
+            $textoSeleccionado = ' '.trim($selectedAge->nombre . ' ' . $selectedAge->cargo . ' ' . $selectedAge->deporg);
+            
+            // Lógica para el modal principal
+            switch ($this->selectedColumn) {
+                case 'columna1':
+                    $this->textarea_1 = $this->textarea_1 ? $this->textarea_1 . "\n" . $textoSeleccionado : $textoSeleccionado;
                     break;
-                case 'TUR':
-                    // Llenar campos de Turnado
-                    $this->tur_nom = trim($selectedAge->titulo . ' ' . $selectedAge->nombre . ' ' . $selectedAge->apaterno . ' ' . $selectedAge->amaterno);
-                    $this->tur_cargo = $selectedAge->cargo;
-                    $this->tur_deporg = $selectedAge->deporg;
+                case 'columna2':
+                    $this->textarea_2 = $this->textarea_2 ? $this->textarea_2 . "\n" . $textoSeleccionado : $textoSeleccionado;
                     break;
-                case 'DES':
-                    // Agregar al textarea de Descripción
-                    $textoDescripcion = trim($selectedAge->titulo . ' ' . $selectedAge->nombre . ' ' . $selectedAge->apaterno . ' ' . $selectedAge->amaterno);
-                    $this->des = $this->des ? $this->des . "\n" . $textoDescripcion : $textoDescripcion;
+                case 'columna3':
+                    $this->input_3_1 = $this->input_3_1 ? $this->input_3_1 . "\n" . $selectedAge->nombre : $selectedAge->nombre;
+                    $this->input_3_2 = $this->input_3_2 ? $this->input_3_2 . "\n" . $selectedAge->cargo : $selectedAge->cargo;
+                    $this->input_3_3 = $this->input_3_3 ? $this->input_3_3 . "\n" . $selectedAge->deporg : $selectedAge->deporg;
+                    $this->input_3_4 = $this->input_3_4 ? $this->input_3_4 . "\n" . $selectedAge->dir : $selectedAge->dir;
                     break;
-                case 'SEG':
-                    // Agregar al textarea de Seguimiento
-                    $textoSeguimiento = trim($selectedAge->titulo . ' ' . $selectedAge->nombre . ' ' . $selectedAge->apaterno . ' ' . $selectedAge->amaterno);
-                    $this->seguimiento = $this->seguimiento ? $this->seguimiento . "\n" . $textoSeguimiento : $textoSeguimiento;
+                case 'columna4':
+                    $this->input_4_1 = $this->input_4_1 ? $this->input_4_1 . "\n" . $selectedAge->nombre : $selectedAge->nombre;
+                    $this->input_4_2 = $this->input_4_2 ? $this->input_4_2 . "\n" . $selectedAge->cargo : $selectedAge->cargo;
+                    $this->input_4_3 = $this->input_4_3 ? $this->input_4_3 . "\n" . $selectedAge->deporg : $selectedAge->deporg;
+                    $this->input_4_4 = $this->input_4_4 ? $this->input_4_4 . "\n" . $selectedAge->dir : $selectedAge->dir;
                     break;
             }
+            $this->closeModal();
         }
-        $this->closeAgeModal();
     }
 
     // --- Método para actualizar el estado de habilitación del select de clasificación ---
@@ -148,51 +175,69 @@ class Add extends Component
     }
     // -------------------------------------
 
-    public function render()
+    // Método para abrir el modal
+    public function openModalAgent($column = null)
     {
-        // Filtrar los datos para el modal si está abierto
-        $modalAgesData = collect(); // Inicializa como colección vacía
-        if ($this->isAgeModalOpen) {
-            $query = Age::query();
-            if (!empty($this->modalAgeFilter)) {
-                $filter = '%' . $this->modalAgeFilter . '%';
-                // Busca en múltiples campos
-                $query->where(function ($q) use ($filter) {
-                    $q->where('titulo', 'like', $filter)
-                      ->orWhere('nombre', 'like', $filter)
-                      ->orWhere('apaterno', 'like', $filter)
-                      ->orWhere('amaterno', 'like', $filter)
-                      ->orWhere('cargo', 'like', $filter)
-                      ->orWhere('deporg', 'like', $filter)
-                      ->orWhere('telefono', 'like', $filter)
-                      ->orWhere('email', 'like', $filter)
-                      ->orWhere('dir', 'like', $filter);
-                });
-            }
-            $modalAgesData = $query->orderBy('nombre')->orderBy('apaterno')->get();
-            // Alternativa si $this->ages ya tiene *todos* los registros y no son demasiados:
-            // $modalAgesData = $this->ages->filter(function ($age) {
-            //     $filterLower = strtolower($this->modalAgeFilter);
-            //     return str_contains(strtolower($age->titulo ?? ''), $filterLower) ||
-            //            str_contains(strtolower($age->nombre ?? ''), $filterLower) ||
-            //            str_contains(strtolower($age->apaterno ?? ''), $filterLower) ||
-            //            str_contains(strtolower($age->amaterno ?? ''), $filterLower) ||
-            //            str_contains(strtolower($age->cargo ?? ''), $filterLower) ||
-            //            str_contains(strtolower($age->deporg ?? ''), $filterLower);
-            // });
+        $this->showModalAgent = true;
+        $this->selectedColumn = $column;
+    }
+
+    // Método para cerrar el modal
+    public function closeModal()
+    {
+        $this->showModalAgent = false;
+        $this->selectedColumn = null;
+        $this->reset(['searchNombre', 'searchCargo', 'searchDeporg']);
+    }
+
+    // Método para obtener los Ages paginados y filtrados
+    public function getModalAgesProperty()
+    {
+        $query = Age::query();
+
+        if ($this->searchNombre) {
+            $query->where('nombre', 'like', '%' . $this->searchNombre . '%');
         }
 
-        // Ya no es necesario paginar aquí si el modal usa su propia query
-        // $ages = Age::paginate(10);
+        if ($this->searchCargo) {
+            $query->where('cargo', 'like', '%' . $this->searchCargo . '%');
+        }
 
+        if ($this->searchDeporg) {
+            $query->where('deporg', 'like', '%' . $this->searchDeporg . '%');
+        }
+
+        return $query->orderBy('nombre')->paginate($this->perPage);
+    }
+
+    // Reseteo de la paginación al cambiar los filtros
+    public function updatedSearchNombre()
+    {
+        $this->resetPage();
+        $this->showModalAgent = true; // Mantener el modal abierto
+    }
+
+    public function updatedSearchCargo()
+    {
+        $this->resetPage();
+        $this->showModalAgent = true; // Mantener el modal abierto
+    }
+
+    public function updatedSearchDeporg()
+    {
+        $this->resetPage();
+        $this->showModalAgent = true; // Mantener el modal abierto
+    }
+
+    public function render()
+    {
         return view('livewire.add', [
-            // 'ages' => $ages, // Quitar si ya no se usa fuera del modal
             'legs' => $this->legs,
             'ncors' => $this->ncors,
             'tcc' => $this->tcors,
             'ccors' => $this->ccors,
             'users' => $this->users,
-            'modalAges' => $modalAgesData, // Pasar los datos filtrados para el modal
+            'modalAges' => $this->modalAges,
         ]);
     }
 
