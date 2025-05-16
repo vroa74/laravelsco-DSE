@@ -172,7 +172,7 @@
                 <div class="col-span-1">
                     <label
                                 for="des"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                class="block mb-8 text-sm font-medium text-gray-900 dark:text-white">
                         Descripcion: 
                         <button type="button" 
                         wire:click="openModalAgent('columna1')" 
@@ -198,7 +198,7 @@
                     </button>
                 </div>
                 <div class="col-span-1 m-4">
-                        <p class="py-1" >Remitente:                      
+                        <p class="py-1 mb-8 " >Remitente:                      
                         <button type="button" 
                         wire:click="openModalAgent('columna1')" 
                         class="px-2 py-1 text-xs text-white bg-orange-500 rounded-md hover:bg-orange-700 focus:ring focus:ring-orange-300 relative group"
@@ -268,7 +268,7 @@
                 </div>
                 <div class="col-span-1 ">
                     <label for="seg"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                class="block mb-8  text-sm font-medium text-gray-900 dark:text-white">
                         Seguimiento:
                         <button type="button" 
                         wire:click="openModalAgent('columna1')" 
@@ -293,8 +293,9 @@
                             Buscar Usuario
                         </button>
                 </div>
-                <div class="col-span-1 ">
-                    <p>Turnado:
+                <div class="col-span-1 mb-8">
+                    <label for="turnado" class="block mb-8 text-sm font-medium text-gray-900 dark:text-white">
+                        Turnado:
                         <button type="button" 
                         wire:click="openModalAgent('columna1')" 
                         class="px-2 py-1 text-xs text-white bg-orange-500 rounded-md hover:bg-orange-700 focus:ring focus:ring-orange-300 relative group"
@@ -304,7 +305,9 @@
                                 Presiona para seleccionar
                             </span>
                         </button>
-                    </p>
+                    </label>
+
+                    
                     <div class="flex items-center m-1 space-x-4 ">
                         <label for="turnom" class="text-sm font-medium text-gray-900 dark:text-white">
                             Nombre;
