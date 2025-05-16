@@ -173,8 +173,17 @@
                     <label
                                 for="des"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Descripcion
-                    </label>
+                        Descripcion: 
+                        <button type="button" 
+                        wire:click="openModalAgent('columna1')" 
+                        class="px-2 py-1 text-xs text-white bg-orange-500 rounded-md hover:bg-orange-700 focus:ring focus:ring-orange-300 relative group"
+                        title="Presiona para seleccionar">
+                            <i class="fa-solid fa-users"></i>
+                            <span class="absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                                Presiona para seleccionar
+                            </span>
+                    </button>
+                    </label>                     
                     <textarea
                         id="des"
                         rows="4"
@@ -183,15 +192,23 @@
                         wire:model.live="des"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe aquí...">{{ $des }}</textarea>
-
                         <button type="button" wire:click="openAgeModal('DES')"
-                        class="px-3 py-2 m-1 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        class="px-3 py-2 m-1 text-xs font-medium text-center text-white bg-green-500 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                             Buscar Usuario
                     </button>
-
                 </div>
                 <div class="col-span-1 m-4">
-                    <p class="py-1" >Remitente</p>
+                        <p class="py-1" >Remitente:                      
+                        <button type="button" 
+                        wire:click="openModalAgent('columna1')" 
+                        class="px-2 py-1 text-xs text-white bg-orange-500 rounded-md hover:bg-orange-700 focus:ring focus:ring-orange-300 relative group"
+                        title="Presiona para seleccionar">
+                            <i class="fa-solid fa-users"></i>
+                            <span class="absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                                Presiona para seleccionar
+                            </span>
+                        </button>
+                    </p>
                     <div class="flex items-center m-1 space-x-4 ">
                         <!-- Etiqueta -->
                         <label  for="remnom" 
@@ -246,14 +263,22 @@
                     {{-- Botón para abrir modal y llenar Remitente --}}
                     <button type="button" wire:click="openAgeModal('REM')"
                             class="px-3 py-2 m-1 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                        Buscar Usuario
-                    </button>
-                    
+                        Buscar Usuario :
+                    </button>                    
                 </div>
                 <div class="col-span-1 ">
                     <label for="seg"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Seguimiento
+                        Seguimiento:
+                        <button type="button" 
+                        wire:click="openModalAgent('columna1')" 
+                        class="px-2 py-1 text-xs text-white bg-orange-500 rounded-md hover:bg-orange-700 focus:ring focus:ring-orange-300 relative group"
+                        title="Presiona para seleccionar">
+                            <i class="fa-solid fa-users"></i>
+                            <span class="absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                                Presiona para seleccionar
+                            </span>
+                        </button>
                     </label>
                     <textarea   id="seg"
                                 rows="4"
@@ -269,7 +294,17 @@
                         </button>
                 </div>
                 <div class="col-span-1 ">
-                    <p>Turnado</p>
+                    <p>Turnado:
+                        <button type="button" 
+                        wire:click="openModalAgent('columna1')" 
+                        class="px-2 py-1 text-xs text-white bg-orange-500 rounded-md hover:bg-orange-700 focus:ring focus:ring-orange-300 relative group"
+                        title="Presiona para seleccionar">
+                            <i class="fa-solid fa-users"></i>
+                            <span class="absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                                Presiona para seleccionar
+                            </span>
+                        </button>
+                    </p>
                     <div class="flex items-center m-1 space-x-4 ">
                         <label for="turnom" class="text-sm font-medium text-gray-900 dark:text-white">
                             Nombre;
@@ -510,7 +545,7 @@
 
     @if($showModalAgent)
     <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div class="w-full h-2/3 mx-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-white flex flex-col">
+        <div class="w-full h-1/2 mx-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-white flex flex-col">
             <!-- Modal Header -->
             <div class="flex items-center justify-between p-4 border-b border-white">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
