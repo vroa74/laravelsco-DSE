@@ -14,7 +14,7 @@ use App\Models\User;
 use App\Models\Co;
 
 
-class Add extends Component
+class Edit extends Component
 {
     use WithPagination;
     public $legs, $ncors, $tcors, $ccors, $users, $ages;
@@ -51,8 +51,6 @@ class Add extends Component
     public $currentAgeAction = ''; // Para saber qué hacer al seleccionar ('fillRemitente', 'fillTurnado', etc.)
     public $isCccorEnabled = false; // Para controlar si el select de clasificación está habilitado
     public $selectedColumn = null; // Para almacenar la columna seleccionada
-    // No necesitamos una propiedad separada para $modalAges, filtraremos $this->ages en render
-    // ------------------------------------------
 
     public function mount()
     {
@@ -93,7 +91,7 @@ class Add extends Component
         $this->isCccorEnabled = !empty($this->tcccid);
         $this->updateFilteredCcor();
     }
-    // Mantener la función selectCorrespondence optimizada
+
     public function selectCorrespondence($fid, $fttcor)
     {
         $this->ftcorid = $fid;
@@ -101,14 +99,13 @@ class Add extends Component
         $this->tcor = $this->ftcor;
     }
 
-    // --- Métodos para el Modal de Ages ---
     public function openAgeModal($action, $column = null)
     {
         $this->currentAgeAction = $action;
-        $this->accion = $action; // Establecer la acción
+        $this->accion = $action;
         $this->modalAgeFilter = '';
         $this->isAgeModalOpen = true;
-        $this->selectedColumn = $column; // Guardar la columna seleccionada
+        $this->selectedColumn = $column;
     }
 
     public function closeAgeModal()
@@ -116,7 +113,7 @@ class Add extends Component
         $this->isAgeModalOpen = false;
         $this->modalAgeFilter = '';
         $this->currentAgeAction = '';
-        $this->accion = ''; // Limpiar la acción al cerrar
+        $this->accion = '';
     }
 
     public function selectAgeFromModal($ageId)
@@ -125,7 +122,6 @@ class Add extends Component
         if ($selectedAge) {
             $textoSeleccionado = ' '.trim($selectedAge->nombre . ' ' . $selectedAge->cargo . ' ' . $selectedAge->deporg);
             
-            // Lógica para el modal principal
             switch ($this->selectedColumn) {
                 case 'seguimiento':
                     $this->seguimiento = $this->seguimiento ? $this->seguimiento . "\n" . $textoSeleccionado : $textoSeleccionado;
@@ -150,15 +146,13 @@ class Add extends Component
         }
     }
 
-    // --- Método para actualizar el estado de habilitación del select de clasificación ---
     public function updatedTcccid($value)
     {
         $this->isCccorEnabled = !empty($value);
         if (!$this->isCccorEnabled) {
-            $this->ccor = ''; // Resetear el valor de clasificación si se deshabilita
-            $this->tccctext = ''; // Resetear el texto
+            $this->ccor = '';
+            $this->tccctext = '';
         } else {
-            // Obtener el texto del tipo de correspondencia seleccionado
             $selectedTcor = $this->tcors->find($value);
             $this->tccctext = $selectedTcor ? $selectedTcor->tcor : '';
         }
@@ -173,16 +167,13 @@ class Add extends Component
             $this->filteredCcor = collect([]);
         }
     }
-    // -------------------------------------
 
-    // Método para abrir el modal
     public function openModalAgent($column = null)
     {
         $this->showModalAgent = true;
         $this->selectedColumn = $column;
     }
 
-    // Método para cerrar el modal
     public function closeModal()
     {
         $this->showModalAgent = false;
@@ -190,7 +181,6 @@ class Add extends Component
         $this->reset(['searchNombre', 'searchCargo', 'searchDeporg']);
     }
 
-    // Método para obtener los Ages paginados y filtrados
     public function getModalAgesProperty()
     {
         $query = Age::query();
@@ -210,28 +200,27 @@ class Add extends Component
         return $query->orderBy('nombre')->paginate($this->perPage);
     }
 
-    // Reseteo de la paginación al cambiar los filtros
     public function updatedSearchNombre()
     {
         $this->resetPage();
-        $this->showModalAgent = true; // Mantener el modal abierto
+        $this->showModalAgent = true;
     }
 
     public function updatedSearchCargo()
     {
         $this->resetPage();
-        $this->showModalAgent = true; // Mantener el modal abierto
+        $this->showModalAgent = true;
     }
 
     public function updatedSearchDeporg()
     {
         $this->resetPage();
-        $this->showModalAgent = true; // Mantener el modal abierto
+        $this->showModalAgent = true;
     }
 
     public function render()
     {
-        return view('livewire.add', [
+        return view('livewire.edit', [
             'legs' => $this->legs,
             'ncors' => $this->ncors,
             'tcc' => $this->tcors,
@@ -244,7 +233,6 @@ class Add extends Component
     public function save()
     {
         try {
-            // Validar los datos del formulario
             $validatedData = $this->validate([
                 'selectedLegislaturaId' => 'required|exists:legislaturas,id',
                 'fcap' => 'required|date',
@@ -294,7 +282,6 @@ class Add extends Component
                 'tur_deporg.required' => 'La dependencia del turnado es requerida',
             ]);
 
-            // Crear y guardar el nuevo registro
             $correspondencia = new Co();
             $correspondencia->legislatura_id = $this->selectedLegislaturaId;
             $correspondencia->fcap = $this->fcap;
@@ -317,19 +304,15 @@ class Add extends Component
             $correspondencia->creo = Auth::user()->email;
             $correspondencia->save();
 
-            // Mostrar mensaje de éxito
             session()->flash('success', 'Registro guardado exitosamente.');
             
-            // Redirigir a la página de listado
             return redirect()->route('reportesgral');
         } catch (\Illuminate\Validation\ValidationException $e) {
-            // Capturar errores de validación
             session()->flash('error', 'Por favor, verifica los datos del formulario.');
             throw $e;
         } catch (\Exception $e) {
-            // Capturar otros errores
             session()->flash('error', 'Error al guardar el registro: ' . $e->getMessage());
             return;
         }
     }
-}
+} 

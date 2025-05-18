@@ -24,6 +24,7 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),  'verified
     Route::get('/dashboard', function () {  return view('dashboard');   })->name('dashboard');
     Route::get('/reportesgral', function () {  return view('rg.rg');   })->name('reportgral');
     Route::get('/reportesgral/add', function () {  return view('rg.add');   })->name('add');
+    Route::get('/reportesgral/edit/{id}', function () {  return view('rg.edit');   })->name('edit');
     Route::get('/catalogos', function () {  return view('catalogos.catalogos');   })->name('catalogos');
     Route::get('/usuarios', function () {  return view('usuarios.people');   })->name('usuarios');
     Route::get('/temp', function () {  return view('temp');   })->name('temp');

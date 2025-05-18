@@ -411,33 +411,33 @@
                     </button>{{--                    boton de show--}}
 
                     <button {{-- yellow-orange--}}
+                            href="{{ route('add') }}"
                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2
-                                   overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
-                                   bg-gradient-to-br from-yellow-200 to-red-700 group-hover:from-orange-500
-                                   group-hover:to-orange-600 hover:text-white dark:text-white focus:ring-4
-                                   focus:outline-none focus:ring-orange-600 dark:focus:ring-orange-800">
-
-                          <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
-                            <i class="fa-solid fa-pencil"></i>{{-- Edit--}}
-                          </span>
+                                    overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
+                                    bg-gradient-to-br from-yellow-200 to-red-700 group-hover:from-orange-500
+                                    group-hover:to-orange-600 hover:text-white dark:text-white focus:ring-4
+                                    focus:outline-none focus:ring-orange-600 dark:focus:ring-orange-800">
+                            <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
+                                <i class="fa-solid fa-pencil"></i>      {{-- Edit--}}
+                            </span>
                     </button> {{--                    boton de edit--}}
                     <a href="" wire:click="generarReporte({{ $co->id }}, 'reporte1')" target="_blank"
                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden
-                                   text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
-                                   from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
-                                   hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
-                                   dark:focus:ring-purple-800">
-                           <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
+                                text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
+                                from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
+                                hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
+                                dark:focus:ring-purple-800">
+                            <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                             <i class="fa-regular fa-rectangle-list"></i>
                             </span>
                     </a>
                     <a href="" wire:click="generarReporte({{ $co->id }}, 'reporte2')" target="_blank"
                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden
-                                   text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
-                                   from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
-                                   hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
-                                   dark:focus:ring-purple-800">
-                           <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
+                                    text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
+                                    from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
+                                    hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
+                                    dark:focus:ring-purple-800">
+                            <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                             <i class="fa-solid fa-bars"></i>
                             </span>
                     </a>
