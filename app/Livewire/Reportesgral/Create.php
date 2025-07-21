@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Reportesgral;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +14,7 @@ use App\Models\User;
 use App\Models\Co;
 
 
-class Add extends Component
+class Create extends Component
 {
     use WithPagination;
     public $legs, $ncors, $tcors, $ccors, $users, $ages;
@@ -231,7 +231,7 @@ class Add extends Component
 
     public function render()
     {
-        return view('livewire.add', [
+        return view('livewire.reportesgral.create', [
             'legs' => $this->legs,
             'ncors' => $this->ncors,
             'tcc' => $this->tcors,
@@ -321,7 +321,7 @@ class Add extends Component
             session()->flash('success', 'Registro guardado exitosamente.');
             
             // Redirigir a la página de listado
-            return redirect()->route('reportesgral');
+            return redirect()->route('rg.index');
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Capturar errores de validación
             session()->flash('error', 'Por favor, verifica los datos del formulario.');
@@ -331,5 +331,10 @@ class Add extends Component
             session()->flash('error', 'Error al guardar el registro: ' . $e->getMessage());
             return;
         }
+    }
+
+    public function cancel()
+    {
+        return redirect()->route('rg.index');
     }
 }

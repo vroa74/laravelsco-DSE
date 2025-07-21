@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\RgController;
+use App\Http\Controllers\AgeController;
+use App\Http\Controllers\UsuarioController;
 
 
 
@@ -21,14 +24,23 @@ Route::get('/of10', function () { return view('ofi.of10'); })->name('of10');
 
 
 Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),  'verified', ])->group(function () {
+    // Rutas para el controlador Rg (Reportes Generales) - Solo GET routes para Livewire
+    Route::resource('rg', RgController::class)->names('rg')->except(['store', 'update']);
+    // Rutas para Age - Solo GET routes para Livewire
+    Route::resource('agen', AgeController::class)->names('agen')->except(['store', 'update']);
+    // Rutas para Usuario - Solo GET routes para Livewire
+    Route::resource('usuario', UsuarioController::class)->names('usuario')->except(['store', 'update']);
+    
+    // Rutas adicionales para reportes generales
+    Route::get('/reportesgral', function () {  return view('rg.rg');   })->name('reportgral');  
+    
+    // Otras rutas
     Route::get('/dashboard', function () {  return view('dashboard');   })->name('dashboard');
-    Route::get('/reportesgral', function () {  return view('rg.rg');   })->name('reportgral');
-    Route::get('/reportesgral/add', function () {  return view('rg.add');   })->name('add');
-    Route::get('/reportesgral/edit/{id}', function () {  return view('rg.edit');   })->name('edit');
     Route::get('/catalogos', function () {  return view('catalogos.catalogos');   })->name('catalogos');
     Route::get('/usuarios', function () {  return view('usuarios.people');   })->name('usuarios');
     Route::get('/temp', function () {  return view('temp');   })->name('temp');
     Route::get('/componentes', function () {  return view('comp');   })->name('componentes');
+    
     //reportes -----------------------------------------------------------------------------------------------------------------
     Route::get('/reporte-normal/{id}/{tipoReporte}', [ReportsController::class, 'rg_report_1'])->name('reporteNormal');
     Route::get('/reporte-especial/{id}/{tipoReporte}', [ReportsController::class, 'rg_report_2'])->name('reporteEspecial');

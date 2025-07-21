@@ -329,10 +329,16 @@
             </div>
             {{-- {{$users}} --}}
             {{-- {{$users->email}} {{$users->name}} {{$users->id}} --}}
-            <div class="mt-6">
+            <div class="mt-6 flex justify-end space-x-3">
+                <button
+                        type="button"
+                        wire:click="cancel"
+                        class="px-4 py-2 text-white bg-gray-600 rounded-md hover:bg-gray-700 focus:ring focus:ring-gray-300">
+                    Cancelar
+                </button>
                 <button
                         type="submit"
-                        class="w-full px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:ring focus:ring-blue-300">
+                        class="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:ring focus:ring-blue-300">
                     Guardar
                 </button>
             </div>

@@ -29,7 +29,7 @@
 
                     <!-- Contenedor de los botones adicionales centrados -->
                     <div class="flex gap-2 justify-center items-center absolute top-1/2 right-[50%] -translate-y-1/2">
-                        <a href="{{ route('add') }}"
+                        <a href="{{ route('rg.create') }}"
                                 class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2
                                         overflow-hidden text-sm font-medium text-gray-900 rounded-lg
                                         group bg-gradient-to-br from-green-400 to-blue-600
@@ -45,11 +45,25 @@
 
 
                         <button wire:click="exportPDF"
+                                wire:loading.attr="disabled"
+                                wire:loading.class="opacity-50 cursor-not-allowed"
                                 class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
                           <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                               <i class="fa-solid fa-file-export"></i>
+                              <span wire:loading.remove>PDF</span>
+                              <span wire:loading>Procesando...</span>
                           </span>
-                          {{-- exportar --}}
+                        </button>
+
+                        <button wire:click="exportCSV"
+                                wire:loading.attr="disabled"
+                                wire:loading.class="opacity-50 cursor-not-allowed"
+                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-orange-400 to-red-600 group-hover:from-orange-400 group-hover:to-red-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-orange-200 dark:focus:ring-orange-800">
+                          <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
+                              <i class="fa-solid fa-file-csv"></i>
+                              <span wire:loading.remove>CSV</span>
+                              <span wire:loading>Procesando...</span>
+                          </span>
                         </button>
 
                         <button wire:click="openViewQuery"
@@ -123,7 +137,9 @@
                     {{--        filtro por estatus de la correspondencia ------------------------------------------------------}}
                     <div class="p-1 text-center border-2 border-yellow-400 rounded-lg">
                         {{-- estatus --}}
-                        <p>Total de registros: {{ $cos->total() }}</p>
+                        <p>Total paginado: {{ $cos->total() }}</p>
+                        <p>Total filtrado: {{ $this->getFilteredCount() }}</p>
+                        <p class="text-xs text-orange-600">Límite PDF: 2000 | CSV: 5000</p>
                         <p>{{ $myquery }}</p>
                     </div>
                     {{--        fin filtro por estatus de la correspondencia ------------------------------------------------------}}
@@ -286,7 +302,7 @@
            {{--      end section containes filter--}}
 
         </div>
-    </div>
+</div>
 
 
 
@@ -399,7 +415,7 @@
                     <p>{{ $co->seguimiento  }}</p>
                 </td>
                 <td class="px-1 py-1">
-                    <button
+                    <a href="{{ route('rg.show', $co->id) }}"
                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2
                            overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
                            bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400
@@ -408,10 +424,9 @@
                         <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                              <i class="fa-regular fa-eye"></i> {{--  show record--}}
                         </span>
-                    </button>{{--                    boton de show--}}
+                    </a>{{--                    boton de show--}}
 
-                    <button {{-- yellow-orange--}}
-                            href="{{ route('add') }}"
+                    <a href="{{ route('rg.edit', $co->id) }}" {{-- yellow-orange--}}
                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2
                                     overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
                                     bg-gradient-to-br from-yellow-200 to-red-700 group-hover:from-orange-500
@@ -420,7 +435,7 @@
                             <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                                 <i class="fa-solid fa-pencil"></i>      {{-- Edit--}}
                             </span>
-                    </button> {{--                    boton de edit--}}
+                    </a> {{--                    boton de edit--}}
                     <a href="" wire:click="generarReporte({{ $co->id }}, 'reporte1')" target="_blank"
                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden
                                 text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
@@ -463,12 +478,18 @@
     <br>
 {{-- escrip del reporte--}}
     <script>
-        window.addEventListener('reporteGenerado', event => {
-            alert(event.detail.reporte);
-        });
+        document.addEventListener('livewire:init', () => {
+            console.log('Livewire initialized');
+            
+            Livewire.on('reporteGenerado', (mensaje) => {
+                console.log('Evento reporteGenerado recibido:', mensaje);
+                alert('Éxito: ' + mensaje);
+            });
 
-        window.addEventListener('reporteError', event => {
-            alert(event.detail.mensaje);
+            Livewire.on('reporteError', (mensaje) => {
+                console.log('Evento reporteError recibido:', mensaje);
+                alert('Error: ' + mensaje);
+            });
         });
     </script>
 

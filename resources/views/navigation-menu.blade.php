@@ -16,10 +16,10 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('reportgral') }}" :active="request()->routeIs('reportgral')">
+                    <x-nav-link href="{{ route('rg.index') }}" :active="request()->routeIs('rg.index')">
                         Reportes generales{{--                       {{ __('Dashboard') }}--}}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('usuarios') }}" :active="request()->routeIs('usuarios')">
+                    <x-nav-link href="{{ route('usuario.index') }}" :active="request()->routeIs('usuario.index')">
                         usuarios
                     </x-nav-link>
 
