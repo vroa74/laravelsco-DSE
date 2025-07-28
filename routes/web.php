@@ -46,7 +46,7 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),  'verified
     // Otras rutas
     Route::get('/dashboard', function () {  return view('dashboard');   })->name('dashboard');
     Route::get('/catalogos', function () {  return view('catalogos.catalogos');   })->name('catalogos');
-    Route::get('/usuarios', function () {  return view('usuarios.people');   })->name('usuarios');
+    Route::get('/usuarios', function () {  return view('age.people');   })->name('usuarios');
     Route::get('/temp', function () {  return view('temp');   })->name('temp');
     Route::get('/componentes', function () {  return view('comp');   })->name('componentes');
     

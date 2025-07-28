@@ -11,7 +11,7 @@ class AgeController extends Controller
      */
     public function index()
     {
-        //
+        return view('age.index');
     }
 
     /**
@@ -19,7 +19,7 @@ class AgeController extends Controller
      */
     public function create()
     {
-        //
+        return view('age.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class AgeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('age.show');
     }
 
     /**
@@ -46,7 +46,7 @@ class AgeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('age.edit');
     }
 
     /**
@@ -65,6 +65,6 @@ class AgeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return view('age.destroy');
     }
 }

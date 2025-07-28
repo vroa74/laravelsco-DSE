@@ -19,8 +19,11 @@
                     <x-nav-link href="{{ route('rg.index') }}" :active="request()->routeIs('rg.index')">
                         Reportes generales{{--                       {{ __('Dashboard') }}--}}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('usuario.index') }}" :active="request()->routeIs('usuario.index')">
+                    <x-nav-link href="{{ route('agen.index') }}" :active="request()->routeIs('agen.index')">
                         usuarios
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('usuario.index') }}" :active="request()->routeIs('usuario.index')">
+                        Personal
                     </x-nav-link>
 
                     <x-nav-link href="{{ route('catalogos') }}" :active="request()->routeIs('catalogos')">
