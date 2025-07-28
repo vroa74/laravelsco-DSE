@@ -25,6 +25,9 @@ class Index extends Component
     public $turnom, $turcargo, $turdeporg;
     public $remnombre, $remcargo, $remdeporg;
     public $Nccors, $Tccors, $Cccors;
+    public $ncor_filter; // Add filter for N. Cor.
+    public $tcor_filter; // Add filter for T. Cor.
+    public $ccor_filter; // Add filter for Clas. Cor.
     //    begin     open modal
     public $isOpen = true;
 
@@ -141,6 +144,33 @@ class Index extends Component
             $query->where('tur_deporg', 'like', '%' . $this->turdeporg . '%');
         }
 
+        // Filtro por 'ncor' (N. Cor.)
+        if (!is_null($this->ncor_filter) && $this->ncor_filter !== '' && $this->ncor_filter !== 'Seleccione una opción') {
+            // Obtener el valor ncor de la tabla ncors basado en el ID seleccionado
+            $ncorValue = Ncor::find($this->ncor_filter);
+            if ($ncorValue) {
+                $query->where('ncor', '=', $ncorValue->ncor);
+            }
+        }
+
+        // Filtro por 'tcor' (T. Cor.)
+        if (!is_null($this->tcor_filter) && $this->tcor_filter !== '' && $this->tcor_filter !== 'Seleccione una opción') {
+            // Obtener el valor tcor de la tabla tcors basado en el ID seleccionado
+            $tcorValue = Tcor::find($this->tcor_filter);
+            if ($tcorValue) {
+                $query->where('tcor', '=', $tcorValue->tcor);
+            }
+        }
+
+        // Filtro por 'ccor' (Clas. Cor.)
+        if (!is_null($this->ccor_filter) && $this->ccor_filter !== '' && $this->ccor_filter !== 'Seleccione una opción') {
+            // Obtener el valor ccor de la tabla ccors basado en el ID seleccionado
+            $ccorValue = Ccor::find($this->ccor_filter);
+            if ($ccorValue) {
+                $query->where('ccor', '=', $ccorValue->ccor);
+            }
+        }
+
         return $query->count();
     }
 
@@ -249,6 +279,33 @@ class Index extends Component
             }
             if (!is_null($this->turdeporg) && $this->turdeporg !== '') {
                 $query->where('tur_deporg', 'like', '%' . $this->turdeporg . '%');
+            }
+
+            // Filtro por 'ncor' (N. Cor.)
+            if (!is_null($this->ncor_filter) && $this->ncor_filter !== '' && $this->ncor_filter !== 'Seleccione una opción') {
+                // Obtener el valor ncor de la tabla ncors basado en el ID seleccionado
+                $ncorValue = Ncor::find($this->ncor_filter);
+                if ($ncorValue) {
+                    $query->where('ncor', '=', $ncorValue->ncor);
+                }
+            }
+
+            // Filtro por 'tcor' (T. Cor.)
+            if (!is_null($this->tcor_filter) && $this->tcor_filter !== '' && $this->tcor_filter !== 'Seleccione una opción') {
+                // Obtener el valor tcor de la tabla tcors basado en el ID seleccionado
+                $tcorValue = Tcor::find($this->tcor_filter);
+                if ($tcorValue) {
+                    $query->where('tcor', '=', $tcorValue->tcor);
+                }
+            }
+
+            // Filtro por 'ccor' (Clas. Cor.)
+            if (!is_null($this->ccor_filter) && $this->ccor_filter !== '' && $this->ccor_filter !== 'Seleccione una opción') {
+                // Obtener el valor ccor de la tabla ccors basado en el ID seleccionado
+                $ccorValue = Ccor::find($this->ccor_filter);
+                if ($ccorValue) {
+                    $query->where('ccor', '=', $ccorValue->ccor);
+                }
             }
 
             // Get records with limit
@@ -397,6 +454,33 @@ class Index extends Component
             }
             if (!is_null($this->turdeporg) && $this->turdeporg !== '') {
                 $query->where('tur_deporg', 'like', '%' . $this->turdeporg . '%');
+            }
+
+            // Filtro por 'ncor' (N. Cor.)
+            if (!is_null($this->ncor_filter) && $this->ncor_filter !== '' && $this->ncor_filter !== 'Seleccione una opción') {
+                // Obtener el valor ncor de la tabla ncors basado en el ID seleccionado
+                $ncorValue = Ncor::find($this->ncor_filter);
+                if ($ncorValue) {
+                    $query->where('ncor', '=', $ncorValue->ncor);
+                }
+            }
+
+            // Filtro por 'tcor' (T. Cor.)
+            if (!is_null($this->tcor_filter) && $this->tcor_filter !== '' && $this->tcor_filter !== 'Seleccione una opción') {
+                // Obtener el valor tcor de la tabla tcors basado en el ID seleccionado
+                $tcorValue = Tcor::find($this->tcor_filter);
+                if ($tcorValue) {
+                    $query->where('tcor', '=', $tcorValue->tcor);
+                }
+            }
+
+            // Filtro por 'ccor' (Clas. Cor.)
+            if (!is_null($this->ccor_filter) && $this->ccor_filter !== '' && $this->ccor_filter !== 'Seleccione una opción') {
+                // Obtener el valor ccor de la tabla ccors basado en el ID seleccionado
+                $ccorValue = Ccor::find($this->ccor_filter);
+                if ($ccorValue) {
+                    $query->where('ccor', '=', $ccorValue->ccor);
+                }
             }
 
             // Get records with limit
@@ -680,6 +764,33 @@ class Index extends Component
         // Filtro por 'tur_deporg' si contiene información
         if (!is_null($this->turdeporg) && $this->turdeporg !== '') {
             $query->where('tur_deporg', 'like', '%' . $this->turdeporg . '%');
+        }
+
+        // Filtro por 'ncor' (N. Cor.)
+        if (!is_null($this->ncor_filter) && $this->ncor_filter !== '' && $this->ncor_filter !== 'Seleccione una opción') {
+            // Obtener el valor ncor de la tabla ncors basado en el ID seleccionado
+            $ncorValue = Ncor::find($this->ncor_filter);
+            if ($ncorValue) {
+                $query->where('ncor', '=', $ncorValue->ncor);
+            }
+        }
+
+        // Filtro por 'tcor' (T. Cor.)
+        if (!is_null($this->tcor_filter) && $this->tcor_filter !== '' && $this->tcor_filter !== 'Seleccione una opción') {
+            // Obtener el valor tcor de la tabla tcors basado en el ID seleccionado
+            $tcorValue = Tcor::find($this->tcor_filter);
+            if ($tcorValue) {
+                $query->where('tcor', '=', $tcorValue->tcor);
+            }
+        }
+
+        // Filtro por 'ccor' (Clas. Cor.)
+        if (!is_null($this->ccor_filter) && $this->ccor_filter !== '' && $this->ccor_filter !== 'Seleccione una opción') {
+            // Obtener el valor ccor de la tabla ccors basado en el ID seleccionado
+            $ccorValue = Ccor::find($this->ccor_filter);
+            if ($ccorValue) {
+                $query->where('ccor', '=', $ccorValue->ccor);
+            }
         }
 
         // ++++++++++---------------------------------------------------------------------------------------------------

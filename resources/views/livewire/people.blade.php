@@ -178,11 +178,6 @@
 
         </div>
     </div>
-
-
-
-
-
     {{--         ------------------------------------------------------------------------------------------------------------}}
     <div class="relative overflow-x-auto pt-1  px-4 shadow-md sm:rounded-lg">
         <div class="w-[96%] mx-auto overflow-x-auto">

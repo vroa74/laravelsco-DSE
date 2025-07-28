@@ -261,10 +261,11 @@
                             <label for="nnncor" class="text-xs font-medium text-gray-900 dark:text-white">N. Cor.</label>
                             <!-- Select -->
                             <select id="nnncor"
+                                    wire:model.live="ncor_filter"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[120px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected>Seleccione una opción</option>
+                                <option value="">Seleccione una opción</option>
                                 @foreach($Nccors as $Nccor)
-                                    <option value=" {{ $Nccor->id }} "> {{ $Nccor->ncor }} </option>
+                                    <option value="{{ $Nccor->id }}">{{ $Nccor->ncor }}</option>
                                 @endforeach
 
                             </select>
@@ -273,24 +274,26 @@
                             <!-- Label -->
                             <label for="tttcor" class="text-xs font-medium text-gray-900 dark:text-white">T. Cor.</label>
                             <!-- Select -->
-                            <select id="tttcor" class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[120px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected>Choose</option>
-                                <option value="US">United States</option>
-                                <option value="CA">Canada</option>
-                                <option value="FR">France</option>
-                                <option value="DE">Germany</option>
+                            <select id="tttcor" 
+                                    wire:model.live="tcor_filter"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[120px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="">Seleccione una opción</option>
+                                @foreach($Tccors as $Tccor)
+                                    <option value="{{ $Tccor->id }}">{{ $Tccor->tcor }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="flex items-center max-w-sm mx-auto space-x-2">
                             <!-- Label -->
                             <label for="cccor" class="text-xs font-medium text-gray-900 dark:text-white">Clas. Cor</label>
                             <!-- Select -->
-                            <select id="cccor" class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[120px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected>Choose</option>
-                                <option value="US">United States</option>
-                                <option value="CA">Canada</option>
-                                <option value="FR">France</option>
-                                <option value="DE">Germany</option>
+                            <select id="cccor" 
+                                    wire:model.live="ccor_filter"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[120px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="">Seleccione una opción</option>
+                                @foreach($Cccors as $Cccor)
+                                    <option value="{{ $Cccor->id }}">{{ $Cccor->ccor }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
