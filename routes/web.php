@@ -5,10 +5,19 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RgController;
 use App\Http\Controllers\AgeController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\Auth\LoginController;
 
 
 
 Route::get('/', function () { return view('welcome'); })->name('welcome');
+
+// Rutas de autenticación personalizadas (deben ir antes que las rutas de Fortify)
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login')->middleware('guest');
+
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/of1', function () { return view('ofi.of1'); })->name('of1');
 Route::get('/of2', function () { return view('ofi.of2'); })->name('of2');
 Route::get('/of3', function () { return view('ofi.of3'); })->name('of3');

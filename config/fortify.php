@@ -144,7 +144,7 @@ return [
     */
 
     'features' => [
-        Features::registration(),
+        // Features::registration(), // Deshabilitado el registro de usuarios
         Features::resetPasswords(),
         // Features::emailVerification(),
         Features::updateProfileInformation(),
@@ -155,5 +155,18 @@ return [
             // 'window' => 0,
         ]),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Disable Fortify Routes
+    |--------------------------------------------------------------------------
+    |
+    | Disable specific Fortify routes to use custom authentication
+    |
+    */
+    // 'disable_routes' => [
+    //     'login',
+    //     'logout',
+    // ],
 
 ];

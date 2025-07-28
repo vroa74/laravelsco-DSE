@@ -445,7 +445,7 @@
                                 <i class="fa-solid fa-pencil"></i>      {{-- Edit--}}
                             </span>
                     </a> {{--                    boton de edit--}}
-                    <a href="" wire:click="generarReporte({{ $co->id }}, 'reporte1')" target="_blank"
+                    <a href="javascript:void(0)" onclick="abrirReporte({{ $co->id }}, 'reporte1')"
                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden
                                 text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
                                 from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
@@ -456,7 +456,7 @@
                             <i class="fa-regular fa-rectangle-list"></i>
                             </span>
                     </a>
-                    <a href="" wire:click="generarReporte({{ $co->id }}, 'reporte2')" target="_blank"
+                    <a href="javascript:void(0)" onclick="abrirReporte({{ $co->id }}, 'reporte2')"
                         class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden
                                     text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
                                     from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
@@ -467,7 +467,7 @@
                             <i class="fa-solid fa-bars"></i>
                             </span>
                     </a>
-                    <a href="" wire:click="generarReporte({{ $co->id }}, 'reporte3')" target="_blank"
+                    <a href="javascript:void(0)" onclick="abrirReporte({{ $co->id }}, 'reporte3')"
                           class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden
                                    text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
                                    from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
@@ -503,9 +503,40 @@
                 alert('Error: ' + mensaje);
             });
         });
+
+        // Función para abrir reportes en nueva ventana
+        function abrirReporte(id, tipo) {
+            // Configuración de la ventana
+            const windowFeatures = 'width=1200,height=800,scrollbars=yes,resizable=yes,menubar=yes,toolbar=yes,location=yes,status=yes';
+            
+            // URL base para los reportes usando las rutas correctas
+            let url = '';
+            
+            switch(tipo) {
+                case 'reporte1':
+                    url = `/reporte-normal/${id}/reporte1`;
+                    break;
+                case 'reporte2':
+                    url = `/reporte-especial/${id}/reporte2`;
+                    break;
+                case 'reporte3':
+                    url = `/reporte-solicitud/${id}/reporte3`;
+                    break;
+                default:
+                    console.error('Tipo de reporte no válido');
+                    return;
+            }
+            
+            // Abrir nueva ventana
+            const nuevaVentana = window.open(url, '_blank', windowFeatures);
+            
+            // Verificar si la ventana se abrió correctamente
+            if (nuevaVentana) {
+                nuevaVentana.focus();
+            } else {
+                alert('No se pudo abrir la ventana. Verifica que el bloqueador de ventanas emergentes esté desactivado.');
+            }
+        }
     </script>
-
-
-
 
 </div> {{--  final de componente    --}}
