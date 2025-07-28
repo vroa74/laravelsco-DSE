@@ -36,7 +36,8 @@
                                         group-hover:from-green-400 group-hover:to-blue-600
                                         hover:text-white dark:text-white focus:ring-4
                                         focus:outline-none focus:ring-green-200
-                                        dark:focus:ring-green-800">
+                                        dark:focus:ring-green-800"
+                                title="Agregar nuevo registro">
                           <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                               <i class="fa-regular fa-square-plus"></i>
                           </span>
@@ -47,7 +48,8 @@
                         <button wire:click="exportPDF"
                                 wire:loading.attr="disabled"
                                 wire:loading.class="opacity-50 cursor-not-allowed"
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
+                                title="Exportar a PDF">
                           <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                               <i class="fa-solid fa-file-export"></i>
                               <span wire:loading.remove>PDF</span>
@@ -58,7 +60,8 @@
                         <button wire:click="exportCSV"
                                 wire:loading.attr="disabled"
                                 wire:loading.class="opacity-50 cursor-not-allowed"
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-orange-400 to-red-600 group-hover:from-orange-400 group-hover:to-red-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-orange-200 dark:focus:ring-orange-800">
+                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-orange-400 to-red-600 group-hover:from-orange-400 group-hover:to-red-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-orange-200 dark:focus:ring-orange-800"
+                                title="Exportar a CSV">
                           <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                               <i class="fa-solid fa-file-csv"></i>
                               <span wire:loading.remove>CSV</span>
@@ -67,7 +70,8 @@
                         </button>
 
                         <button wire:click="openViewQuery"
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
+                                title="Aplicar filtros">
                           <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                               <i class="fa-solid fa-filter"></i>
                           </span>
@@ -423,7 +427,8 @@
                            overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
                            bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400
                            group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4
-                           focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                           focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
+                            title="Ver detalles">
                         <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                              <i class="fa-regular fa-eye"></i> {{--  show record--}}
                         </span>
@@ -434,7 +439,8 @@
                                     overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
                                     bg-gradient-to-br from-yellow-200 to-red-700 group-hover:from-orange-500
                                     group-hover:to-orange-600 hover:text-white dark:text-white focus:ring-4
-                                    focus:outline-none focus:ring-orange-600 dark:focus:ring-orange-800">
+                                    focus:outline-none focus:ring-orange-600 dark:focus:ring-orange-800"
+                            title="Editar registro">
                             <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                                 <i class="fa-solid fa-pencil"></i>      {{-- Edit--}}
                             </span>
@@ -444,7 +450,8 @@
                                 text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
                                 from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
                                 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
-                                dark:focus:ring-purple-800">
+                                dark:focus:ring-purple-800"
+                            title="Generar Reporte Normal">
                             <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                             <i class="fa-regular fa-rectangle-list"></i>
                             </span>
@@ -454,7 +461,8 @@
                                     text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
                                     from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
                                     hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
-                                    dark:focus:ring-purple-800">
+                                    dark:focus:ring-purple-800"
+                        title="Generar Reporte Especial">
                             <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                             <i class="fa-solid fa-bars"></i>
                             </span>
@@ -464,7 +472,8 @@
                                    text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
                                    from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
                                    hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
-                                   dark:focus:ring-purple-800">
+                                   dark:focus:ring-purple-800"
+                          title="Generar Reporte de Peticiones o Solicitudes">
                            <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
                             <i class="fa-solid fa-list"></i>
                             </span>

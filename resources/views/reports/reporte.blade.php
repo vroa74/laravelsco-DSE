@@ -3,79 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte General</title>
-    <style>
-        body { font-family: Arial, sans-serif; font-size: 10px; margin: 20px; }
-        .header { text-align: center; margin-bottom: 20px; }
-        .title { font-size: 16px; font-weight: bold; margin-bottom: 10px; }
-        .subtitle { font-size: 12px; margin-bottom: 5px; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        th, td { border: 1px solid #ccc; padding: 4px; text-align: left; }
-        th { background-color: #f0f0f0; font-weight: bold; }
-        .footer { margin-top: 30px; font-size: 8px; }
-        .total { text-align: center; font-weight: bold; margin: 10px 0; }
-    </style>
+    <title>Reporte 1</title>
+        <link rel="icon" type="image/png" href="{{ asset('media/img/favicon.png') }}v=5">
+    <link href="{{ public_path('pdf.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div class="header">
-        <div class="title">PODER LEGISLATIVO DEL ESTADO DE CAMPECHE</div>
-        <div class="subtitle">SECRETARIA GENERAL Y ADMINISTRACION</div>
-        <div class="subtitle">OFICIALÍA DE PARTES</div>
-        <div class="subtitle">Reporte General de Correspondencia</div>
-        <div class="subtitle">Fecha: {{ date('d/m/Y H:i:s') }}</div>
-    </div>
+    <div id="header">
+        <div style="width: 96%; display: flex; justify-content: center;">
+            <table style="width: 100%; border-collapse: collapse; ">
+                <tr>
+                    <!-- Primera columna (20%) -->
+                    <td style="width: 20%; text-align: center; vertical-align: middle;">
+                        <img src="{{ public_path('media/img/ple.png') }}" alt="Logo izquierdo" style="max-width: 100%; height: auto;">
+                    </td>
 
-    <div class="content">
-        @if(isset($registros) && count($registros) > 0)
-            <table>
-                <thead>
-                    <tr>
-                        <th>Folio</th>
-                        <th>Legislatura</th>
-                        <th>Fecha Captura</th>
-                        <th>Remitente</th>
-                        <th>Descripción</th>
-                        <th>Seguimiento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($registros as $registro)
-                        <tr>
-                            <td>{{ $registro->id }}</td>
-                            <td>{{ $registro->legislatura }}</td>
-                            <td>{{ $registro->fcap ? date('d/m/Y', strtotime($registro->fcap)) : '-' }}</td>
-                            <td>
-                                @if(!empty($registro->rem_nombre))
-                                    <strong>{{ $registro->rem_nombre }}</strong><br>
-                                @endif
-                                @if(!empty($registro->rem_cargo))
-                                    {{ $registro->rem_cargo }}<br>
-                                @endif
-                                @if(!empty($registro->rem_deporg))
-                                    {{ $registro->rem_deporg }}
-                                @endif
-                            </td>
-                            <td>{{ Str::limit($registro->des, 50) }}</td>
-                            <td>{{ Str::limit($registro->seguimiento, 50) }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
+                    <!-- Segunda columna (60%) - Texto centrado y más grande -->
+                    <td style="width: 56%; text-align: center; vertical-align: middle; padding: 10px;">
+                        <p class="text-base">
+                            PODER LEGISLATIVO DEL ESTADO DE CAMPECHE</p>
+                        <p class="text-sm">
+
+                            SECRETARIA GENERAL Y ADMINISTRACION</p>
+                        <p class="text-xs" >OFICIALÍA DE PARTES</p>
+                        <p class="text-xs" >Volante de recibo de correspondencia normal</p>
+                    </td>
+
+                    <!-- Tercera columna (20%) -->
+                    <td style="width: 20%; text-align: center; vertical-align: middle;">
+                        <img src="{{ public_path('media/img/legislatura.png') }}" alt="Logo derecho" style="max-width: 100%; height: auto;">
+                    </td>
+                </tr>
             </table>
-            
-            <div class="total">
-                Total de registros: {{ count($registros) }}
-            </div>
-        @else
-            <div style="text-align: center; margin: 40px;">
-                <p>No se encontraron registros con los filtros aplicados.</p>
-            </div>
-        @endif
+        </div>
     </div>
 
-    <div class="footer">
-        <p>C.c.p. Minutario/Expediente</p>
-        <p>Observación: Este documento requiere atención urgente y respuesta a su remitente.</p>
-        <p>By Vroa74@gmail.com - M.C.C. Victor Roman Ortiz Abreu</p>
+{{--    <div class="bgfooter " ></div>--}}
+    <div id="footer" >
+        <table class="two-column-table ">
+            <tr>
+                <!-- Columna del 70% -->
+                <td class="pt-6 mb-12 col-70">
+                    <div>
+
+                        <div style="
+                            position: relative;
+                            width: 150%;
+                            height: 1900px; /* Ajusta el tamaño según el diseño */
+                            background-image: url('data:image/png;base64,{{ base64_encode(file_get_contents(public_path('media/pic/i05.png'))) }}');
+                            background-size: cover;
+                            background-position: center;
+                            top: 2cm;
+                            opacity: 0.3;">
+                        </div>
+                        <div class="text-left" >
+                        <P class="text-10px " >
+                            C.c.p. Minutario/Expediente
+                        </P>
+                        <P class="text-8px leading-xs" >
+                            By <span class="text-gray-600 text-7px" >Vroa74@gmail.com</span>
+                        </P>
+                        <P><span class="text-gray-500 text-7px leading-3xs " >M.C.C. Victor Roman Ortiz Abreu</span></P>
+                        </div>
+                    </div>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <br>
+
+                </td>
+
+                <!-- Columna del 30% -->
+
+                <td class="col-30 tableRoundx">
+
+                    <table style="width: 96%" >
+                        <tr class="mb-2 ">
+                            <td class="tableRoundMS" style="height: 20px; line-height: 12px; padding: 2px; vertical-align: middle;">
+                                <p class="text-center text-10px" style=" margin: 0.5rem; padding: 0.15rem;">
+                                    Área de sello
+                                </p>
+                            </td>
+                        </tr>
+                        <tr class="mb-2 " >
+                            <td class="text-lg  tableRoundMS">
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                                <p class="text-xs" ></p>
+                            </td>
+                        </tr>
+                        <tr class="mb-4" >
+                            <td class="p-0 text-sm leading-none text-center tableRoundMS" >
+                                <p class="p-0 m-0 text-center text-10px">Nombre y Firma</p>
+                                <p class="p-0 m-0">&nbsp;</p>
+                                <p class="p-0 m-0">&nbsp;</p>
+                            </td>
+                        </tr>
+                        <
+                    </table>
+                    <br><br>
+                </td> {{--                fin de la columna del 30%--}}
+
+            </tr>
+
+        </table>
     </div>
+
+<div class="body">
+    <table class="mb-2 table4 ">
+        <tr  >
+            <td  >
+            <p class="pl-2 text-10px ">
+                @if (!empty($registro->id))
+                    <span class="font-bold">Número de oficio: </span> {{ $registro->id }}
+                @endif
+            </p>
+            </td>
+            <td  >
+                <p class="text-10px ">
+                    @if (!empty($registro->nofi))
+                        <span class="font-bold">Número de oficio: </span> {{ $registro->nofi }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    @endif
+
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td >
+                <p class="pl-2 text-10px ">
+                    @if (!empty($registro->fcap))
+                        <span class="font-bold">Fecha del documento:</span>
+                        {{ \Carbon\Carbon::parse($registro->fcap)->format('d/m/Y') }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    @endif
+
+                </p>
+            </td>
+            <td >
+                <p class="text-10px">
+                    @if (!empty($registro->frec))
+                        <span class="font-bold">Fecha de recepción:</span>
+                        {{ \Carbon\Carbon::parse($registro->frec)->format('d/m/Y') }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    @endif
+
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <table class="mb-2 table4 ">
+        <tr  >
+            <td  >
+                @if (!empty($registro->rem_nombre))
+                    <p class="pl-2 text-10px ">
+                    <span class="font-bold">Nombre :</span> {{ $registro->rem_nombre }}
+                    </p>
+                @endif
+                    @if (!empty($registro->rem_cargo))
+                        <p class="pl-2 text-10px ">
+                        <span class="font-bold">Cargo: </span> {{ $registro->rem_cargo}}
+                        </p>
+                    @endif
+                    @if (!empty($registro->rem_deporg))
+                        <p class="pl-2 text-10px ">
+                        <span class="font-bold">Dependencia u Organismo: </span> {{ $registro->rem_deporg }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </p>
+                    @endif
+
+                    @if (!empty($registro->rem_dir))
+                        <p class="pl-2 text-10px ">
+                        <span class="font-bold">Domicilio: </span> {{ $registro->rem_dir }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </p>
+                    @endif
+
+
+            </td>
+        </tr>
+    </table>
+
+    <table class="mb-2 table4 ">
+        <tr  >
+            <td>
+
+                    @if (!empty($registro->tcor))
+                    <p class="pl-2 text-10px ">
+                        <span class="font-bold">Tipo del documento: </span> {{ $registro->tcor }}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </p>
+                    @endif
+                    @if (!empty($registro->ccor))
+                    <p class="pl-2 text-10px ">
+                        <span class="font-bold"> clasificación del documento: </span> {{ $registro->ccor }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </p>
+                    @endif
+                    @if (!empty($registro->des))
+                    <p class="pl-2 text-10px ">
+                        <span class="font-bold"> Descripción del asunto: </span> {{ $registro->des }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </p>
+                    @endif
+                    @if (!empty($registro->seguimiento))
+                    <p class="pl-2 text-10px ">
+                        <span class="font-bold"> clasificación del documento: </span> {{ $registro->seguimiento }}
+                    </p>
+                    @endif
+                <hr>
+                    @if (!empty($registro->rem_nombre))
+                            <p class="pl-2 text-10px ">
+                        <span class="font-bold">Nombre: </span> {{ $registro->rem_nombre }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </p>
+                    @endif
+                    @if (!empty($registro->rem_cargo))
+                            <p class="pl-2 text-10px ">
+                        <span class="font-bold">Cargo: </span> {{ $registro->rem_cargo}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </p>
+                    @endif
+                    @if (!empty($registro->rem_deporg))
+                            <p class="pl-2 text-10px ">
+                        <span class="font-bold">Dependencia u Organismo: </span> {{ $registro->rem_deporg }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </p>
+                    @endif
+            </td>
+        </tr>
+    </table>
+
+ </div>
 </body>
 </html>
