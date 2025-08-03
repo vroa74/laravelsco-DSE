@@ -21,6 +21,7 @@ class Create extends Component
     public $selectedLegislaturaId, $ffcap, $fncor, $ftcor, $ftcorid;
     public $legislatura, $fcap, $frec, $ncor, $tcor, $ccor, $fofi, $nofi, $nhoj, $rem_nombre, $rem_cargo, $rem_deporg, $rem_dir;
     public $des, $seguimiento, $tur_nom, $tur_cargo, $tur_deporg, $creo, $modifico, $reporte, $estatus;
+    public $rem_id = null; // Para almacenar el ID del usuario seleccionado en Turnado
     public $tcccid = null;
     public $tccctext = '';
     public $filteredCcor = [];
@@ -209,6 +210,7 @@ class Create extends Component
                     $this->tur_nom = $selectedUser->name;
                     $this->tur_cargo = $selectedUser->position;
                     $this->tur_deporg = $selectedUser->direction;
+                    $this->rem_id = $selectedUser->id; // Asignar el ID del usuario al rem_id
                     break;
                 case 'Remitente':
                     $this->rem_nombre = $selectedUser->name;
@@ -407,6 +409,7 @@ class Create extends Component
             $correspondencia->tur_nom = $this->tur_nom;
             $correspondencia->tur_cargo = $this->tur_cargo;
             $correspondencia->tur_deporg = $this->tur_deporg;
+            $correspondencia->rem_id = $this->rem_id; // Asignar el rem_id del usuario seleccionado
             $correspondencia->creo = Auth::user()->email;
             $correspondencia->save();
 

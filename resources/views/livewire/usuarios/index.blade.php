@@ -33,7 +33,7 @@
                     <!-- Contenedor de los botones adicionales centrados -->
                     <div class="flex gap-2 justify-center items-center absolute top-1/2 right-[50%] -translate-y-1/2">
                         <button wire:click="openCreateModal"
-
+                                title="Agregar registro"
                                 class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
                           <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                               <i class="fa-regular fa-square-plus"></i>
@@ -41,26 +41,27 @@
                         </button>
 
 
-                        <button wire:click="exportPDF"
+                        {{-- <button wire:click="exportPDF"
                                 class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
                           <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                               <i class="fa-solid fa-file-export"></i>
                           </span>
-                        </button>
+                        </button> --}}
 
                         <button wire:click="openViewQuery"
+                        title="Mostrar query"
                                 class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
                           <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                               <i class="fa-solid fa-filter"></i>
                           </span>
                         </button>
 
-                        <button wire:click="clearFilters"
+                        {{-- <button wire:click="clearFilters"
                                 class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-400 to-pink-600 group-hover:from-red-400 group-hover:to-pink-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-red-200 dark:focus:ring-red-800">
                           <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                               <i class="fa-solid fa-times"></i>
                           </span>
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
             </div>
@@ -458,7 +459,7 @@
                 <label class="block text-sm font-medium mb-1">Nueva Contraseña:</label>
                 <div class="relative">
                     <input wire:model="editPassword" type="{{ $showEditPassword ? 'text' : 'password' }}" class="w-full p-2 pr-10 border rounded dark:bg-gray-800 text-black" placeholder="Dejar vacío para mantener la actual">
-                    <button type="button" wire:click="toggleEditPassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                    <button type="button" wire:click="toggleEditPassword" class="absolute inset-y-0 right-0 pr-3 flex items-center" title="{{ $showEditPassword ? 'Ocultar contraseña' : 'Mostrar contraseña' }}">
                         <i class="fa-solid {{ $showEditPassword ? 'fa-eye-slash' : 'fa-eye' }} text-gray-500"></i>
                     </button>
                 </div>
@@ -468,7 +469,7 @@
                 <label class="block text-sm font-medium mb-1">Confirmar Contraseña:</label>
                 <div class="relative">
                     <input wire:model="editPasswordConfirmation" type="{{ $showEditPasswordConfirmation ? 'text' : 'password' }}" class="w-full p-2 pr-10 border rounded dark:bg-gray-800 text-black" placeholder="Confirmar nueva contraseña">
-                    <button type="button" wire:click="toggleEditPasswordConfirmation" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                    <button type="button" wire:click="toggleEditPasswordConfirmation" class="absolute inset-y-0 right-0 pr-3 flex items-center" title="{{ $showEditPasswordConfirmation ? 'Ocultar confirmación' : 'Mostrar confirmación' }}">
                         <i class="fa-solid {{ $showEditPasswordConfirmation ? 'fa-eye-slash' : 'fa-eye' }} text-gray-500"></i>
                     </button>
                 </div>
@@ -622,7 +623,7 @@
                         <label class="block text-sm font-medium mb-1">Contraseña:</label>
                         <div class="relative">
                             <input wire:model="createPassword" type="{{ $showCreatePassword ? 'text' : 'password' }}" class="w-full p-2 pr-10 border rounded dark:bg-gray-800 text-black" placeholder="Mínimo 8 caracteres" required>
-                            <button type="button" wire:click="toggleCreatePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                            <button type="button" wire:click="toggleCreatePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center" title="{{ $showCreatePassword ? 'Ocultar contraseña' : 'Mostrar contraseña' }}">
                                 <i class="fa-solid {{ $showCreatePassword ? 'fa-eye-slash' : 'fa-eye' }} text-gray-500"></i>
                             </button>
                         </div>
@@ -632,7 +633,7 @@
                         <label class="block text-sm font-medium mb-1">Confirmar Contraseña:</label>
                         <div class="relative">
                             <input wire:model="createPasswordConfirmation" type="{{ $showCreatePasswordConfirmation ? 'text' : 'password' }}" class="w-full p-2 pr-10 border rounded dark:bg-gray-800 text-black" placeholder="Confirmar contraseña" required>
-                            <button type="button" wire:click="toggleCreatePasswordConfirmation" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                            <button type="button" wire:click="toggleCreatePasswordConfirmation" class="absolute inset-y-0 right-0 pr-3 flex items-center" title="{{ $showCreatePasswordConfirmation ? 'Ocultar confirmación' : 'Mostrar confirmación' }}">
                                 <i class="fa-solid {{ $showCreatePasswordConfirmation ? 'fa-eye-slash' : 'fa-eye' }} text-gray-500"></i>
                             </button>
                         </div>

@@ -27,7 +27,8 @@ class Co extends Model
         'ccor',
         'nhoj',
         'nofi',
-        'estatus'
+        'estatus',
+        'rem_id'
     ];
 
     protected $casts = [
@@ -36,4 +37,10 @@ class Co extends Model
         'fofi' => 'date',
         'estatus' => 'boolean',
     ];
+
+    // Relación con el usuario remitente
+    public function remitente()
+    {
+        return $this->belongsTo(User::class, 'rem_id');
+    }
 }
