@@ -182,7 +182,16 @@
                             <span class="absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
                                 Presiona para seleccionar
                             </span>
-                    </button>
+                        </button>
+                        <button type="button" 
+                        wire:click="openModalUsers('des')" 
+                        class="px-2 py-1 text-xs text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:ring focus:ring-blue-300 relative group ml-1"
+                        title="Presiona para seleccionar usuario">
+                            <i class="fa-solid fa-user"></i>
+                            <span class="absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                                Presiona para seleccionar usuario
+                            </span>
+                        </button>
                     </label>                     
                     <textarea
                         id="des"
@@ -271,6 +280,15 @@
                                 Presiona para seleccionar
                             </span>
                         </button>
+                        <button type="button" 
+                        wire:click="openModalUsers('seguimiento')" 
+                        class="px-2 py-1 text-xs text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:ring focus:ring-blue-300 relative group ml-1"
+                        title="Presiona para seleccionar usuario">
+                            <i class="fa-solid fa-user"></i>
+                            <span class="absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                                Presiona para seleccionar usuario
+                            </span>
+                        </button>
                     </label>
                     <textarea   id="seg"
                                 rows="4"
@@ -284,12 +302,12 @@
                     <label for="turnado" class="block mb-8 text-sm font-medium text-gray-900 dark:text-white">
                         Turnado:
                         <button type="button" 
-                        wire:click="openModalAgent('Turnado:')" 
-                        class="px-2 py-1 text-xs text-white bg-orange-500 rounded-md hover:bg-orange-700 focus:ring focus:ring-orange-300 relative group"
-                        title="Presiona para seleccionar">
-                            <i class="fa-solid fa-users"></i>
+                        wire:click="openModalUsers('Turnado')" 
+                        class="px-2 py-1 text-xs text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:ring focus:ring-blue-300 relative group"
+                        title="Presiona para seleccionar usuario">
+                            <i class="fa-solid fa-user"></i>
                             <span class="absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-                                Presiona para seleccionar
+                                Presiona para seleccionar usuario
                             </span>
                         </button>
                     </label>
@@ -325,6 +343,19 @@
                                 readonly
                             class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
+                    <!-- Campo oculto para mostrar el rem_id seleccionado (para debugging) -->
+                    @if($rem_id)
+                    <div class="flex items-center m-1 space-x-4 ">
+                        <label for="rem_id_debug" class="text-sm font-medium text-gray-900 dark:text-white">
+                            ID Usuario:
+                        </label>
+                        <input  type="text" 
+                                id="rem_id_debug" 
+                                value="{{ $rem_id }}"
+                                readonly
+                            class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    @endif
                 </div>
             </div>
             {{-- {{$users}} --}}
@@ -607,6 +638,87 @@
             <!-- Paginación -->
             <div class="p-4 border-t border-white">
                 {{ $modalAges->links() }}
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <!-- Modal de Usuarios para Turnado y Remitente -->
+    @if($showModalUsers)
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="w-full h-1/2 mx-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-white flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-4 border-b border-white">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Lista de Usuarios - {{ $selectedUserColumn ? $selectedUserColumn : '' }}
+                </h3>
+                <button wire:click="closeModalUsers" class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Filtros -->
+            <div class="p-4 border-b border-white">
+                <div class="grid grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre</label>
+                        <input wire:model.live="searchUserName" type="text" 
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                               placeholder="Buscar por nombre">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cargo</label>
+                        <input wire:model.live="searchUserPosition" type="text" 
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                               placeholder="Buscar por cargo">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Dirección</label>
+                        <input wire:model.live="searchUserDirection" type="text" 
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                               placeholder="Buscar por dirección">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de Usuarios -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <table class="w-full text-sm text-left text-gray-900 dark:text-white">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="px-6 py-3">ID</th>
+                            <th class="px-6 py-3">Nombre</th>
+                            <th class="px-6 py-3">Cargo</th>
+                            <th class="px-6 py-3">Dirección</th>
+                            <th class="px-6 py-3">Email</th>
+                            <th class="px-6 py-3">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($modalUsers as $user)
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4">{{ $user->id }}</td>
+                            <td class="px-6 py-4">{{ $user->name }}</td>
+                            <td class="px-6 py-4">{{ $user->position }}</td>
+                            <td class="px-6 py-4">{{ $user->direction }}</td>
+                            <td class="px-6 py-4">{{ $user->email }}</td>
+                            <td class="px-6 py-4">
+                                <button wire:click="selectUserFromModal({{ $user->id }})" 
+                                    class="px-2 py-1 text-xs font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                    Seleccionar
+                                </button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginación -->
+            <div class="p-4 border-t border-white">
+                {{ $modalUsers->links() }}
             </div>
         </div>
     </div>

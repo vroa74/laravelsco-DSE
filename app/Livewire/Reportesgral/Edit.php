@@ -55,6 +55,16 @@ class Edit extends Component
     // No necesitamos una propiedad separada para $modalAges, filtraremos $this->ages en render
     // ------------------------------------------
 
+    // --- Propiedades para el Modal de Users (Turnado) ---
+    public $showModalUsers = false;
+    public $searchUserName = '';
+    public $searchUserPosition = '';
+    public $searchUserDirection = '';
+    public $perPageUsers = 10;
+    public $selectedUserColumn = null; // Para almacenar la columna seleccionada para usuarios
+    public $rem_id = null; // Para almacenar el ID del usuario seleccionado en Turnado
+    // ------------------------------------------
+
     public function mount($id = null)
     {
         // Cargar todos los registros necesarios
@@ -99,6 +109,7 @@ class Edit extends Component
         $this->tur_nom = $record->tur_nom;
         $this->tur_cargo = $record->tur_cargo;
         $this->tur_deporg = $record->tur_deporg;
+        $this->rem_id = $record->rem_id; // Cargar el rem_id del registro
 
         // Establecer el tcccid basado en el tcor para habilitar la clasificación
         $this->tcccid = $this->tcors->where('tcor', $record->tcor)->first()?->id;
@@ -161,6 +172,89 @@ class Edit extends Component
             }
             $this->closeModal();
         }
+    }
+
+    // --- Métodos para el Modal de Users ---
+    public function openModalUsers($column = null)
+    {
+        $this->showModalUsers = true;
+        $this->selectedUserColumn = $column;
+    }
+
+    public function closeModalUsers()
+    {
+        $this->showModalUsers = false;
+        $this->selectedUserColumn = null;
+        $this->reset(['searchUserName', 'searchUserPosition', 'searchUserDirection']);
+    }
+
+    public function selectUserFromModal($userId)
+    {
+        $selectedUser = User::find($userId);
+        if ($selectedUser) {
+            $textoSeleccionado = ' '.trim($selectedUser->name . ' ' . $selectedUser->position . ' ' . $selectedUser->direction);
+            
+            switch ($this->selectedUserColumn) {
+                case 'Turnado':
+                    $this->tur_nom = $selectedUser->name;
+                    $this->tur_cargo = $selectedUser->position;
+                    $this->tur_deporg = $selectedUser->direction;
+                    $this->rem_id = $selectedUser->id; // Asignar el ID del usuario al rem_id
+                    break;
+                case 'Remitente':
+                    $this->rem_nombre = $selectedUser->name;
+                    $this->rem_cargo = $selectedUser->position;
+                    $this->rem_deporg = $selectedUser->direction;
+                    $this->rem_dir = $selectedUser->direction; // Usar direction como dirección
+                    break;
+                case 'des':
+                    $this->des = $this->des ? $this->des . "\n" . $textoSeleccionado : $textoSeleccionado;
+                    break;
+                case 'seguimiento':
+                    $this->seguimiento = $this->seguimiento ? $this->seguimiento . "\n" . $textoSeleccionado : $textoSeleccionado;
+                    break;
+            }
+            $this->closeModalUsers();
+        }
+    }
+
+    // Método para obtener los Users paginados y filtrados
+    public function getModalUsersProperty()
+    {
+        $query = User::query();
+
+        if ($this->searchUserName) {
+            $query->where('name', 'like', '%' . $this->searchUserName . '%');
+        }
+
+        if ($this->searchUserPosition) {
+            $query->where('position', 'like', '%' . $this->searchUserPosition . '%');
+        }
+
+        if ($this->searchUserDirection) {
+            $query->where('direction', 'like', '%' . $this->searchUserDirection . '%');
+        }
+
+        return $query->orderBy('name')->paginate($this->perPageUsers);
+    }
+
+    // Reseteo de la paginación al cambiar los filtros de usuarios
+    public function updatedSearchUserName()
+    {
+        $this->resetPage();
+        $this->showModalUsers = true; // Mantener el modal abierto
+    }
+
+    public function updatedSearchUserPosition()
+    {
+        $this->resetPage();
+        $this->showModalUsers = true; // Mantener el modal abierto
+    }
+
+    public function updatedSearchUserDirection()
+    {
+        $this->resetPage();
+        $this->showModalUsers = true; // Mantener el modal abierto
     }
 
     // --- Método para actualizar el estado de habilitación del select de clasificación ---
@@ -251,6 +345,7 @@ class Edit extends Component
             'ccors' => $this->ccors,
             'users' => $this->users,
             'modalAges' => $this->modalAges,
+            'modalUsers' => $this->modalUsers,
         ]);
     }
 
@@ -327,6 +422,7 @@ class Edit extends Component
             $correspondencia->tur_nom = $this->tur_nom;
             $correspondencia->tur_cargo = $this->tur_cargo;
             $correspondencia->tur_deporg = $this->tur_deporg;
+            $correspondencia->rem_id = $this->rem_id; // Asignar el rem_id del usuario seleccionado
             $correspondencia->modifico = Auth::user()->email;
             $correspondencia->save();
 
