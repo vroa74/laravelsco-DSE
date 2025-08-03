@@ -29,7 +29,15 @@ class User extends Authenticatable
         'name',
         'email',
         'rfc',
+        'curp',
+        'direction',
+        'position',
+        'sex',
+        'lvl',
+        'tipo',
+        'status',
         'password',
+        'profile_photo_path',
     ];
 
     /**
@@ -64,5 +72,29 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Relación con los registros COS donde este usuario es el remitente
+     */
+    public function cosRemitente()
+    {
+        return $this->hasMany(Cos::class, 'rem_id');
+    }
+
+    /**
+     * Relación con los registros COS que este usuario creó
+     */
+    public function cosCreados()
+    {
+        return $this->hasMany(Cos::class, 'creo');
+    }
+
+    /**
+     * Relación con los registros COS que este usuario modificó
+     */
+    public function cosModificados()
+    {
+        return $this->hasMany(Cos::class, 'modifico');
     }
 }

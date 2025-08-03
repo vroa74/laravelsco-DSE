@@ -1124,8 +1124,8 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'VICTOR ROMAN ORTIZ ABREU',
             'email' => 'vroa74@gmail.com',
-            'rfc' => 'ZOOZ401477',
-            'curp' => 'ZOOZ401477',
+            'rfc' => 'oiav740927',
+            'curp' => 'oiav740927hccrbc00',
             'direction' => 'DIRECCIÓN DE INFORMÁTICA',
             'position' => 'JEFE DE DEPARTAMENTO',
             'sex' => 'masculino',
@@ -2713,8 +2713,13 @@ class DatabaseSeeder extends Seeder
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'profile_photo_path' => 'profile-photos/00229',
-            'password' => Hash::make('LHNH459639916268'),
+            'profile_photo_path' => 'profile-photos/00737',
+            'password' => Hash::make('LHNH099938'),
+        ]);
+        
+        // Ejecutar el seeder de COS después de crear los usuarios
+        $this->call([
+            CosSeeder::class,
         ]);
         
         User::factory()->create([

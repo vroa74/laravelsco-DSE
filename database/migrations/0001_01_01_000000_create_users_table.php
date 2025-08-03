@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('rfc', 13)->unique()->nullable();
-            $table->string('curp', 13)->unique()->nullable();
+            $table->string('curp', 20)->unique()->nullable();
             $table->string('direction', 250)->nullable();
             $table->string('position', 35)->nullable();
             $table->enum('sex', ['masculino', 'femenino'])->nullable();

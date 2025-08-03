@@ -11,7 +11,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return view('age.people');
+        return view('usuarios.index');
     }
 
     /**

@@ -54,6 +54,15 @@ class Create extends Component
     // No necesitamos una propiedad separada para $modalAges, filtraremos $this->ages en render
     // ------------------------------------------
 
+    // --- Propiedades para el Modal de Users (Turnado) ---
+    public $showModalUsers = false;
+    public $searchUserName = '';
+    public $searchUserPosition = '';
+    public $searchUserDirection = '';
+    public $perPageUsers = 10;
+    public $selectedUserColumn = null; // Para almacenar la columna seleccionada para usuarios
+    // ------------------------------------------
+
     public function mount()
     {
         // Cargar todos los registros necesarios
@@ -175,6 +184,89 @@ class Create extends Component
     }
     // -------------------------------------
 
+    // --- Métodos para el Modal de Users (Turnado) ---
+    public function openModalUsers($column = null)
+    {
+        $this->showModalUsers = true;
+        $this->selectedUserColumn = $column;
+    }
+
+    public function closeModalUsers()
+    {
+        $this->showModalUsers = false;
+        $this->selectedUserColumn = null;
+        $this->reset(['searchUserName', 'searchUserPosition', 'searchUserDirection']);
+    }
+
+    public function selectUserFromModal($userId)
+    {
+        $selectedUser = User::find($userId);
+        if ($selectedUser) {
+            $textoSeleccionado = ' '.trim($selectedUser->name . ' ' . $selectedUser->position . ' ' . $selectedUser->direction);
+            
+            switch ($this->selectedUserColumn) {
+                case 'Turnado':
+                    $this->tur_nom = $selectedUser->name;
+                    $this->tur_cargo = $selectedUser->position;
+                    $this->tur_deporg = $selectedUser->direction;
+                    break;
+                case 'Remitente':
+                    $this->rem_nombre = $selectedUser->name;
+                    $this->rem_cargo = $selectedUser->position;
+                    $this->rem_deporg = $selectedUser->direction;
+                    $this->rem_dir = $selectedUser->direction; // Usar direction como dirección
+                    break;
+                case 'des':
+                    $this->des = $this->des ? $this->des . "\n" . $textoSeleccionado : $textoSeleccionado;
+                    break;
+                case 'seguimiento':
+                    $this->seguimiento = $this->seguimiento ? $this->seguimiento . "\n" . $textoSeleccionado : $textoSeleccionado;
+                    break;
+            }
+            $this->closeModalUsers();
+        }
+    }
+
+    // Método para obtener los Users paginados y filtrados
+    public function getModalUsersProperty()
+    {
+        $query = User::query();
+
+        if ($this->searchUserName) {
+            $query->where('name', 'like', '%' . $this->searchUserName . '%');
+        }
+
+        if ($this->searchUserPosition) {
+            $query->where('position', 'like', '%' . $this->searchUserPosition . '%');
+        }
+
+        if ($this->searchUserDirection) {
+            $query->where('direction', 'like', '%' . $this->searchUserDirection . '%');
+        }
+
+        return $query->orderBy('name')->paginate($this->perPageUsers);
+    }
+
+    // Reseteo de la paginación al cambiar los filtros de usuarios
+    public function updatedSearchUserName()
+    {
+        $this->resetPage();
+        $this->showModalUsers = true; // Mantener el modal abierto
+    }
+
+    public function updatedSearchUserPosition()
+    {
+        $this->resetPage();
+        $this->showModalUsers = true; // Mantener el modal abierto
+    }
+
+    public function updatedSearchUserDirection()
+    {
+        $this->resetPage();
+        $this->showModalUsers = true; // Mantener el modal abierto
+    }
+    // -------------------------------------
+
     // Método para abrir el modal
     public function openModalAgent($column = null)
     {
@@ -238,6 +330,7 @@ class Create extends Component
             'ccors' => $this->ccors,
             'users' => $this->users,
             'modalAges' => $this->modalAges,
+            'modalUsers' => $this->modalUsers,
         ]);
     }
 
