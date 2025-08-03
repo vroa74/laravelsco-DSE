@@ -32,7 +32,7 @@
 
                     <!-- Contenedor de los botones adicionales centrados -->
                     <div class="flex gap-2 justify-center items-center absolute top-1/2 right-[50%] -translate-y-1/2">
-                        <button wire:click="openInsertModal"
+                        <button wire:click="openCreateModal"
 
                                 class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
                           <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -456,12 +456,22 @@
             <!-- Fila 6 - Contraseña -->
             <div class="bg-gray-500 text-white p-1 rounded-lg">
                 <label class="block text-sm font-medium mb-1">Nueva Contraseña:</label>
-                <input wire:model="editPassword" type="password" class="w-full p-2 border rounded dark:bg-gray-800 text-black" placeholder="Dejar vacío para mantener la actual">
+                <div class="relative">
+                    <input wire:model="editPassword" type="{{ $showEditPassword ? 'text' : 'password' }}" class="w-full p-2 pr-10 border rounded dark:bg-gray-800 text-black" placeholder="Dejar vacío para mantener la actual">
+                    <button type="button" wire:click="toggleEditPassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                        <i class="fa-solid {{ $showEditPassword ? 'fa-eye-slash' : 'fa-eye' }} text-gray-500"></i>
+                    </button>
+                </div>
                 @error('editPassword') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
             </div>
             <div class="bg-gray-500 text-white p-1 rounded-lg">
                 <label class="block text-sm font-medium mb-1">Confirmar Contraseña:</label>
-                <input wire:model="editPasswordConfirmation" type="password" class="w-full p-2 border rounded dark:bg-gray-800 text-black" placeholder="Confirmar nueva contraseña">
+                <div class="relative">
+                    <input wire:model="editPasswordConfirmation" type="{{ $showEditPasswordConfirmation ? 'text' : 'password' }}" class="w-full p-2 pr-10 border rounded dark:bg-gray-800 text-black" placeholder="Confirmar nueva contraseña">
+                    <button type="button" wire:click="toggleEditPasswordConfirmation" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                        <i class="fa-solid {{ $showEditPasswordConfirmation ? 'fa-eye-slash' : 'fa-eye' }} text-gray-500"></i>
+                    </button>
+                </div>
                 @error('editPasswordConfirmation') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
             </div>
             
@@ -509,6 +519,165 @@
         </div>
     @endif
     {{--  end Modal de edir registro--}}
+
+{{-- Modal de creación (duplicado del modal de edición) --}}
+@if($createModalOpen)
+    <div id="create-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
+        <div class="relative w-full max-w-2xl h-auto bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Crear Nuevo Usuario
+                </h3>
+                <button wire:click="closeCreateModal" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 8.586 5.707 4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-4">
+                <div class="grid grid-cols-2 gap-4 bg-gray-900 p-1">
+                    <!-- Fila 1 -->
+                    <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">Nombre:</label>
+                        <input wire:model="createName" type="text" class="w-full p-2 border rounded dark:bg-gray-800 text-black" placeholder="Nombre completo">
+                        @error('createName') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">Email:</label>
+                        <input wire:model="createEmail" type="email" class="w-full p-2 border rounded dark:bg-gray-800 text-black" placeholder="correo@ejemplo.com">
+                        @error('createEmail') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+                    </div>
+                    
+                    <!-- Fila 2 -->
+                    <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">RFC:</label>
+                        <input wire:model="createRfc" type="text" class="w-full p-2 border rounded dark:bg-gray-800 text-black" placeholder="RFC (13 caracteres)" maxlength="13">
+                        @error('createRfc') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">CURP:</label>
+                        <input wire:model="createCurp" type="text" class="w-full p-2 border rounded dark:bg-gray-800 text-black" placeholder="CURP (18 caracteres)" maxlength="20">
+                        @error('createCurp') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+                    </div>
+                    
+                    <!-- Fila 3 -->
+                    <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">Cargo:</label>
+                        <select wire:model="createPosition" class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                            <option value="">Seleccionar cargo</option>
+                            @foreach($uniquePositions as $position)
+                                <option value="{{ $position }}">{{ $position }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">Nivel:</label>
+                        <select wire:model="createLvl" class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                            <option value="">Seleccionar nivel</option>
+                            @foreach($uniqueLevels as $level)
+                                <option value="{{ $level }}">{{ $level }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    <!-- Fila 4 -->
+                    <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">Sexo:</label>
+                        <select wire:model="createSex" class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                            <option value="">Seleccionar sexo</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                        </select>
+                    </div>
+                    <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">Tipo:</label>
+                        <select wire:model="createTipo" class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                            <option value="">Seleccionar tipo</option>
+                            <option value="1">Administrador</option>
+                            <option value="2">Supervisor</option>
+                            <option value="3">Usuario</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Fila 5 -->
+                    <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">Estado:</label>
+                        <select wire:model="createStatus" class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">Dirección:</label>
+                        <select wire:model="createDirection" class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                            <option value="">Seleccionar dirección</option>
+                            @foreach($uniqueDirections as $direction)
+                                <option value="{{ $direction }}">{{ $direction }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    <!-- Fila 6 - Contraseña -->
+                    <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">Contraseña:</label>
+                        <div class="relative">
+                            <input wire:model="createPassword" type="{{ $showCreatePassword ? 'text' : 'password' }}" class="w-full p-2 pr-10 border rounded dark:bg-gray-800 text-black" placeholder="Mínimo 8 caracteres" required>
+                            <button type="button" wire:click="toggleCreatePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <i class="fa-solid {{ $showCreatePassword ? 'fa-eye-slash' : 'fa-eye' }} text-gray-500"></i>
+                            </button>
+                        </div>
+                        @error('createPassword') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">Confirmar Contraseña:</label>
+                        <div class="relative">
+                            <input wire:model="createPasswordConfirmation" type="{{ $showCreatePasswordConfirmation ? 'text' : 'password' }}" class="w-full p-2 pr-10 border rounded dark:bg-gray-800 text-black" placeholder="Confirmar contraseña" required>
+                            <button type="button" wire:click="toggleCreatePasswordConfirmation" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <i class="fa-solid {{ $showCreatePasswordConfirmation ? 'fa-eye-slash' : 'fa-eye' }} text-gray-500"></i>
+                            </button>
+                        </div>
+                        @error('createPasswordConfirmation') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+                    </div>
+                    
+                    <!-- Fila 7 - Foto de perfil -->
+                    <div class="bg-gray-500 text-white p-1 rounded-lg col-span-2">
+                        <label class="block text-sm font-medium mb-1">Foto de Perfil:</label>
+                        <div class="flex items-center space-x-4">
+                            <!-- Vista previa de nueva imagen -->
+                            <div class="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center">
+                                @if($createProfilePhoto)
+                                    <!-- Vista previa de nueva imagen seleccionada -->
+                                    <img src="{{ $createProfilePhoto->temporaryUrl() }}" alt="Vista previa" class="w-full h-full object-cover">
+                                @else
+                                    <!-- Avatar por defecto con iniciales -->
+                                    <div class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-xl">
+                                        <i class="fa-solid fa-user-plus text-2xl"></i>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="flex-1">
+                                <input wire:model.live="createProfilePhoto" type="file" accept="image/*" class="w-full p-2 border rounded dark:bg-gray-800 text-black text-sm">
+                                <p class="text-xs text-gray-300 mt-1">Formatos: JPG, PNG, GIF. Máximo 2MB</p>
+                                @if($createProfilePhoto)
+                                    <p class="text-xs text-green-300 mt-1">Archivo seleccionado: {{ $createProfilePhoto->getClientOriginalName() }}</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex justify-end p-4 space-x-2 border-t border-gray-200 dark:border-gray-600">
+                    <button wire:click="saveCreateRecord" type="button" class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800">
+                        Crear Usuario
+                    </button>
+                    <button wire:click="closeCreateModal" type="button" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-100 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 
 
 {{-- Modal de inserción --}}

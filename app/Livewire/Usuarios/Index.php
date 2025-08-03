@@ -23,6 +23,16 @@ class Index extends Component
 
     public $editRecordId;
     public $editName, $editRfc, $editCurp, $editPosition, $editSex, $editLvl, $editTipo, $editStatus, $editEmail, $editDirection, $editPassword, $editPasswordConfirmation, $editProfilePhoto, $editProfilePhotoPath;
+    
+    // Variables para el modal de creación (duplicado del modal de edición)
+    public $createModalOpen = false;
+    public $createName, $createRfc, $createCurp, $createPosition, $createSex, $createLvl, $createTipo, $createStatus, $createEmail, $createDirection, $createPassword, $createPasswordConfirmation, $createProfilePhoto;
+    
+    // Variables para mostrar/ocultar contraseñas
+    public $showEditPassword = false;
+    public $showEditPasswordConfirmation = false;
+    public $showCreatePassword = false;
+    public $showCreatePasswordConfirmation = false;
     protected $paginationTheme = 'tailwind';
     
     // Variables adicionales del componente original
@@ -79,6 +89,105 @@ class Index extends Component
     public function openInsertModal()
     {
         $this->isInsertModalOpen = true;
+    }
+
+    public function openCreateModal()
+    {
+        $this->createModalOpen = true;
+        // Inicializar valores por defecto
+        $this->createStatus = true;
+        $this->createTipo = 3;
+    }
+
+    public function closeCreateModal()
+    {
+        $this->createModalOpen = false;
+        // Limpiar foto temporal si existe
+        if ($this->createProfilePhoto) {
+            $this->createProfilePhoto = null;
+        }
+        // Resetear todos los campos
+        $this->reset([
+            'createName', 'createRfc', 'createCurp', 'createPosition', 'createSex', 
+            'createLvl', 'createTipo', 'createStatus', 'createEmail', 'createDirection', 
+            'createPassword', 'createPasswordConfirmation', 'showCreatePassword', 'showCreatePasswordConfirmation'
+        ]);
+    }
+
+    public function saveCreateRecord()
+    {
+        $this->validate([
+            'createName' => 'required|string|max:255',
+            'createRfc' => 'nullable|string|max:13|unique:users,rfc',
+            'createCurp' => 'nullable|string|max:20|unique:users,curp',
+            'createPosition' => 'nullable|string|max:35',
+            'createSex' => 'nullable|in:masculino,femenino',
+            'createLvl' => 'nullable|string|max:10',
+            'createTipo' => 'nullable|integer',
+            'createStatus' => 'nullable|boolean',
+            'createEmail' => 'required|email|max:255|unique:users,email',
+            'createDirection' => 'nullable|string|max:250',
+            'createPassword' => 'required|string|min:8|confirmed',
+            'createProfilePhoto' => 'nullable|image|max:2048', // 2MB máximo
+        ]);
+
+        $createData = [
+            'name' => $this->createName,
+            'rfc' => $this->createRfc,
+            'curp' => $this->createCurp,
+            'position' => $this->createPosition,
+            'sex' => $this->createSex,
+            'lvl' => $this->createLvl,
+            'tipo' => $this->createTipo ?? 3,
+            'status' => $this->createStatus ?? true,
+            'email' => $this->createEmail,
+            'direction' => $this->createDirection,
+            'password' => bcrypt($this->createPassword),
+        ];
+
+        // Manejar foto de perfil
+        if ($this->createProfilePhoto) {
+            $photoPath = $this->createProfilePhoto->store('profile-photos', 'public');
+            $createData['profile_photo_path'] = $photoPath;
+        }
+
+        User::create($createData);
+
+        $this->closeCreateModal();
+        session()->flash('message', 'Usuario creado exitosamente.');
+        
+        // Forzar actualización de la tabla para mostrar la nueva foto
+        $this->dispatch('$refresh');
+    }
+
+    public function updatedCreateProfilePhoto()
+    {
+        // Este método se ejecuta cuando se selecciona una nueva foto en creación
+        if ($this->createProfilePhoto) {
+            // Forzar actualización de la vista para mostrar la vista previa
+            $this->dispatch('$refresh');
+        }
+    }
+
+    // Métodos para mostrar/ocultar contraseñas
+    public function toggleEditPassword()
+    {
+        $this->showEditPassword = !$this->showEditPassword;
+    }
+
+    public function toggleEditPasswordConfirmation()
+    {
+        $this->showEditPasswordConfirmation = !$this->showEditPasswordConfirmation;
+    }
+
+    public function toggleCreatePassword()
+    {
+        $this->showCreatePassword = !$this->showCreatePassword;
+    }
+
+    public function toggleCreatePasswordConfirmation()
+    {
+        $this->showCreatePasswordConfirmation = !$this->showCreatePasswordConfirmation;
     }
 
     public function openViewQuery()
@@ -270,7 +379,7 @@ class Index extends Component
         }
         
         $this->editRecordId = null;
-        $this->reset(['editName', 'editRfc', 'editCurp', 'editPosition', 'editSex', 'editLvl', 'editTipo', 'editStatus', 'editEmail', 'editDirection', 'editPassword', 'editPasswordConfirmation', 'editProfilePhotoPath']);
+        $this->reset(['editName', 'editRfc', 'editCurp', 'editPosition', 'editSex', 'editLvl', 'editTipo', 'editStatus', 'editEmail', 'editDirection', 'editPassword', 'editPasswordConfirmation', 'editProfilePhotoPath', 'showEditPassword', 'showEditPasswordConfirmation']);
     }
 
     public function showRecord($id)
