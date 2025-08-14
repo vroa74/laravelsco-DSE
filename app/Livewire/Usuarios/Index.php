@@ -127,9 +127,15 @@ class Index extends Component
             'createStatus' => 'nullable|boolean',
             'createEmail' => 'required|email|max:255|unique:users,email',
             'createDirection' => 'nullable|string|max:250',
-            'createPassword' => 'required|string|min:8|confirmed',
+            'createPassword' => 'required|string|min:8',
             'createProfilePhoto' => 'nullable|image|max:2048', // 2MB máximo
         ]);
+
+        // Validar que las contraseñas coincidan manualmente
+        if ($this->createPassword !== $this->createPasswordConfirmation) {
+            $this->addError('createPasswordConfirmation', 'La confirmación de contraseña no coincide.');
+            return;
+        }
 
         $createData = [
             'name' => $this->createName,
@@ -224,9 +230,15 @@ class Index extends Component
             'newStatus' => 'nullable|boolean',
             'newEmail' => 'required|email|max:255|unique:users,email',
             'newDirection' => 'nullable|string|max:250',
-            'newPassword' => 'required|string|min:8|confirmed',
+            'newPassword' => 'required|string|min:8',
             'newProfilePhoto' => 'nullable|image|max:2048', // 2MB máximo
         ]);
+
+        // Validar que las contraseñas coincidan manualmente
+        if ($this->newPassword !== $this->newPasswordConfirmation) {
+            $this->addError('newPasswordConfirmation', 'La confirmación de contraseña no coincide.');
+            return;
+        }
 
         $createData = [
             'name' => $this->newName,
@@ -326,7 +338,12 @@ class Index extends Component
 
         // Solo validar contraseña si se está cambiando
         if (!empty($this->editPassword)) {
-            $rules['editPassword'] = 'string|min:8|confirmed';
+            $rules['editPassword'] = 'string|min:8';
+            // Validar que las contraseñas coincidan manualmente
+            if ($this->editPassword !== $this->editPasswordConfirmation) {
+                $this->addError('editPasswordConfirmation', 'La confirmación de edit password no coincide.');
+                return;
+            }
         }
 
         $this->validate($rules);

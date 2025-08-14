@@ -6,6 +6,6 @@
     </x-slot>
 
     <div class="py-2 font-roboto">
-        @livewire('rg')
+        @livewire('reportesgral.index')
     </div>
 </x-app-layout>
