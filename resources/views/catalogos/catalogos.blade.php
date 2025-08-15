@@ -8,13 +8,11 @@
             </div>
         </h2>
     </x-slot>
-     <br>
-    <!-- Indicador visual del estado de detección -->
 
     <!-- Detección de dispositivo -->
     <div id="device-info" class="text-center py-2">
-        <p id="desktop-text" class="hidden text-lg font-semibold text-blue-600">DESKTOP.</p>
-        <p id="mobile-text" class="hidden text-lg font-semibold text-green-600">MOBILE.</p>
+        <p id="desktop-text" class="hidden text-lg font-semibold text-blue-600"></p>
+        <p id="mobile-text" class="hidden text-lg font-semibold text-green-600"></p>
     </div>
 
     <!-- Versión DESKTOP - Grid horizontal 4 columnas -->
@@ -52,26 +50,11 @@
     <script>
         // Función simple y directa para detectar dispositivo
         function detectDevice() {
-            // Mostrar estado de carga
-            document.getElementById('status-loading').classList.remove('hidden');
-            document.getElementById('status-desktop').classList.add('hidden');
-            document.getElementById('status-mobile').classList.add('hidden');
-            
             // Detectar si es móvil
             const isMobile = window.innerWidth <= 768 || 
                             /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
-            // Mostrar información de debug
-            document.getElementById('screen-width').textContent = `Ancho: ${window.innerWidth}px`;
-            document.getElementById('user-agent-short').textContent = navigator.userAgent.substring(0, 30) + '...';
-            
-            // Ocultar estado de carga
-            document.getElementById('status-loading').classList.add('hidden');
-            
             if (isMobile) {
-                // Mostrar estado móvil
-                document.getElementById('status-mobile').classList.remove('hidden');
-                
                 // Mostrar icono móvil en header
                 document.getElementById('header-mobile-text').classList.remove('hidden');
                 document.getElementById('header-desktop-text').classList.add('hidden');
@@ -82,9 +65,6 @@
                 document.getElementById('mobile-grid').classList.remove('hidden');
                 document.getElementById('desktop-grid').classList.add('hidden');
             } else {
-                // Mostrar estado desktop
-                document.getElementById('status-desktop').classList.remove('hidden');
-                
                 // Mostrar icono desktop en header
                 document.getElementById('header-desktop-text').classList.remove('hidden');
                 document.getElementById('header-mobile-text').classList.add('hidden');
