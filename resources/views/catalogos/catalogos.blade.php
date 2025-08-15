@@ -2,25 +2,14 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             <div class="text-center py-2">
-                <span id="header-desktop-text" class="hidden"> <i class="fa-solid fa-desktop"></i> </span>
-                <span id="header-mobile-text" class="hidden"> <i class="fa-solid fa-mobile-screen"></i> </span>
-                📱 Catalogos  
+                <span id="header-desktop-text" class="hidden"> 🖥️ </span>
+                <span id="header-mobile-text" class="hidden"> 📱 </span>
+                 Catalogos  
             </div>
         </h2>
     </x-slot>
      <br>
     <!-- Indicador visual del estado de detección -->
-    <div class="text-center py-2 bg-gray-800 text-white">
-        <div id="status-info" class="text-sm">
-            <span id="status-loading">🔄 Detectando dispositivo...</span>
-            <span id="status-desktop" class="hidden">🖥️ Desktop detectado</span>
-            <span id="status-mobile" class="hidden">📱 Móvil detectado</span>
-        </div>
-        <div id="debug-info" class="text-xs text-gray-400 mt-1">
-            <span id="screen-width"></span> | 
-            <span id="user-agent-short"></span>
-        </div>
-    </div>
 
     <!-- Detección de dispositivo -->
     <div id="device-info" class="text-center py-2">
