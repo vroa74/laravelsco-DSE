@@ -4,7 +4,7 @@
             <div class="text-center py-2">
                 <span id="header-desktop-text" class="hidden"> <i class="fa-solid fa-desktop"></i> </span>
                 <span id="header-mobile-text" class="hidden"> <i class="fa-solid fa-mobile-screen"></i> </span>
-                Catalogos  
+                📱 Catalogos  
             </div>
         </h2>
     </x-slot>
