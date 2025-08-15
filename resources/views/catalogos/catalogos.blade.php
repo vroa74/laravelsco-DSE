@@ -9,7 +9,11 @@
         </h2>
     </x-slot>
 
-    <br>
+    <!-- Detección de dispositivo -->
+    <div id="device-info" class="text-center py-2">
+        <p id="desktop-text" class="hidden text-lg font-semibold text-blue-600">DESKTOP</p>
+        <p id="mobile-text" class="hidden text-lg font-semibold text-green-600">MOBILE</p>
+    </div>
 
     <!-- Versión DESKTOP - Grid horizontal 4 columnas -->
     <div id="desktop-grid" class="grid grid-cols-4 pt-4 gap-1 w-full h-full px-4 text-white">
