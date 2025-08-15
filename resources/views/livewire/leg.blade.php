@@ -1,109 +1,99 @@
-<div>
-    <h3 class="text-center items-center">Legislatura</h3>
-    <div class="m-0.5">
-        <label for="legislatura" class="block mb-2  text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+<div class="text-white">
+    <!-- Título responsivo -->
+    <h3 class="text-center text-lg md:text-xl font-semibold mb-3 md:mb-4">Legislatura</h3>
+    
+    <!-- Selector de Legislatura Actual -->
+    <div class="mb-4 md:mb-6">
+        <label for="legislatura" class="block mb-2 text-sm md:text-base font-medium text-white">Seleccionar Legislatura Actual</label>
         <select id="legislatura"
-                class="bg-gray-50  mb-2 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="w-full p-2 md:p-3 text-sm md:text-base bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors"
                 wire:change="setActual($event.target.value)">
-            <option selected>Seleccione una opcion</option>
+            <option selected>Seleccione una opción</option>
             @foreach($legis as $item)
                 <option value="{{ $item->id }}" @if($item->actual) selected @endif>{{ $item->legislatura }}</option>
             @endforeach
         </select>
     </div>
 
-    <div class="flex justify-center items-center space-x-2 space-y-1 mb-2">
-        <div class="items-center text-center">
-            <input type="text" id="small-input" name="legislatura" wire:model.defer="newLegislatura"
-                   class="p-1 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                   style="width: 100px;">
-            @if($editingId)
-                <button wire:click="saveEdit"
-                        class="relative inline-flex items-center justify-center p-0.5  mb-2 me-2
-                           overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
-                           bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400
-                           group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4
-                           focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white
-                            dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                <i class="fa-solid fa-notes-medical"></i> {{--  add record--}}
-                </span>
-                </button>
-            @else
-                <button wire:click="addLegislatura"
-                        class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2
-                           overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
-                           bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400
-                           group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4
-                           focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white
-                            dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                <i class="fa-solid fa-notes-medical"></i> {{--  add record--}}
-                </span>
-                </button>
-            @endif
+    <!-- Formulario de Agregar/Editar -->
+    <div class="mb-4 md:mb-6">
+        <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3">
+            <input type="text" 
+                   id="legislatura-input" 
+                   name="legislatura" 
+                   wire:model.defer="newLegislatura"
+                   placeholder="Ingrese legislatura (ej: IV, V, VI)"
+                   class="flex-1 p-2 md:p-3 text-sm md:text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+            
+            <div class="flex space-x-2 md:flex-shrink-0">
+                @if($editingId)
+                    <button wire:click="saveEdit"
+                            class="flex-1 md:flex-none bg-green-600 hover:bg-green-700 text-white font-medium py-2 md:py-3 px-3 md:px-4 rounded-lg transition-colors text-sm md:text-base">
+                        <i class="fa-solid fa-save mr-1 md:mr-2"></i>
+                        <span class="hidden md:inline">Guardar</span>
+                        <span class="md:hidden">✓</span>
+                    </button>
+                    <button wire:click="cancelEdit"
+                            class="flex-1 md:flex-none bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 md:py-3 px-3 md:px-4 rounded-lg transition-colors text-sm md:text-base">
+                        <i class="fa-solid fa-times mr-1 md:mr-2"></i>
+                        <span class="hidden md:inline">Cancelar</span>
+                        <span class="md:hidden">✗</span>
+                    </button>
+                @else
+                    <button wire:click="addLegislatura"
+                            class="flex-1 md:flex-none bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 md:py-3 px-3 md:px-4 rounded-lg transition-colors text-sm md:text-base">
+                        <i class="fa-solid fa-plus mr-1 md:mr-2"></i>
+                        <span class="hidden md:inline">Agregar</span>
+                        <span class="md:hidden">+</span>
+                    </button>
+                @endif
+            </div>
         </div>
     </div>
 
+    <!-- Mensajes de Estado -->
     @if(session()->has('success'))
-        <div class="mt-2 text-green-500 text-sm">
+        <div class="mb-4 p-3 bg-green-600 text-white text-sm md:text-base rounded-lg">
             {{ session('success') }}
         </div>
     @endif
     @if(session()->has('error'))
-        <div class="mt-2 text-red-500 text-sm">
+        <div class="mb-4 p-3 bg-red-600 text-white text-sm md:text-base rounded-lg">
             {{ session('error') }}
         </div>
     @endif
 
-    <hr>
-    <ol class="list-none list-inside text-xs mt-2">
+    <!-- Lista de Legislaturas -->
+    <div class="space-y-2 md:space-y-3">
+        <h4 class="text-sm md:text-base font-medium text-gray-300 mb-2 md:mb-3">Legislaturas Registradas:</h4>
         @foreach($legis as $items)
-            <li class="flex justify-between items-center">
-                <span class="@if($items->actual) font-bold text-base text-green-400 @endif">- {{ $items->legislatura }} - {{ $items->actual }}</span>
-                <div>
-{{--                    <button wire:click="startEdit({{ $items->id }})"--}}
-{{--                            class="px-1 py-1 m-0.5 text-xs font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-700">--}}
-{{--                        Editar--}}
-{{--                    </button>--}}
-{{--                    <button onclick="confirmDeletion({{ $items->id }})"--}}
-{{--                            class="px-1 py-1 m-0.5 text-xs font-medium text-white bg-red-500 rounded-lg hover:bg-red-700">--}}
-{{--                        Borrar--}}
-{{--                    </button>--}}
-
-                    <button wire:click="startEdit({{ $items->id }})" {{-- yellow-orange--}}
-                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2
-                                   overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
-                                   bg-gradient-to-br from-yellow-200 to-red-700 group-hover:from-orange-500
-                                   group-hover:to-orange-600 hover:text-white dark:text-white focus:ring-4
-                                   focus:outline-none focus:ring-orange-600 dark:focus:ring-orange-800">
-
-                          <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white
-                                       dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                            <i class="fa-solid fa-pencil"></i>{{-- Edit--}}
-                          </span>
+            <div class="flex justify-between items-center p-2 md:p-3 bg-gray-800 rounded-lg hover:bg-gray-750 transition-colors">
+                <span class="@if($items->actual) font-bold text-green-400 @else text-white @endif text-sm md:text-base">
+                    {{ $items->legislatura }}
+                    @if($items->actual)
+                        <span class="ml-2 text-xs md:text-sm bg-green-600 px-2 py-1 rounded-full">Actual</span>
+                    @endif
+                </span>
+                <div class="flex space-x-1 md:space-x-2">
+                    <button wire:click="startEdit({{ $items->id }})"
+                            class="p-2 md:p-2.5 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition-colors"
+                            title="Editar">
+                        <i class="fa-solid fa-pencil text-sm md:text-base"></i>
                     </button>
-                    <button onclick="confirmDeletion({{ $items->id }})"  {{-- red-orange--}}
-                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2
-                                   overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
-                                   bg-gradient-to-br from-orange-400 to-red-800 group-hover:from-red-600
-                                   group-hover:to-orange-800 hover:text-white dark:text-white focus:ring-4
-                                   focus:outline-none focus:ring-red-200 dark:focus:ring-red-800">
-                          <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white
-                                       dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                            <i class="fa-solid fa-trash-can"></i>{{-- borrar--}}
-                          </span>
+                    <button onclick="confirmDeletion({{ $items->id }})"
+                            class="p-2 md:p-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+                            title="Eliminar">
+                        <i class="fa-solid fa-trash-can text-sm md:text-base"></i>
                     </button>
-
-
                 </div>
-            </li>
+            </div>
         @endforeach
-    </ol>
+    </div>
 
+    <!-- Script para confirmación de eliminación -->
     <script>
         function confirmDeletion(id) {
-            if (confirm('¿Estás seguro de que deseas borrar esta legislatura?')) {
+            if (confirm('¿Está seguro de que desea eliminar esta legislatura?')) {
                 @this.deleteLegislatura(id);
             }
         }
