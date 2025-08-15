@@ -8,11 +8,24 @@
             </div>
         </h2>
     </x-slot>
+     <br>
+    <!-- Indicador visual del estado de detección -->
+    <div class="text-center py-2 bg-gray-800 text-white">
+        <div id="status-info" class="text-sm">
+            <span id="status-loading">🔄 Detectando dispositivo...</span>
+            <span id="status-desktop" class="hidden">🖥️ Desktop detectado</span>
+            <span id="status-mobile" class="hidden">📱 Móvil detectado</span>
+        </div>
+        <div id="debug-info" class="text-xs text-gray-400 mt-1">
+            <span id="screen-width"></span> | 
+            <span id="user-agent-short"></span>
+        </div>
+    </div>
 
     <!-- Detección de dispositivo -->
     <div id="device-info" class="text-center py-2">
-        <p id="desktop-text" class="hidden text-lg font-semibold text-blue-600">DESKTOP</p>
-        <p id="mobile-text" class="hidden text-lg font-semibold text-green-600">MOBILE</p>
+        <p id="desktop-text" class="hidden text-lg font-semibold text-blue-600">DESKTOP.</p>
+        <p id="mobile-text" class="hidden text-lg font-semibold text-green-600">MOBILE.</p>
     </div>
 
     <!-- Versión DESKTOP - Grid horizontal 4 columnas -->
@@ -48,68 +61,65 @@
     </div>
 
     <script>
-        // Función para detectar si es dispositivo móvil
+        // Función simple y directa para detectar dispositivo
         function detectDevice() {
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-                            window.innerWidth <= 768;
+            // Mostrar estado de carga
+            document.getElementById('status-loading').classList.remove('hidden');
+            document.getElementById('status-desktop').classList.add('hidden');
+            document.getElementById('status-mobile').classList.add('hidden');
             
-            console.log('Detectando dispositivo...', { isMobile, userAgent: navigator.userAgent, width: window.innerWidth });
+            // Detectar si es móvil
+            const isMobile = window.innerWidth <= 768 || 
+                            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
-            // Elementos del header
-            const headerDesktopText = document.getElementById('header-desktop-text');
-            const headerMobileText = document.getElementById('header-mobile-text');
+            // Mostrar información de debug
+            document.getElementById('screen-width').textContent = `Ancho: ${window.innerWidth}px`;
+            document.getElementById('user-agent-short').textContent = navigator.userAgent.substring(0, 30) + '...';
             
-            // Elementos del contenido
-            const desktopText = document.getElementById('desktop-text');
-            const mobileText = document.getElementById('mobile-text');
-            const desktopGrid = document.getElementById('desktop-grid');
-            const mobileGrid = document.getElementById('mobile-grid');
+            // Ocultar estado de carga
+            document.getElementById('status-loading').classList.add('hidden');
             
             if (isMobile) {
-                console.log('Dispositivo móvil detectado - Mostrando layout móvil');
+                // Mostrar estado móvil
+                document.getElementById('status-mobile').classList.remove('hidden');
                 
                 // Mostrar icono móvil en header
-                if (headerMobileText) headerMobileText.classList.remove('hidden');
-                if (headerDesktopText) headerDesktopText.classList.add('hidden');
+                document.getElementById('header-mobile-text').classList.remove('hidden');
+                document.getElementById('header-desktop-text').classList.add('hidden');
                 
-                // Mostrar texto y grid móvil
-                if (mobileText) mobileText.classList.remove('hidden');
-                if (desktopText) desktopText.classList.add('hidden');
-                if (mobileGrid) mobileGrid.classList.remove('hidden');
-                if (desktopGrid) desktopGrid.classList.add('hidden');
+                // Mostrar contenido móvil
+                document.getElementById('mobile-text').classList.remove('hidden');
+                document.getElementById('desktop-text').classList.add('hidden');
+                document.getElementById('mobile-grid').classList.remove('hidden');
+                document.getElementById('desktop-grid').classList.add('hidden');
             } else {
-                console.log('Dispositivo desktop detectado - Mostrando layout desktop');
+                // Mostrar estado desktop
+                document.getElementById('status-desktop').classList.remove('hidden');
                 
                 // Mostrar icono desktop en header
-                if (headerDesktopText) headerDesktopText.classList.remove('hidden');
-                if (headerMobileText) headerMobileText.classList.add('hidden');
+                document.getElementById('header-desktop-text').classList.remove('hidden');
+                document.getElementById('header-mobile-text').classList.add('hidden');
                 
-                // Mostrar texto y grid desktop
-                if (desktopText) desktopText.classList.remove('hidden');
-                if (mobileText) mobileText.classList.add('hidden');
-                if (desktopGrid) desktopGrid.classList.remove('hidden');
-                if (mobileGrid) mobileGrid.classList.add('hidden');
+                // Mostrar contenido desktop
+                document.getElementById('desktop-text').classList.remove('hidden');
+                document.getElementById('mobile-text').classList.add('hidden');
+                document.getElementById('desktop-grid').classList.remove('hidden');
+                document.getElementById('mobile-grid').classList.add('hidden');
             }
         }
         
-        // Detectar al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM cargado, detectando dispositivo...');
-            detectDevice();
-        });
-        
-        // Detectar cuando cambie el tamaño de la ventana
-        window.addEventListener('resize', function() {
-            console.log('Ventana redimensionada, detectando dispositivo...');
-            detectDevice();
-        });
-        
-        // Detectar también al cargar la página (fallback)
+        // Ejecutar cuando el DOM esté listo
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', detectDevice);
         } else {
             detectDevice();
         }
+        
+        // Ejecutar también al cargar la ventana
+        window.addEventListener('load', detectDevice);
+        
+        // Ejecutar cuando cambie el tamaño
+        window.addEventListener('resize', detectDevice);
     </script>
 
 </x-app-layout>
