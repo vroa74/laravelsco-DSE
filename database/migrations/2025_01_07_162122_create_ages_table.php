@@ -23,6 +23,7 @@ return new class extends Migration
             $table->char('email',255)->nullable();//emailchar(255)DEFAULTNULL
             $table->text('dir')->nullable();//dirtext
             $table->char('modifico',20)->nullable();
+            $table->boolean('status')->default(true);            
             $table->timestamps();
         });
     }

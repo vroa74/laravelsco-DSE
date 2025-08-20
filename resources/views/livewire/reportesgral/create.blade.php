@@ -24,7 +24,7 @@
     <div class="mx-auto bg-gray-900 rounded-lg shadow-md max-w-2sm border-amber-200">
         <h2 class="mb-0 font-bold text-center text-white text-md">Formulario de Registro</h2>
         {{-- //! Formulario de Registro --}}
-        <form wire:submit="save" class="m-4 text-white ">
+        <form wire:submit="saveWithFiles" class="m-4 text-white ">
             @csrf
             <div>
                 <label
@@ -360,6 +360,77 @@
             </div>
             {{-- {{$users}} --}}
             {{-- {{$users->email}} {{$users->name}} {{$users->id}} --}}
+            
+            <!-- Gestión de Archivos PDF -->
+            <div class="mt-6 p-4 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                    📎 Archivos PDF Adjuntos
+                </h3>
+                
+                <!-- Subida de archivos -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Seleccionar Archivos PDF (Máximo 15MB cada uno)
+                    </label>
+                    <input type="file" 
+                           wire:model="files" 
+                           multiple 
+                           accept=".pdf"
+                           class="block w-full text-sm text-gray-500 dark:text-gray-400
+                                  file:mr-4 file:py-2 file:px-4
+                                  file:rounded-full file:border-0
+                                  file:text-sm file:font-semibold
+                                  file:bg-blue-50 file:text-blue-700
+                                  hover:file:bg-blue-100
+                                  dark:file:bg-blue-900 dark:file:text-blue-300">
+                    @error('files.*') 
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p> 
+                    @enderror
+                </div>
+
+                <!-- Lista de archivos seleccionados -->
+                @if($this->hasFiles())
+                    <div class="space-y-3 mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Archivos a subir ({{ count($files) }}):
+                        </h4>
+                        @foreach($files as $index => $file)
+                            <div class="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-file-pdf text-red-500"></i>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900 dark:text-white">
+                                            {{ $file->getClientOriginalName() }}
+                                        </p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                                            {{ number_format($file->getSize() / 1024 / 1024, 2) }} MB
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="text" 
+                                           wire:model="fileDescriptions.{{ $index }}" 
+                                           placeholder="Descripción opcional"
+                                           class="px-2 py-1 text-xs border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                    <button type="button" 
+                                            wire:click="removeFile({{ $index }})"
+                                            class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
+                <!-- Información de archivos -->
+                <div class="text-xs text-gray-600 dark:text-gray-400">
+                    <p>• Solo se permiten archivos PDF</p>
+                    <p>• Tamaño máximo por archivo: 15MB</p>
+                    <p>• Puedes agregar descripciones opcionales a cada archivo</p>
+                </div>
+            </div>
+
             <div class="mt-6 flex justify-end space-x-3">
                 <button
                         type="button"
@@ -374,64 +445,6 @@
                 </button>
             </div>
 
-            <!-- Nueva tabla -->
-            {{-- <div class="mt-4">
-                <table class="w-full border-collapse border border-gray-300">
-                    <tr>
-                        <!-- Primera columna - Textarea -->
-                        <td class="w-1/4 border border-gray-300 p-2">
-                            <button type="button" wire:click="openModalAgent('columna1')" class="w-full px-4 py-2 mb-2 text-white bg-pink-600 rounded-md hover:bg-pink-700 focus:ring focus:ring-pink-300">
-                                t1
-                            </button>
-                            <textarea 
-                                id="textarea_1" 
-                                name="textarea_1" 
-                                rows="4" 
-                                wire:model="textarea_1"
-                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Escribe aquí..."></textarea>
-                        </td>
-                        <!-- Segunda columna - Textarea -->
-                        <td class="w-1/4 border border-gray-300 p-2">
-                            <button type="button" wire:click="openModalAgent('columna2')" class="w-full px-4 py-2 mb-2 text-white bg-pink-600 rounded-md hover:bg-pink-700 focus:ring focus:ring-pink-300">
-                                t2
-                            </button>
-                            <textarea 
-                                id="textarea_2" 
-                                name="textarea_2" 
-                                rows="4" 
-                                wire:model="textarea_2"
-                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Escribe aquí..."></textarea>
-                        </td>
-                        <!-- Tercera columna - 4 inputs -->
-                        <td class="w-1/4 border border-gray-300 p-2">
-                            <button type="button" wire:click="openModalAgent('columna3')" class="w-full px-4 py-2 mb-2 text-white bg-pink-600 rounded-md hover:bg-pink-700 focus:ring focus:ring-pink-300">
-                                input1
-                            </button>
-                            <div class="space-y-2">
-                                <input type="text" id="input_3_1" name="input_3_1" wire:model="input_3_1" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 1">
-                                <input type="text" id="input_3_2" name="input_3_2" wire:model="input_3_2" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 2">
-                                <input type="text" id="input_3_3" name="input_3_3" wire:model="input_3_3" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 3">
-                                <input type="text" id="input_3_4" name="input_3_4" wire:model="input_3_4" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 4">
-                            </div>
-                        </td>
-                        <!-- Cuarta columna - 4 inputs -->
-                        <td class="w-1/4 border border-gray-300 p-2">
-                            <button type="button" wire:click="openModalAgent('columna4')" class="w-full px-4 py-2 mb-2 text-white bg-pink-600 rounded-md hover:bg-pink-700 focus:ring focus:ring-pink-300">
-                                input 2 
-                            </button>
-                            <div class="space-y-2">
-                                <input type="text" id="input_4_1" name="input_4_1" wire:model="input_4_1" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 1">
-                                <input type="text" id="input_4_2" name="input_4_2" wire:model="input_4_2" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 2">
-                                <input type="text" id="input_4_3" name="input_4_3" wire:model="input_4_3" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 3">
-                                <input type="text" id="input_4_4" name="input_4_4" wire:model="input_4_4" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 4">
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div> --}}
-
             {{-- <div class="mt-4">
                 <button
                         type="button"
@@ -442,6 +455,44 @@
             </div> --}}
         </form>
     </div>
+
+    <!-- Notificaciones para archivos -->
+    <script>
+        // Escuchar eventos de archivos
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('file-deleted', (data) => {
+                // Mostrar notificación de archivo eliminado
+                if (data.message) {
+                    showNotification(data.message, 'success');
+                }
+            });
+
+            Livewire.on('file-error', (data) => {
+                // Mostrar notificación de error
+                if (data.message) {
+                    showNotification(data.message, 'error');
+                }
+            });
+        });
+
+        // Función para mostrar notificaciones
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg ${
+                type === 'success' 
+                    ? 'bg-green-500 text-white' 
+                    : 'bg-red-500 text-white'
+            }`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Auto-ocultar después de 3 segundos
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
     <!-- Modal toggle -->
     <!-- Modal de descripcion -->
     <div

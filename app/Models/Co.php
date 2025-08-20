@@ -28,7 +28,9 @@ class Co extends Model
         'nhoj',
         'nofi',
         'estatus',
-        'rem_id'
+        'rem_id',
+        'age_id',
+        'tur_id'
     ];
 
     protected $casts = [
@@ -38,9 +40,15 @@ class Co extends Model
         'estatus' => 'boolean',
     ];
 
-    // Relación con el usuario remitente
-    public function remitente()
+    // Relación con la tabla ages a través de rem_id
+    public function remAge()
     {
-        return $this->belongsTo(User::class, 'rem_id');
+        return $this->belongsTo(Age::class, 'rem_id');
+    }
+
+    // Relación con archivos PDF
+    public function files()
+    {
+        return $this->hasMany(CosFile::class, 'cos_id');
     }
 }

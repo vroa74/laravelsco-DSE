@@ -25,14 +25,14 @@
                     <x-nav-link href="{{ route('usuario.index') }}" :active="request()->routeIs('usuario.index')">
                         Personal
                     </x-nav-link>
-
+                    <x-nav-link href="{{ route('user-groups.index') }}" :active="request()->routeIs('user-groups.index')">
+                        Grupos de Personal
+                    </x-nav-link>
                     <x-nav-link href="{{ route('catalogos') }}" :active="request()->routeIs('catalogos')">
                         Catalogos
                     </x-nav-link>
-                    {{-- <x-nav-link href="{{ route('add') }}" :active="request()->routeIs('add')">
-                        Add
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('temp') }}" :active="request()->routeIs('temp')">
+
+                    {{-- <x-nav-link href="{{ route('temp') }}" :active="request()->routeIs('temp')">
                         temp
                     </x-nav-link>
                     <x-nav-link href="{{ route('componentes') }}" :active="request()->routeIs('componentes')">

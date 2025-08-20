@@ -22,11 +22,14 @@ return new class extends Migration
             $table->date('fofi')->nullable();
             $table->string('nofi',20)->nullable();
             $table->integer('nhoj')->nullable();
+
             $table->string('rem_nombre',70)->nullable();
             $table->string('rem_cargo',50)->nullable();
             $table->string('rem_deporg',60)->nullable();
-            $table->unsignedBigInteger('rem_id')->nullable();
+            $table->unsignedBigInteger('rem_id')->nullable()->foreign('rem_id')->references('id')->on('ages');
             
+            $table->string('tur_id', 100)->nullable();
+
             $table->text('rem_dir')->nullable();
             $table->text('des')->nullable();
             $table->text('seguimiento')->nullable();
@@ -37,10 +40,8 @@ return new class extends Migration
             $table->string('modifico',20)->nullable();
             $table->string('reporte',20)->nullable();
             $table->boolean('estatus')->default(false);
-            $table->timestamps();
             
-            // Agregar llave foránea
-            $table->foreign('rem_id')->references('id')->on('users')->onDelete('set null');
+            $table->timestamps();
         });
     }
 

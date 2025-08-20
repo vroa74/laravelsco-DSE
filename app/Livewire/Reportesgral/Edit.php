@@ -5,6 +5,7 @@ namespace App\Livewire\Reportesgral;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Models\Age;
 use App\Models\Legislatura;
 use App\Models\Ncor;
@@ -12,12 +13,14 @@ use App\Models\Tcor;
 use App\Models\Ccor;
 use App\Models\User;
 use App\Models\Co;
+use App\Models\UserGroup;
+use App\Traits\HandlesFileUploads;
 
 
 class Edit extends Component
 {
-    use WithPagination;
-    public $legs, $ncors, $tcors, $ccors, $users, $ages;
+    use WithPagination, WithFileUploads, HandlesFileUploads;
+    public $legs, $ncors, $tcors, $ccors, $users, $ages, $userGroups;
     public $selectedLegislaturaId, $ffcap, $fncor, $ftcor, $ftcorid;
     public $legislatura, $fcap, $frec, $ncor, $tcor, $ccor, $fofi, $nofi, $nhoj, $rem_nombre, $rem_cargo, $rem_deporg, $rem_dir;
     public $des, $seguimiento, $tur_nom, $tur_cargo, $tur_deporg, $creo, $modifico, $reporte, $estatus;
@@ -26,6 +29,11 @@ class Edit extends Component
     public $filteredCcor = [];
     public $accion = '';
     public $recordId; // ID del registro a editar
+    
+    // Nuevas propiedades para el sistema de turnado
+    public $turnadoType = 'manual';
+    public $turnadoUserId = null;
+    public $turnadoGroupId = null;
 
     // Variables para los componentes de la tabla
     public $textarea_1 = 'Hola';
@@ -74,6 +82,7 @@ class Edit extends Component
         $this->tcors = Tcor::all();
         $this->ccors = Ccor::all();
         $this->users = Auth::user();
+        $this->userGroups = UserGroup::active()->get(); // Cargar grupos activos
         
         // Si se proporciona un ID, cargar el registro para editar
         if ($id) {
@@ -98,23 +107,201 @@ class Edit extends Component
         $this->tcor = $record->tcor;
         $this->ccor = $record->ccor;
         $this->nhoj = $record->nhoj;
-        $this->nofi = $record->nofi;
-        $this->fofi = $record->fofi;
+        
+        // Cargar campos de turnado
+        $this->tur_nom = $record->tur_nom;
+        $this->tur_cargo = $record->tur_cargo;
+        $this->tur_deporg = $record->tur_deporg;
+        
+        // Cargar nuevos campos de turnado si existen
+        if ($record->turnado_type) {
+            $this->turnadoType = $record->turnado_type;
+            $this->turnadoUserId = $record->turnado_user_id;
+            $this->turnadoGroupId = $record->turnado_group_id;
+        }
+        
+        // Cargar otros campos
+        $this->des = $record->des;
+        $this->seguimiento = $record->seguimiento;
         $this->rem_nombre = $record->rem_nombre;
         $this->rem_cargo = $record->rem_cargo;
         $this->rem_deporg = $record->rem_deporg;
         $this->rem_dir = $record->rem_dir;
-        $this->des = $record->des;
-        $this->seguimiento = $record->seguimiento;
-        $this->tur_nom = $record->tur_nom;
-        $this->tur_cargo = $record->tur_cargo;
-        $this->tur_deporg = $record->tur_deporg;
-        $this->rem_id = $record->rem_id; // Cargar el rem_id del registro
+        $this->fofi = $record->fofi;
+        $this->nofi = $record->nofi;
+        $this->creo = $record->creo;
+        $this->modifico = $record->modifico;
+        $this->reporte = $record->reporte;
+        $this->estatus = $record->estatus;
+        
+        // Cargar campos de la tabla si existen
+        if (isset($record->textarea_1)) $this->textarea_1 = $record->textarea_1;
+        if (isset($record->textarea_2)) $this->textarea_2 = $record->textarea_2;
+        if (isset($record->input_3_1)) $this->input_3_1 = $record->input_3_1;
+        if (isset($record->input_3_2)) $this->input_3_2 = $record->input_3_2;
+        if (isset($record->input_3_3)) $this->input_3_3 = $record->input_3_3;
+        if (isset($record->input_3_4)) $this->input_3_4 = $record->input_3_4;
+        if (isset($record->input_4_1)) $this->input_4_1 = $record->input_4_1;
+        if (isset($record->input_4_2)) $this->input_4_2 = $record->input_4_2;
+        if (isset($record->input_4_3)) $this->input_4_3 = $record->input_4_3;
+        if (isset($record->input_4_4)) $this->input_4_4 = $record->input_4_4;
+    }
 
-        // Establecer el tcccid basado en el tcor para habilitar la clasificación
-        $this->tcccid = $this->tcors->where('tcor', $record->tcor)->first()?->id;
-        $this->isCccorEnabled = !empty($this->tcccid);
-        $this->updateFilteredCcor();
+    /**
+     * Método para cambiar el tipo de turnado
+     */
+    public function updatedTurnadoType()
+    {
+        // Limpiar campos según el tipo seleccionado
+        if ($this->turnadoType === 'individual') {
+            $this->turnadoGroupId = null;
+            $this->tur_nom = $this->tur_cargo = $this->tur_deporg = null;
+        } elseif ($this->turnadoType === 'group') {
+            $this->turnadoUserId = null;
+            $this->tur_nom = $this->tur_cargo = $this->tur_deporg = null;
+        } else {
+            $this->turnadoUserId = $this->turnadoGroupId = null;
+        }
+    }
+
+    /**
+     * Método para cuando se selecciona un usuario individual
+     */
+    public function updatedTurnadoUserId()
+    {
+        if ($this->turnadoUserId) {
+            $user = User::find($this->turnadoUserId);
+            if ($user) {
+                $this->tur_nom = $user->name;
+                $this->tur_cargo = $user->position;
+                $this->tur_deporg = $user->direction;
+            }
+        }
+    }
+
+    /**
+     * Método para cuando se selecciona un grupo
+     */
+    public function updatedTurnadoGroupId()
+    {
+        if ($this->turnadoGroupId) {
+            $group = UserGroup::find($this->turnadoGroupId);
+            if ($group) {
+                $this->tur_nom = "Grupo: " . $group->name;
+                $this->tur_cargo = "Múltiples usuarios (" . $group->users_count . ")";
+                $this->tur_deporg = $group->description ?? 'N/A';
+            }
+        }
+    }
+
+    /**
+     * Método para agregar descripción a un archivo
+     */
+    public function addFileDescription($index, $description)
+    {
+        $this->fileDescriptions[$index] = $description;
+    }
+
+    /**
+     * Método para eliminar un archivo de la lista
+     */
+    public function removeFile($index)
+    {
+        unset($this->files[$index]);
+        unset($this->fileDescriptions[$index]);
+        
+        // Reindexar arrays
+        $this->files = array_values($this->files);
+        $this->fileDescriptions = array_values($this->fileDescriptions);
+    }
+
+    /**
+     * Método para validar archivos antes de guardar
+     */
+    public function validateFilesBeforeSave()
+    {
+        if ($this->hasFiles()) {
+            $this->validateFiles();
+        }
+    }
+
+    /**
+     * Método para actualizar el registro con archivos
+     */
+    public function updateWithFiles()
+    {
+        // Validar archivos si existen
+        $this->validateFilesBeforeSave();
+        
+        // Validar otros campos del formulario
+        $this->validate([
+            'selectedLegislaturaId' => 'required',
+            'fcap' => 'required|date',
+            'frec' => 'required|date',
+            'ncor' => 'required',
+            'tcor' => 'required',
+            'ccor' => 'required',
+            'nhoj' => 'required|integer',
+            'nofi' => 'required',
+            'rem_nombre' => 'required|string|max:70',
+            'rem_cargo' => 'required|string|max:50',
+            'rem_deporg' => 'required|string|max:60',
+            'des' => 'required|string',
+            'seguimiento' => 'required|string',
+            'tur_nom' => 'required|string|max:70',
+            'tur_cargo' => 'required|string|max:50',
+            'tur_deporg' => 'required|string|max:60',
+        ]);
+
+        try {
+            // Actualizar el registro CO
+            $correspondencia = Co::findOrFail($this->recordId);
+            $correspondencia->update([
+                'legislatura' => $this->selectedLegislaturaId,
+                'fcap' => $this->fcap,
+                'frec' => $this->frec,
+                'ncor' => $this->ncor,
+                'tcor' => $this->tcor,
+                'ccor' => $this->ccor,
+                'nhoj' => $this->nhoj,
+                'nofi' => $this->nofi,
+                'rem_nombre' => $this->rem_nombre,
+                'rem_cargo' => $this->rem_cargo,
+                'rem_deporg' => $this->rem_deporg,
+                'rem_dir' => $this->rem_dir,
+                'des' => $this->des,
+                'seguimiento' => $this->seguimiento,
+                'tur_nom' => $this->tur_nom,
+                'tur_cargo' => $this->tur_cargo,
+                'tur_deporg' => $this->tur_deporg,
+                'turnado_type' => $this->turnadoType,
+                'turnado_user_id' => $this->turnadoType === 'individual' ? $this->turnadoUserId : null,
+                'turnado_group_id' => $this->turnadoType === 'group' ? $this->turnadoGroupId : null,
+                'rem_id' => $this->rem_id,
+                'modifico' => Auth::user()->email,
+            ]);
+
+            // Guardar archivos nuevos si existen
+            if ($this->hasFiles()) {
+                $this->saveFiles($correspondencia->id, Auth::user()->email);
+            }
+
+            session()->flash('message', 'Registro actualizado exitosamente con archivos.');
+            
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error al actualizar el registro: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Método para obtener archivos existentes del registro
+     */
+    public function getExistingFiles()
+    {
+        if ($this->recordId) {
+            return $this->getFilesForCos($this->recordId);
+        }
+        return collect();
     }
 
     // Mantener la función selectCorrespondence optimizada
@@ -344,6 +531,7 @@ class Edit extends Component
             'tcc' => $this->tcors,
             'ccors' => $this->ccors,
             'users' => $this->users,
+            'userGroups' => $this->userGroups,
             'modalAges' => $this->modalAges,
             'modalUsers' => $this->modalUsers,
         ]);
@@ -372,6 +560,9 @@ class Edit extends Component
                 'tur_nom' => 'string|max:255',
                 'tur_cargo' => 'string|max:255',
                 'tur_deporg' => 'string|max:255',
+                'turnadoType' => 'required|in:manual,individual,group',
+                'turnadoUserId' => 'nullable|exists:users,id',
+                'turnadoGroupId' => 'nullable|exists:user_groups,id',
             ], [
                 'selectedLegislaturaId.required' => 'La legislatura es requerida',
                 'selectedLegislaturaId.exists' => 'La legislatura seleccionada no es válida',
@@ -400,6 +591,9 @@ class Edit extends Component
                 'tur_nom.required' => 'El nombre del turnado es requerido',
                 'tur_cargo.required' => 'El cargo del turnado es requerido',
                 'tur_deporg.required' => 'La dependencia del turnado es requerida',
+                'turnadoType.required' => 'El tipo de turnado es requerido',
+                'turnadoUserId.exists' => 'El usuario seleccionado no es válido',
+                'turnadoGroupId.exists' => 'El grupo seleccionado no es válido',
             ]);
 
             // Buscar y actualizar el registro existente
@@ -422,6 +616,9 @@ class Edit extends Component
             $correspondencia->tur_nom = $this->tur_nom;
             $correspondencia->tur_cargo = $this->tur_cargo;
             $correspondencia->tur_deporg = $this->tur_deporg;
+            $correspondencia->turnado_type = $this->turnadoType;
+            $correspondencia->turnado_user_id = $this->turnadoType === 'individual' ? $this->turnadoUserId : null;
+            $correspondencia->turnado_group_id = $this->turnadoType === 'group' ? $this->turnadoGroupId : null;
             $correspondencia->rem_id = $this->rem_id; // Asignar el rem_id del usuario seleccionado
             $correspondencia->modifico = Auth::user()->email;
             $correspondencia->save();

@@ -97,4 +97,37 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cos::class, 'modifico');
     }
+
+    /**
+     * Relación muchos a muchos con grupos de usuarios
+     */
+    public function userGroups()
+    {
+        return $this->belongsToMany(UserGroup::class, 'user_group_user')
+                    ->withTimestamps();
+    }
+
+    /**
+     * Relación con los registros CO donde este usuario es el turnado individual
+     */
+    public function cosTurnado()
+    {
+        return $this->hasMany(Co::class, 'turnado_user_id');
+    }
+
+    /**
+     * Obtener el cargo del usuario (para compatibilidad)
+     */
+    public function getCargoAttribute()
+    {
+        return $this->position ?? 'N/A';
+    }
+
+    /**
+     * Obtener la dependencia del usuario (para compatibilidad)
+     */
+    public function getDepartamentoAttribute()
+    {
+        return $this->direction ?? 'N/A';
+    }
 }
