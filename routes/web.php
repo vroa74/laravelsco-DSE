@@ -33,25 +33,25 @@ Route::get('/of10', function () { return view('ofi.of10'); })->name('of10');
 
 
 Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),  'verified', ])->group(function () {
-    // Rutas para el controlador Rg (Reportes Generales) - Solo GET routes para Livewire
-    Route::resource('rg', RgController::class)->names('rg')->except(['store', 'update']);
-    // Rutas para Age - Solo GET routes para Livewire
-    Route::resource('agen', AgeController::class)->names('agen')->except(['store', 'update']);
-    // Rutas para Usuario - Solo GET routes para Livewire
-    Route::resource('usuario', UsuarioController::class)->names('usuario')->except(['store', 'update']);
+    // Rutas para el controlador Rg (Reportes Generales) - Solo GET routes para Livewire - SOLO TIPO 1
+    Route::resource('rg', RgController::class)->names('rg')->except(['store', 'update'])->middleware('check.user.type');
+    // Rutas para Age - Solo GET routes para Livewire - SOLO TIPO 1
+    Route::resource('agen', AgeController::class)->names('agen')->except(['store', 'update'])->middleware('check.user.type');
+    // Rutas para Usuario - Solo GET routes para Livewire - SOLO TIPO 1
+    Route::resource('usuario', UsuarioController::class)->names('usuario')->except(['store', 'update'])->middleware('check.user.type');
     
-    // Rutas adicionales para reportes generales
-    Route::get('/reportesgral', function () {  return view('rg.rg');   })->name('reportgral');  
+    // Rutas adicionales para reportes generales - SOLO TIPO 1
+    Route::get('/reportesgral', function () {  return view('rg.rg');   })->name('reportgral')->middleware('check.user.type');
     
     // Otras rutas
     Route::get('/dashboard', function () {  return view('dashboard');   })->name('dashboard');
-    Route::get('/catalogos', function () {  return view('catalogos.catalogos');   })->name('catalogos');
-    Route::get('/usuarios', function () {  return view('age.people');   })->name('usuarios');
+    Route::get('/catalogos', function () {  return view('catalogos.catalogos');   })->name('catalogos')->middleware('check.user.type');
+    Route::get('/usuarios', function () {  return view('age.people');   })->name('usuarios')->middleware('check.user.type');
     Route::get('/temp', function () {  return view('temp');   })->name('temp');
     Route::get('/componentes', function () {  return view('comp');   })->name('componentes');
     
-    //reportes -----------------------------------------------------------------------------------------------------------------
-    Route::get('/reporte-normal/{id}/{tipoReporte}', [ReportsController::class, 'rg_report_1'])->name('reporteNormal');
-    Route::get('/reporte-especial/{id}/{tipoReporte}', [ReportsController::class, 'rg_report_2'])->name('reporteEspecial');
-    Route::get('/reporte-solicitud/{id}/{tipoReporte}', [ReportsController::class, 'rg_report_3'])->name('reporteSolicitud');
+    //reportes ----------------------------------------------------------------------------------------------------------------- - SOLO TIPO 1
+    Route::get('/reporte-normal/{id}/{tipoReporte}', [ReportsController::class, 'rg_report_1'])->name('reporteNormal')->middleware('check.user.type');
+    Route::get('/reporte-especial/{id}/{tipoReporte}', [ReportsController::class, 'rg_report_2'])->name('reporteEspecial')->middleware('check.user.type');
+    Route::get('/reporte-solicitud/{id}/{tipoReporte}', [ReportsController::class, 'rg_report_3'])->name('reporteSolicitud')->middleware('check.user.type');
 });

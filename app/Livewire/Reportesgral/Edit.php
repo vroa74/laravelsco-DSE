@@ -5,6 +5,7 @@ namespace App\Livewire\Reportesgral;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Models\Age;
 use App\Models\Legislatura;
 use App\Models\Ncor;
@@ -12,11 +13,13 @@ use App\Models\Tcor;
 use App\Models\Ccor;
 use App\Models\User;
 use App\Models\Co;
+use App\Models\CosFile;
+use App\Traits\HandlesFileUploads;
 
 
 class Edit extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads, HandlesFileUploads;
     public $legs, $ncors, $tcors, $ccors, $users, $ages;
     public $selectedLegislaturaId, $ffcap, $fncor, $ftcor, $ftcorid;
     public $legislatura, $fcap, $frec, $ncor, $tcor, $ccor, $fofi, $nofi, $nhoj, $rem_nombre, $rem_cargo, $rem_deporg, $rem_dir;
@@ -63,6 +66,12 @@ class Edit extends Component
     public $perPageUsers = 10;
     public $selectedUserColumn = null; // Para almacenar la columna seleccionada para usuarios
     public $rem_id = null; // Para almacenar el ID del usuario seleccionado en Turnado
+    // ------------------------------------------
+
+    // --- Propiedades para manejo de archivos ---
+    public $files = [];
+    public $fileDescriptions = [];
+    public $existingFiles = []; // Archivos existentes del registro
     // ------------------------------------------
 
     public function mount($id = null)
@@ -115,6 +124,9 @@ class Edit extends Component
         $this->tcccid = $this->tcors->where('tcor', $record->tcor)->first()?->id;
         $this->isCccorEnabled = !empty($this->tcccid);
         $this->updateFilteredCcor();
+
+        // Cargar archivos existentes
+        $this->existingFiles = CosFile::where('cos_id', $id)->get();
     }
 
     // Mantener la función selectCorrespondence optimizada
@@ -426,6 +438,13 @@ class Edit extends Component
             $correspondencia->modifico = Auth::user()->email;
             $correspondencia->save();
 
+            // Guardar archivos nuevos si existen
+            if (!empty($this->files)) {
+                foreach ($this->files as $index => $file) {
+                    $this->saveSingleFile($file, $correspondencia->id, $index, Auth::user()->email);
+                }
+            }
+
             // Mostrar mensaje de éxito
             session()->flash('success', 'Registro actualizado exitosamente.');
             
@@ -439,6 +458,25 @@ class Edit extends Component
             // Capturar otros errores
             session()->flash('error', 'Error al actualizar el registro: ' . $e->getMessage());
             return;
+        }
+    }
+
+    public function removeFile($index)
+    {
+        if (isset($this->files[$index])) {
+            unset($this->files[$index]);
+            $this->files = array_values($this->files); // Reindexar el array
+        }
+    }
+
+    public function deleteExistingFile($fileId)
+    {
+        $file = CosFile::find($fileId);
+        if ($file && $file->cos_id == $this->recordId) {
+            $file->deleteFile(); // Eliminar archivo físico
+            $file->delete(); // Eliminar registro de la DB
+            $this->existingFiles = CosFile::where('cos_id', $this->recordId)->get(); // Recargar archivos
+            session()->flash('success', 'Archivo eliminado correctamente.');
         }
     }
 

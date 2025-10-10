@@ -5,6 +5,7 @@ namespace App\Livewire\Reportesgral;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Models\Age;
 use App\Models\Legislatura;
 use App\Models\Ncor;
@@ -12,11 +13,13 @@ use App\Models\Tcor;
 use App\Models\Ccor;
 use App\Models\User;
 use App\Models\Co;
+use App\Models\CosFile;
+use App\Traits\HandlesFileUploads;
 
 
 class Create extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads, HandlesFileUploads;
     public $legs, $ncors, $tcors, $ccors, $users, $ages;
     public $selectedLegislaturaId, $ffcap, $fncor, $ftcor, $ftcorid;
     public $legislatura, $fcap, $frec, $ncor, $tcor, $ccor, $fofi, $nofi, $nhoj, $rem_nombre, $rem_cargo, $rem_deporg, $rem_dir;
@@ -62,6 +65,11 @@ class Create extends Component
     public $searchUserDirection = '';
     public $perPageUsers = 10;
     public $selectedUserColumn = null; // Para almacenar la columna seleccionada para usuarios
+    // ------------------------------------------
+
+    // --- Propiedades para manejo de archivos ---
+    public $files = [];
+    public $fileDescriptions = [];
     // ------------------------------------------
 
     public function mount()
@@ -413,6 +421,13 @@ class Create extends Component
             $correspondencia->creo = Auth::user()->email;
             $correspondencia->save();
 
+            // Guardar archivos si existen
+            if (!empty($this->files)) {
+                foreach ($this->files as $index => $file) {
+                    $this->saveSingleFile($file, $correspondencia->id, $index, Auth::user()->email);
+                }
+            }
+
             // Mostrar mensaje de éxito
             session()->flash('success', 'Registro guardado exitosamente.');
             
@@ -426,6 +441,14 @@ class Create extends Component
             // Capturar otros errores
             session()->flash('error', 'Error al guardar el registro: ' . $e->getMessage());
             return;
+        }
+    }
+
+    public function removeFile($index)
+    {
+        if (isset($this->files[$index])) {
+            unset($this->files[$index]);
+            $this->files = array_values($this->files); // Reindexar el array
         }
     }
 
