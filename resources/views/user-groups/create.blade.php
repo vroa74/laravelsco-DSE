@@ -1,103 +1,78 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Crear Nuevo Grupo de Usuarios
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-lg text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Crear Grupo de Usuarios') }}
+            </h2>
+            <a href="{{ route('user-groups.index') }}"
+                class="bg-gray-500 hover:bg-gray-700 text-white font-medium py-1.5 px-3 rounded text-xs">
+                Volver
+            </a>
+        </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6">
+    <div class="py-8">
+        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-5 text-gray-900 dark:text-gray-100">
                     <form action="{{ route('user-groups.store') }}" method="POST">
                         @csrf
-                        
-                        <!-- Nombre del grupo -->
-                        <div class="mb-6">
-                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                Nombre del Grupo *
-                            </label>
-                            <input type="text" 
-                                   id="name" 
-                                   name="name" 
-                                   value="{{ old('name') }}"
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                                   placeholder="Ej: Administradores, Secretarios, etc."
-                                   required>
-                            @error('name')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
 
-                        <!-- Descripción -->
-                        <div class="mb-6">
-                            <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                Descripción
-                            </label>
-                            <textarea id="description" 
-                                      name="description" 
-                                      rows="3"
-                                      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                                      placeholder="Describe el propósito o función de este grupo">{{ old('description') }}</textarea>
-                            @error('description')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <!-- Selección de usuarios -->
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                Usuarios del Grupo
-                            </label>
-                            <div class="border border-gray-300 rounded-md p-4 dark:border-gray-600">
-                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                                    Selecciona los usuarios que pertenecerán a este grupo:
-                                </p>
-                                
-                                @if($users->count() > 0)
-                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                                        @foreach($users as $user)
-                                            <label class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded">
-                                                <input type="checkbox" 
-                                                       name="user_ids[]" 
-                                                       value="{{ $user->id }}"
-                                                       class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                                                <div class="flex-1 min-w-0">
-                                                    <p class="text-sm font-medium text-gray-900 dark:text-white">
-                                                        {{ $user->name }}
-                                                    </p>
-                                                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                                                        {{ $user->email }}
-                                                    </p>
-                                                    @if($user->position)
-                                                        <p class="text-xs text-gray-400 dark:text-gray-500">
-                                                            {{ $user->position }}
-                                                        </p>
-                                                    @endif
-                                                </div>
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                @else
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                                        No hay usuarios disponibles para asignar al grupo.
-                                    </p>
-                                @endif
+                        <div class="space-y-4">
+                            <!-- Nombre del grupo -->
+                            <div>
+                                <label for="name"
+                                    class="block text-xs font-medium text-gray-700 dark:text-gray-300">
+                                    Nombre del Grupo <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" name="name" id="name" value="{{ old('name') }}" required
+                                    placeholder="Ej: Administradores, Supervisores, etc."
+                                    class="mt-1 block w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                @error('name')
+                                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
-                            @error('user_ids')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
+
+                            <!-- Descripción -->
+                            <div>
+                                <label for="description"
+                                    class="block text-xs font-medium text-gray-700 dark:text-gray-300">
+                                    Descripción
+                                </label>
+                                <textarea name="description" id="description" rows="3" placeholder="Describe el propósito de este grupo..."
+                                    class="mt-1 block w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <!-- Estado activo -->
+                            <div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" name="active" id="active" value="1"
+                                        {{ old('active', true) ? 'checked' : '' }}
+                                        class="h-3.5 w-3.5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                    <label for="active" class="ml-2 block text-xs text-gray-900 dark:text-gray-100">
+                                        Grupo activo
+                                    </label>
+                                </div>
+                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                    Los grupos inactivos no aparecerán en las opciones de turnado.
+                                </p>
+                                @error('active')
+                                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
 
-                        <!-- Botones de acción -->
-                        <div class="flex justify-end space-x-3">
-                            <a href="{{ route('user-groups.index') }}" 
-                               class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700">
+                        <!-- Botones -->
+                        <div class="mt-6 flex justify-end space-x-3">
+                            <a href="{{ route('user-groups.index') }}"
+                                class="bg-gray-500 hover:bg-gray-700 text-white font-medium py-1.5 px-3 rounded text-xs">
                                 Cancelar
                             </a>
-                            <button type="submit" 
-                                    class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                <i class="fas fa-save mr-2"></i>
+                            <button type="submit"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-medium py-1.5 px-3 rounded text-xs">
                                 Crear Grupo
                             </button>
                         </div>

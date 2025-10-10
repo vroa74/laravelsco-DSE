@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserGroup;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class UserGroupController extends Controller
 {
@@ -14,8 +14,17 @@ class UserGroupController extends Controller
      */
     public function index()
     {
-        $userGroups = UserGroup::with('users')->get();
-        return view('user-groups.index', compact('userGroups'));
+        $groups = UserGroup::with(['creator', 'members'])
+                          ->active()
+                          ->orderBy('name')
+                          ->get();
+
+        // Agregar estadísticas de archivos para cada grupo
+        $groups->each(function ($group) {
+            $group->files_stats = $group->files_statistics;
+        });
+
+        return view('user-groups.index', compact('groups'));
     }
 
     /**
@@ -23,8 +32,7 @@ class UserGroupController extends Controller
      */
     public function create()
     {
-        $users = User::where('status', true)->get();
-        return view('user-groups.create', compact('users'));
+        return view('user-groups.create');
     }
 
     /**
@@ -32,27 +40,19 @@ class UserGroupController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:user_groups',
+        $validated = $request->validate([
+            'name' => 'required|string|max:100|unique:user_groups,name',
             'description' => 'nullable|string',
-            'user_ids' => 'nullable|array',
-            'user_ids.*' => 'exists:users,id'
+            'active' => 'boolean',
         ]);
 
-        DB::transaction(function () use ($request) {
-            $userGroup = UserGroup::create([
-                'name' => $request->name,
-                'description' => $request->description,
-                'is_active' => true
-            ]);
+        $validated['created_by'] = auth()->user() ? auth()->user()->id : null;
+        $validated['active'] = $validated['active'] ?? true;
 
-            if ($request->has('user_ids')) {
-                $userGroup->users()->attach($request->user_ids);
-            }
-        });
+        $group = UserGroup::create($validated);
 
         return redirect()->route('user-groups.index')
-                        ->with('success', 'Grupo de usuarios creado exitosamente.');
+                        ->with('success', 'Grupo creado exitosamente.');
     }
 
     /**
@@ -60,8 +60,15 @@ class UserGroupController extends Controller
      */
     public function show(UserGroup $userGroup)
     {
-        $userGroup->load('users');
-        return view('user-groups.show', compact('userGroup'));
+        $userGroup->load(['creator', 'members']);
+        
+        // Cargar estadísticas de archivos
+        $filesStats = $userGroup->files_statistics;
+        
+        // Cargar documentos con archivos activos
+        $documentsWithFiles = $userGroup->documentsWithActiveFiles()->paginate(10);
+
+        return view('user-groups.show', compact('userGroup', 'filesStats', 'documentsWithFiles'));
     }
 
     /**
@@ -69,9 +76,7 @@ class UserGroupController extends Controller
      */
     public function edit(UserGroup $userGroup)
     {
-        $users = User::where('status', true)->get();
-        $selectedUserIds = $userGroup->users->pluck('id')->toArray();
-        return view('user-groups.edit', compact('userGroup', 'users', 'selectedUserIds'));
+        return view('user-groups.edit', compact('userGroup'));
     }
 
     /**
@@ -79,28 +84,23 @@ class UserGroupController extends Controller
      */
     public function update(Request $request, UserGroup $userGroup)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:user_groups,name,' . $userGroup->id,
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:100',
+                Rule::unique('user_groups', 'name')->ignore($userGroup->id)
+            ],
             'description' => 'nullable|string',
-            'user_ids' => 'nullable|array',
-            'user_ids.*' => 'exists:users,id',
-            'is_active' => 'boolean'
+            'active' => 'boolean',
         ]);
 
-        DB::transaction(function () use ($request, $userGroup) {
-            $userGroup->update([
-                'name' => $request->name,
-                'description' => $request->description,
-                'is_active' => $request->has('is_active')
-            ]);
+        $validated['active'] = $validated['active'] ?? true;
 
-            // Sincronizar usuarios
-            $userIds = $request->user_ids ?? [];
-            $userGroup->users()->sync($userIds);
-        });
+        $userGroup->update($validated);
 
         return redirect()->route('user-groups.index')
-                        ->with('success', 'Grupo de usuarios actualizado exitosamente.');
+                        ->with('success', 'Grupo actualizado exitosamente.');
     }
 
     /**
@@ -108,33 +108,70 @@ class UserGroupController extends Controller
      */
     public function destroy(UserGroup $userGroup)
     {
-        // Verificar si el grupo está siendo usado en correspondencias
-        if ($userGroup->correspondencias()->count() > 0) {
-            return back()->with('error', 'No se puede eliminar el grupo porque está siendo usado en correspondencias.');
+        // Verificar si tiene miembros
+        if ($userGroup->members()->count() > 0) {
+            return redirect()->route('user-groups.index')
+                           ->with('error', 'No se puede eliminar un grupo que tiene miembros.');
         }
 
-        $userGroup->users()->detach();
+        // Verificar si tiene reportes turnados
+        if ($userGroup->cos()->count() > 0) {
+            return redirect()->route('user-groups.index')
+                           ->with('error', 'No se puede eliminar un grupo que tiene reportes turnados.');
+        }
+
         $userGroup->delete();
 
         return redirect()->route('user-groups.index')
-                        ->with('success', 'Grupo de usuarios eliminado exitosamente.');
+                        ->with('success', 'Grupo eliminado exitosamente.');
     }
 
     /**
-     * API endpoint para obtener grupos activos
+     * Add member to group
      */
-    public function getActiveGroups()
+    public function addMember(Request $request, UserGroup $userGroup)
     {
-        $groups = UserGroup::active()->with('users')->get();
-        return response()->json($groups);
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $user = User::findOrFail($validated['user_id']);
+
+        // Verificar si el usuario ya pertenece a otro grupo
+        if ($user->groups()->count() > 0) {
+            return back()->with('error', 'El usuario ya pertenece a un grupo.');
+        }
+
+        $userGroup->addMember($user);
+
+        return back()->with('success', 'Usuario agregado al grupo exitosamente.');
     }
 
     /**
-     * API endpoint para obtener usuarios de un grupo
+     * Remove member from group
      */
-    public function getGroupUsers(UserGroup $userGroup)
+    public function removeMember(Request $request, UserGroup $userGroup)
     {
-        $users = $userGroup->users;
-        return response()->json($users);
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $user = User::findOrFail($validated['user_id']);
+        $userGroup->removeMember($user);
+
+        return back()->with('success', 'Usuario removido del grupo exitosamente.');
+    }
+
+    /**
+     * Get users available for adding to group
+     */
+    public function getAvailableUsers(UserGroup $userGroup)
+    {
+        $availableUsers = User::whereDoesntHave('groups')
+                             ->where('id', '!=', auth()->user() ? auth()->user()->id : 0)
+                             ->select('id', 'name', 'email', 'position')
+                             ->get();
+
+        return response()->json($availableUsers);
     }
 }

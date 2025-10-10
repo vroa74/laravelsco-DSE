@@ -28,7 +28,9 @@ class Co extends Model
         'nhoj',
         'nofi',
         'estatus',
-        'rem_id'
+        'rem_id',
+        'tur_group_id',
+        'tur_type'
     ];
 
     protected $casts = [
@@ -42,5 +44,45 @@ class Co extends Model
     public function remitente()
     {
         return $this->belongsTo(User::class, 'rem_id');
+    }
+
+    // Relación con el grupo de turnado
+    public function turGroup()
+    {
+        return $this->belongsTo(UserGroup::class, 'tur_group_id');
+    }
+
+    // Relación con archivos
+    public function files()
+    {
+        return $this->hasMany(CosFile::class, 'cos_id');
+    }
+
+    /**
+     * Obtener el nombre del turnado (usuario o grupo)
+     */
+    public function getTurNameAttribute()
+    {
+        if ($this->tur_type === 'group' && $this->turGroup) {
+            return $this->turGroup->name;
+        }
+        
+        return $this->tur_nom;
+    }
+
+    /**
+     * Verificar si está turnado a un grupo
+     */
+    public function isTurnadoToGroup()
+    {
+        return $this->tur_type === 'group' && $this->tur_group_id;
+    }
+
+    /**
+     * Verificar si está turnado a un usuario
+     */
+    public function isTurnadoToUser()
+    {
+        return $this->tur_type === 'user' || (!$this->tur_type && $this->tur_nom);
     }
 }

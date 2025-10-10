@@ -62,6 +62,48 @@ class User extends Authenticatable
     ];
 
     /**
+     * Relación con los grupos de los que es miembro
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(UserGroup::class, 'user_group_members', 'user_id', 'group_id')
+                    ->withPivot('added_by')
+                    ->withTimestamps();
+    }
+
+    /**
+     * Relación con los grupos que ha creado
+     */
+    public function createdGroups()
+    {
+        return $this->hasMany(UserGroup::class, 'created_by');
+    }
+
+    /**
+     * Relación con los reportes turnados a este usuario
+     */
+    public function cosTurnado()
+    {
+        return $this->hasMany(Co::class, 'rem_id');
+    }
+
+    /**
+     * Verificar si el usuario pertenece a un grupo
+     */
+    public function belongsToGroup(UserGroup $group): bool
+    {
+        return $this->groups()->where('group_id', $group->id)->exists();
+    }
+
+    /**
+     * Obtener todos los grupos activos del usuario
+     */
+    public function activeGroups()
+    {
+        return $this->groups()->where('active', true);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

@@ -6,6 +6,7 @@ use App\Http\Controllers\RgController;
 use App\Http\Controllers\AgeController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserGroupController;
 
 
 
@@ -46,9 +47,15 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),  'verified
     // Otras rutas
     Route::get('/dashboard', function () {  return view('dashboard');   })->name('dashboard');
     Route::get('/catalogos', function () {  return view('catalogos.catalogos');   })->name('catalogos');
+    Route::get('/componentes', function () {  return view('componentes.index');   })->name('componentes');
     Route::get('/usuarios', function () {  return view('age.people');   })->name('usuarios');
     Route::get('/temp', function () {  return view('temp');   })->name('temp');
-    Route::get('/componentes', function () {  return view('comp');   })->name('componentes');
+    
+    // Grupos de usuarios
+    Route::resource('user-groups', UserGroupController::class);
+    Route::post('/user-groups/{userGroup}/add-member', [UserGroupController::class, 'addMember'])->name('user-groups.add-member');
+    Route::delete('/user-groups/{userGroup}/remove-member', [UserGroupController::class, 'removeMember'])->name('user-groups.remove-member');
+    Route::get('/user-groups/{userGroup}/available-users', [UserGroupController::class, 'getAvailableUsers'])->name('user-groups.available-users');
     
     //reportes ----------------------------------------------------------------------------------------------------------------- - TODOS LOS USUARIOS
     Route::get('/reporte-normal/{id}/{tipoReporte}', [ReportsController::class, 'rg_report_1'])->name('reporteNormal');
