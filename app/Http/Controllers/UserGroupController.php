@@ -6,6 +6,7 @@ use App\Models\UserGroup;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class UserGroupController extends Controller
 {
@@ -46,7 +47,7 @@ class UserGroupController extends Controller
             'active' => 'boolean',
         ]);
 
-        $validated['created_by'] = auth()->user() ? auth()->user()->id : null;
+        $validated['created_by'] = Auth::id();
         $validated['active'] = $validated['active'] ?? true;
 
         $group = UserGroup::create($validated);
@@ -168,7 +169,7 @@ class UserGroupController extends Controller
     public function getAvailableUsers(UserGroup $userGroup)
     {
         $availableUsers = User::whereDoesntHave('groups')
-                             ->where('id', '!=', auth()->user() ? auth()->user()->id : 0)
+                             ->where('id', '!=', Auth::id())
                              ->select('id', 'name', 'email', 'position')
                              ->get();
 
