@@ -6,7 +6,6 @@ use App\Http\Controllers\RgController;
 use App\Http\Controllers\AgeController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\UserGroupController;
 
 
 
@@ -40,9 +39,6 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),  'verified
     Route::resource('agen', AgeController::class)->names('agen')->except(['store', 'update']);
     // Rutas para Usuario - Solo GET routes para Livewire
     Route::resource('usuario', UsuarioController::class)->names('usuario')->except(['store', 'update']);
-    
-    // Rutas para grupos de usuarios
-    Route::resource('user-groups', UserGroupController::class)->names('user-groups');
     
     // Rutas adicionales para reportes generales
     Route::get('/reportesgral', function () {  return view('rg.rg');   })->name('reportgral');  

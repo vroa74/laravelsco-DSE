@@ -5,7 +5,6 @@ namespace App\Livewire\Reportesgral;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
-use Livewire\WithFileUploads;
 use App\Models\Age;
 use App\Models\Legislatura;
 use App\Models\Ncor;
@@ -13,24 +12,16 @@ use App\Models\Tcor;
 use App\Models\Ccor;
 use App\Models\User;
 use App\Models\Co;
-use App\Models\UserGroup;
-use App\Traits\HandlesFileUploads;
 
 
 class Create extends Component
 {
-    use WithPagination, WithFileUploads, HandlesFileUploads;
-    public $legs, $ncors, $tcors, $ccors, $users, $ages, $userGroups;
+    use WithPagination;
+    public $legs, $ncors, $tcors, $ccors, $users, $ages;
     public $selectedLegislaturaId, $ffcap, $fncor, $ftcor, $ftcorid;
     public $legislatura, $fcap, $frec, $ncor, $tcor, $ccor, $fofi, $nofi, $nhoj, $rem_nombre, $rem_cargo, $rem_deporg, $rem_dir;
     public $des, $seguimiento, $tur_nom, $tur_cargo, $tur_deporg, $creo, $modifico, $reporte, $estatus;
     public $rem_id = null; // Para almacenar el ID del usuario seleccionado en Turnado
-    
-    // Nuevas propiedades para el sistema de turnado
-    public $turnadoType = 'manual';
-    public $turnadoUserId = null;
-    public $turnadoGroupId = null;
-    
     public $tcccid = null;
     public $tccctext = '';
     public $filteredCcor = [];
@@ -82,7 +73,6 @@ class Create extends Component
         $this->tcors = Tcor::all();
         $this->ccors = Ccor::all();
         $this->users = Auth::user();
-        $this->userGroups = UserGroup::active()->get(); // Cargar grupos activos
         
         // Inicializar las fechas con el día actual
         $this->fcap = now()->format('Y-m-d');
@@ -108,170 +98,10 @@ class Create extends Component
         if ($actualLegislatura) {
             $this->selectedLegislaturaId = $actualLegislatura->id;
         }
-    }
 
-    /**
-     * Método para cambiar el tipo de turnado
-     */
-    public function updatedTurnadoType()
-    {
-        // Limpiar campos según el tipo seleccionado
-        if ($this->turnadoType === 'individual') {
-            $this->turnadoGroupId = null;
-            $this->tur_nom = $this->tur_cargo = $this->tur_deporg = null;
-        } elseif ($this->turnadoType === 'group') {
-            $this->turnadoUserId = null;
-            $this->tur_nom = $this->tur_cargo = $this->tur_deporg = null;
-        } else {
-            $this->turnadoUserId = $this->turnadoGroupId = null;
-        }
-    }
-
-    /**
-     * Método para cuando se selecciona un usuario individual
-     */
-    public function updatedTurnadoUserId()
-    {
-        if ($this->turnadoUserId) {
-            $user = User::find($this->turnadoUserId);
-            if ($user) {
-                $this->tur_nom = $user->name;
-                $this->tur_cargo = $user->cargo;
-                $this->tur_deporg = $user->departamento;
-            }
-        }
-    }
-
-    /**
-     * Método para cuando se selecciona un grupo
-     */
-    public function updatedTurnadoGroupId()
-    {
-        if ($this->turnadoGroupId) {
-            $group = UserGroup::find($this->turnadoGroupId);
-            if ($group) {
-                $this->tur_nom = "Grupo: " . $group->name;
-                $this->tur_cargo = "Múltiples usuarios (" . $group->users_count . ")";
-                $this->tur_deporg = $group->description ?? 'N/A';
-            }
-        }
-    }
-
-    /**
-     * Método para agregar descripción a un archivo
-     */
-    public function addFileDescription($index, $description)
-    {
-        $this->fileDescriptions[$index] = $description;
-    }
-
-    /**
-     * Método para eliminar un archivo de la lista
-     */
-    public function removeFile($index)
-    {
-        unset($this->files[$index]);
-        unset($this->fileDescriptions[$index]);
-        
-        // Reindexar arrays
-        $this->files = array_values($this->files);
-        $this->fileDescriptions = array_values($this->fileDescriptions);
-    }
-
-    /**
-     * Método para validar archivos antes de guardar
-     */
-    public function validateFilesBeforeSave()
-    {
-        if ($this->hasFiles()) {
-            $this->validateFiles();
-        }
-    }
-
-    /**
-     * Método para guardar el registro con archivos
-     */
-    public function saveWithFiles()
-    {
-        // Validar archivos si existen
-        $this->validateFilesBeforeSave();
-        
-        // Validar otros campos del formulario
-        $this->validate([
-            'selectedLegislaturaId' => 'required',
-            'fcap' => 'required|date',
-            'frec' => 'required|date',
-            'ncor' => 'required',
-            'tcor' => 'required',
-            'ccor' => 'required',
-            'nhoj' => 'required|integer',
-            'nofi' => 'required',
-            'rem_nombre' => 'required|string|max:70',
-            'rem_cargo' => 'required|string|max:50',
-            'rem_deporg' => 'required|string|max:60',
-            'des' => 'required|string',
-            'seguimiento' => 'required|string',
-            'tur_nom' => 'required|string|max:70',
-            'tur_cargo' => 'required|string|max:50',
-            'tur_deporg' => 'required|string|max:60',
-        ]);
-
-        try {
-            // Crear el registro CO
-            $correspondencia = Co::create([
-                'legislatura' => $this->selectedLegislaturaId,
-                'fcap' => $this->fcap,
-                'frec' => $this->frec,
-                'ncor' => $this->ncor,
-                'tcor' => $this->tcor,
-                'ccor' => $this->ccor,
-                'nhoj' => $this->nhoj,
-                'nofi' => $this->nofi,
-                'rem_nombre' => $this->rem_nombre,
-                'rem_cargo' => $this->rem_cargo,
-                'rem_deporg' => $this->rem_deporg,
-                'rem_dir' => $this->rem_dir,
-                'des' => $this->des,
-                'seguimiento' => $this->seguimiento,
-                'tur_nom' => $this->tur_nom,
-                'tur_cargo' => $this->tur_cargo,
-                'tur_deporg' => $this->tur_deporg,
-                'turnado_type' => $this->turnadoType,
-                'turnado_user_id' => $this->turnadoType === 'individual' ? $this->turnadoUserId : null,
-                'turnado_group_id' => $this->turnadoType === 'group' ? $this->turnadoGroupId : null,
-                'rem_id' => $this->rem_id,
-                'creo' => Auth::user()->email,
-                'estatus' => true
-            ]);
-
-            // Guardar archivos si existen
-            if ($this->hasFiles()) {
-                $this->saveFiles($correspondencia->id, Auth::user()->email);
-            }
-
-            session()->flash('message', 'Registro creado exitosamente con archivos.');
-            
-            // Redirigir o limpiar formulario
-            $this->resetForm();
-            
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error al crear el registro: ' . $e->getMessage());
-        }
-    }
-
-    /**
-     * Método para limpiar el formulario
-     */
-    public function resetForm()
-    {
-        $this->clearFiles();
-        // Resetear otros campos del formulario
-        $this->reset([
-            'fcap', 'frec', 'ncor', 'tcor', 'ccor', 'nhoj', 'nofi',
-            'rem_nombre', 'rem_cargo', 'rem_deporg', 'rem_dir',
-            'des', 'seguimiento', 'tur_nom', 'tur_cargo', 'tur_deporg',
-            'turnadoType', 'turnadoUserId', 'turnadoGroupId'
-        ]);
+        // Inicializar el estado de isCccorEnabled basado en tcccid
+        $this->isCccorEnabled = !empty($this->tcccid);
+        $this->updateFilteredCcor();
     }
     // Mantener la función selectCorrespondence optimizada
     public function selectCorrespondence($fid, $fttcor)
@@ -501,7 +331,6 @@ class Create extends Component
             'tcc' => $this->tcors,
             'ccors' => $this->ccors,
             'users' => $this->users,
-            'userGroups' => $this->userGroups,
             'modalAges' => $this->modalAges,
             'modalUsers' => $this->modalUsers,
         ]);

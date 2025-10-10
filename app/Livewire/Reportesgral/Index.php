@@ -11,7 +11,6 @@ use App\Models\Co;
 use App\Models\Ncor;
 use App\Models\Tcor;
 use App\Models\Ccor;
-use App\Models\UserGroup;
 
 class Index extends Component
 {
@@ -29,13 +28,6 @@ class Index extends Component
     public $ncor_filter; // Add filter for N. Cor.
     public $tcor_filter; // Add filter for T. Cor.
     public $ccor_filter; // Add filter for Clas. Cor.
-    
-    // Nuevas propiedades para el sistema de turnado
-    public $turnadoTypeFilter = '';
-    public $turnadoUserIdFilter = null;
-    public $turnadoGroupIdFilter = null;
-    public $userGroups; // Para los filtros de grupos
-    
     //    begin     open modal
     public $isOpen = true;
 
@@ -582,7 +574,6 @@ class Index extends Component
         $this->Nccors = Ncor::all();
         $this->Tccors = Tcor::all();
         $this->Cccors = Ccor::all();
-        $this->userGroups = UserGroup::active()->get();
     }
 
 //    reportes --------------------------------------------------------------------------------------------------------
