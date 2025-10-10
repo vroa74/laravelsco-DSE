@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class legislatura extends Model
+class Legislatura extends Model
 {
     protected $fillable = ['legislatura', 'actual'];
 }
