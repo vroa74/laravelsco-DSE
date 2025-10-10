@@ -31,8 +31,7 @@ return new class extends Migration
             
             // Control de tiempo de vida
             $table->timestamp('expires_at'); // Fecha de expiración (7 días)
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate();
+            $table->timestamps();
             
             // Índices para optimizar consultas
             $table->index(['report_id', 'report_type']);
