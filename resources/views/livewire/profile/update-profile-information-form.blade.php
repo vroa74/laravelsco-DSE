@@ -16,16 +16,27 @@
             <x-label for="photo" value="{{ __('Photo') }}" />
 
             <!-- Current Profile Photo -->
-            <div class="mt-2">
-                @if (auth()->user()->profile_photo_path)
-                    <img src="{{ asset('storage/' . auth()->user()->profile_photo_path) }}"
-                        alt="{{ auth()->user()->name }}" class="rounded-full size-20 object-cover">
-                @else
+            <div class="mt-2" x-data="{
+                hasPhoto: '{{ $this->user->profile_photo_path ? 'true' : 'false' }}',
+                photoPath: '{{ $this->user->profile_photo_path ?? '' }}'
+            }" x-init="$wire.on('saved', () => {
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+            });">
+                <template x-if="hasPhoto === 'true' && photoPath">
+                    <img
+                        :src="'{{ asset('storage/') }}/' + photoPath +
+                            '?v=' + Date.now()" 
+                         alt="{{ $this->user->name }}" 
+                         class="rounded-full size-20 object-cover">
+                </template>
+                <template x-if="hasPhoto === 'false ' || !photoPath">
                     <div
                         class="size-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-2xl">
-                        {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
+                        {{ strtoupper(substr($this->user->name, 0, 4)) }}
                     </div>
-                @endif
+                </template>
             </div>
 
             <!-- New Profile Photo Preview -->
@@ -42,7 +53,7 @@
                 {{ __('Select A New Photo') }}
             </x-secondary-button>
 
-            @if (auth()->user()->profile_photo_path)
+            @if ($this->user->profile_photo_path && !empty($this->user->profile_photo_path))
                 <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
                     {{ __('Remove Photo') }}
                 </x-secondary-button>

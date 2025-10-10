@@ -35,3 +35,7 @@ comando::
 cd /var/www/vhosts/melomelon.club/vroa.melomelon.club && npm run build
 cd /var/www/vhosts/melomelon.club/sicodoc.melomelon.club && npm run build
  sicodoc.melomelon.club
+
+
+
+ lo abri con un navegador que no avia abierto en proyecto antes y no se ve observa la imagen el codigo del origen de la imagen no esta unificado nuevamente quien sae donde carajo esta mandando a llamar la imagen

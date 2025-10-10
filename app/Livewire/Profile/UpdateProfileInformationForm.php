@@ -16,6 +16,18 @@ class UpdateProfileInformationForm extends Component
         'name' => '',
         'email' => '',
     ];
+    
+    // Propiedad computada para obtener la foto actual del usuario
+    public function getUserProperty()
+    {
+        return auth()->user();
+    }
+    
+    // Método para forzar la actualización del componente
+    public function refreshUser()
+    {
+        $this->dispatch('$refresh');
+    }
 
     public function mount()
     {
@@ -53,10 +65,16 @@ class UpdateProfileInformationForm extends Component
         }
 
         $this->photo = null;
+        
+        // Emitir evento de guardado
         $this->emit('saved');
         
-        // Forzar actualización de la vista para mostrar la nueva foto
+        // Forzar actualización completa del componente
         $this->dispatch('$refresh');
+        $this->dispatch('profile-updated');
+        
+        // Recargar el usuario para obtener los datos actualizados
+        $user->refresh();
     }
 
     public function deleteProfilePhoto()
