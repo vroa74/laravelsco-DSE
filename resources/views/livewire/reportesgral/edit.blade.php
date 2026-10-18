@@ -49,21 +49,21 @@
                         Fecha de Captura
                     </label>
                     <!-- Campo de Entrada -->
-                    <input type="date" id="ffcapt" wire:model.live="fcap"
+                    <input type="date" id="ffcapt" wire:model="fcap"
                         class="w-3/4 p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <!-- Columna 2 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
                     <label for="ffrec" wire:model.live="frec"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de recepcion</label>
-                    <input type="date" id="ffrec" wire:model.live="frec"
+                    <input type="date" id="ffrec" wire:model="frec"
                         class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="flex items-center w-full col-span-1 gap-2">
                     <label for="nncor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Nivel de Correspondencia
                     </label>
-                    <select id="nncor" wire:model.live="ncor"
+                    <select id="nncor" wire:model="ncor"
                         class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Selecione el Nivel:</option>
                         @foreach ($ncors as $item)
@@ -96,7 +96,7 @@
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Clasificacion de Correspondencia
                     </label>
-                    <select id="cccor" wire:model.live="ccor"
+                    <select id="cccor" wire:model="ccor"
                         class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         @if (!$isCccorEnabled) disabled @endif>
                         <option selected>Selecione la Clasificacion:</option>
@@ -110,7 +110,7 @@
                     <label for="nnh" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         No. de hojas
                     </label>
-                    <input type="number" id="nnh" wire:model.live="nhoj"
+                    <input type="number" id="nnh" wire:model="nhoj"
                         class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <!-- Fila 2 - Columna 3 -->
@@ -118,7 +118,7 @@
                     <label for="nno" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         No. de Oficio
                     </label>
-                    <input type="text" id="nno" wire:model.live="nofi"
+                    <input type="text" id="nno" wire:model="nofi"
                         class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <!-- Fila 2 - Columna 4 -->
@@ -126,7 +126,7 @@
                     <label for="ffo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Fecha del oficio
                     </label>
-                    <input type="date" id="ffo" wire:model.live="fofi"
+                    <input type="date" id="ffo" wire:model="fofi"
                         class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
             </div>
@@ -155,7 +155,7 @@
                             </span>
                         </button>
                     </label>
-                    <textarea id="des" rows="4" spellcheck="true" lang="es" wire:model.live="des"
+                    <textarea id="des" rows="4" spellcheck="true" lang="es" wire:model="des"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe aquí...">{{ $des }}</textarea>
                 </div>
@@ -229,7 +229,7 @@
                             </span>
                         </button>
                     </label>
-                    <textarea id="seg" rows="4" spellcheck="true" lang="es" wire:model.live="seguimiento"
+                    <textarea id="seg" rows="4" spellcheck="true" lang="es" wire:model="seguimiento"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe aquí...">{{ $seguimiento }}</textarea>
                 </div>
@@ -484,17 +484,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($ages as $age)
-                            <tr class="border-b dark:border-gray-700">
-                                <td>{{ $age->id }}</td>
-                                <td>{{ $age->name }}</td>
-                                <td>{{ $age->age }}</td>
-                                <td>
-                                    <button class="text-blue-600 dark:text-blue-400">Editar</button>
-                                    <button class="text-red-600 dark:text-red-400">Eliminar</button>
-                                </td>
-                            </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -611,20 +600,20 @@
                     <div class="grid grid-cols-3 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre</label>
-                            <input wire:model.live="searchNombre" type="text"
+                            <input wire:model.live.debounce.300ms="searchNombre" type="text"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 placeholder="Buscar por nombre">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cargo</label>
-                            <input wire:model.live="searchCargo" type="text"
+                            <input wire:model.live.debounce.300ms="searchCargo" type="text"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 placeholder="Buscar por cargo">
                         </div>
                         <div>
                             <label
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-300">Departamento</label>
-                            <input wire:model.live="searchDeporg" type="text"
+                            <input wire:model.live.debounce.300ms="searchDeporg" type="text"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 placeholder="Buscar por departamento">
                         </div>
@@ -694,19 +683,19 @@
                     <div class="grid grid-cols-3 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre</label>
-                            <input wire:model.live="searchUserName" type="text"
+                            <input wire:model.live.debounce.300ms="searchUserName" type="text"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 placeholder="Buscar por nombre">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cargo</label>
-                            <input wire:model.live="searchUserPosition" type="text"
+                            <input wire:model.live.debounce.300ms="searchUserPosition" type="text"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 placeholder="Buscar por cargo">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Dirección</label>
-                            <input wire:model.live="searchUserDirection" type="text"
+                            <input wire:model.live.debounce.300ms="searchUserDirection" type="text"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 placeholder="Buscar por dirección">
                         </div>

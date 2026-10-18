@@ -322,9 +322,6 @@
                 <th scope="col" class="px-6 py-3 w-[4%]">
                     id
                 </th>
-                <th scope="col" class="px-6 py-3 w-[4%]">
-                    Legis.
-                </th>
                 <th scope="col" class="px-6 py-3 w-[10%]">
                      Correspondencia
                 </th>
@@ -357,9 +354,7 @@
                 @endif
                 <td class="px-1 py-1">
                     {{$co->id}}
-                </td>
-                <td class="px-1 py-1">
-                    {{ $co->legislatura  }}
+                    <p class="text-yellow-300">{{ $co->legislaturaRel->legislatura ?? $co->legislatura }}</p>
                 </td>
                 <td class="px-1 py-1">
                     @if(!empty($co->ncor))

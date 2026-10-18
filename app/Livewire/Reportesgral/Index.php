@@ -807,7 +807,7 @@ class Index extends Component
             })->toArray()
         );
         return view('livewire.reportesgral.index', [
-            'cos' => $query->orderBy('id', 'desc')->paginate($this->NumPag),
+            'cos' => $query->with('legislaturaRel')->orderBy('id', 'desc')->paginate($this->NumPag),
             'myquery' => $sqlWithBindings,
         ]);
 

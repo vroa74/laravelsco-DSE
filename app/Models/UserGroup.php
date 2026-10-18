@@ -76,7 +76,7 @@ class UserGroup extends Model
      */
     public function activeFiles()
     {
-        return $this->files()->where('created_at', '>=', now()->subDays(10));
+        return $this->files()->where('cos_files.created_at', '>=', now()->subDays(10));
     }
 
     /**
@@ -84,7 +84,7 @@ class UserGroup extends Model
      */
     public function expiredFiles()
     {
-        return $this->files()->where('created_at', '<', now()->subDays(10));
+        return $this->files()->where('cos_files.created_at', '<', now()->subDays(10));
     }
 
     /**
@@ -92,7 +92,7 @@ class UserGroup extends Model
      */
     public function getActiveFilesCountAttribute(): int
     {
-        return $this->files()->where('created_at', '>=', now()->subDays(10))->count();
+        return $this->files()->where('cos_files.created_at', '>=', now()->subDays(10))->count();
     }
 
     /**
@@ -109,9 +109,9 @@ class UserGroup extends Model
     public function documentsWithActiveFiles()
     {
         return $this->cos()->whereHas('files', function($query) {
-            $query->where('created_at', '>=', now()->subDays(10));
+            $query->where('cos_files.created_at', '>=', now()->subDays(10));
         })->with(['files' => function($query) {
-            $query->where('created_at', '>=', now()->subDays(10));
+            $query->where('cos_files.created_at', '>=', now()->subDays(10));
         }]);
     }
 
@@ -120,7 +120,7 @@ class UserGroup extends Model
      */
     public function getFilesStatisticsAttribute(): array
     {
-        $activeFiles = $this->files()->where('created_at', '>=', now()->subDays(10))->count();
+        $activeFiles = $this->files()->where('cos_files.created_at', '>=', now()->subDays(10))->count();
         $totalFiles = $this->files()->count();
         $expiredFiles = $totalFiles - $activeFiles;
         

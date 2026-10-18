@@ -49,21 +49,21 @@
                         Fecha de Captura
                     </label>
                     <!-- Campo de Entrada -->
-                    <input type="date" id="ffcapt" wire:model.live="fcap"
+                    <input type="date" id="ffcapt" wire:model="fcap"
                         class="w-3/4 p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <!-- Columna 2 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
                     <label for="ffrec" wire:model.live="frec"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de recepcion</label>
-                    <input type="date" id="ffrec" wire:model.live="frec"
+                    <input type="date" id="ffrec" wire:model="frec"
                         class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="flex items-center w-full col-span-1 gap-2">
                     <label for="nncor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Nivel de Correspondencia
                     </label>
-                    <select id="nncor" wire:model.live="ncor"
+                    <select id="nncor" wire:model="ncor"
                         class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Selecione el Nivel:</option>
                         @foreach ($ncors as $item)
@@ -96,7 +96,7 @@
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Clasificacion de Correspondencia
                     </label>
-                    <select id="cccor" wire:model.live="ccor"
+                    <select id="cccor" wire:model="ccor"
                         class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         @if (!$isCccorEnabled) disabled @endif>
                         <option selected>Selecione la Clasificacion:</option>
@@ -110,7 +110,7 @@
                     <label for="nnh" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         No. de hojas
                     </label>
-                    <input type="number" id="nnh" wire:model.live="nhoj"
+                    <input type="number" id="nnh" wire:model="nhoj"
                         class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <!-- Fila 2 - Columna 3 -->
@@ -118,7 +118,7 @@
                     <label for="nno" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         No. de Oficio
                     </label>
-                    <input type="text" id="nno" wire:model.live="nofi"
+                    <input type="text" id="nno" wire:model="nofi"
                         class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <!-- Fila 2 - Columna 4 -->
@@ -126,7 +126,7 @@
                     <label for="ffo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Fecha del oficio
                     </label>
-                    <input type="date" id="ffo" wire:model.live="fofi"
+                    <input type="date" id="ffo" wire:model="fofi"
                         class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
             </div>
@@ -155,7 +155,7 @@
                             </span>
                         </button>
                     </label>
-                    <textarea id="des" rows="4" spellcheck="true" lang="es" wire:model.live="des"
+                    <textarea id="des" rows="4" spellcheck="true" lang="es" wire:model="des"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe aquí...">{{ $des }}</textarea>
                 </div>
@@ -229,55 +229,122 @@
                             </span>
                         </button>
                     </label>
-                    <textarea id="seg" rows="4" spellcheck="true" lang="es" wire:model.live="seguimiento"
+                    <textarea id="seg" rows="4" spellcheck="true" lang="es" wire:model="seguimiento"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Escribe aquí...">{{ $seguimiento }}</textarea>
                 </div>
                 <div class="col-span-1 mb-8">
-                    <label for="turnado" class="block mb-8 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="turnado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Turnado:
-                        <button type="button" wire:click="openModalUsers('Turnado')"
-                            class="px-2 py-1 text-xs text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:ring focus:ring-blue-300 relative group"
-                            title="Presiona para seleccionar usuario">
-                            <i class="fa-solid fa-user"></i>
-                            <span
-                                class="absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-                                Presiona para seleccionar usuario
-                            </span>
-                        </button>
+                        <div class="inline-flex ml-2 space-x-1">
+                            <button type="button" wire:click="switchToUserTurnado"
+                                class="px-2 py-1 text-xs rounded-md focus:ring focus:ring-blue-300 relative group {{ $turnadoType === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700' }}"
+                                title="Seleccionar usuario individual">
+                                <i class="fa-solid fa-user"></i>
+                                <span class="ml-1">Usuario</span>
+                            </button>
+                            <button type="button" wire:click="switchToGroupTurnado"
+                                class="px-2 py-1 text-xs rounded-md focus:ring focus:ring-green-300 relative group {{ $turnadoType === 'group' ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-700' }}"
+                                title="Seleccionar grupo de usuarios">
+                                <i class="fa-solid fa-users"></i>
+                                <span class="ml-1">Grupo</span>
+                            </button>
+                            <button type="button"
+                                @if ($turnadoType === 'user') wire:click="openModalUsers('Turnado')"
+                                    class="ml-2 px-2 py-1 text-xs text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:ring focus:ring-blue-300 relative group"
+                                    title="Presiona para seleccionar usuario"
+                                @else
+                                    wire:click="openModalGroups('Turnado')"
+                                    class="ml-2 px-2 py-1 text-xs text-white bg-green-500 rounded-md hover:bg-green-700 focus:ring focus:ring-green-300 relative group"
+                                    title="Presiona para seleccionar grupo" @endif>
+                                <i class="fa-solid {{ $turnadoType === 'user' ? 'fa-user' : 'fa-users' }}"></i>
+                                <span
+                                    class="absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                                    @if ($turnadoType === 'user')
+                                        Presiona para seleccionar usuario
+                                    @else
+                                        Presiona para seleccionar grupo
+                                    @endif
+                                </span>
+                            </button>
+                        </div>
                     </label>
 
 
-                    <div class="flex items-center m-1 space-x-4 ">
-                        <label for="turnom" class="text-sm font-medium text-gray-900 dark:text-white">
-                            Nombre;
-                        </label>
-                        <input type="text" id="tur_nom" wire:model="tur_nom" readonly
-                            class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    </div>
-                    <div class="flex items-center m-1 space-x-4 ">
-                        <label for="turcargo" class="text-sm font-medium text-gray-900 dark:text-white">
-                            Cargo;
-                        </label>
-                        <input type="text" id="tur_cargo" wire:model="tur_cargo" readonly
-                            class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    </div>
-                    <div class="flex items-center m-1 space-x-4 ">
-                        <label for="turdeporg" class="text-sm font-medium text-gray-900 dark:text-white">
-                            Depto:
-                        </label>
-                        <input type="text" id="tur_deporg" wire:model="tur_deporg" readonly
-                            class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    </div>
-                    <!-- Campo oculto para mostrar el rem_id seleccionado (para debugging) -->
-                    @if ($rem_id)
-                        <div class="flex items-center m-1 space-x-4 ">
-                            <label for="rem_id_debug" class="text-sm font-medium text-gray-900 dark:text-white">
-                                ID Usuario:
+                    @if ($turnadoType === 'user')
+                        <!-- Campos para usuario individual -->
+                        <div class="flex items-center mb-1 space-x-4 ">
+                            <label for="turnom" class="text-xs font-medium text-gray-900 dark:text-white">
+                                Nombre:
                             </label>
-                            <input type="text" id="rem_id_debug" value="{{ $rem_id }}" readonly
+                            <input type="text" id="tur_nom" wire:model="tur_nom" readonly
                                 class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         </div>
+                        <div class="flex items-center mb-1 space-x-4 ">
+                            <label for="turcargo" class="text-xs font-medium text-gray-900 dark:text-white">
+                                Cargo:
+                            </label>
+                            <input type="text" id="tur_cargo" wire:model="tur_cargo" readonly
+                                class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        </div>
+                        <div class="flex items-center mb-1 space-x-4 ">
+                            <label for="turdeporg" class="text-xs font-medium text-gray-900 dark:text-white">
+                                Depto:
+                            </label>
+                            <input type="text" id="tur_deporg" wire:model="tur_deporg" readonly
+                                class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        </div>
+                        @if ($rem_id)
+                            <div class="flex items-center mb-1 space-x-4 ">
+                                <label for="rem_id_debug" class="text-xs font-medium text-gray-900 dark:text-white">
+                                    ID Usuario:
+                                </label>
+                                <input type="text" id="rem_id_debug" value="{{ $rem_id }}" readonly
+                                    class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            </div>
+                        @endif
+                    @else
+                        <!-- Campos para grupo -->
+                        <div class="flex items-center mb-1 space-x-4 ">
+                            <label for="groupname" class="text-xs font-medium text-gray-900 dark:text-white">
+                                Grupo:
+                            </label>
+                            <input type="text" id="groupname"
+                                value="{{ $selectedGroup ? $selectedGroup->name : '' }}" readonly
+                                class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        </div>
+                        @if ($selectedGroup)
+                            @if (count($groupMembers) > 0)
+                                <div class="mt-1 p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                                    <h4 class="text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Miembros del
+                                        grupo ({{ count($groupMembers) }}):</h4>
+                                    <div class="space-y-1 max-h-24 overflow-y-auto">
+                                        @foreach ($groupMembers as $member)
+                                            <div
+                                                class="flex items-center justify-between p-1 bg-white dark:bg-gray-700 rounded text-xs">
+                                                <div>
+                                                    <span class="font-medium">{{ $member->name }}</span>
+                                                    @if ($member->position)
+                                                        <span class="text-gray-500 dark:text-gray-400"> -
+                                                            {{ $member->position }}</span>
+                                                    @endif
+                                                </div>
+                                                <span
+                                                    class="text-gray-500 dark:text-gray-400">{{ $member->email }}</span>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="flex items-center mb-1 space-x-4 ">
+                                <label for="group_id_debug" class="text-xs font-medium text-gray-900 dark:text-white">
+                                    ID Grupo:
+                                </label>
+                                <input type="text" id="group_id_debug" value="{{ $selectedGroup->id }}" readonly
+                                    class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            </div>
+                        @endif
                     @endif
                 </div>
             </div>
@@ -448,17 +515,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($ages as $age)
-                            <tr class="border-b dark:border-gray-700">
-                                <td>{{ $age->id }}</td>
-                                <td>{{ $age->name }}</td>
-                                <td>{{ $age->age }}</td>
-                                <td>
-                                    <button class="text-blue-600 dark:text-blue-400">Editar</button>
-                                    <button class="text-red-600 dark:text-red-400">Eliminar</button>
-                                </td>
-                            </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -484,32 +540,32 @@
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
             <div x-show="show"
-                class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
                 <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div class="sm:flex sm:items-start">
                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
+                            <h3 class="text-sm leading-6 font-medium text-gray-900 dark:text-gray-100">
                                 Seleccionar Agente
                             </h3>
                             <div class="mt-2">
                                 <input type="text" wire:model.live="modalAgeFilter" placeholder="Buscar agente..."
-                                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs">
                             </div>
                             <div class="mt-4 max-h-96 overflow-y-auto">
                                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                                     <thead class="bg-gray-50 dark:bg-gray-700">
                                         <tr>
                                             <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                class="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                                 Nombre</th>
                                             <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                class="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                                 Cargo</th>
                                             <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                class="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                                 Dependencia</th>
                                             <th
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                class="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                                 Acción</th>
                                         </tr>
                                     </thead>
@@ -518,16 +574,16 @@
                                         @foreach ($modalAges as $age)
                                             <tr>
                                                 <td
-                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300">
+                                                    class="px-3 py-2 whitespace-nowrap text-xs text-gray-900 dark:text-gray-300">
                                                     {{ $age->nombre }}</td>
                                                 <td
-                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300">
+                                                    class="px-3 py-2 whitespace-nowrap text-xs text-gray-900 dark:text-gray-300">
                                                     {{ $age->cargo }}</td>
                                                 <td
-                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300">
+                                                    class="px-3 py-2 whitespace-nowrap text-xs text-gray-900 dark:text-gray-300">
                                                     {{ $age->deporg }}</td>
                                                 <td
-                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300">
+                                                    class="px-3 py-2 whitespace-nowrap text-xs text-gray-900 dark:text-gray-300">
                                                     <button wire:click="selectAgeFromModal({{ $age->des }})"
                                                         class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300">
                                                         Seleccionar
@@ -543,7 +599,7 @@
                 </div>
                 <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button type="button" wire:click="closeAgeModal"
-                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-xs">
                         Cerrar
                     </button>
                 </div>
@@ -554,10 +610,10 @@
     @if ($showModalAgent)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div
-                class="w-full h-1/2 mx-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-white flex flex-col">
+                class="w-full h-3/4 mx-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-white flex flex-col">
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between p-4 border-b border-white">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">
                         Lista de Ages -
                         {{ $selectedColumn ? 'Columna ' . str_replace('columna', '', $selectedColumn) : '' }}
                     </h3>
@@ -574,22 +630,22 @@
                 <div class="p-4 border-b border-white">
                     <div class="grid grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre</label>
-                            <input wire:model.live="searchNombre" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Nombre</label>
+                            <input wire:model.live.debounce.300ms="searchNombre" type="text"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 placeholder="Buscar por nombre">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cargo</label>
-                            <input wire:model.live="searchCargo" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Cargo</label>
+                            <input wire:model.live.debounce.300ms="searchCargo" type="text"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 placeholder="Buscar por cargo">
                         </div>
                         <div>
                             <label
-                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">Departamento</label>
-                            <input wire:model.live="searchDeporg" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                class="block text-xs font-medium text-gray-700 dark:text-gray-300">Departamento</label>
+                            <input wire:model.live.debounce.300ms="searchDeporg" type="text"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 placeholder="Buscar por departamento">
                         </div>
                     </div>
@@ -597,24 +653,24 @@
 
                 <!-- Tabla de Ages -->
                 <div class="flex-1 overflow-y-auto p-4">
-                    <table class="w-full text-sm text-left text-gray-900 dark:text-white">
+                    <table class="w-full text-xs text-left text-gray-900 dark:text-white">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th class="px-6 py-3">ID</th>
-                                <th class="px-6 py-3">Nombre</th>
-                                <th class="px-6 py-3">Cargo</th>
-                                <th class="px-6 py-3">Departamento</th>
-                                <th class="px-6 py-3">Acción</th>
+                                <th class="px-3 py-2">ID</th>
+                                <th class="px-3 py-2">Nombre</th>
+                                <th class="px-3 py-2">Cargo</th>
+                                <th class="px-3 py-2">Departamento</th>
+                                <th class="px-3 py-2">Acción</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($modalAges as $age)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td class="px-6 py-4">{{ $age->id }}</td>
-                                    <td class="px-6 py-4">{{ $age->nombre }}</td>
-                                    <td class="px-6 py-4">{{ $age->cargo }}</td>
-                                    <td class="px-6 py-4">{{ $age->deporg }}</td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-3 py-2">{{ $age->id }}</td>
+                                    <td class="px-3 py-2">{{ $age->nombre }}</td>
+                                    <td class="px-3 py-2">{{ $age->cargo }}</td>
+                                    <td class="px-3 py-2">{{ $age->deporg }}</td>
+                                    <td class="px-3 py-2">
                                         <button wire:click="selectAgeFromModal({{ $age->id }})"
                                             class="px-2 py-1 text-xs font-medium text-center text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300">
                                             Seleccionar
@@ -638,10 +694,10 @@
     @if ($showModalUsers)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div
-                class="w-full h-1/2 mx-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-white flex flex-col">
+                class="w-full h-3/4 mx-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-white flex flex-col">
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between p-4 border-b border-white">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">
                         Lista de Usuarios - {{ $selectedUserColumn ? $selectedUserColumn : '' }}
                     </h3>
                     <button wire:click="closeModalUsers"
@@ -657,21 +713,21 @@
                 <div class="p-4 border-b border-white">
                     <div class="grid grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre</label>
-                            <input wire:model.live="searchUserName" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Nombre</label>
+                            <input wire:model.live.debounce.300ms="searchUserName" type="text"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 placeholder="Buscar por nombre">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cargo</label>
-                            <input wire:model.live="searchUserPosition" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Cargo</label>
+                            <input wire:model.live.debounce.300ms="searchUserPosition" type="text"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 placeholder="Buscar por cargo">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Dirección</label>
-                            <input wire:model.live="searchUserDirection" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Dirección</label>
+                            <input wire:model.live.debounce.300ms="searchUserDirection" type="text"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 placeholder="Buscar por dirección">
                         </div>
                     </div>
@@ -679,26 +735,26 @@
 
                 <!-- Tabla de Usuarios -->
                 <div class="flex-1 overflow-y-auto p-4">
-                    <table class="w-full text-sm text-left text-gray-900 dark:text-white">
+                    <table class="w-full text-xs text-left text-gray-900 dark:text-white">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th class="px-6 py-3">ID</th>
-                                <th class="px-6 py-3">Nombre</th>
-                                <th class="px-6 py-3">Cargo</th>
-                                <th class="px-6 py-3">Dirección</th>
-                                <th class="px-6 py-3">Email</th>
-                                <th class="px-6 py-3">Acción</th>
+                                <th class="px-3 py-2">ID</th>
+                                <th class="px-3 py-2">Nombre</th>
+                                <th class="px-3 py-2">Cargo</th>
+                                <th class="px-3 py-2">Dirección</th>
+                                <th class="px-3 py-2">Email</th>
+                                <th class="px-3 py-2">Acción</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($modalUsers as $user)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td class="px-6 py-4">{{ $user->id }}</td>
-                                    <td class="px-6 py-4">{{ $user->name }}</td>
-                                    <td class="px-6 py-4">{{ $user->position }}</td>
-                                    <td class="px-6 py-4">{{ $user->direction }}</td>
-                                    <td class="px-6 py-4">{{ $user->email }}</td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-3 py-2">{{ $user->id }}</td>
+                                    <td class="px-3 py-2">{{ $user->name }}</td>
+                                    <td class="px-3 py-2">{{ $user->position }}</td>
+                                    <td class="px-3 py-2">{{ $user->direction }}</td>
+                                    <td class="px-3 py-2">{{ $user->email }}</td>
+                                    <td class="px-3 py-2">
                                         <button wire:click="selectUserFromModal({{ $user->id }})"
                                             class="px-2 py-1 text-xs font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
                                             Seleccionar
@@ -713,6 +769,85 @@
                 <!-- Paginación -->
                 <div class="p-4 border-t border-white">
                     {{ $modalUsers->links() }}
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <!-- Modal de Grupos para Turnado -->
+    @if ($showModalGroups)
+        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div
+                class="w-full h-3/4 mx-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-white flex flex-col">
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between p-4 border-b border-white">
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">
+                        Lista de Grupos - {{ $selectedGroupColumn ? $selectedGroupColumn : '' }}
+                    </h3>
+                    <button wire:click="closeModalGroups"
+                        class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Filtros -->
+                <div class="p-4 border-b border-white">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Nombre del
+                                Grupo</label>
+                            <input wire:model.live.debounce.300ms="searchGroupName" type="text"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                placeholder="Buscar por nombre del grupo">
+                        </div>
+                        <div>
+                            <label
+                                class="block text-xs font-medium text-gray-700 dark:text-gray-300">Descripción</label>
+                            <input wire:model.live.debounce.300ms="searchGroupDescription" type="text"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                placeholder="Buscar por descripción">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de Grupos -->
+                <div class="flex-1 overflow-y-auto p-4">
+                    <table class="w-full text-xs text-left text-gray-900 dark:text-white">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th class="px-3 py-2">ID</th>
+                                <th class="px-3 py-2">Nombre</th>
+                                <th class="px-3 py-2">Descripción</th>
+                                <th class="px-3 py-2">Miembros</th>
+                                <th class="px-3 py-2">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($modalGroups as $group)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-3 py-2">{{ $group->id }}</td>
+                                    <td class="px-3 py-2">{{ $group->name }}</td>
+                                    <td class="px-3 py-2">{{ $group->description ?: 'Sin descripción' }}</td>
+                                    <td class="px-3 py-2">{{ $group->members_count ?? $group->members()->count() }}
+                                    </td>
+                                    <td class="px-3 py-2">
+                                        <button wire:click="selectGroupFromModal({{ $group->id }})"
+                                            class="px-2 py-1 text-xs font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300">
+                                            Seleccionar
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paginación -->
+                <div class="p-4 border-t border-white">
+                    {{ $modalGroups->links() }}
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Reportesgral;
 
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
@@ -20,13 +21,11 @@ use App\Traits\HandlesFileUploads;
 class Edit extends Component
 {
     use WithPagination, WithFileUploads, HandlesFileUploads;
-    public $legs, $ncors, $tcors, $ccors, $users, $ages;
     public $selectedLegislaturaId, $ffcap, $fncor, $ftcor, $ftcorid;
     public $legislatura, $fcap, $frec, $ncor, $tcor, $ccor, $fofi, $nofi, $nhoj, $rem_nombre, $rem_cargo, $rem_deporg, $rem_dir;
     public $des, $seguimiento, $tur_nom, $tur_cargo, $tur_deporg, $creo, $modifico, $reporte, $estatus;
     public $tcccid = null;
     public $tccctext = '';
-    public $filteredCcor = [];
     public $accion = '';
     public $recordId; // ID del registro a editar
 
@@ -76,14 +75,6 @@ class Edit extends Component
 
     public function mount($id = null)
     {
-        // Cargar todos los registros necesarios
-        $this->ages = Age::all();
-        $this->legs = Legislatura::all();
-        $this->ncors = Ncor::all();
-        $this->tcors = Tcor::all();
-        $this->ccors = Ccor::all();
-        $this->users = Auth::user();
-        
         // Si se proporciona un ID, cargar el registro para editar
         if ($id) {
             $this->recordId = $id;
@@ -92,7 +83,37 @@ class Edit extends Component
 
         // Inicializar el estado de isCccorEnabled basado en tcccid
         $this->isCccorEnabled = !empty($this->tcccid);
-        $this->updateFilteredCcor();
+    }
+
+    // Catálogos pequeños: se calculan por petición y no viajan en el estado de Livewire
+    #[Computed]
+    public function legs()
+    {
+        return Legislatura::all();
+    }
+
+    #[Computed]
+    public function ncors()
+    {
+        return Ncor::all();
+    }
+
+    #[Computed]
+    public function tcors()
+    {
+        return Tcor::all();
+    }
+
+    #[Computed]
+    public function ccors()
+    {
+        return Ccor::all();
+    }
+
+    #[Computed]
+    public function filteredCcor()
+    {
+        return $this->tcccid ? $this->ccors->where('tcor', $this->tcccid) : collect();
     }
 
     public function loadRecord($id)
@@ -123,7 +144,6 @@ class Edit extends Component
         // Establecer el tcccid basado en el tcor para habilitar la clasificación
         $this->tcccid = $this->tcors->where('tcor', $record->tcor)->first()?->id;
         $this->isCccorEnabled = !empty($this->tcccid);
-        $this->updateFilteredCcor();
 
         // Cargar archivos existentes
         $this->existingFiles = CosFile::where('cos_id', $id)->get();
@@ -281,16 +301,6 @@ class Edit extends Component
             $selectedTcor = $this->tcors->find($value);
             $this->tccctext = $selectedTcor ? $selectedTcor->tcor : '';
         }
-        $this->updateFilteredCcor();
-    }
-
-    protected function updateFilteredCcor()
-    {
-        if ($this->tcccid) {
-            $this->filteredCcor = $this->ccors->where('tcor', $this->tcccid);
-        } else {
-            $this->filteredCcor = collect([]);
-        }
     }
     // -------------------------------------
 
@@ -355,9 +365,10 @@ class Edit extends Component
             'ncors' => $this->ncors,
             'tcc' => $this->tcors,
             'ccors' => $this->ccors,
-            'users' => $this->users,
-            'modalAges' => $this->modalAges,
-            'modalUsers' => $this->modalUsers,
+            'filteredCcor' => $this->filteredCcor,
+            'users' => Auth::user(),
+            'modalAges' => ($this->showModalAgent || $this->isAgeModalOpen) ? $this->modalAges : collect(),
+            'modalUsers' => $this->showModalUsers ? $this->modalUsers : null,
         ]);
     }
 

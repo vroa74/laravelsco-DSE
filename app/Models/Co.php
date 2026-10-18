@@ -10,6 +10,7 @@ class Co extends Model
     
     protected $fillable = [
         'legislatura',
+        'legislatura_id',
         'fcap',
         'frec',
         'fofi',
@@ -39,6 +40,11 @@ class Co extends Model
         'fofi' => 'date',
         'estatus' => 'boolean',
     ];
+
+    public function legislaturaRel()
+    {
+        return $this->belongsTo(Legislatura::class, 'legislatura_id');
+    }
 
     // Relación con el usuario remitente
     public function remitente()
