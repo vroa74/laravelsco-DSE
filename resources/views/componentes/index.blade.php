@@ -127,6 +127,183 @@
                 </div>
             </div>
 
+            @php
+                $bladeComponents = [
+                    'x-action-message' => 'Mensaje de confirmación de acciones',
+                    'x-action-section' => 'Sección de acciones del perfil',
+                    'x-app-layout' => 'Diseño principal autenticado',
+                    'x-application-logo' => 'Logotipo de la aplicación',
+                    'x-application-mark' => 'Marca de la aplicación para navegación',
+                    'x-authentication-card' => 'Contenedor de pantallas de autenticación',
+                    'x-authentication-card-logo' => 'Logotipo en pantallas de autenticación',
+                    'x-banner' => 'Avisos de sesión',
+                    'x-button' => 'Botón principal',
+                    'x-checkbox' => 'Casilla de verificación',
+                    'x-confirmation-modal' => 'Modal de confirmación',
+                    'x-confirms-password' => 'Confirmación de contraseña',
+                    'x-danger-button' => 'Botón de acción peligrosa',
+                    'x-dialog-modal' => 'Modal de diálogo',
+                    'x-dropdown' => 'Menú desplegable',
+                    'x-dropdown-link' => 'Enlace de menú desplegable',
+                    'x-form-section' => 'Sección de formulario',
+                    'x-guest-layout' => 'Diseño para visitantes',
+                    'x-input' => 'Campo de entrada',
+                    'x-input-error' => 'Error de validación de campo',
+                    'x-label' => 'Etiqueta de formulario',
+                    'x-modal' => 'Contenedor modal',
+                    'x-nav-link' => 'Enlace de navegación',
+                    'x-responsive-nav-link' => 'Enlace de navegación adaptable',
+                    'x-secondary-button' => 'Botón secundario',
+                    'x-section-border' => 'Separador de sección',
+                    'x-section-title' => 'Título y descripción de sección',
+                    'x-switchable-team' => 'Selector de equipo',
+                    'x-validation-errors' => 'Resumen de errores de validación',
+                    'x-welcome' => 'Componente de bienvenida',
+                ];
+
+                $livewireComponents = [
+                    'App\\Livewire\\Cc',
+                    'App\\Livewire\\Catalogo\\Cc',
+                    'App\\Livewire\\Catalogo\\Nc',
+                    'App\\Livewire\\Catalogo\\Tc',
+                    'App\\Livewire\\FileManager',
+                    'App\\Livewire\\Leg',
+                    'App\\Livewire\\NavigationMenu',
+                    'App\\Livewire\\Nc',
+                    'App\\Livewire\\People',
+                    'App\\Livewire\\Profile\\UpdateProfileInformationForm',
+                    'App\\Livewire\\Reportesgral\\Create',
+                    'App\\Livewire\\Reportesgral\\Edit',
+                    'App\\Livewire\\Reportesgral\\Index',
+                    'App\\Livewire\\Reportesgral\\Show',
+                    'App\\Livewire\\Tc',
+                    'App\\Livewire\\Temp',
+                    'App\\Livewire\\UserGroups\\Index',
+                    'App\\Livewire\\Usuarios\\Create',
+                    'App\\Livewire\\Usuarios\\Edit',
+                    'App\\Livewire\\Usuarios\\Index',
+                    'App\\Livewire\\Usuarios\\Show',
+                ];
+
+                $frontendIntegrations = [
+                    ['nombre' => 'Alpine.js', 'uso' => 'Interacciones reactivas; importado desde resources/js/app.js.'],
+                    ['nombre' => 'Axios', 'uso' => 'Solicitudes HTTP; importado desde resources/js/bootstrap.js.'],
+                    ['nombre' => 'Flowbite', 'uso' => 'Componentes y plugin de Tailwind; CSS npm y JavaScript CDN.'],
+                    ['nombre' => 'Font Awesome 6.0.0', 'uso' => 'Iconos; hoja de estilos CDN en layouts/app.blade.php y layouts/guest.blade.php.'],
+                    ['nombre' => 'SweetAlert2 11', 'uso' => 'Alertas; JavaScript CDN en los diseños de aplicación y visitante.'],
+                    ['nombre' => 'Tailwind CSS', 'uso' => 'Estilos utilitarios; plugins Forms, Typography y Flowbite.'],
+                    ['nombre' => 'Vite', 'uso' => 'Compila resources/css/app.css y resources/js/app.js.'],
+                    ['nombre' => 'Vue.js', 'uso' => 'Dependencia instalada junto con @vitejs/plugin-vue; no se importa en app.js.'],
+                    ['nombre' => 'Roboto', 'uso' => 'Fuente principal; Google Fonts y @fontsource/roboto.'],
+                    ['nombre' => 'Arimo', 'uso' => 'Fuente empaquetada con @fontsource/arimo.'],
+                    ['nombre' => 'Figtree', 'uso' => 'Google Fonts Bunny; cargada en las vistas de bienvenida y visitante.'],
+                ];
+
+                $fontAwesomeIcons = [
+                    'fa-download', 'fa-eye', 'fa-eye-slash', 'fa-file-pdf', 'fa-plus', 'fa-trash', 'fa-user', 'fa-users',
+                    'fa-regular fa-eye', 'fa-regular fa-house', 'fa-regular fa-rectangle-list', 'fa-regular fa-square-plus',
+                    'fa-solid fa-bars', 'fa-solid fa-eye', 'fa-solid fa-file-csv', 'fa-solid fa-file-export',
+                    'fa-solid fa-filter', 'fa-solid fa-house', 'fa-solid fa-igloo', 'fa-solid fa-list', 'fa-solid fa-pen-to-square', 'fa-solid fa-pencil',
+                    'fa-solid fa-plus', 'fa-solid fa-save', 'fa-solid fa-times', 'fa-solid fa-trash-can',
+                    'fa-solid fa-user', 'fa-solid fa-user-plus', 'fa-solid fa-users',
+                ];
+
+                $inlineSvgViews = [
+                    'auth/login.blade.php',
+                    'comp.blade.php',
+                    'components/application-mark.blade.php',
+                    'components/authentication-card-logo.blade.php',
+                    'components/banner.blade.php',
+                    'components/confirmation-modal.blade.php',
+                    'components/switchable-team.blade.php',
+                    'components/welcome.blade.php',
+                    'layouts/_navbar.blade.php',
+                    'layouts/navbar.blade.php',
+                    'livewire/navigation-menu.blade.php',
+                    'livewire/people.blade.php',
+                    'livewire/reportesgral/create.blade.php',
+                    'livewire/reportesgral/edit.blade.php',
+                    'livewire/reportesgral/index.blade.php',
+                    'livewire/rg/index.blade.php',
+                    'livewire/user-groups/index.blade.php',
+                    'livewire/usuarios/index.blade.php',
+                    'navigation-menu.blade.php',
+                    'profile/logout-other-browser-sessions-form.blade.php',
+                    'temp.blade.php',
+                    'user-groups/show.blade.php',
+                    'welcome.blade.php',
+                ];
+            @endphp
+
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <h3 class="text-lg font-semibold mb-4">Componentes Blade propios y Jetstream</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                        {{ count($bladeComponents) }} componentes disponibles en resources/views/components y los diseños de la aplicación.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        @foreach ($bladeComponents as $component => $description)
+                            <div class="rounded border border-gray-200 dark:border-gray-700 p-3">
+                                <code class="text-sm font-semibold text-indigo-700 dark:text-indigo-300">{{ $component }}</code>
+                                <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ $description }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <h3 class="text-lg font-semibold mb-4">Componentes Livewire</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                        {{ count($livewireComponents) }} clases encontradas en app/Livewire.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        @foreach ($livewireComponents as $component)
+                            <code class="rounded border border-gray-200 dark:border-gray-700 p-3 text-xs text-indigo-700 dark:text-indigo-300">{{ $component }}</code>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <h3 class="text-lg font-semibold mb-4">Plugins e integraciones de interfaz</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        @foreach ($frontendIntegrations as $integration)
+                            <div class="rounded border border-gray-200 dark:border-gray-700 p-3">
+                                <h4 class="text-sm font-semibold">{{ $integration['nombre'] }}</h4>
+                                <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ $integration['uso'] }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <h3 class="text-lg font-semibold mb-2">Iconos Font Awesome encontrados</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                        {{ count($fontAwesomeIcons) }} clases o combinaciones encontradas en las vistas Blade.
+                        Las clases sin prefijo de estilo se muestran tal como están escritas en el código.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        @foreach ($fontAwesomeIcons as $icon)
+                            <code class="rounded bg-gray-100 dark:bg-gray-700 px-3 py-2 text-xs">{{ $icon }}</code>
+                        @endforeach
+                    </div>
+                    <h4 class="font-semibold mt-6 mb-2">Iconos y gráficos SVG en línea</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                        No dependen de un plugin de iconos; están dibujados directamente en estas vistas:
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                        @foreach ($inlineSvgViews as $view)
+                            <code class="rounded border border-gray-200 dark:border-gray-700 px-3 py-2 text-xs">{{ $view }}</code>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
             <!-- Statistics -->
             <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-amber-100 dark:bg-amber-900/30 rounded-lg p-4">
@@ -155,8 +332,7 @@
                         </div>
                         <div>
                             <h4 class="text-sm font-medium text-green-900 dark:text-green-100">Componentes Node.js</h4>
-                            <p class="text-2xl font-bold text-green-800 dark:text-green-200">{{ count($nodePackages) }}
-                            </p>
+                            <p class="text-2xl font-bold text-green-800 dark:text-green-200">{{ count($nodePackages) }}</p>
                         </div>
                     </div>
                 </div>
@@ -165,7 +341,7 @@
             <!-- Total -->
             <div class="mt-6 bg-gray-100 dark:bg-gray-700 rounded-lg p-4">
                 <div class="text-center">
-                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Total de Componentes</h4>
+                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Total de paquetes directos</h4>
                     <p class="text-3xl font-bold text-gray-800 dark:text-gray-200">
                         {{ count($composerPackages) + count($nodePackages) }}
                     </p>
@@ -179,14 +355,14 @@
             <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-blue-100 dark:bg-blue-900/30 rounded-lg p-4">
                     <h4 class="text-sm font-medium text-blue-900 dark:text-blue-100 mb-2">Producción</h4>
-                    <p class="text-lg font-bold text-blue-800 dark:text-blue-200">10 Composer + 6 Node.js</p>
+                    <p class="text-lg font-bold text-blue-800 dark:text-blue-200">11 Composer + 6 Node.js</p>
                     <p class="text-xs text-blue-600 dark:text-blue-300 mt-1">Componentes esenciales para el
                         funcionamiento</p>
                 </div>
 
                 <div class="bg-purple-100 dark:bg-purple-900/30 rounded-lg p-4">
                     <h4 class="text-sm font-medium text-purple-900 dark:text-purple-100 mb-2">Desarrollo</h4>
-                    <p class="text-lg font-bold text-purple-800 dark:text-purple-200">9 Composer + 8 Node.js</p>
+                    <p class="text-lg font-bold text-purple-800 dark:text-purple-200">9 Composer + 9 Node.js</p>
                     <p class="text-xs text-purple-600 dark:text-purple-300 mt-1">Herramientas de desarrollo y testing
                     </p>
                 </div>

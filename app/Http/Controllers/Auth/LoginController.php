@@ -13,7 +13,6 @@ class LoginController extends Controller
     /**
      * Handle a login request to the application.
      *
-     * @param  \App\Http\Requests\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function login(LoginRequest $request)
@@ -22,10 +21,10 @@ class LoginController extends Controller
 
         // Buscar usuario por email y RFC
         $user = \App\Models\User::where('email', $credentials['email'])
-                               ->where('rfc', $credentials['rfc'])
-                               ->first();
+            ->where('rfc', $credentials['rfc'])
+            ->first();
 
-        if (!$user) {
+        if (! $user) {
             throw ValidationException::withMessages([
                 'email' => ['Las credenciales proporcionadas no coinciden con nuestros registros.'],
             ]);
@@ -46,7 +45,6 @@ class LoginController extends Controller
     /**
      * Log the user out of the application.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function logout(Request $request)
@@ -56,6 +54,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('welcome');
     }
-} 
+}

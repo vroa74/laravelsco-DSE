@@ -1,41 +1,552 @@
-# sistema de control documental de oficialia de partes
+# SICODOC · Sistema de Control Documental de Oficialía de Partes
 
-## iniciando la contruccion y optimizacion de proyecto
+Aplicación web para la recepción, registro, turnado, resguardo y consulta de documentos oficiales de una Oficialía de Partes. Está construida sobre Laravel + Livewire + Jetstream, con interfaz en español, tema oscuro y soporte para generación de reportes PDF, control de archivos adjuntos y grupos de usuarios para el turnado de documentos.
 
-    creacion de componente livewire
+- **Repositorio:** `laravelsco-DSE`
+- **Dominio de referencia (bitácora heredada):** `sicodoc.melomelon.club`, `vroa.melomelon.club`
+- **Entorno local:** Laragon (`http://laravelsco-dse.test`)
+- **Idioma de la interfaz:** español (`config/app.php` → `locale` por defecto `es`)
 
-    php artisan make:livewire catalogo.nc
-    php artisan make:livewire catalogo.tc
-    php artisan make:livewire catalogo.cc
+---
 
-    php artisan make:livewire reportesgral.index
-    php artisan make:livewire reportesgral.create
-    php artisan make:livewire reportesgral.edit
-    php artisan make:livewire reportesgral.show
+## 1. Estado del proyecto
 
-    php artisan make:livewire usuarios.index
-    php artisan make:livewire usuarios.create
-    php artisan make:livewire usuarios.edit
-    php artisan make:livewire usuarios.show
+| Aspecto | Estado |
+| --- | --- |
+| Autenticación personalizada (email + RFC + contraseña) | Funcional |
+| Registro público de usuarios | Deshabilitado en `config/fortify.php` |
+| Recuperación de contraseña, perfil, 2FA, cierre de sesión | Habilitado (Fortify/Jetstream) |
+| Reportes generales (`/rg`) con Livewire | Funcional |
+| Turnado a usuario o a grupo de usuarios | Funcional (`tur_type`, `tur_group_id`, `tur_nom` heredado) |
+| Catálogos NC / TC / CC y legislaturas | Funcional (Livewire) |
+| Grupos de usuarios y miembros | Funcional |
+| Adjuntos PDF por documento (`cos_files`) | Funcional (15 MB por archivo) |
+| Archivos de reporte con límite de descargas y caducidad (`report_files`) | Modelo y comando listos; controlador sin rutas registradas |
+| Inventario de componentes (`/componentes`) | Funcional |
+| Pruebas automatizadas | Pest; 1 prueba heredada desactualizada (ver §13) |
 
+---
 
-    php artisan make:livewire agen.index
-    php artisan make:livewire agen.create
-    php artisan make:livewire agen.edit
-    php artisan make:livewire agen.show
+## 2. Stack tecnológico
 
-php artisan make:controller AgeController --resourse
-php artisan make:controller UsuarioController --resourse
+Versiones declaradas en `composer.json` y `package.json` (fuente de verdad del proyecto):
 
-@index.blade.php @Index.php necesito generar una migracion en la cual por cada reporte generar puede subir uno o varios archivos pdf con un peso maximo de 10 mb y el archivo solopodra ser descargado 5 veces y su tiempo maximo en el servidor sera de 7 dias naturales, esto es una pregunta no es para hacerlo
+### Backend
 
+| Paquete | Versión | Uso |
+| --- | --- | --- |
+| PHP | `^8.2` | Requisito de plataforma |
+| `laravel/framework` | `^11.31` | Framework base |
+| `laravel/jetstream` | `^5.3` | Autenticación, perfil y stack Livewire |
+| `laravel/fortify` | v1 (transitiva) | Backend de autenticación (`config/fortify.php`) |
+| `laravel/sanctum` | `^4.0` | Tokens de API (`/api/user`) |
+| `livewire/livewire` | `^3.0` | Componentes reactivos del servidor |
+| `wireui/wireui` | `^2.2` | Componentes UI (instalado; sin uso detectado en las vistas) |
+| `barryvdh/laravel-dompdf` | `^3.0` | Generación de reportes PDF |
+| `barryvdh/laravel-snappy` | `^1.0` | PDF alternativo (instalado; sin uso detectado) |
+| `maatwebsite/excel` | `^3.1` | Exportaciones a Excel/CSV |
+| `endroid/qr-code` | `^6.0` | Códigos QR |
+| `laravel-lang/common` | `^6.7` | Traducciones de Laravel |
+| `laravel/tinker` | `^2.10` | REPL de depuración |
 
-comando::
+### Frontend
 
+| Paquete | Versión | Uso |
+| --- | --- | --- |
+| `tailwindcss` | `^3.4.0` | Estilos utilitarios (+ `@tailwindcss/forms`, `@tailwindcss/typography`) |
+| `vite` / `laravel-vite-plugin` | `^6.0` / `^1.0` | Compilación de assets |
+| `alpinejs` | `^3.14.8` | Interacciones del cliente |
+| `flowbite` | `^2.5.2` | Componentes Tailwind + plugin JS (CDN) |
+| `vue` / `@vitejs/plugin-vue` | `^3.5.13` / `^5.2.1` | Instalado; no se importa en `resources/js/app.js` |
+| `axios` | `^1.7.4` | Peticiones HTTP (`resources/js/bootstrap.js`) |
+| `@fontsource/roboto`, `@fontsource/arimo` | `^5.1.1` | Tipografías empaquetadas |
+| `concurrently` | `^9.0.1` | Script `composer run dev` |
+
+### Desarrollo
+
+Pest `^3.7`, PHPUnit (implícito), Pint `^1.13`, Pail `^1.1`, Collision `^8.1`, Sail `^1.26`, Faker, Mockery.
+
+> **Nota de entorno:** el equipo local ejecuta PHP 8.5.11 en Laragon. Esa versión produce avisos de deprecación en Pest/Collision y en `PDO::MYSQL_ATTR_SSL_CA`, que no cambian el resultado de las pruebas.
+
+---
+
+## 3. Requisitos
+
+- PHP 8.2 o superior con extensiones `pdo_mysql`, `mbstring`, `openssl`, `fileinfo`, `zip`, `gd`.
+- Composer 2.
+- Node.js 18+ y npm.
+- MySQL/MariaDB para desarrollo (la base de pruebas es SQLite en memoria).
+- (Opcional) Laragon o cualquier servidor local con virtual host `laravelsco-dse.test`.
+
+---
+
+## 4. Instalación y puesta en marcha
+
+```bash
+# 1. Dependencias
+composer install
+npm install
+
+# 2. Configuración
+copy .env.example .env        # Windows
+php artisan key:generate
+
+# 3. Base de datos de desarrollo (revisar credenciales en .env antes de ejecutar)
+php artisan migrate
+
+# 4. Assets
+npm run build                 # o: npm run dev
+
+# 5. Servidor
+php artisan serve             # o: composer run dev (servidor + queue + vite)
+```
+
+> ⚠️ **Protección de datos:** nunca ejecutes `migrate:fresh`, `migrate:refresh`, `migrate:reset`, `db:wipe` ni `db:seed` sobre datos existentes. `App\Providers\AppServiceProvider` bloquea esos comandos destructivos fuera del entorno de pruebas.
+
+### Comandos habituales
+
+| Comando | Descripción |
+| --- | --- |
+| `php artisan serve` | Servidor de desarrollo |
+| `npm run dev` / `npm run build` | Vite en caliente / compilación de producción |
+| `composer run dev` | Servidor + cola + Vite con `concurrently` |
+| `php artisan test --compact` | Suite Pest completa |
+| `php artisan test --compact --filter=nombre` | Prueba específica |
+| `vendor/bin/pint --dirty --format agent` | Formateo de archivos PHP modificados |
+| `php artisan reports:clean-expired [--force]` | Elimina archivos de reporte expirados (7 días) |
+| `php artisan optimize:clear` | Limpia cachés (solo si es necesario) |
+
+### Despliegue (bitácora heredada)
+
+```bash
 cd /var/www/vhosts/melomelon.club/vroa.melomelon.club && npm run build
 cd /var/www/vhosts/melomelon.club/sicodoc.melomelon.club && npm run build
- sicodoc.melomelon.club
+```
 
+Tras compilar, limpiar cachés de configuración/vistas en el servidor. Si un cambio de frontend no se refleja, ejecutar `npm run build` (o `npm run dev` en local).
 
+---
 
- lo abri con un navegador que no avia abierto en proyecto antes y no se ve observa la imagen el codigo del origen de la imagen no esta unificado nuevamente quien sae donde carajo esta mandando a llamar la imagen
+## 5. Estructura del proyecto
+
+```text
+app/
+├── Actions/
+│   ├── Fortify/                 CreateNewUser, PasswordValidationRules,
+│   │                            ResetUserPassword, UpdateUserPassword,
+│   │                            UpdateUserProfileInformation
+│   └── Jetstream/               DeleteUser
+├── Console/Commands/            CleanExpiredReportFiles (reports:clean-expired)
+├── Helpers/                     AvatarHelper (autoload vía composer.json "files")
+├── Http/
+│   ├── Controllers/             AgeController, ReportsController, RgController,
+│   │                            UsuarioController, UserGroupController,
+│   │                            ReportFileController
+│   ├── Controllers/Auth/        LoginController (login/logout personalizados)
+│   └── Requests/                LoginRequest
+├── Livewire/                    Componentes por dominio (ver §6)
+├── Models/                      User, Co, Cos, CosFile, ReportFile, Age,
+│                                Bitacora, UserGroup, UserGroupMember,
+│                                Ccor, Ncor, Tcor, Legislatura
+├── Providers/                   App, Fortify, Jetstream, Route
+├── Traits/                      HandlesFileUploads
+└── View/Components/             AppLayout, GuestLayout
+
+config/                          app, auth, database, fortify, jetstream, sanctum, ...
+database/
+├── factories/                   UserFactory
+├── migrations/                  22 migraciones (ver §9)
+└── seeders/                     DatabaseSeeder, CosSeeder, UserGroupSeeder
+
+public/media/img/                Logotipos, favicon y fondos
+resources/
+├── css/app.css                  Tailwind + estilos base
+├── js/                          app.js, bootstrap.js
+└── views/                       Blade (auth, ofi, rg, age, catalogos, componentes,
+                                 components, layouts, livewire, profile, reports,
+                                 user-groups, usuarios, api, emails, errors)
+routes/
+├── web.php                      50 rutas de la aplicación
+└── api.php                      /api/user (Sanctum)
+
+tests/
+├── Feature/                     Pruebas de características (Pest)
+├── Unit/                        Ejemplo unitario
+├── Pest.php                     Configuración de Pest + RefreshDatabase
+└── TestCase.php                 Guardia de SQLite en memoria
+```
+
+---
+
+## 6. Módulos funcionales
+
+### 6.1 Autenticación personalizada
+
+- **Inicio de sesión** (`GET /login` → `auth.login`, `POST /login` → `login.post`):
+  - Credenciales: **email + RFC + contraseña**.
+  - `App\Http\Requests\LoginRequest` valida `email`, `rfc` (`3-4 letras + 6 dígitos`, máx. 13) y `password`, con mensajes en español.
+  - `Auth\LoginController@login` localiza al usuario por `email` y `rfc`, autentica con `Auth::attempt()` y regenera la sesión; redirige a `config('fortify.home')` (`/dashboard`).
+  - Los campos RFC y contraseña incluyen botón de mostrar/ocultar con SVG en línea.
+  - La vista de login cierra la sesión automáticamente tras **60 segundos de inactividad** (script propio).
+- **Cierre de sesión:** `POST /logout` (`Auth\LoginController@logout`) invalida la sesión y redirige a la página pública `welcome`. `GET /logout` también redirige a `welcome` para evitar errores al recargar o usar el botón "atrás".
+- **Registro deshabilitado** (`Features::registration()` comentado en `config/fortify.php`).
+- **Funciones activas:** recuperación de contraseña, actualización de perfil, cambio de contraseña y autenticación de dos factores.
+- **Jetstream:** stack `livewire`, foto de perfil y eliminación de cuenta activas; equipos y API desactivados en `config/jetstream.php`.
+
+### 6.2 Reportes generales y Oficialía de Partes (`/rg`)
+
+- Recurso `RgController` (solo `index`, `create`, `show`, `edit`, `destroy`; las altas y cambios se resuelven con Livewire).
+- Componentes: `App\Livewire\Reportesgral\{Index, Create, Edit, Show}`.
+- Vistas: `resources/views/rg/{index,rg,create,edit,show,add}.blade.php`.
+- **Turnado:** el documento puede turnarse a un usuario (`tur_type = user`, campos `tur_nom`, `tur_cargo`, `tur_deporg`) o a un grupo (`tur_type = group`, `tur_group_id`). `Co::getTurNameAttribute()` resuelve el nombre mostrado y `Co::turGroup()` expone la relación. Los campos añadidos son `nullable` para conservar el histórico.
+- **Reportes PDF** (`ReportsController`, DomPDF):
+  - `GET /reporte-normal/{id}/{tipoReporte}` → `reports.reportn` (`reporteNormal`).
+  - `GET /reporte-especial/{id}/{tipoReporte}` → `reports.reporte` (`reporteEspecial`).
+  - `GET /reporte-solicitud/{id}/{tipoReporte}` → `reports.reports` (`reporteSolicitud`).
+- **Bitácora:** modelo `Bitacora` sobre la tabla `bitacoras` para el seguimiento de movimientos.
+
+### 6.3 Usuarios y AGE
+
+- `UsuarioController` (resource `usuario`, sin `store`/`update`) y `AgeController` (resource `agen`) para consulta y edición asistidas por Livewire.
+- Componentes: `App\Livewire\Usuarios\{Index, Create, Edit, Show}` y `App\Livewire\People` (vista `/usuarios` → `age.people`).
+- Campos de usuario: `name`, `email`, `rfc`, `curp`, `direction`, `position`, `sex`, `lvl`, `tipo`, `status`, `password`, `profile_photo_path`.
+- Relaciones: grupos del usuario (`groups`), grupos creados (`createdGroups`), documentos turnados (`cosTurnado`), creados (`cosCreados`) y modificados (`cosModificados`).
+
+### 6.4 Catálogos
+
+- Ruta `/catalogos` (`catalogos`) con componentes `App\Livewire\Catalogo\{Nc, Tc, Cc}`.
+- Modelos y tablas: `Ncor` → `ncors`, `Tcor` → `tcors`, `Ccor` → `ccors` y `Legislatura` → `legislaturas`.
+- También existen componentes raíz `App\Livewire\{Nc, Tc, Cc, Leg}` con sus vistas en `resources/views/livewire/`.
+
+### 6.5 Grupos de usuarios y turnado
+
+- `UserGroupController` (resource `user-groups`) + `App\Livewire\UserGroups\Index`.
+- Rutas adicionales:
+  - `POST /user-groups/{userGroup}/add-member` → `user-groups.add-member`
+  - `DELETE /user-groups/{userGroup}/remove-member` → `user-groups.remove-member`
+  - `GET /user-groups/{userGroup}/available-users` → `user-groups.available-users`
+- `UserGroup`: nombre, descripción, estado activo, creador, miembros (`members`), conteos y estadísticas de archivos, `hasMember()`, `addMember()`, `removeMember()`.
+- `UserGroupMember` mantiene la pertenencia con `added_by` y unicidad por usuario/grupo.
+- La jerarquía de grupos se agregó y se retiró en migraciones posteriores (`add_hierarchy_to_user_groups_table`, `remove_hierarchy_from_user_groups_table`).
+- Vistas: `resources/views/user-groups/{index,create,edit,show}.blade.php`.
+
+### 6.6 Archivos adjuntos (dos esquemas)
+
+**a) Archivos de documento (`cos_files`)**
+
+- Trait `App\Traits\HandlesFileUploads`: `files`, `fileDescriptions`, `maxFileSize` = 15 MB (`15728640` bytes), tipos permitidos `pdf`.
+- Guarda en el disco `public` bajo `cos-files/`, con nombre único `time()_uniqid().pdf`.
+- `CosFile` expone `url`, tamaño formateado, `exists()`, `deleteFile()` y los scopes `pdf` y `maxSize`.
+- Relación `Co::files()`.
+
+**b) Archivos de reporte (`report_files`)**
+
+- Modelo `ReportFile`: `report_id`, `report_type`, `original_name`, `file_path`, `file_name`, `mime_type`, `file_size`, `download_count`, `max_downloads` (5 por defecto), `expires_at`.
+- Reglas de negocio: **máximo 10 MB por PDF** (`ReportFileController::upload` → `max:10240`), **5 descargas** y **7 días naturales** de vida; `canBeDownloaded()`, `incrementDownloadCount()`, `isExpired()`, `hasReachedDownloadLimit()`, `getDaysUntilExpiration()`, scopes `expired` y `downloadable`.
+- `ReportFileController` implementa `upload`, `download`, `list`, `delete` y `stats` (responde 410 cuando el archivo caducó o agotó sus descargas).
+- Comando programable `php artisan reports:clean-expired` (con `--force`) para eliminar registros y archivos físicos expirados.
+- ⚠️ Actualmente **no hay rutas registradas** para `ReportFileController`; la funcionalidad queda disponible solo a nivel de modelo y comando.
+
+### 6.7 Inventario de componentes (`/componentes`)
+
+Vista `resources/views/componentes/index.blade.php`, accesible con sesión iniciada. Documenta:
+
+- Paquetes directos de Composer y Node.js (contadores: 11 + 6 en producción, 9 + 9 en desarrollo).
+- Componentes Blade propios y de Jetstream.
+- Clases Livewire del proyecto.
+- Plugins e integraciones de interfaz (Alpine, Axios, Flowbite, Font Awesome, SweetAlert2, Tailwind, Vite, Vue, Roboto, Arimo, Figtree).
+- Iconos Font Awesome utilizados y vistas con SVG en línea.
+
+Debe mantenerse sincronizada con `composer.json`, `package.json`, `resources/views/components`, `app/Livewire` y los iconos de las vistas.
+
+### 6.8 Vistas de apoyo
+
+- `resources/views/ofi/of1..of10`: plantillas de oficios usadas como referencia de maquetación.
+- `/temp` (`temp`) y `App\Livewire\Temp`: espacio de pruebas.
+- `welcome`: página pública con la descripción de la Oficialía de Partes y acceso al inicio de sesión.
+
+---
+
+## 7. Rutas principales
+
+`php artisan route:list --except-vendor` reporta 50 rutas. Todas usan nombres y se referencian con `route()`.
+
+### Rutas públicas
+
+| Método | URI | Nombre | Acción |
+| --- | --- | --- | --- |
+| GET | `/` | `welcome` | Vista `welcome` |
+| GET | `/login` | `login` | Vista `auth.login` (middleware `guest`) |
+| POST | `/login` | `login.post` | `Auth\LoginController@login` |
+| POST | `/logout` | `logout` | `Auth\LoginController@logout` |
+| GET | `/logout` | — | Redirección a `welcome` |
+| GET | `/of1` … `/of10` | `of1` … `of10` | Plantillas `ofi.ofN` |
+
+### Rutas autenticadas (`auth:sanctum`, `jetstream.auth_session`, `verified`)
+
+| Método | URI | Nombre | Acción |
+| --- | --- | --- | --- |
+| GET | `/dashboard` | `dashboard` | Vista `dashboard` |
+| GET | `/catalogos` | `catalogos` | Vista `catalogos.catalogos` |
+| GET | `/componentes` | `componentes` | Vista `componentes.index` |
+| GET | `/usuarios` | `usuarios` | Vista `age.people` |
+| GET | `/temp` | `temp` | Vista `temp` |
+| GET/POST/PUT/DELETE | `/user-groups...` | `user-groups.*` | `UserGroupController` |
+| POST | `/user-groups/{userGroup}/add-member` | `user-groups.add-member` | `UserGroupController@addMember` |
+| DELETE | `/user-groups/{userGroup}/remove-member` | `user-groups.remove-member` | `UserGroupController@removeMember` |
+| GET | `/user-groups/{userGroup}/available-users` | `user-groups.available-users` | `UserGroupController@getAvailableUsers` |
+| GET/POST/PUT/DELETE | `/rg...` | `rg.*` | `RgController` (sin `store`/`update`) |
+| GET/POST/PUT/DELETE | `/agen...` | `agen.*` | `AgeController` (sin `store`/`update`) |
+| GET/POST/PUT/DELETE | `/usuario...` | `usuario.*` | `UsuarioController` (sin `store`/`update`) |
+| GET | `/reportesgral` | `reportgral` | Vista `rg.rg` |
+| GET | `/reporte-normal/{id}/{tipoReporte}` | `reporteNormal` | PDF `reports.reportn` |
+| GET | `/reporte-especial/{id}/{tipoReporte}` | `reporteEspecial` | PDF `reports.reporte` |
+| GET | `/reporte-solicitud/{id}/{tipoReporte}` | `reporteSolicitud` | PDF `reports.reports` |
+
+### API
+
+| Método | URI | Middleware | Acción |
+| --- | --- | --- | --- |
+| GET | `/api/user` | `auth:sanctum` | Devuelve el usuario autenticado |
+
+---
+
+## 8. Modelos y base de datos
+
+| Modelo | Tabla | Notas |
+| --- | --- | --- |
+| `User` | `users` | `HasApiTokens`, `HasProfilePhoto`, `TwoFactorAuthenticatable`, `Notifiable`; contraseña con cast `hashed` |
+| `Co` | `cos` | Modelo principal de documentos; `legislaturaRel`, `remitente`, `turGroup`, `files`, `getTurNameAttribute`, `isTurnadoToGroup`, `isTurnadoToUser` |
+| `Cos` | `cos` | Modelo heredado sobre la misma tabla; conserva `remitente`, `creador`, `modificador` |
+| `CosFile` | `cos_files` | Adjuntos PDF de un documento |
+| `ReportFile` | `report_files` | Archivos PDF con límite de descargas y caducidad |
+| `Age` | `ages` | Registros de la Dirección/AGE |
+| `Bitacora` | `bitacoras` | Bitácora de movimientos |
+| `Ccor` | `ccors` | Catálogo CC |
+| `Ncor` | `ncors` | Catálogo NC |
+| `Tcor` | `tcors` | Catálogo TC |
+| `Legislatura` | `legislaturas` | Catálogo de legislaturas |
+| `UserGroup` | `user_groups` | Grupos de turnado |
+| `UserGroupMember` | `user_group_members` | Pertenencia a grupos (`added_by`) |
+
+### Campos heredados que **no deben renombrarse**
+
+`id_s`, `F_serv`, `fcap`, `frec`, `ncor`, `tcor`, `ccor`, `fofi`, `nofi`, `nhoj`, `rem_*`, `tur_*`, `creo`, `modifico`, `reporte`, `estatus`, `des`, `seguimiento`. Se conservan para mantener compatibilidad con el histórico y los reportes existentes.
+
+### Tabla `cos` (documento)
+
+- Identificación: `legislatura`, `legislatura_id`, `ncor`, `tcor`, `ccor`, `nofi`, `nhoj`.
+- Fechas: `fcap` (captura), `frec` (recepción), `fofi` (oficio).
+- Remitente: `rem_nombre`, `rem_cargo`, `rem_deporg`, `rem_dir`, `rem_id` (FK `users`).
+- Turnado: `tur_nom`, `tur_cargo`, `tur_deporg`, `tur_group_id` (FK `user_groups`), `tur_type` (`user`/`group`).
+- Contenido: `des`, `seguimiento`, `reporte`, `estatus`.
+- Auditoría: `creo`, `modifico`, `created_at`, `updated_at`.
+
+---
+
+## 9. Migraciones (22)
+
+```text
+0001_01_01_000000_create_users_table
+0001_01_01_000001_create_cache_table
+0001_01_01_000002_create_jobs_table
+2025_01_07_035343_add_two_factor_columns_to_users_table
+2025_01_07_035417_create_personal_access_tokens_table
+2025_01_07_162123_create_cos_table
+2025_01_07_162124_create_ages_table
+2025_01_07_162124_create_ncors_table
+2025_01_07_162125_create_ccors_table
+2025_01_07_162125_create_tcors_table
+2025_01_07_162158_create_legislaturas_table
+2025_01_28_182914_create_bitacoras_table
+2025_01_30_000000_create_report_files_table
+2025_01_31_000001_create_user_groups_table
+2025_01_31_000002_create_user_group_members_table
+2025_01_31_000003_add_group_turnado_to_cos_table
+2025_01_31_000004_add_hierarchy_to_user_groups_table
+2025_01_31_000005_add_unique_user_group_membership
+2025_01_31_000006_remove_hierarchy_from_user_groups_table
+2025_06_15_043921_create_cos_files_table
+2025_10_15_194355_fix_cos_foreign_keys
+2026_10_17_210000_add_legislatura_id_to_cos_table
+```
+
+Las migraciones de turnado y archivos usan columnas `nullable` para no romper registros anteriores. Las migraciones automáticas generadas por herramientas se eliminaron en el commit `up000038`.
+
+---
+
+## 10. Interfaz, layouts y componentes
+
+### Layouts
+
+| Vista | Uso |
+| --- | --- |
+| `layouts.app` | Layout autenticado: navbar fija (`@livewire('navigation-menu')`), encabezado opcional, `x-banner`, SweetAlert2 y Flowbite por CDN, Font Awesome 6.0, Roboto |
+| `layouts.guest` | Layout público: tema oscuro, Figtree (Bunny Fonts), Font Awesome 6.0 y SweetAlert2 por CDN |
+| `layouts.free` | Layout libre para pantallas sin navegación |
+| `layouts.navbar` / `layouts._navbar` | Navegación de la página pública y variantes |
+| `layouts.footer` | Pie de página |
+
+Convenciones visuales: Tailwind CSS, tema oscuro (`<html class="dark">`), contenedores `bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg`, badges `inline-flex ... rounded-full text-xs`, botones Jetstream (`<x-button>`, `<x-secondary-button>`, `<x-danger-button>`).
+
+### Componentes Blade (30 registrados en el inventario)
+
+`x-action-message`, `x-action-section`, `x-app-layout`, `x-application-logo`, `x-application-mark`, `x-authentication-card`, `x-authentication-card-logo`, `x-banner`, `x-button`, `x-checkbox`, `x-confirmation-modal`, `x-confirms-password`, `x-danger-button`, `x-dialog-modal`, `x-dropdown`, `x-dropdown-link`, `x-form-section`, `x-guest-layout`, `x-input`, `x-input-error`, `x-label`, `x-modal`, `x-nav-link`, `x-responsive-nav-link`, `x-secondary-button`, `x-section-border`, `x-section-title`, `x-switchable-team`, `x-validation-errors`, `x-welcome`.
+
+Además existe `resources/views/components/nav.php` (componente `x-nav`) y dos componentes de clase en `app/View/Components` (`AppLayout`, `GuestLayout`).
+
+### Componentes Livewire (21)
+
+```text
+App\Livewire\Cc                          App\Livewire\Reportesgral\Create
+App\Livewire\Catalogo\Cc                 App\Livewire\Reportesgral\Edit
+App\Livewire\Catalogo\Nc                 App\Livewire\Reportesgral\Index
+App\Livewire\Catalogo\Tc                 App\Livewire\Reportesgral\Show
+App\Livewire\FileManager                 App\Livewire\Tc
+App\Livewire\Leg                         App\Livewire\Temp
+App\Livewire\NavigationMenu              App\Livewire\UserGroups\Index
+App\Livewire\Nc                          App\Livewire\Usuarios\Create
+App\Livewire\People                      App\Livewire\Usuarios\Edit
+App\Livewire\Profile\UpdateProfileInformationForm
+                                         App\Livewire\Usuarios\Index
+                                         App\Livewire\Usuarios\Show
+```
+
+### Reglas de interfaz del proyecto
+
+- Todo texto visible debe estar en **español** (aún quedan cadenas de Jetstream en inglés).
+- Tailwind CSS es la primera opción de estilo; no crear variantes visuales nuevas sin reutilizar patrones.
+- Campos de contraseña: mostrar/ocultar con icono de ojo SVG, `text-gray-400 hover:text-gray-600`, alineado a la derecha. La regla de `AGENTS.md` indica usar `<x-password-toggle-button />`; ese componente **todavía no existe** en el proyecto (ver §12).
+- Mensajes de sesión con claves `message` y `error`, textos claros en español.
+
+---
+
+## 11. Pruebas automatizadas
+
+- Framework: **Pest 3** sobre PHPUnit, con `tests/Pest.php` aplicando `Tests\TestCase` y `RefreshDatabase` a `Feature`.
+- **Base de datos de pruebas:** `phpunit.xml` fuerza `DB_CONNECTION=sqlite`, `DB_DATABASE=:memory:` y `DB_URL=""` (vacío) con `force="true"`.
+- **Guardia adicional:** `tests/TestCase.php` aborta con `RuntimeException` si la conexión por defecto no es SQLite en memoria.
+- **Bloqueo de comandos destructivos:** `AppServiceProvider::boot()` ejecuta `DB::prohibitDestructiveCommands(! $this->app->runningUnitTests())`.
+- Nunca deben ejecutarse pruebas contra MySQL real ni debilitar estas protecciones.
+
+### Comandos
+
+```bash
+php artisan test --compact
+php artisan test --compact --filter=logout
+php artisan test --compact tests/Feature/LogoutTest.php
+vendor/bin/pint --dirty --format agent
+```
+
+### Pruebas del proyecto
+
+| Archivo | Cobertura | Estado |
+| --- | --- | --- |
+| `tests/Feature/LogoutTest.php` | Logout POST redirige a `welcome`, `welcome` carga sin sesión, `/logout` por GET redirige a `welcome` | ✅ 3 pruebas |
+| `tests/Feature/ComponentesTest.php` | `/componentes` lista componentes Blade, Livewire, integraciones e iconos | ✅ 1 prueba |
+| `tests/Feature/AuthenticationTest.php` | Login de Jetstream (sin RFC) | ❌ 1 fallo: el test no envía `rfc` y el login personalizado lo exige |
+| Suite Jetstream (`ProfileInformationTest`, `UpdatePasswordTest`, `TwoFactorAuthenticationTest`, `PasswordResetTest`, `BrowserSessionsTest`, `ApiTokenPermissionsTest`, `CreateApiTokenTest`, `DeleteApiTokenTest`, `DeleteAccountTest`, `EmailVerificationTest`, `PasswordConfirmationTest`, `RegistrationTest`) | Funciones de Jetstream/Fortify | ✅ ejecutan con avisos de deprecación |
+
+**Último resultado (entorno local, PHP 8.5.11):** `36 pruebas`, `53 aserciones`, `35 con avisos de deprecación`, `1 fallo` (el descrito arriba).
+
+---
+
+## 12. Análisis frente a `AGENTS.md`
+
+`AGENTS.md` (reglas de Laravel Boost) es la guía operativa del proyecto. Este es el contraste con el estado real del código:
+
+### Lo que se cumple
+
+- Interfaz en español en las vistas trabajadas y mensajes de validación personalizados.
+- Rutas con nombre y uso de `route()` en enlaces y redirecciones (`welcome`, `logout`, `login.post`, `componentes`).
+- Controladores en `App\Http\Controllers` con sufijo `Controller`.
+- Livewire organizado por dominio (`Catalogo`, `Reportesgral`, `Usuarios`, `UserGroups`, `Profile`).
+- Nombres de columnas heredados respetados (`id_s`, `F_serv`, `rem_*`, `tur_*`, `ncor`, `tcor`, `ccor`, etc.).
+- Tailwind CSS como base de estilos y reutilización de componentes `x-*` de Jetstream.
+- Protección de la base de datos: `phpunit.xml` fuerza SQLite `:memory:`, `tests/TestCase.php` aborta si no lo es y `AppServiceProvider` bloquea comandos destructivos.
+- Inventario de componentes actualizado en `resources/views/componentes/index.blade.php` junto con las dependencias.
+- Formateo con Laravel Pint disponible (`vendor/bin/pint --dirty --format agent`).
+
+### Discrepancias y brechas detectadas
+
+| # | Regla en `AGENTS.md` | Estado real |
+| --- | --- | --- |
+| 1 | PHP 8.3, Laravel 13, Pest 4, Livewire 3, Sanctum 4, Pint 1, Pail 1, Tailwind 3 | `composer.json` declara PHP `^8.2`, Laravel `^11.31`, Pest `^3.7`; Livewire, Sanctum, Pint y Pail coinciden en la rama declarada |
+| 2 | Paquetes `laravel/boost`, `laravel/mcp`, `laravel/prompts` | No figuran en `composer.json`; las herramientas MCP de Boost (`search-docs`, `database-query`, `database-schema`, `browser-logs`) no están disponibles en este entorno |
+| 3 | Pruebas en la carpeta `/pruebas` | El proyecto usa `tests/` con la estructura estándar de Laravel; no existe `/pruebas` |
+| 4 | Habilidades en `**/skills/**` | Están en `.agents/skills/`; `.agents/` no figura en `.gitignore` y suma 1 929 archivos / 39.6 MB (incluye `.agents/skill-backups/`), por lo que hoy queda fuera del commit |
+| 5 | Usar `<x-password-toggle-button />` en campos de contraseña | El componente no existe; `auth/login.blade.php` implementa el toggle con SVG y JavaScript propios, y otras vistas no lo tienen |
+| 6 | Todo texto visible en español | Persisten cadenas de Jetstream en inglés (`Email`, `Password`, `Log in`, `Remember me`, `Email Password Reset Link`) |
+| 7 | Inventario de componentes sincronizado | Falta registrar el componente propio `x-nav` (`resources/views/components/nav.php`) |
+| 8 | Documentación solo si se solicita | `README.md` se reescribe por solicitud explícita en este cambio |
+
+> Recomendación: alinear `AGENTS.md` con las versiones reales o planificar la actualización de dependencias como tarea independiente y con aprobación, ya que cambiar de Laravel 11 a 13 y de Pest 3 a 4 afecta migraciones, pruebas y paquetes.
+
+---
+
+## 13. Observaciones y deuda técnica
+
+Detectadas al revisar el proyecto y el diff del último commit. **No se corrigieron** porque el alcance solicitado era revisar, documentar y registrar el commit.
+
+1. **`AuthenticationTest` desactualizado:** envía solo `email` y `password`, pero `LoginRequest` exige `rfc`. Es el único fallo de la suite (preexistente). Se debe actualizar la prueba (y no eliminarla) agregando un RFC válido al usuario de fábrica.
+2. **`ReportFileController` sin rutas:** `upload`, `download`, `list`, `delete` y `stats` no están expuestos en `routes/web.php`; la funcionalidad de 10 MB / 5 descargas / 7 días existe pero no es accesible desde la interfaz.
+3. **Modelos duplicados:** `Co` y `Cos` apuntan a la misma tabla `cos`. Conviene dejar un solo modelo canónico y conservar el otro como alias deprecado.
+4. **`UserFactory` referencia `App\Models\Team`**, clase que no existe. Solo falla si se usa `withPersonalTeam()` o se habilitan equipos de Jetstream. No se ejecuta en las pruebas actuales.
+5. **`resources/views/welcome.blade.php`**: contiene el texto suelto `++++++` (línea 29) y el `<title>` fijo `Laravel` en lugar de `config('app.name')`.
+6. **Vista huérfana:** `resources/views/livewire/rg/index.blade.php` no tiene clase `App\Livewire\Rg\Index` asociada.
+7. **Copias de vistas:** `resources/views/ofi/of1.blade - copia.php` y `of2.blade - copia*.php` deberían retirarse del proyecto.
+8. **Descarga de adjuntos:** `CosFile::exists()` y `deleteFile()` usan el disco por defecto (`local`), mientras `HandlesFileUploads` guarda en el disco `public` con `storeAs(..., 'public')`. Revisar para evitar descargas fallidas.
+9. **Dos límites distintos de tamaño:** `cos_files` permite 15 MB y `report_files` 10 MB. Confirmar con negocio cuál aplica a cada flujo.
+10. **Inactividad de 60 segundos** en el login: redirige a `/` sin cerrar sesión formalmente; puede ser agresivo para el usuario.
+11. **`config/app.php`** usa `locale = es`, pero `.env.example` declara `APP_LOCALE=en`; un `.env` nuevo arrancaría en inglés.
+12. **PHP 8.5 local** emite deprecaciones de Pest, Collision y `PDO::MYSQL_ATTR_SSL_CA`; conviene fijar la versión de PHP del servidor (8.2/8.3) para evitar ruido.
+13. **Rutas de imágenes públicas:** `welcome` usa `media/img/background.png` y `media/img/logos.png`, `layouts.app` usa `media/img/favicon.png` y `layouts.navbar` usa `media/img/ple_legis_65.png`. Las cuatro existen en `public/media/img`; el fallo de imágenes en despliegues proviene de no publicar esa carpeta.
+14. **`AppServiceProvider`** ahora bloquea comandos destructivos; documentar que `migrate:fresh`, `migrate:refresh`, `migrate:reset` y `db:wipe` fallarán fuera de las pruebas.
+15. **`.agents/` fuera del control de versiones:** contiene 1 929 archivos (39.6 MB) entre `skills/` y `skill-backups/`; falta decidir si se versiona `skills/` e ignora `skill-backups/`.
+
+---
+
+## 14. Bitácora heredada del README anterior
+
+El README original (`zREADME.md`) mantenía una bitácora de trabajo que se conserva como referencia histórica:
+
+- Creación de componentes Livewire: `catalogo.nc`, `catalogo.tc`, `catalogo.cc`, `reportesgral.index`, `reportesgral.create`, `reportesgral.edit`, `reportesgral.show`.
+- Creación de controladores con `php artisan make:controller ... --resourse` (incluida la errata `--resourse`).
+- Definición del requisito de archivos de reporte: **PDF de máximo 10 MB, 5 descargas y caducidad de 7 días**, implementado en `ReportFile` y `reports:clean-expired`.
+- Nota sobre la imagen de la aplicación no unificada entre vistas.
+- Secuencia sugerida de despliegue: `composer install`, `npm install`, `npm run build`, `php artisan migrate --force`, `php artisan config:cache`, `php artisan route:cache`, `php artisan view:cache`.
+
+---
+
+## 15. Convención de commits y registro de este cambio
+
+### Convención
+
+- Los commits usan la secuencia `upNNNNNN` (por ejemplo `up000037`, `up000038`, `up000039`), con mensaje corto y una descripción de los cambios incluidos.
+- Las migraciones generadas automáticamente por herramientas no se conservan (se retiraron en `up000038`).
+- Los cambios se documentan también en el inventario `/componentes` cuando afectan dependencias, componentes o iconos.
+
+### Cambios incluidos en este commit
+
+| Archivo | Cambio |
+| --- | --- |
+| `README.md` | Reescritura completa: estado, stack, requisitos, instalación, estructura, módulos, rutas, modelos, migraciones, interfaz, pruebas, análisis de `AGENTS.md`, deuda técnica y convenciones |
+| `resources/views/componentes/index.blade.php` | Inventario ampliado: 30 componentes Blade con descripción, 21 clases Livewire, integraciones de frontend, iconos Font Awesome y SVG en línea; contadores corregidos (11 + 6 producción, 9 + 9 desarrollo) y título «Total de paquetes directos» |
+| `app/Http/Controllers/Auth/LoginController.php` | El cierre de sesión redirige con `route('welcome')` en lugar de `redirect('/')` |
+| `routes/web.php` | Nueva ruta `GET /logout` que redirige a `welcome` para enlaces directos, recargas y botón «atrás»; Pint normalizó clausuras multilínea y orden de `use` |
+| `resources/views/auth/login.blade.php` | Botón «Inicio» con icono `fa-igloo` para volver a la página pública |
+| `resources/views/auth/forgot-password.blade.php` | Botón «Inicio» con icono `fa-house` para volver a la página pública |
+| `resources/views/layouts/guest.blade.php` | Font Awesome 6.0 por CDN para las pantallas de autenticación |
+| `phpunit.xml` | Fuerza `DB_CONNECTION=sqlite`, `DB_DATABASE=:memory:` y `DB_URL=""` con `force="true"` |
+| `tests/TestCase.php` | Guardia que aborta la ejecución si la conexión no es SQLite en memoria |
+| `app/Providers/AppServiceProvider.php` | `DB::prohibitDestructiveCommands()` fuera del entorno de pruebas |
+| `tests/Feature/LogoutTest.php` *(nuevo)* | 3 pruebas del cierre de sesión y de la página pública |
+| `tests/Feature/ComponentesTest.php` *(nuevo)* | Prueba del inventario de componentes |
+| `AGENTS.md` *(nuevo)* | Reglas operativas del proyecto |
+
+### Pendientes fuera de este commit
+
+- `.agents/` (habilidades y respaldos, 39.6 MB) y `zREADME.md` (bitácora anterior) quedan sin versionar a la espera de decisión.
+- `AuthenticationTest` debe actualizarse con `rfc` para volver a verde.
+- Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
+
