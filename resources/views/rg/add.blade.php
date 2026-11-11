@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-md text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-base text-gray-800 dark:text-gray-200 leading-tight sm:text-lg">
             Agregar Nuevo Registro
         </h2>
     </x-slot>
@@ -66,15 +66,11 @@
                         </div>
                     </div>
 
-                    <div class="mt-6 flex justify-end space-x-3">
-                        <a href="{{ route('rg.index') }}" 
-                           class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                            Cancelar
-                        </a>
-                        <button type="submit" 
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Guardar Registro
-                        </button>
+                    <div class="mt-6 flex items-center justify-end gap-2">
+                        <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cancelar" size="md"
+                            :href="route('rg.index')" />
+                        <x-icon-action variant="success" icon="fa-solid fa-floppy-disk" label="Guardar registro"
+                            size="md" type="submit" />
                     </div>
                 </form>
             </div>

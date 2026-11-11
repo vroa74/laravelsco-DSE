@@ -39,9 +39,7 @@
                 {{ __('Created.') }}
             </x-action-message>
 
-            <x-button>
-                {{ __('Create') }}
-            </x-button>
+            <x-icon-action variant="success" icon="fa-solid fa-plus" label="{{ __('Create') }}" size="md"  />
         </x-slot>
     </x-form-section>
 
@@ -76,14 +74,12 @@
                                     @endif
 
                                     @if (Laravel\Jetstream\Jetstream::hasPermissions())
-                                        <button class="cursor-pointer ms-6 text-sm text-gray-400 underline" wire:click="manageApiTokenPermissions({{ $token->id }})">
-                                            {{ __('Permissions') }}
-                                        </button>
+                                        <x-icon-action variant="info" icon="fa-solid fa-key"
+                                            label="{{ __('Permissions') }}" wire:click="manageApiTokenPermissions({{ $token->id }})" />
                                     @endif
 
-                                    <button class="cursor-pointer ms-6 text-sm text-red-500" wire:click="confirmApiTokenDeletion({{ $token->id }})">
-                                        {{ __('Delete') }}
-                                    </button>
+                                    <x-icon-action variant="danger" icon="fa-solid fa-trash" label="{{ __('Delete') }}"
+                                        wire:click="confirmApiTokenDeletion({{ $token->id }})" />
                                 </div>
                             </div>
                         @endforeach
@@ -112,9 +108,7 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-secondary-button wire:click="$set('displayingToken', false)" wire:loading.attr="disabled">
-                {{ __('Close') }}
-            </x-secondary-button>
+            <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="{{ __('Close') }}" size="md" wire:click="$set('displayingToken', false)" wire:loading.attr="disabled" />
         </x-slot>
     </x-dialog-modal>
 
@@ -136,13 +130,9 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-secondary-button wire:click="$set('managingApiTokenPermissions', false)" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
-            </x-secondary-button>
+            <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="{{ __('Cancel') }}" size="md" wire:click="$set('managingApiTokenPermissions', false)" wire:loading.attr="disabled" />
 
-            <x-button class="ms-3" wire:click="updateApiToken" wire:loading.attr="disabled">
-                {{ __('Save') }}
-            </x-button>
+            <x-icon-action variant="success" icon="fa-solid fa-floppy-disk" label="{{ __('Save') }}" size="md" class="ms-3" wire:click="updateApiToken" wire:loading.attr="disabled" />
         </x-slot>
     </x-dialog-modal>
 
@@ -157,13 +147,9 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-secondary-button wire:click="$toggle('confirmingApiTokenDeletion')" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
-            </x-secondary-button>
+            <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="{{ __('Cancel') }}" size="md" wire:click="$toggle('confirmingApiTokenDeletion')" wire:loading.attr="disabled" />
 
-            <x-danger-button class="ms-3" wire:click="deleteApiToken" wire:loading.attr="disabled">
-                {{ __('Delete') }}
-            </x-danger-button>
+            <x-icon-action variant="danger" icon="fa-solid fa-trash" label="{{ __('Delete') }}" size="md" class="ms-3" wire:click="deleteApiToken" wire:loading.attr="disabled" />
         </x-slot>
     </x-confirmation-modal>
 </div>

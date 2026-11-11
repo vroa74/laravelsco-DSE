@@ -10,19 +10,9 @@
 
             <div class="flex space-x-1 md:flex-shrink-0">
                 @if ($editingId)
-                    <button wire:click="saveEdit"
-                        class="flex-1 md:flex-none bg-green-600 hover:bg-green-700 text-white font-medium py-1.5 md:py-2 px-2 md:px-3 rounded-lg transition-colors text-xs md:text-sm">
-                        <i class="fa-solid fa-save mr-1"></i>
-                        <span class="hidden md:inline">Guardar</span>
-                        <span class="md:hidden">✓</span>
-                    </button>
+                    <x-icon-action variant="success" icon="fa-solid fa-floppy-disk" label="Guardar" size="md" wire:click="saveEdit" />
                 @else
-                    <button wire:click="addNcor"
-                        class="flex-1 md:flex-none bg-blue-600 hover:bg-blue-700 text-white font-medium py-1.5 md:py-2 px-2 md:px-3 rounded-lg transition-colors text-xs md:text-sm">
-                        <i class="fa-solid fa-plus mr-1"></i>
-                        <span class="hidden md:inline">Agregar</span>
-                        <span class="md:hidden">+</span>
-                    </button>
+                    <x-icon-action variant="success" icon="fa-solid fa-plus" label="Agregar" size="md" wire:click="addNcor" />
                 @endif
             </div>
         </div>
@@ -48,16 +38,8 @@
                 class="flex justify-between items-center p-1.5 md:p-2 bg-gray-800 rounded-lg hover:bg-gray-750 transition-colors">
                 <span class="text-white text-xs md:text-sm">{{ $items->ncor }}</span>
                 <div class="flex space-x-1">
-                    <button wire:click="startEdit({{ $items->id }})"
-                        class="p-1.5 md:p-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition-colors"
-                        title="Editar">
-                        <i class="fa-solid fa-pencil text-xs md:text-sm"></i>
-                    </button>
-                    <button wire:click="deleteNcor({{ $items->id }})"
-                        class="p-1.5 md:p-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
-                        title="Eliminar">
-                        <i class="fa-solid fa-trash-can text-xs md:text-sm"></i>
-                    </button>
+                    <x-icon-action variant="warning" icon="fa-solid fa-pencil" label="Editar" wire:click="startEdit({{ $items->id }})" />
+                    <x-icon-action variant="danger" icon="fa-solid fa-trash" label="Eliminar" wire:click="deleteNcor({{ $items->id }})" />
                 </div>
             </div>
         @endforeach

@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-base text-gray-800 dark:text-gray-200 leading-tight sm:text-lg">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-6 sm:py-12">
 {{--        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">--}}
 {{--            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">--}}
 
@@ -13,12 +13,8 @@
 {{----------------------------------------------------------------------------------------------------------------------------------------------}}
         @livewire('temp')
                 <!-- Modal toggle -->
-                <button data-modal-target="static-modal1"
-                        data-modal-toggle="static-modal1"
-                        class="block text-white bg-gray-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-1 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        type="button">
-                    Insertar Usuario
-                </button>
+                <x-icon-action variant="success" icon="fa-solid fa-user-plus" label="Insertar usuario"
+                    size="md" data-modal-target="static-modal1" data-modal-toggle="static-modal1" />
 
                 <!-- Main modal -->
                 <div id="static-modal1"
@@ -108,13 +104,12 @@
                                 </form>
                             </div>
                             <!-- Modal footer -->
-                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    Save
-                                </button>
-                                <button data-modal-hide="static-modal1" type="button" class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                    Cancel
-                                </button>
+                            <div class="flex items-center gap-2 p-6 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                <x-icon-action variant="success" icon="fa-solid fa-floppy-disk" label="Guardar"
+                                    size="md" type="submit" />
+
+                                <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cancelar"
+                                    size="md" data-modal-hide="static-modal1" />
                             </div>
                         </div>
                     </div>

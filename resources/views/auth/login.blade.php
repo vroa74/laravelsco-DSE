@@ -53,21 +53,17 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="mt-4 flex flex-wrap items-center justify-end gap-2">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
+                    <x-icon-action variant="info" icon="fa-solid fa-key" label="¿Olvidó su contraseña?"
+                        size="md" :href="route('password.request')" />
                 @endif
 
-                <x-button class="ms-4">
-                    {{ __('Log in') }}
-                </x-button>
+                <x-icon-action variant="success" icon="fa-solid fa-right-to-bracket" label="Iniciar sesión"
+                    size="md" type="submit" />
 
-                <a href="{{ url('/') }}" class="inline-flex items-center px-4 py-2 m-2 bg-gray-800 dark:bg-blue-300 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
-                    <i class="fa-solid fa-igloo"></i>{{ __('Inicio') }}
-                </a>
-
+                <x-icon-action variant="neutral" icon="fa-solid fa-house" label="Ir al inicio" size="md"
+                    :href="url('/')" />
             </div>
         </form>
 

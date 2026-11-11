@@ -1,18 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-lg text-gray-800 dark:text-gray-200 leading-tight">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+            <h2 class="font-semibold text-base text-gray-800 dark:text-gray-200 leading-tight sm:text-lg">
                 {{ __('Crear Grupo de Usuarios') }}
             </h2>
-            <a href="{{ route('user-groups.index') }}"
-                class="bg-gray-500 hover:bg-gray-700 text-white font-medium py-1.5 px-3 rounded text-xs">
-                Volver
-            </a>
+            <x-icon-action variant="neutral" icon="fa-solid fa-arrow-left" :href="route('user-groups.index')"
+                label="Volver al listado" />
         </div>
     </x-slot>
 
     <div class="py-8">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-5 text-gray-900 dark:text-gray-100">
                     <form action="{{ route('user-groups.store') }}" method="POST">
@@ -66,15 +64,11 @@
                         </div>
 
                         <!-- Botones -->
-                        <div class="mt-6 flex justify-end space-x-3">
-                            <a href="{{ route('user-groups.index') }}"
-                                class="bg-gray-500 hover:bg-gray-700 text-white font-medium py-1.5 px-3 rounded text-xs">
-                                Cancelar
-                            </a>
-                            <button type="submit"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-medium py-1.5 px-3 rounded text-xs">
-                                Crear Grupo
-                            </button>
+                        <div class="mt-6 flex items-center justify-end gap-2">
+                            <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cancelar" size="md"
+                                :href="route('user-groups.index')" />
+                            <x-icon-action variant="success" icon="fa-solid fa-floppy-disk" label="Crear grupo"
+                                size="md" type="submit" />
                         </div>
                     </form>
                 </div>

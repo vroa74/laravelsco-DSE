@@ -7,17 +7,18 @@
     <div id="accordion-collapse" class="text-center items-center w-[99%] mx-auto">
         <h2 id="accordion-collapse-heading-1">
             <div class="relative">
-                <div class="flex items-center justify-between w-full">
-                    <!-- Botón Principal con el texto y el ícono SVG -->
+                <div class="flex flex-col gap-2 sm:flex-row sm:items-stretch">
+                    <!-- Botón de filtros -->
                     <button
                         type="button"
-                        class="flex items-center justify-between w-[100%] px-5 py-3 font-medium
-                               text-gray-500 border border-gray-200 rounded-t-xl focus:ring-4 bg-blue-950 focus:ring-gray-200
-                               dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-blue-800 gap-3"
+                        class="flex w-full items-center justify-between gap-3 rounded-xl border border-gray-700 bg-blue-950 px-4 py-2.5 text-sm font-medium text-gray-200 transition hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-gray-700 sm:flex-1"
                         wire:click="toggleAccordion"
                         aria-expanded="{{ $isOpen ? 'true' : 'false' }}"
                         aria-controls="accordion-collapse-body-1">
-                        <span>Filtros</span>
+                        <span class="inline-flex items-center gap-2">
+                            <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                            Filtros
+                        </span>
 
                         <svg
                             class="w-5 h-5 transition-transform {{ $isOpen ? 'rotate-180' : '' }}"
@@ -25,35 +26,23 @@
                             fill="none"
                             viewBox="0 0 10 6"
                             stroke="currentColor"
-                            stroke-width="2">
+                            stroke-width="2"
+                            aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5 5 1 1 5" />
                         </svg>
                     </button>
 
-                    <!-- Contenedor de los botones adicionales centrados -->
-                    <div class="flex gap-2 justify-center items-center absolute top-1/2 right-[50%] -translate-y-1/2">
-                        <button wire:click="openInsertModal"
+                    <!-- Acciones de la barra: solo iconos con tooltip -->
+                    <div class="flex flex-wrap items-center justify-center gap-2 sm:justify-end">
+                        <x-icon-action variant="success" icon="fa-regular fa-square-plus" label="Agregar registro"
+                            wire:click="openInsertModal" />
 
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                          <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                              <i class="fa-regular fa-square-plus"></i>
-                          </span>
-                        </button>
+                        <x-icon-action variant="danger" icon="fa-solid fa-file-pdf" label="Exportar a PDF"
+                            wire:click="exportPDF" wire:loading.attr="disabled"
+                            wire:loading.class="opacity-50 cursor-not-allowed" />
 
-
-                        <button wire:click="exportPDF"
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                          <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                              <i class="fa-solid fa-file-export"></i>
-                          </span>
-                        </button>
-
-                        <button wire:click="openViewQuery"
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                          <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                              <i class="fa-solid fa-filter"></i>
-                          </span>
-                        </button>
+                        <x-icon-action variant="info" icon="fa-solid fa-filter" label="Aplicar filtros"
+                            wire:click="openViewQuery" />
                     </div>
                 </div>
             </div>
@@ -64,7 +53,7 @@
             {{--      begin section containes filter--}}
 
 
-            <div class="grid grid-cols-4 gap-1 w-full h-full px-4 text-white text-xs">
+            <div class="grid grid-cols-1 gap-1 w-full h-full px-2 text-xs text-white sm:grid-cols-2 sm:px-4 xl:grid-cols-4">
                 <div class="border-2 border-gray-300 rounded-lg p-1 items-center text-center space-y-1">
                     {{-- inline-block se usa para un tamaño especifico           --}}
                     Mostrar::
@@ -179,9 +168,9 @@
         </div>
     </div>
     {{--         ------------------------------------------------------------------------------------------------------------}}
-    <div class="relative overflow-x-auto pt-1  px-4 shadow-md sm:rounded-lg">
-        <div class="w-[96%] mx-auto overflow-x-auto">
-            <table class="w-full table-fixed rounded-2xl text-xs text-left rtl:text-right text-gray-500
+    <div class="relative pt-1 px-4 shadow-md sm:rounded-lg">
+        <div class="mx-auto w-full sm:w-[96%]">
+            <table class="tabla-apilada rounded-2xl text-xs text-left rtl:text-right text-gray-500
                           dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-blue-900
                               dark:text-gray-400">
@@ -204,19 +193,21 @@
                     @foreach($ages as $items)
                         <tr class="bg-white border-b text-xs dark:bg-gray-800 dark:border-gray-700
                                     hover:bg-gray-50 dark:hover:bg-gray-950">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                            <th scope="row"
+                                class="px-3 py-3 font-medium text-gray-900 dark:text-white md:w-12 md:px-6 md:py-4"
+                                data-label="Folio">
                                 {{ $items->id }}
                             </th>
-                            <td class="px-6 py-4 whitespace-normal break-words w-20">{{ $items->titulo }}</td>
-                            <td class="px-6 py-4 whitespace-normal break-words w-32">{{ $items->nombre }}</td>
-                            <td class="px-6 py-4 whitespace-normal break-words w-32">{{ $items->apaterno }}</td>
-                            <td class="px-6 py-4 whitespace-normal break-words w-32">{{ $items->amaterno }}</td>
-                            <td class="px-6 py-4 whitespace-normal break-words w-40">{{ $items->cargo }}</td>
-                            <td class="px-6 py-4 whitespace-normal break-words w-40">{{ $items->deporg }}</td>
-                            <td class="px-6 py-4 whitespace-normal break-words w-28">{{ $items->telefono }}</td>
-                            <td class="px-6 py-4 whitespace-normal break-words w-40">{{ $items->email }}</td>
-                            <td class="px-6 py-4 whitespace-normal break-words w-48">{{ $items->dir }}</td>
-                            <td class="px-6 py-4 whitespace-normal break-words w-[150px] text-right ">
+                            <td class="px-3 py-3 md:w-20 md:px-6 md:py-4" data-label="Título">{{ $items->titulo }}</td>
+                            <td class="px-3 py-3 md:w-32 md:px-6 md:py-4" data-label="Nombre">{{ $items->nombre }}</td>
+                            <td class="px-3 py-3 md:w-32 md:px-6 md:py-4" data-label="Ap. paterno">{{ $items->apaterno }}</td>
+                            <td class="px-3 py-3 md:w-32 md:px-6 md:py-4" data-label="Ap. materno">{{ $items->amaterno }}</td>
+                            <td class="px-3 py-3 md:w-40 md:px-6 md:py-4" data-label="Cargo">{{ $items->cargo }}</td>
+                            <td class="px-3 py-3 md:w-40 md:px-6 md:py-4" data-label="Dep. org.">{{ $items->deporg }}</td>
+                            <td class="px-3 py-3 md:w-28 md:px-6 md:py-4" data-label="Teléfono">{{ $items->telefono }}</td>
+                            <td class="px-3 py-3 md:w-40 md:px-6 md:py-4" data-label="Email">{{ $items->email }}</td>
+                            <td class="px-3 py-3 md:w-48 md:px-6 md:py-4" data-label="Dirección">{{ $items->dir }}</td>
+                            <td class="px-3 py-3 text-right md:w-[150px] md:px-6 md:py-4" data-label="Acciones">
 {{--                                seccion de botones de acciones de la tabla--}}
                                 <button
                                     wire:click="showRecord({{ $items->id }})"
@@ -255,7 +246,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="12" class="text-center py-4 text-gray-500">
+                        <td colspan="11" class="px-3 py-3 text-center text-gray-500">
                             No se encontraron registros.
                         </td>
                     </tr>
@@ -292,9 +283,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="flex justify-end p-4 space-x-2 border-t border-gray-200 dark:border-gray-600">
-                    <button wire:click="closeModal" type="button" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
-                        Cerrar
-                    </button>
+                    <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cerrar" size="md" wire:click="closeModal" />
                 </div>
             </div>
         </div>
@@ -368,12 +357,8 @@
                 <!-- Modal footer -->
                 <div class="flex justify-end p-4 space-x-2 border-t border-gray-200 dark:border-gray-600">
                     {{--                    begin  botones de acciones--}}
-                    <button wire:click="updateRecord" type="button" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
-                        Guardar
-                    </button>
-                    <button wire:click="closeEditModal" type="button" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-100 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">
-                        Cancelar
-                    </button>
+                    <x-icon-action variant="success" icon="fa-solid fa-floppy-disk" label="Guardar" size="md" wire:click="updateRecord" />
+                    <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cancelar" size="md" wire:click="closeEditModal" />
 {{--                    end  botones de acciones--}}
                 </div>
             </div>
@@ -440,12 +425,8 @@
             </div>
             <!-- Modal footer -->
             <div class="flex justify-end p-4 space-x-2 border-t border-gray-200 dark:border-gray-600">
-                <button wire:click="saveNewRecord" type="button" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
-                    Guardar
-                </button>
-                <button wire:click="closeInsertModal" type="button" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-100 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">
-                    Cancelar
-                </button>
+                <x-icon-action variant="success" icon="fa-solid fa-floppy-disk" label="Guardar" size="md" wire:click="saveNewRecord" />
+                <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cancelar" size="md" wire:click="closeInsertModal" />
             </div>
         </div>
     </div>
@@ -474,19 +455,11 @@
                     </div>
                 </div>
                 <!-- Modal footer -->
-                <div class="flex justify-end p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button
-                        wire:click="deleteRecord"
-                        data-modal-hide="delete-modal"
-                        class="px-4 py-2 text-sm text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800">
-                        Sí, eliminar
-                    </button>
-                    <button
-                        wire:click="$set('deleteRecordId', null)"
-                        data-modal-hide="delete-modal"
-                        class="px-4 py-2 text-sm text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-100 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">
-                        Cancelar
-                    </button>
+                <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <x-icon-action variant="danger" icon="fa-solid fa-trash" label="Sí, eliminar" size="md"
+                        wire:click="deleteRecord" data-modal-hide="delete-modal" />
+                    <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cancelar" size="md"
+                        wire:click="$set('deleteRecordId', null)" data-modal-hide="delete-modal" />
                 </div>
             </div>
         </div>
@@ -511,9 +484,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="flex justify-end p-4 space-x-2 border-t border-gray-200 dark:border-gray-600">
-                    <button wire:click="closeViewQuery" type="button" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
-                        Cerrar
-                    </button>
+                    <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cerrar" size="md" wire:click="closeViewQuery" />
                 </div>
             </div>
         </div>

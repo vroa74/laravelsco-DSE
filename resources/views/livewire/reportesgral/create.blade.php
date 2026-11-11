@@ -41,7 +41,7 @@
                 </select>
             </div>
             {{-- ----------------------------------------------------------------------------------------- --}}
-            <div class="grid grid-cols-4 grid-rows-2 gap-4">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
                 <!-- Columna 1 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
                     <!-- Etiqueta -->
@@ -131,7 +131,7 @@
                 </div>
             </div>
             {{-- -------------------------------------------------------------------------------------------------------------- --}}
-            <div class="grid grid-cols-2 grid-rows-2 gap-4">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <!-- Fila 1 - Columna 1 -->
                 <div class="col-span-1">
                     <label for="des" class="block mb-8 text-sm font-medium text-gray-900 dark:text-white">
@@ -403,15 +403,11 @@
 
             {{-- {{$users}} --}}
             {{-- {{$users->email}} {{$users->name}} {{$users->id}} --}}
-            <div class="mt-6 flex justify-end space-x-3">
-                <button type="button" wire:click="cancel"
-                    class="px-4 py-2 text-white bg-gray-600 rounded-md hover:bg-gray-700 focus:ring focus:ring-gray-300">
-                    Cancelar
-                </button>
-                <button type="submit"
-                    class="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:ring focus:ring-blue-300">
-                    Guardar
-                </button>
+            <div class="mt-6 flex items-center justify-end gap-2">
+                <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cancelar" size="md"
+                    wire:click="cancel" />
+                <x-icon-action variant="success" icon="fa-solid fa-floppy-disk" label="Guardar registro"
+                    size="md" type="submit" />
             </div>
 
             <!-- Nueva tabla -->
@@ -520,10 +516,7 @@
             </div>
             <!-- Modal Footer -->
             <div class="flex items-center px-4 py-3 border-t dark:border-gray-700">
-                <button type="button" data-modal-hide="modal_des"
-                    class="px-4 py-2 text-white bg-blue-700 rounded-lg hover:bg-blue-800">
-                    Cerrar
-                </button>
+                <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cerrar" size="md" data-modal-hide="modal_des" />
             </div>
         </div>
     </div>
@@ -584,10 +577,7 @@
                                                     {{ $age->deporg }}</td>
                                                 <td
                                                     class="px-3 py-2 whitespace-nowrap text-xs text-gray-900 dark:text-gray-300">
-                                                    <button wire:click="selectAgeFromModal({{ $age->des }})"
-                                                        class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300">
-                                                        Seleccionar
-                                                    </button>
+                                                    <x-icon-action variant="success" icon="fa-solid fa-check" label="Seleccionar" wire:click="selectAgeFromModal({{ $age->des }})" />
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -598,10 +588,7 @@
                     </div>
                 </div>
                 <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" wire:click="closeAgeModal"
-                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-xs">
-                        Cerrar
-                    </button>
+                    <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cerrar" size="md" wire:click="closeAgeModal" />
                 </div>
             </div>
         </div>
@@ -628,7 +615,7 @@
 
                 <!-- Filtros -->
                 <div class="p-4 border-b border-white">
-                    <div class="grid grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
                         <div>
                             <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Nombre</label>
                             <input wire:model.live.debounce.300ms="searchNombre" type="text"
@@ -671,10 +658,7 @@
                                     <td class="px-3 py-2">{{ $age->cargo }}</td>
                                     <td class="px-3 py-2">{{ $age->deporg }}</td>
                                     <td class="px-3 py-2">
-                                        <button wire:click="selectAgeFromModal({{ $age->id }})"
-                                            class="px-2 py-1 text-xs font-medium text-center text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300">
-                                            Seleccionar
-                                        </button>
+                                        <x-icon-action variant="success" icon="fa-solid fa-check" label="Seleccionar" wire:click="selectAgeFromModal({{ $age->id }})" />
                                     </td>
                                 </tr>
                             @endforeach
@@ -711,7 +695,7 @@
 
                 <!-- Filtros -->
                 <div class="p-4 border-b border-white">
-                    <div class="grid grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
                         <div>
                             <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Nombre</label>
                             <input wire:model.live.debounce.300ms="searchUserName" type="text"
@@ -755,10 +739,7 @@
                                     <td class="px-3 py-2">{{ $user->direction }}</td>
                                     <td class="px-3 py-2">{{ $user->email }}</td>
                                     <td class="px-3 py-2">
-                                        <button wire:click="selectUserFromModal({{ $user->id }})"
-                                            class="px-2 py-1 text-xs font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                                            Seleccionar
-                                        </button>
+                                        <x-icon-action variant="success" icon="fa-solid fa-check" label="Seleccionar" wire:click="selectUserFromModal({{ $user->id }})" />
                                     </td>
                                 </tr>
                             @endforeach
@@ -795,7 +776,7 @@
 
                 <!-- Filtros -->
                 <div class="p-4 border-b border-white">
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
                             <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Nombre del
                                 Grupo</label>
@@ -834,10 +815,7 @@
                                     <td class="px-3 py-2">{{ $group->members_count ?? $group->members()->count() }}
                                     </td>
                                     <td class="px-3 py-2">
-                                        <button wire:click="selectGroupFromModal({{ $group->id }})"
-                                            class="px-2 py-1 text-xs font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300">
-                                            Seleccionar
-                                        </button>
+                                        <x-icon-action variant="success" icon="fa-solid fa-check" label="Seleccionar" wire:click="selectGroupFromModal({{ $group->id }})" />
                                     </td>
                                 </tr>
                             @endforeach

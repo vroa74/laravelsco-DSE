@@ -28,8 +28,8 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <!-- Fixed Top Section (Navigation + Header) -->
-            <div class="fixed top-0 left-0 right-0 z-50 bg-gray-100 dark:bg-gray-900">
+            <!-- Barra superior fija (navegación + encabezado) -->
+            <div class="sticky top-0 z-50 bg-gray-100 dark:bg-gray-900">
                 @livewire('navigation-menu')
 
                 <!-- Page Heading -->
@@ -43,7 +43,7 @@
             </div>
 
             <!-- Page Content (Scrollable) -->
-            <main class="pt-24">
+            <main class="pb-8">
                 {{ $slot }}
             </main>
         </div>

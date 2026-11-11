@@ -5,6 +5,14 @@
 Todos los archivos generados para las pruebas estaran ubicados en
 la carpeta /pruebas si execpcion.
 
+# Commits y bitácora (regla obligatoria)
+
+- Toda modificación terminada que sume **más de 10 líneas** (altas + bajas) se cierra con un commit inmediato, sin esperar a que el usuario lo pida.
+- El mensaje sigue la serie existente: `upNNNNNN - Título corto en español` con el **siguiente consecutivo** (`up000042`, `up000043`, …). El cuerpo enumera los cambios generados: archivos o grupos tocados y el efecto de cada uno.
+- El mismo cambio se registra en `README.md` §15 con una subsección `### Título ("upNNNNNN")`, una tabla `Archivo | Cambio` y la línea **Validación**; así queda documentado el post al que pertenece el commit.
+- Antes de commitear: `vendor/bin/pint --dirty --format agent`, `npm run build` si hubo cambios de frontend y `php artisan test --compact`.
+- Nunca se incluyen en el commit `public/build`, `.env`, credenciales, respaldos `sql/` ni la carpeta `.agents/` sin autorización.
+
 # Guía de Laravel Boost
 
 Las directrices de Laravel Boost están especialmente curadas por los mantenedores de Laravel para esta aplicación. Estas reglas deben seguirse de cerca para asegurar la mejor experiencia al construir aplicaciones Laravel.
@@ -60,6 +68,7 @@ Este proyecto tiene habilidades específicas de dominio disponibles en `**/skill
 - Blade: prioriza componentes reutilizables (`x-...`) antes de duplicar bloques; conserva estructuras existentes de layout y slots.
 - Estilos: usa Tailwind CSS como primera opción, manteniendo coherencia visual con la paleta y patrones ya presentes en cada módulo.
 - Coherencia visual: conserva el mismo estilo visual en todo el proyecto; reutiliza los patrones existentes en lugar de inventar variantes.
+- Sin desplazamiento lateral (regla obligatoria): ninguna vista debe desplazarse en horizontal; solo se permite desplazamiento vertical. Prohibido `overflow-x-auto`, `overflow-x-scroll` y anchos mínimos fijos como `min-w-[960px]`. Las tablas de datos usan la clase `tabla-apilada` (definida en `resources/css/app.css`): en móvil cada fila se muestra como tarjeta con etiqueta `data-label` y desde 768px vuelve a ser tabla normal. Usa anchos fijos solo con prefijo responsive (`md:w-40`), nunca en móvil.
 - Campos de contraseña: todo input de contraseña debe incluir el botón de mostrar/ocultar con el estilo del login (icono de ojo SVG, `text-gray-400 hover:text-gray-600`, posicionado a la derecha). En Livewire/Blade usa el componente `<x-password-toggle-button />` dentro de un contenedor `relative` con `x-data="{ show: false }"` y `x-bind:type="show ? 'text' : 'password'"` en el input.
 - Mensajes de sesión: conserva claves estándar observadas (`message`, `error`) y textos claros en español.
 - Comentarios: usa comentarios breves y útiles, preferentemente en español, solo cuando aporten contexto no obvio.

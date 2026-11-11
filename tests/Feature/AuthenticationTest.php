@@ -13,6 +13,7 @@ test('users can authenticate using the login screen', function () {
 
     $response = $this->post('/login', [
         'email' => $user->email,
+        'rfc' => $user->rfc,
         'password' => 'password',
     ]);
 
@@ -25,6 +26,7 @@ test('users cannot authenticate with invalid password', function () {
 
     $this->post('/login', [
         'email' => $user->email,
+        'rfc' => $user->rfc,
         'password' => 'wrong-password',
     ]);
 

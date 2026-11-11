@@ -1,9 +1,11 @@
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 pb-0 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-    <div>
-        <img src="{{ asset('media/img/logos.png') }}" alt=""  height="150px"  width="150px" />
+<div class="flex min-h-screen flex-col items-center justify-center px-4 py-8">
+    <div class="mb-4">
+        <img src="{{ asset('media/img/ple_legis_65.png') }}" alt="Escudo del Estado de Campeche"
+            class="h-20 w-auto sm:h-24" />
     </div>
 
-    <div class="w-full sm:max-w-md mt-6 px-2 py-2 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+    <div
+        class="w-full overflow-hidden rounded-xl border border-white/10 bg-white/95 p-5 shadow-2xl backdrop-blur sm:max-w-md sm:p-6 dark:bg-gray-900/85">
         {{ $slot }}
     </div>
 </div>

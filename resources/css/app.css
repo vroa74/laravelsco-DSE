@@ -6,10 +6,113 @@
 @tailwind utilities;
 
 
+/* Regla del sitio: nunca hay desplazamiento lateral, solo vertical. */
+html {
+    overflow-x: clip;
+}
+
 body {
     font-family: 'Roboto', Arial, sans-serif;
+    overflow-x: clip;
 }
 
 [x-cloak] {
     display: none;
+}
+
+@layer components {
+    /*
+     * Tablas responsivas sin desplazamiento horizontal.
+     * En móvil cada fila se convierte en una tarjeta con sus etiquetas;
+     * a partir de 768px vuelve a comportarse como tabla normal.
+     */
+    .tabla-apilada {
+        display: block;
+        width: 100%;
+    }
+
+    .tabla-apilada thead {
+        display: none;
+    }
+
+    .tabla-apilada tbody {
+        display: block;
+    }
+
+    .tabla-apilada tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0.75rem;
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
+
+    .tabla-apilada tr > * {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        width: auto;
+        max-width: 100%;
+        text-align: left;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .tabla-apilada tr > *::before {
+        content: attr(data-label);
+        font-size: 0.625rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #94a3b8;
+    }
+
+    .tabla-apilada tr > :not([data-label])::before {
+        content: none;
+    }
+
+    /* La celda de acciones mantiene sus botones en línea dentro de la tarjeta. */
+    .tabla-apilada tr > [data-label='Acciones'] {
+        display: block;
+    }
+
+    .tabla-apilada tr > [data-label='Acciones']::before {
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+
+    @media (min-width: 768px) {
+        .tabla-apilada {
+            display: table;
+        }
+
+        .tabla-apilada thead {
+            display: table-header-group;
+        }
+
+        .tabla-apilada tbody {
+            display: table-row-group;
+        }
+
+        .tabla-apilada tr {
+            display: table-row;
+            margin-bottom: 0;
+            border-radius: 0;
+            overflow: visible;
+        }
+
+        .tabla-apilada tr > * {
+            display: table-cell;
+            text-align: inherit;
+        }
+
+        .tabla-apilada tr > *::before {
+            content: none;
+        }
+
+        .tabla-apilada tr > [data-label='Acciones'] {
+            display: table-cell;
+        }
+    }
 }

@@ -7,55 +7,31 @@
     <div id="accordion-collapse" class="text-center items-center w-[99%] mx-auto">
         <h2 id="accordion-collapse-heading-1">
             <div class="relative">
-                <div class="flex items-center justify-between w-full">
-                    <!-- Botón Principal con el texto y el ícono SVG -->
+                <div class="flex flex-col gap-2 sm:flex-row sm:items-stretch">
+                    <!-- Botón de filtros -->
                     <button type="button"
-                        class="flex items-center justify-between w-[100%] px-5 py-3 font-medium
-                               text-gray-500 border border-gray-200 rounded-t-xl focus:ring-4 bg-blue-950 focus:ring-gray-200
-                               dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-blue-800 gap-3"
+                        class="flex w-full items-center justify-between gap-3 rounded-xl border border-gray-700 bg-blue-950 px-4 py-2.5 text-sm font-medium text-gray-200 transition hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-gray-700 sm:flex-1"
                         wire:click="toggleAccordion" aria-expanded="{{ $isOpen ? 'true' : 'false' }}"
                         aria-controls="accordion-collapse-body-1">
-                        <span>Filtros</span>
+                        <span class="inline-flex items-center gap-2">
+                            <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                            Filtros
+                        </span>
 
                         <svg class="w-5 h-5 transition-transform {{ $isOpen ? 'rotate-180' : '' }}"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6" stroke="currentColor"
-                            stroke-width="2">
+                            stroke-width="2" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5 5 1 1 5" />
                         </svg>
                     </button>
 
-                    <!-- Contenedor de los botones adicionales centrados -->
-                    <div class="flex gap-2 justify-center items-center absolute top-1/2 right-[50%] -translate-y-1/2">
-                        <button wire:click="openCreateModal" title="Agregar registro"
-                            class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                            <span
-                                class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                <i class="fa-regular fa-square-plus"></i>
-                            </span>
-                        </button>
+                    <!-- Acciones de la barra: solo iconos con tooltip -->
+                    <div class="flex flex-wrap items-center justify-center gap-2 sm:justify-end">
+                        <x-icon-action variant="success" icon="fa-regular fa-square-plus" label="Agregar registro"
+                            wire:click="openCreateModal" />
 
-
-                        {{-- <button wire:click="exportPDF"
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                          <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                              <i class="fa-solid fa-file-export"></i>
-                          </span>
-                        </button> --}}
-
-                        <button wire:click="openViewQuery" title="Mostrar query"
-                            class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                            <span
-                                class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                <i class="fa-solid fa-filter"></i>
-                            </span>
-                        </button>
-
-                        {{-- <button wire:click="clearFilters"
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-400 to-pink-600 group-hover:from-red-400 group-hover:to-pink-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-red-200 dark:focus:ring-red-800">
-                          <span class="relative px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                              <i class="fa-solid fa-times"></i>
-                          </span>
-                        </button> --}}
+                        <x-icon-action variant="info" icon="fa-solid fa-filter" label="Mostrar consulta"
+                            wire:click="openViewQuery" />
                     </div>
                 </div>
             </div>
@@ -66,7 +42,7 @@
             {{--      begin section containes filter --}}
 
 
-            <div class="grid grid-cols-4 gap-1 w-full h-full px-4 text-white text-xs">
+            <div class="grid grid-cols-1 gap-1 w-full h-full px-2 text-xs text-white sm:grid-cols-2 sm:px-4 xl:grid-cols-4">
                 <div class="border-2 border-gray-300 rounded-lg p-1 items-center text-center space-y-1">
                     {{-- inline-block se usa para un tamaño especifico           --}}
                     Mostrar::
@@ -158,10 +134,10 @@
         </div>
     </div>
     {{--         ---------------------------------------------------------------------------------------------------------- --}}
-    <div class="relative overflow-x-auto pt-1  px-4 shadow-md sm:rounded-lg">
-        <div class="w-[96%] mx-auto overflow-x-auto">
+    <div class="relative pt-1 px-4 shadow-md sm:rounded-lg">
+        <div class="mx-auto w-full sm:w-[96%]">
             <table
-                class="w-full table-fixed rounded-2xl text-xs text-left rtl:text-right text-gray-500
+                class="tabla-apilada rounded-2xl text-xs text-left rtl:text-right text-gray-500
                           dark:text-gray-400">
                 <thead
                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-blue-900
@@ -187,7 +163,7 @@
                             <tr
                                 class="bg-white border-b text-xs dark:bg-gray-800 dark:border-gray-700
                                     hover:bg-gray-50 dark:hover:bg-gray-950">
-                                <td class="px-6 py-4 text-center">
+                                <td class="px-3 py-3 text-center md:w-16 md:px-6 md:py-4" data-label="Foto">
                                     @if ($items->profile_photo_path)
                                         <img src="{{ asset('storage/' . $items->profile_photo_path) }}"
                                             alt="Foto de perfil"
@@ -199,24 +175,26 @@
                                         </div>
                                     @endif
                                 </td>
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                                <th scope="row"
+                                    class="px-3 py-3 font-medium text-gray-900 dark:text-white md:w-12 md:px-6 md:py-4"
+                                    data-label="ID">
                                     {{ $items->id }}
                                 </th>
-                                <td class="px-6 py-4 whitespace-normal break-words w-32">{{ $items->name }}</td>
-                                <td class="px-6 py-4 whitespace-normal break-words w-20">{{ $items->rfc }}</td>
-                                <td class="px-6 py-4 whitespace-normal break-words w-20">{{ $items->curp }}</td>
-                                <td class="px-6 py-4 whitespace-normal break-words w-32">{{ $items->position }}</td>
-                                <td class="px-6 py-4 whitespace-normal break-words w-20">{{ $items->sex }}</td>
-                                <td class="px-6 py-4 whitespace-normal break-words w-20">{{ $items->lvl }}</td>
-                                <td class="px-6 py-4 whitespace-normal break-words w-20">{{ $items->tipo }}</td>
-                                <td class="px-6 py-4 whitespace-normal break-words w-20">
+                                <td class="px-3 py-3 md:w-32 md:px-6 md:py-4" data-label="Nombre">{{ $items->name }}</td>
+                                <td class="px-3 py-3 md:w-20 md:px-6 md:py-4" data-label="RFC">{{ $items->rfc }}</td>
+                                <td class="px-3 py-3 md:w-20 md:px-6 md:py-4" data-label="CURP">{{ $items->curp }}</td>
+                                <td class="px-3 py-3 md:w-32 md:px-6 md:py-4" data-label="Cargo">{{ $items->position }}</td>
+                                <td class="px-3 py-3 md:w-20 md:px-6 md:py-4" data-label="Sexo">{{ $items->sex }}</td>
+                                <td class="px-3 py-3 md:w-20 md:px-6 md:py-4" data-label="Nivel">{{ $items->lvl }}</td>
+                                <td class="px-3 py-3 md:w-20 md:px-6 md:py-4" data-label="Tipo">{{ $items->tipo }}</td>
+                                <td class="px-3 py-3 md:w-20 md:px-6 md:py-4" data-label="Estado">
                                     <span
                                         class="px-2 py-1 text-xs font-semibold rounded-full {{ $items->status ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                         {{ $items->status ? 'Activo' : 'Inactivo' }}
                                     </span>
                                 </td>
-                                <td class="px-6 py-4 whitespace-normal break-words w-40">{{ $items->email }}</td>
-                                <td class="px-6 py-4 whitespace-normal break-words w-[150px] text-right ">
+                                <td class="px-3 py-3 md:w-40 md:px-6 md:py-4" data-label="Email">{{ $items->email }}</td>
+                                <td class="px-3 py-3 text-right md:w-[150px] md:px-6 md:py-4" data-label="Acciones">
                                     {{--                                seccion de botones de acciones de la tabla --}}
                                     <button wire:click="showRecord({{ $items->id }})"
                                         title="Ver detalles del usuario"
@@ -257,7 +235,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="13" class="text-center py-4 text-gray-500">
+                            <td colspan="12" class="px-3 py-3 text-center text-gray-500">
                                 No se encontraron registros.
                             </td>
                         </tr>
@@ -318,10 +296,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="flex justify-end p-4 space-x-2 border-t border-gray-200 dark:border-gray-600">
-                    <button wire:click="closeModal" type="button"
-                        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
-                        Cerrar
-                    </button>
+                    <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cerrar" size="md" wire:click="closeModal" />
                 </div>
             </div>
         </div>
@@ -527,14 +502,8 @@
                     <!-- Modal footer -->
                     <div class="flex justify-end p-4 space-x-2 border-t border-gray-200 dark:border-gray-600">
                         {{--                    begin  botones de acciones --}}
-                        <button wire:click="updateRecord" type="button"
-                            class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
-                            Guardar
-                        </button>
-                        <button wire:click="closeEditModal" type="button"
-                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-100 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">
-                            Cancelar
-                        </button>
+                        <x-icon-action variant="success" icon="fa-solid fa-floppy-disk" label="Guardar" size="md" wire:click="updateRecord" />
+                        <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cancelar" size="md" wire:click="closeEditModal" />
                         {{--                    end  botones de acciones --}}
                     </div>
                 </div>
@@ -742,10 +711,7 @@
                             class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800">
                             Crear Usuario
                         </button>
-                        <button wire:click="closeCreateModal" type="button"
-                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-100 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">
-                            Cancelar
-                        </button>
+                        <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cancelar" size="md" wire:click="closeCreateModal" />
                     </div>
                 </div>
             </div>
@@ -900,14 +866,8 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="flex justify-end p-4 space-x-2 border-t border-gray-200 dark:border-gray-600">
-                    <button wire:click="saveNewRecord" type="button"
-                        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
-                        Guardar
-                    </button>
-                    <button wire:click="closeInsertModal" type="button"
-                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-100 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">
-                        Cancelar
-                    </button>
+                    <x-icon-action variant="success" icon="fa-solid fa-floppy-disk" label="Guardar" size="md" wire:click="saveNewRecord" />
+                    <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cancelar" size="md" wire:click="closeInsertModal" />
                 </div>
             </div>
         </div>
@@ -938,15 +898,11 @@
                     </div>
                 </div>
                 <!-- Modal footer -->
-                <div class="flex justify-end p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button wire:click="deleteRecord" data-modal-hide="delete-modal"
-                        class="px-4 py-2 text-sm text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800">
-                        Sí, eliminar
-                    </button>
-                    <button wire:click="$set('deleteRecordId', null)" data-modal-hide="delete-modal"
-                        class="px-4 py-2 text-sm text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-100 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">
-                        Cancelar
-                    </button>
+                <div class="flex items-center justify-end gap-2 p-4 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <x-icon-action variant="danger" icon="fa-solid fa-trash" label="Sí, eliminar" size="md"
+                        wire:click="deleteRecord" data-modal-hide="delete-modal" />
+                    <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cancelar" size="md"
+                        wire:click="$set('deleteRecordId', null)" data-modal-hide="delete-modal" />
                 </div>
             </div>
         </div>
@@ -978,10 +934,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="flex justify-end p-4 space-x-2 border-t border-gray-200 dark:border-gray-600">
-                    <button wire:click="closeViewQuery" type="button"
-                        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
-                        Cerrar
-                    </button>
+                    <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cerrar" size="md" wire:click="closeViewQuery" />
                 </div>
             </div>
         </div>

@@ -14,11 +14,9 @@
                 </div>
 
                 <!-- Botón de reset -->
-                <div class="flex items-end">
-                    <button wire:click="$set('search', '')"
-                        class="bg-gray-500 hover:bg-gray-700 text-white font-medium py-1.5 px-3 rounded text-xs">
-                        Limpiar Filtros
-                    </button>
+                <div class="flex items-end justify-start md:justify-end">
+                    <x-icon-action variant="neutral" icon="fa-solid fa-eraser" label="Limpiar filtros"
+                        wire:click="$set('search', '')" />
                 </div>
             </div>
         </div>
@@ -28,8 +26,8 @@
     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-4 text-gray-900 dark:text-gray-100">
             @if ($groups->count() > 0)
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <div>
+                    <table class="tabla-apilada divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-700">
                             <tr>
                                 <th
@@ -61,50 +59,45 @@
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                             @foreach ($groups as $group)
                                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                                    <td class="px-4 py-2 whitespace-nowrap">
+                                    <td class="px-4 py-2" data-label="Nombre">
                                         <div class="text-xs font-medium text-gray-900 dark:text-white">
                                             {{ $group->name }}
                                         </div>
                                     </td>
-                                    <td class="px-4 py-2 whitespace-nowrap">
+                                    <td class="px-4 py-2" data-label="Descripción">
                                         <div class="text-xs text-gray-500 dark:text-gray-400">
                                             {{ $group->description ? Str::limit($group->description, 40) : 'Sin descripción' }}
                                         </div>
                                     </td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-500 dark:text-gray-400">
+                                    <td class="px-4 py-2 text-xs text-gray-500 dark:text-gray-400" data-label="Miembros">
                                         <span
                                             class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
                                             {{ $group->members_count }}
                                         </span>
                                     </td>
-                                    <td class="px-4 py-2 whitespace-nowrap">
+                                    <td class="px-4 py-2" data-label="Estado">
                                         <button wire:click="toggleActive({{ $group->id }})"
                                             class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium {{ $group->active ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' }}">
                                             {{ $group->active ? 'Activo' : 'Inactivo' }}
                                         </button>
                                     </td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-500 dark:text-gray-400">
+                                    <td class="px-4 py-2 text-xs text-gray-500 dark:text-gray-400" data-label="Creado por">
                                         {{ $group->creator->name ?? 'N/A' }}
                                     </td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-right text-xs font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button wire:click="showGroup({{ $group->id }})"
-                                                class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300">
-                                                Ver
-                                            </button>
-                                            <a href="{{ route('user-groups.edit', $group) }}"
-                                                class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300">
-                                                Editar
-                                            </a>
-                                            <button wire:click="showMembers({{ $group->id }})"
-                                                class="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300">
-                                                Miembros
-                                            </button>
-                                            <button wire:click="deleteGroup({{ $group->id }})"
-                                                onclick="return confirm('¿Está seguro de eliminar este grupo?')"
-                                                class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">
-                                                Eliminar
-                                            </button>
+                                    <td class="px-4 py-2 text-xs font-medium" data-label="Acciones">
+                                        <div class="flex justify-end gap-2">
+                                            <x-icon-action variant="info" icon="fa-regular fa-eye"
+                                                label="Ver grupo" wire:click="showGroup({{ $group->id }})" />
+
+                                            <x-icon-action variant="warning" icon="fa-solid fa-pencil"
+                                                label="Editar grupo" :href="route('user-groups.edit', $group)" />
+
+                                            <x-icon-action variant="success" icon="fa-solid fa-users"
+                                                label="Gestionar miembros" wire:click="showMembers({{ $group->id }})" />
+
+                                            <x-icon-action variant="danger" icon="fa-solid fa-trash"
+                                                label="Eliminar grupo" wire:click="deleteGroup({{ $group->id }})"
+                                                onclick="return confirm('¿Está seguro de eliminar este grupo?')" />
                                         </div>
                                     </td>
                                 </tr>
@@ -184,11 +177,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 dark:bg-gray-700 px-4 py-2 sm:px-5 sm:flex sm:flex-row-reverse">
-                        <button type="button" wire:click="closeModal"
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-3 py-1.5 bg-gray-600 text-xs font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:ml-2 sm:w-auto">
-                            Cerrar
-                        </button>
+                    <div class="flex items-center justify-end bg-gray-50 px-4 py-2 dark:bg-gray-700 sm:px-5">
+                        <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cerrar" size="md" wire:click="closeModal" />
                     </div>
                 </div>
             </div>
@@ -225,7 +215,7 @@
                                 class="block w-full text-xs rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         </div>
 
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
                             <!-- Columna izquierda: Usuarios disponibles -->
                             <div>
                                 <div class="flex justify-between items-center mb-2">
@@ -335,11 +325,8 @@
                             💡 Arrastra y suelta usuarios entre las columnas o usa las flechas
                         </div>
                     </div>
-                    <div class="bg-gray-50 dark:bg-gray-700 px-4 py-2 sm:px-5 sm:flex sm:flex-row-reverse">
-                        <button type="button" wire:click="closeModal"
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-3 py-1.5 bg-gray-600 text-xs font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:ml-2 sm:w-auto">
-                            Cerrar
-                        </button>
+                    <div class="flex items-center justify-end bg-gray-50 px-4 py-2 dark:bg-gray-700 sm:px-5">
+                        <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cerrar" size="md" wire:click="closeModal" />
                     </div>
                 </div>
             </div>

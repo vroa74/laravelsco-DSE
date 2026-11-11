@@ -52,9 +52,7 @@
         @endif
 
         <div class="flex items-center mt-5">
-            <x-button wire:click="confirmLogout" wire:loading.attr="disabled">
-                {{ __('Log Out Other Browser Sessions') }}
-            </x-button>
+            <x-icon-action variant="info" icon="fa-solid fa-key" label="{{ __('Log Out Other Browser Sessions') }}" size="md" wire:click="confirmLogout" wire:loading.attr="disabled" />
 
             <x-action-message class="ms-3" on="loggedOut">
                 {{ __('Done.') }}
@@ -83,15 +81,11 @@
             </x-slot>
 
             <x-slot name="footer">
-                <x-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
+                <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="{{ __('Cancel') }}" size="md" wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled" />
 
-                <x-button class="ms-3"
+                <x-icon-action variant="info" icon="fa-solid fa-key" label="{{ __('Log Out Other Browser Sessions') }}" size="md" class="ms-3"
                             wire:click="logoutOtherBrowserSessions"
-                            wire:loading.attr="disabled">
-                    {{ __('Log Out Other Browser Sessions') }}
-                </x-button>
+                            wire:loading.attr="disabled" />
             </x-slot>
         </x-dialog-modal>
     </x-slot>

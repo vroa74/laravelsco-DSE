@@ -38,14 +38,10 @@
                     </span>
                 </div>
 
-                <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                    {{ __('Select A New Photo') }}
-                </x-secondary-button>
+                <x-icon-action variant="info" icon="fa-solid fa-image" label="{{ __('Select A New Photo') }}" size="md" class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()" />
 
                 @if ($this->user->profile_photo_path)
-                    <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ __('Remove Photo') }}
-                    </x-secondary-button>
+                    <x-icon-action variant="danger" icon="fa-solid fa-trash" label="{{ __('Remove Photo') }}" size="md" type="button" class="mt-2" wire:click="deleteProfilePhoto" />
                 @endif
 
                 <x-input-error for="photo" class="mt-2" />
@@ -88,8 +84,6 @@
             {{ __('Saved.') }}
         </x-action-message>
 
-        <x-button wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Save') }}
-        </x-button>
+        <x-icon-action variant="success" icon="fa-solid fa-floppy-disk" label="{{ __('Save') }}" size="md" wire:loading.attr="disabled" wire:target="photo" />
     </x-slot>
 </x-form-section>

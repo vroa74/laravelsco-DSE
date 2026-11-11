@@ -1,13 +1,11 @@
-<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-    <div class="flex justify-between items-center mb-6">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sm:p-6">
+    <div class="mb-4 flex flex-wrap items-center justify-between gap-2 sm:mb-6">
+        <h3 class="text-base font-semibold text-gray-900 dark:text-white sm:text-lg">
             Archivos PDF ({{ $files->count() }})
         </h3>
-        <button wire:click="toggleUploadForm" 
-                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-            <i class="fas fa-plus mr-2"></i>
-            {{ $showUploadForm ? 'Cancelar' : 'Agregar Archivo' }}
-        </button>
+        <x-icon-action :variant="$showUploadForm ? 'neutral' : 'success'"
+            :icon="$showUploadForm ? 'fa-solid fa-xmark' : 'fa-solid fa-plus'"
+            :label="$showUploadForm ? 'Cancelar' : 'Agregar archivo'" size="md" wire:click="toggleUploadForm" />
     </div>
 
     <!-- Lista de archivos -->
@@ -36,18 +34,13 @@
                             </p>
                         </div>
                     </div>
-                    <div class="flex items-center space-x-2">
-                        <button wire:click="downloadFile({{ $file->id }})" 
-                                class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
-                                title="Descargar">
-                            <i class="fas fa-download"></i>
-                        </button>
-                        <button wire:click="deleteFile({{ $file->id }})" 
-                                class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
-                                title="Eliminar"
-                                onclick="return confirm('¿Estás seguro de que quieres eliminar este archivo?')">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                    <div class="flex items-center gap-2">
+                        <x-icon-action variant="info" icon="fa-solid fa-download" label="Descargar archivo"
+                            wire:click="downloadFile({{ $file->id }})" />
+
+                        <x-icon-action variant="danger" icon="fa-solid fa-trash" label="Eliminar archivo"
+                            wire:click="deleteFile({{ $file->id }})"
+                            onclick="return confirm('¿Estás seguro de que quieres eliminar este archivo?')" />
                     </div>
                 </div>
             @endforeach
@@ -99,15 +92,12 @@
                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white">
                 </div>
 
-                <div class="flex justify-end space-x-3">
-                    <button wire:click="toggleUploadForm" 
-                            class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300 dark:hover:bg-gray-500">
-                        Cancelar
-                    </button>
-                    <button wire:click="uploadFile" 
-                            class="px-4 py-2 bg-blue-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        Subir Archivo
-                    </button>
+                <div class="flex items-center justify-end gap-2">
+                    <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cancelar" size="md"
+                        wire:click="toggleUploadForm" />
+
+                    <x-icon-action variant="success" icon="fa-solid fa-upload" label="Subir archivo" size="md"
+                        wire:click="uploadFile" />
                 </div>
             </div>
         </div>

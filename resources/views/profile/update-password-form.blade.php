@@ -32,8 +32,6 @@
             {{ __('Saved.') }}
         </x-action-message>
 
-        <x-button>
-            {{ __('Save') }}
-        </x-button>
+        <x-icon-action variant="success" icon="fa-solid fa-floppy-disk" label="{{ __('Save') }}" size="md"  />
     </x-slot>
 </x-form-section>

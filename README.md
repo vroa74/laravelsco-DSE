@@ -23,7 +23,7 @@ Aplicación web para la recepción, registro, turnado, resguardo y consulta de d
 | Adjuntos PDF por documento (`cos_files`) | Funcional (15 MB por archivo) |
 | Archivos de reporte con límite de descargas y caducidad (`report_files`) | Modelo y comando listos; controlador sin rutas registradas |
 | Inventario de componentes (`/componentes`) | Funcional |
-| Pruebas automatizadas | Pest; 1 prueba heredada desactualizada (ver §13) |
+| Pruebas automatizadas | Pest 4; 50 correctas y 8 omitidas (ver §11) |
 
 ---
 
@@ -429,7 +429,7 @@ App\Livewire\Profile\UpdateProfileInformationForm
 
 - Todo texto visible debe estar en **español** (aún quedan cadenas de Jetstream en inglés).
 - Tailwind CSS es la primera opción de estilo; no crear variantes visuales nuevas sin reutilizar patrones.
-- Campos de contraseña: mostrar/ocultar con icono de ojo SVG, `text-gray-400 hover:text-gray-600`, alineado a la derecha. La regla de `AGENTS.md` indica usar `<x-password-toggle-button />`; ese componente **todavía no existe** en el proyecto (ver §12).
+- Campos de contraseña: mostrar/ocultar con icono de ojo SVG, `text-gray-400 hover:text-gray-600`, alineado a la derecha, mediante `<x-password-toggle-button />` dentro de un contenedor `relative` con `x-data="{ show: false }"` (regla de `AGENTS.md`).
 - Mensajes de sesión con claves `message` y `error`, textos claros en español.
 
 ---
@@ -457,10 +457,12 @@ vendor/bin/pint --dirty --format agent
 | --- | --- | --- |
 | `tests/Feature/LogoutTest.php` | Logout POST redirige a `welcome`, `welcome` carga sin sesión, `/logout` por GET redirige a `welcome` | ✅ 3 pruebas |
 | `tests/Feature/ComponentesTest.php` | `/componentes` lista componentes Blade, Livewire, integraciones e iconos | ✅ 1 prueba |
-| `tests/Feature/AuthenticationTest.php` | Login de Jetstream (sin RFC) | ❌ 1 fallo: el test no envía `rfc` y el login personalizado lo exige |
+| `tests/Feature/AuthenticationTest.php` | Login de Jetstream con `email`, `rfc` y `password` (credenciales válidas e inválidas) | ✅ 2 pruebas |
+| `tests/Feature/IconActionTest.php` | `x-icon-action` (variantes, enlace, etiqueta accesible), `x-password-toggle-button`, escudo de fondo en auth y render de 8 rutas principales | ✅ 13 pruebas |
+| `tests/Feature/ResponsiveLayoutTest.php` | Regla sin desplazamiento lateral: CSS base, ausencia de `overflow-x-*`/`min-w-[Npx]`, tablas `tabla-apilada` con `data-label` y CSS compilado por Vite | ✅ 9 pruebas |
 | Suite Jetstream (`ProfileInformationTest`, `UpdatePasswordTest`, `TwoFactorAuthenticationTest`, `PasswordResetTest`, `BrowserSessionsTest`, `ApiTokenPermissionsTest`, `CreateApiTokenTest`, `DeleteApiTokenTest`, `DeleteAccountTest`, `EmailVerificationTest`, `PasswordConfirmationTest`, `RegistrationTest`) | Funciones de Jetstream/Fortify | ✅ ejecutan con avisos de deprecación |
 
-**Último resultado (entorno local, PHP 8.5.11):** `36 pruebas`, `53 aserciones`, `27 correctas`, `8 omitidas` (`->skip()` de funciones Jetstream deshabilitadas: API, registro y verificación de correo) y `1 fallo` (el descrito arriba). Sin avisos de deprecación tras el ajuste de `config/database.php`.
+**Último resultado (entorno local, PHP 8.5.11):** `58 pruebas`, `100 aserciones`, `50 correctas`, `8 omitidas` (`->skip()` de funciones Jetstream deshabilitadas: API, registro y verificación de correo) y `0 fallos`. Sin avisos de deprecación tras el ajuste de `config/database.php`.
 
 ---
 
@@ -488,7 +490,7 @@ vendor/bin/pint --dirty --format agent
 | 2 | Paquetes `laravel/boost`, `laravel/mcp`, `laravel/prompts` | No figuran en `composer.json`; las herramientas MCP de Boost (`search-docs`, `database-query`, `database-schema`, `browser-logs`) no están disponibles en este entorno |
 | 3 | Pruebas en la carpeta `/pruebas` | El proyecto usa `tests/` con la estructura estándar de Laravel; no existe `/pruebas` |
 | 4 | Habilidades en `**/skills/**` | Están en `.agents/skills/`; `.agents/` no figura en `.gitignore` y suma 1 929 archivos / 39.6 MB (incluye `.agents/skill-backups/`), por lo que hoy queda fuera del commit |
-| 5 | Usar `<x-password-toggle-button />` en campos de contraseña | El componente no existe; `auth/login.blade.php` implementa el toggle con SVG y JavaScript propios, y otras vistas no lo tienen |
+| 5 | Usar `<x-password-toggle-button />` en campos de contraseña | Componente creado en `up000042` e incluido en el inventario; `auth/login.blade.php` lo usa junto con `x-data="{ show: false }"` |
 | 6 | Todo texto visible en español | Persisten cadenas de Jetstream en inglés (`Email`, `Password`, `Log in`, `Remember me`, `Email Password Reset Link`) |
 | 7 | Inventario de componentes sincronizado | Falta registrar el componente propio `x-nav` (`resources/views/components/nav.php`) |
 | 8 | Documentación solo si se solicita | `README.md` se reescribe por solicitud explícita en este cambio |
@@ -501,7 +503,7 @@ vendor/bin/pint --dirty --format agent
 
 Detectadas al revisar el proyecto y el diff del último commit. **No se corrigieron** porque el alcance solicitado era revisar, documentar y registrar el commit.
 
-1. **`AuthenticationTest` desactualizado:** envía solo `email` y `password`, pero `LoginRequest` exige `rfc`. Es el único fallo de la suite (preexistente). Se debe actualizar la prueba (y no eliminarla) agregando un RFC válido al usuario de fábrica.
+1. **`AuthenticationTest` desactualizado:** ✅ resuelto en `up000042`; la prueba envía `rfc` y `UserFactory` genera un RFC único, por lo que la suite queda sin fallos.
 2. **`ReportFileController` sin rutas:** `upload`, `download`, `list`, `delete` y `stats` no están expuestos en `routes/web.php`; la funcionalidad de 10 MB / 5 descargas / 7 días existe pero no es accesible desde la interfaz.
 3. **Modelos duplicados:** `Co` y `Cos` apuntan a la misma tabla `cos`. Conviene dejar un solo modelo canónico y conservar el otro como alias deprecado.
 4. **`UserFactory` referencia `App\Models\Team`**, clase que no existe. Solo falla si se usa `withPersonalTeam()` o se habilitan equipos de Jetstream. No se ejecuta en las pruebas actuales.
@@ -536,6 +538,8 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 ### Convención
 
 - Los commits usan la secuencia `upNNNNNN` (por ejemplo `up000037`, `up000038`, `up000039`), con mensaje corto y una descripción de los cambios incluidos.
+- **Regla vigente desde `up000042`:** toda modificación terminada que sume más de 10 líneas (altas + bajas) se cierra con un commit inmediato con el siguiente consecutivo de la serie y el detalle de los cambios en el cuerpo del mensaje.
+- Cada commit se registra además en este apartado §15 (`### Título ("upNNNNNN")` + tabla de archivos + validación), de modo que la bitácora indica el post al que pertenece.
 - Las migraciones generadas automáticamente por herramientas no se conservan (se retiraron en `up000038`).
 - Los cambios se documentan también en el inventario `/componentes` cuando afectan dependencias, componentes o iconos.
 
@@ -571,9 +575,36 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** `composer validate` correcto, 50 rutas, `npm run build` correcto con Vite 8 y suite con 27 pruebas correctas, 8 omitidas y 1 fallo preexistente (`AuthenticationTest`).
 
+### Interfaz responsiva, botones unificados y sin desplazamiento lateral (`up000042`)
+
+| Archivo | Cambio |
+| --- | --- |
+| `AGENTS.md` | Nueva sección «Commits y bitácora» (commit obligatorio con `upNNNNNN` y registro en `README.md` cuando el cambio supera 10 líneas) y regla de estilo «sin desplazamiento lateral» |
+| `resources/css/app.css` | `overflow-x: clip` en `html` y `body`; componente `.tabla-apilada` que en móvil convierte cada fila en tarjeta con etiqueta `::before` desde `data-label` y desde 768px restaura la tabla |
+| `resources/views/components/icon-action.blade.php` *(nuevo)* | Botón o enlace de acción solo con icono: variantes por gradiente, tamaños `sm`/`md`, `title` y `aria-label` accesibles |
+| `resources/views/components/password-toggle-button.blade.php` *(nuevo)* | Botón de ojo reutilizable para mostrar u ocultar contraseñas |
+| `resources/views/livewire/reportesgral/index.blade.php` | Tabla a `tabla-apilada` con `data-label`, sin `overflow-x-auto` ni `min-w-[880px]`, filtros con `flex-wrap`, acciones con `x-icon-action` y `<thead>` restaurado |
+| `resources/views/livewire/rg/index.blade.php` | Mismo tratamiento: tabla apilada, sin `min-w-[880px]` y `<thead>` restaurado |
+| `resources/views/livewire/usuarios/index.blade.php` | Tabla apilada con 12 etiquetas, anchos `md:w-*`, `colspan` del estado vacío corregido (13→12) |
+| `resources/views/livewire/people.blade.php` | Tabla apilada con 11 etiquetas, anchos `md:w-*`, `colspan` corregido (12→11) |
+| `resources/views/livewire/user-groups/index.blade.php` | Tabla apilada con 6 etiquetas y sin `overflow-x-auto` |
+| `resources/views/livewire/reportesgral/create.blade.php`, `edit.blade.php` | Contenedores de modal solo con desplazamiento vertical (`overflow-y-auto`) |
+| `resources/views/auth/*` (login, register, reset, forgot, confirm, verify, two-factor) | Acciones con `x-icon-action` y textos en español; `register`, `reset-password` y `confirm-password` incorporan `x-password-toggle-button` (login conserva su toggle con JS propio) |
+| `resources/views/layouts/guest.blade.php`, `components/authentication-card.blade.php` | Escudo `media/img/ple_legis_65.png`: fondo fijo con degradados y `mix-blend-screen` en el layout, y emblema superior en la tarjeta de autenticación con `backdrop-blur` |
+| `resources/views/catalogos/catalogos.blade.php` | Se retira la detección de dispositivo por JavaScript; una sola cuadrícula responsiva de 1, 2 y 4 columnas |
+| `resources/views/livewire/nc.blade.php`, `tc.blade.php`, `cc.blade.php`, `leg.blade.php`, `file-manager.blade.php` | Acciones y formularios con `x-icon-action` en lugar de botones con texto |
+| `resources/views/age/*`, `rg/*`, `user-groups/*`, `profile/*`, `api/*`, `dashboard.blade.php`, `temp.blade.php` | Encabezados y espacios responsivos (`text-base sm:text-lg`, `py-6 sm:py-8`), acciones unificadas y bloques `flex` con `gap` |
+| `resources/views/componentes/index.blade.php` | Inventario con `x-icon-action`, `x-password-toggle-button` y los iconos Font Awesome realmente usados |
+| `database/factories/UserFactory.php` | RFC único (`[A-Z]{4}[0-9]{6}`) y PHPDoc `@extends Factory<User>` |
+| `tests/Feature/AuthenticationTest.php` | Envía `rfc` en el login correcto y en el fallido |
+| `tests/Feature/IconActionTest.php` *(nuevo)* | 13 pruebas: botón de icono, enlace, toggle de contraseña, escudo de fondo y render de 8 rutas principales |
+| `tests/Feature/ResponsiveLayoutTest.php` *(nuevo)* | 9 pruebas que impiden reintroducir desplazamiento lateral y validan `tabla-apilada`, `data-label` y el CSS compilado |
+
+**Validación:** `vendor/bin/pint --dirty --format agent` limpio, `npm run build` correcto (`app-BaXTTsVI.css` exporta `.tabla-apilada`, `attr(data-label)` y `overflow-x:clip`), `php artisan view:cache` correcto y suite con 58 pruebas, 100 aserciones, 50 correctas, 8 omitidas y 0 fallos.
+
 ### Pendientes fuera de estos commits
 
 - `.agents/` (habilidades y respaldos, 39.6 MB) y `zREADME.md` (bitácora anterior) quedan sin versionar a la espera de decisión.
-- `AuthenticationTest` debe actualizarse con `rfc` para volver a verde.
+- `welcome.blade.php` conserva el texto suelto `++++++` y el `<title>` fijo (ver §13.5).
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
 

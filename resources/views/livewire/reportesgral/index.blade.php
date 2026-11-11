@@ -4,17 +4,18 @@
     <div id="accordion-collapse" class="items-center w-full mx-auto text-center">
         <h2 id="accordion-collapse-heading-1">
             <div class="relative">
-                <div class="flex items-center justify-between w-full">
-                    <!-- Botón Principal con el texto y el ícono SVG -->
+                <div class="flex flex-col gap-2 sm:flex-row sm:items-stretch">
+                    <!-- Botón de filtros -->
                     <button
                         type="button"
-                        class="flex items-center justify-between w-[100%] px-5 py-3 font-medium
-                               text-gray-500 border border-gray-200 rounded-t-xl focus:ring-4 bg-blue-950 focus:ring-gray-200
-                               dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-blue-800 gap-3"
+                        class="flex w-full items-center justify-between gap-3 rounded-xl border border-gray-700 bg-blue-950 px-4 py-2.5 text-sm font-medium text-gray-200 transition hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-gray-700 sm:flex-1"
                         wire:click="toggleAccordion"
                         aria-expanded="{{ $isOpen ? 'true' : 'false' }}"
                         aria-controls="accordion-collapse-body-1">
-                        <span>Filtros</span>
+                        <span class="inline-flex items-center gap-2">
+                            <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                            Filtros
+                        </span>
 
                         <svg
                             class="w-5 h-5 transition-transform {{ $isOpen ? 'rotate-180' : '' }}"
@@ -22,61 +23,27 @@
                             fill="none"
                             viewBox="0 0 10 6"
                             stroke="currentColor"
-                            stroke-width="2">
+                            stroke-width="2"
+                            aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5 5 1 1 5" />
                         </svg>
                     </button>
 
-                    <!-- Contenedor de los botones adicionales centrados -->
-                    <div class="flex gap-2 justify-center items-center absolute top-1/2 right-[50%] -translate-y-1/2">
-                        <a href="{{ route('rg.create') }}"
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2
-                                        overflow-hidden text-sm font-medium text-gray-900 rounded-lg
-                                        group bg-gradient-to-br from-green-400 to-blue-600
-                                        group-hover:from-green-400 group-hover:to-blue-600
-                                        hover:text-white dark:text-white focus:ring-4
-                                        focus:outline-none focus:ring-green-200
-                                        dark:focus:ring-green-800"
-                                title="Agregar nuevo registro">
-                          <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
-                              <i class="fa-regular fa-square-plus"></i>
-                          </span>
-                          {{-- agregar --}}
-                        </a>
+                    <!-- Acciones de la barra: solo iconos con tooltip -->
+                    <div class="flex flex-wrap items-center justify-center gap-2 sm:justify-end">
+                        <x-icon-action variant="success" icon="fa-regular fa-square-plus"
+                            :href="route('rg.create')" label="Agregar registro" />
 
+                        <x-icon-action variant="danger" icon="fa-solid fa-file-pdf" label="Exportar a PDF"
+                            wire:click="exportPDF" wire:loading.attr="disabled"
+                            wire:loading.class="opacity-50 cursor-not-allowed" />
 
-                        <button wire:click="exportPDF"
-                                wire:loading.attr="disabled"
-                                wire:loading.class="opacity-50 cursor-not-allowed"
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
-                                title="Exportar a PDF">
-                          <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
-                              <i class="fa-solid fa-file-export"></i>
-                              <span wire:loading.remove>PDF</span>
-                              <span wire:loading>Procesando...</span>
-                          </span>
-                        </button>
+                        <x-icon-action variant="warning" icon="fa-solid fa-file-csv" label="Exportar a CSV"
+                            wire:click="exportCSV" wire:loading.attr="disabled"
+                            wire:loading.class="opacity-50 cursor-not-allowed" />
 
-                        <button wire:click="exportCSV"
-                                wire:loading.attr="disabled"
-                                wire:loading.class="opacity-50 cursor-not-allowed"
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-orange-400 to-red-600 group-hover:from-orange-400 group-hover:to-red-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-orange-200 dark:focus:ring-orange-800"
-                                title="Exportar a CSV">
-                          <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
-                              <i class="fa-solid fa-file-csv"></i>
-                              <span wire:loading.remove>CSV</span>
-                              <span wire:loading>Procesando...</span>
-                          </span>
-                        </button>
-
-                        <button wire:click="openViewQuery"
-                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
-                                title="Aplicar filtros">
-                          <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
-                              <i class="fa-solid fa-filter"></i>
-                          </span>
-                          {{-- filtro --}}
-                        </button>
+                        <x-icon-action variant="info" icon="fa-solid fa-filter" label="Aplicar filtros"
+                            wire:click="openViewQuery" />
                     </div>
                 </div>
             </div>
@@ -87,7 +54,7 @@
             {{--      begin section containes filter--}}
 
                 {{-------------------------------------------------------------------------------------------------------------------------------------------------------------------}}
-                <div class="grid w-full h-full grid-cols-4 gap-1 px-4 ">
+                <div class="grid w-full h-full grid-cols-1 gap-1 px-2 sm:grid-cols-2 sm:px-4 xl:grid-cols-4">
                     <div class="items-center p-1 space-y-1 text-center border-2 border-red-400 rounded-lg">
                         {{-- inline-block se usa para un tamaño especifico           --}}
                         Mostrar:: <select
@@ -108,7 +75,7 @@
                     {{--            filtrar por id y por folio ya sea un registro o por un intervalo --------------------------------------------------------}}
                     <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-blue-400 rounded-lg">
                         {{-- Public folioinit, foliofin --}}
-                        <div class="flex items-center space-x-1">
+                        <div class="flex flex-wrap items-center justify-center gap-1">
                             <span class="text-sm">Folio</span>
                             <input type="number"
                                    id="folio_init"
@@ -124,7 +91,7 @@
                     {{--           fin filtrar por id y por folio ya sea un registro o por un intervalo --------------------------------------------------------}}
                     {{--        filtro por descripcion u por seguimiento -----------------------------------------------------------}}
                     <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-green-400 rounded-lg">
-                        <div class="flex items-center space-x-1">
+                        <div class="flex flex-wrap items-center justify-center gap-1">
                             <span class="text-sm">Des.</span>
                             <input type="text"
                                    id="des"
@@ -149,7 +116,7 @@
                     {{--        fin filtro por estatus de la correspondencia ------------------------------------------------------}}
                     {{--         filtro por fechas ---------------------------------------------------------------------------}}
                     <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-purple-400 rounded-lg">
-                        <div class="flex items-center space-x-2">
+                        <div class="flex flex-wrap items-center justify-center gap-2">
                             <label for="fcapini" class="text-xs font-medium text-gray-700 dark:text-gray-300">F. Cap.</label>
                             <div class="relative">
                                 <input
@@ -170,7 +137,7 @@
                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[100px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Date">
                             </div>
                         </div>
-                        <div class="flex items-center space-x-2">
+                        <div class="flex flex-wrap items-center justify-center gap-2">
                             <label for="remcargoini" class="text-xs font-medium text-gray-700 dark:text-gray-300">F. Rec</label>
                             <div class="relative">
                                 <input id="remcargoini"
@@ -187,7 +154,7 @@
                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[100px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Date">
                             </div>
                         </div>
-                        <div class="flex items-center space-x-2">
+                        <div class="flex flex-wrap items-center justify-center gap-2">
                             <label for="remdeporgini" class="text-xs font-medium text-gray-700 dark:text-gray-300">F. Ofi.</label>
                             <div class="relative">
                                 <input id="remdeporgini"
@@ -316,8 +283,9 @@
 
 {{--     numero de registros a mostrar----------------------------------------------------}}
 
-    <div class="relative pt-4 overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-xs text-center text-gray-500 bg-blue-900 rtl:text-right dark:text-gray-400 dark:hover:font-bold dark:hover:bg-blue-950"  >
+    <div class="relative pt-4 shadow-md sm:rounded-lg">
+        <table class="tabla-apilada text-xs text-center text-gray-500 bg-blue-900 rtl:text-right dark:text-gray-400 dark:hover:font-bold dark:hover:bg-blue-950"  >
+            <thead>
             <tr>
                 <th scope="col" class="px-6 py-3 w-[4%]">
                     id
@@ -340,7 +308,7 @@
                 <th scope="col" class="px-6 py-3 w-[15%]">
                     Seguimiento
                 </th>
-                <th scope="col" class="px-6 py-3 w-[7%]">
+                <th scope="col" class="px-2 py-3 w-[210px]">
                     Acciones
                 </th>
             </tr>
@@ -352,11 +320,11 @@
                       @else
                       <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:text-black dark:hover:text-base "  >
                 @endif
-                <td class="px-1 py-1">
+                <td class="px-3 py-2" data-label="Id">
                     {{$co->id}}
                     <p class="text-yellow-300">{{ $co->legislaturaRel->legislatura ?? $co->legislatura }}</p>
                 </td>
-                <td class="px-1 py-1">
+                <td class="px-3 py-2" data-label="Correspondencia">
                     @if(!empty($co->ncor))
                     <p> <span class="text-yellow-300"> Nivel: </span>   {{ $co->ncor  }}</p>
                     @endif
@@ -367,7 +335,7 @@
                         <p> <span class="text-yellow-300"> Clas.: </span> {{ $co->ccor }}</p>
                     @endif
                 </td>
-                <td class="px-1 py-1">
+                <td class="px-3 py-2" data-label="Fecha">
 
                     @if(!empty($co->fcap))
                         <p> <span class="text-yellow-300" >Cap.: </span> {{ $co->fcap  }}</p>
@@ -385,7 +353,7 @@
                         <p> <span class="text-yellow-600" ># oficio: </span>  {{ $co->nofi  }}</p>
                     @endif
                 </td>
-                <td class="px-1 py-1">
+                <td class="px-3 py-2" data-label="Remitente">
                     @if(!empty($co->rem_nombre))
                     <p> <span class="text-yellow-300" >Nombre:</span>  {{ $co->rem_nombre  }}</p>
                     @endif
@@ -399,7 +367,7 @@
                     <p> <span class="text-yellow-300" >Dir.:</span>  {{ $co->rem_dir  }}</p>
                     @endif
                 </td>
-                <td class="px-1 py-1">
+                <td class="px-3 py-2" data-label="Turnado a">
                     @if(!empty($co->tur_nom))
                     <p> <span class="text-yellow-300" >nombre: </span> {{ $co->tur_nom  }}</p>
                     @endif
@@ -410,69 +378,29 @@
                     <p> <span class="text-yellow-300" >Dep. Org.: </span> {{ $co->tur_deporg  }}</p>
                     @endif
                 </td>
-                <td class="px-1 py-1">
+                <td class="px-3 py-2" data-label="Descripción">
                     <p>{{ $co->des  }}</p>
                 </td>
-                <td class="px-1 py-1">
+                <td class="px-3 py-2" data-label="Seguimiento">
                     <p>{{ $co->seguimiento  }}</p>
                 </td>
-                <td class="px-1 py-1">
-                    <a href="{{ route('rg.show', $co->id) }}"
-                            class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2
-                           overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
-                           bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400
-                           group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4
-                           focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
-                            title="Ver detalles">
-                        <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
-                             <i class="fa-regular fa-eye"></i> {{--  show record--}}
-                        </span>
-                    </a>{{--                    boton de show--}}
+                <td class="px-3 py-2" data-label="Acciones">
+                    <div class="flex flex-wrap items-center justify-center gap-2">
+                        <x-icon-action variant="info" icon="fa-regular fa-eye" :href="route('rg.show', $co->id)"
+                            label="Ver detalles" />
 
-                    <a href="{{ route('rg.edit', $co->id) }}" {{-- yellow-orange--}}
-                            class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2
-                                    overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
-                                    bg-gradient-to-br from-yellow-200 to-red-700 group-hover:from-orange-500
-                                    group-hover:to-orange-600 hover:text-white dark:text-white focus:ring-4
-                                    focus:outline-none focus:ring-orange-600 dark:focus:ring-orange-800"
-                            title="Editar registro">
-                            <span class="relative px-2 py-1 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
-                                <i class="fa-solid fa-pencil"></i>      {{-- Edit--}}
-                            </span>
-                    </a> {{--                    boton de edit--}}
-                    <a href="javascript:void(0)" onclick="abrirReporte({{ $co->id }}, 'reporte1')"
-                            class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden
-                                text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
-                                from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
-                                hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
-                                dark:focus:ring-purple-800"
-                            title="Generar Reporte Normal">
-                            <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
-                            <i class="fa-regular fa-rectangle-list"></i>
-                            </span>
-                    </a>
-                    <a href="javascript:void(0)" onclick="abrirReporte({{ $co->id }}, 'reporte2')"
-                        class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden
-                                    text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
-                                    from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
-                                    hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
-                                    dark:focus:ring-purple-800"
-                        title="Generar Reporte Especial">
-                            <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
-                            <i class="fa-solid fa-bars"></i>
-                            </span>
-                    </a>
-                    <a href="javascript:void(0)" onclick="abrirReporte({{ $co->id }}, 'reporte3')"
-                          class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden
-                                   text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br
-                                   from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500
-                                   hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200
-                                   dark:focus:ring-purple-800"
-                          title="Generar Reporte de Peticiones o Solicitudes">
-                           <span class="relative px-2 py-2 transition-all duration-75 ease-in bg-white rounded-md dark:bg-gray-900 group-hover:bg-opacity-0">
-                            <i class="fa-solid fa-list"></i>
-                            </span>
-                    </a>
+                        <x-icon-action variant="warning" icon="fa-solid fa-pencil" :href="route('rg.edit', $co->id)"
+                            label="Editar registro" />
+
+                        <x-icon-action variant="report" icon="fa-regular fa-rectangle-list" href="javascript:void(0)"
+                            onclick="abrirReporte({{ $co->id }}, 'reporte1')" label="Generar reporte normal" />
+
+                        <x-icon-action variant="report" icon="fa-solid fa-bars" href="javascript:void(0)"
+                            onclick="abrirReporte({{ $co->id }}, 'reporte2')" label="Generar reporte especial" />
+
+                        <x-icon-action variant="report" icon="fa-solid fa-list" href="javascript:void(0)"
+                            onclick="abrirReporte({{ $co->id }}, 'reporte3')" label="Generar reporte de solicitud" />
+                    </div>
 
                 </td>
             </tr>

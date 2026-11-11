@@ -19,14 +19,23 @@
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4" x-data="{ show: false }">
                 <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                <div class="relative">
+                    <x-input id="password" class="block mt-1 w-full pr-10" type="password" name="password"
+                        x-bind:type="show ? 'text' : 'password'" required autocomplete="new-password" />
+                    <x-password-toggle-button />
+                </div>
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4" x-data="{ show: false }">
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <div class="relative">
+                    <x-input id="password_confirmation" class="block mt-1 w-full pr-10" type="password"
+                        name="password_confirmation" x-bind:type="show ? 'text' : 'password'" required
+                        autocomplete="new-password" />
+                    <x-password-toggle-button />
+                </div>
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -46,14 +55,12 @@
                 </div>
             @endif
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
+            <div class="mt-4 flex flex-wrap items-center justify-end gap-2">
+                <x-icon-action variant="neutral" icon="fa-solid fa-arrow-left" label="¿Ya tiene cuenta? Iniciar sesión"
+                    size="md" :href="route('login')" />
 
-                <x-button class="ms-4">
-                    {{ __('Register') }}
-                </x-button>
+                <x-icon-action variant="success" icon="fa-solid fa-user-plus" label="Registrarse" size="md"
+                    type="submit" />
             </div>
         </form>
     </x-authentication-card>

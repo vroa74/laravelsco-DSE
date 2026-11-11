@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-md text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-base text-gray-800 dark:text-gray-200 leading-tight sm:text-lg">
             Ver Registro #{{ $co->id }}
         </h2>
     </x-slot>
@@ -84,15 +84,11 @@
                     </div>
                 </div>
 
-                <div class="mt-6 flex justify-end space-x-3">
-                    <a href="{{ route('rg.index') }}" 
-                       class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                        Volver
-                    </a>
-                    <a href="{{ route('rg.edit', $co->id) }}" 
-                       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Editar
-                    </a>
+                <div class="mt-6 flex items-center justify-end gap-2">
+                    <x-icon-action variant="neutral" icon="fa-solid fa-arrow-left" label="Volver al listado"
+                        size="md" :href="route('rg.index')" />
+                    <x-icon-action variant="warning" icon="fa-solid fa-pencil" label="Editar registro"
+                        size="md" :href="route('rg.edit', $co->id)" />
                 </div>
             </div>
         </div>

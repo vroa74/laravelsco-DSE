@@ -28,29 +28,17 @@
                     <x-input id="recovery_code" class="block mt-1 w-full" type="text" name="recovery_code" x-ref="recovery_code" autocomplete="one-time-code" />
                 </div>
 
-                <div class="flex items-center justify-end mt-4">
-                    <button type="button" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 underline cursor-pointer"
-                                    x-show="! recovery"
-                                    x-on:click="
-                                        recovery = true;
-                                        $nextTick(() => { $refs.recovery_code.focus() })
-                                    ">
-                        {{ __('Use a recovery code') }}
-                    </button>
+                <div class="mt-4 flex flex-wrap items-center justify-end gap-2">
+                    <x-icon-action variant="info" icon="fa-solid fa-key" label="Usar un código de recuperación"
+                        size="md" x-show="! recovery"
+                        x-on:click="recovery = true; $nextTick(() => { $refs.recovery_code.focus() })" />
 
-                    <button type="button" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 underline cursor-pointer"
-                                    x-cloak
-                                    x-show="recovery"
-                                    x-on:click="
-                                        recovery = false;
-                                        $nextTick(() => { $refs.code.focus() })
-                                    ">
-                        {{ __('Use an authentication code') }}
-                    </button>
+                    <x-icon-action variant="info" icon="fa-solid fa-shield-halved" label="Usar un código de autenticación"
+                        size="md" x-show="recovery" style="display: none;"
+                        x-on:click="recovery = false; $nextTick(() => { $refs.code.focus() })" />
 
-                    <x-button class="ms-4">
-                        {{ __('Log in') }}
-                    </x-button>
+                    <x-icon-action variant="success" icon="fa-solid fa-right-to-bracket" label="Iniciar sesión"
+                        size="md" type="submit" />
                 </div>
             </form>
         </div>

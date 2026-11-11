@@ -1,24 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-lg text-gray-800 dark:text-gray-200 leading-tight">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+            <h2 class="font-semibold text-base text-gray-800 dark:text-gray-200 leading-tight sm:text-lg">
                 {{ __('Detalles del Grupo') }}: {{ $userGroup->name }}
             </h2>
-            <div class="flex space-x-2">
-                <a href="{{ route('user-groups.edit', $userGroup) }}"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-medium py-1.5 px-3 rounded text-xs">
-                    Editar
-                </a>
-                <a href="{{ route('user-groups.index') }}"
-                    class="bg-gray-500 hover:bg-gray-700 text-white font-medium py-1.5 px-3 rounded text-xs">
-                    Volver
-                </a>
+            <div class="flex items-center gap-2">
+                <x-icon-action variant="warning" icon="fa-solid fa-pencil" label="Editar grupo"
+                    :href="route('user-groups.edit', $userGroup)" />
+                <x-icon-action variant="neutral" icon="fa-solid fa-arrow-left" label="Volver al listado"
+                    :href="route('user-groups.index')" />
             </div>
         </div>
     </x-slot>
 
     <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <!-- Información del grupo -->
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">

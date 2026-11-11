@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-lg text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-base text-gray-800 dark:text-gray-200 leading-tight sm:text-lg">
             {{ __('Componentes Instalados') }}
         </h2>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-6 sm:py-8">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <!-- Composer Components -->
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -147,11 +147,13 @@
                     'x-dropdown-link' => 'Enlace de menú desplegable',
                     'x-form-section' => 'Sección de formulario',
                     'x-guest-layout' => 'Diseño para visitantes',
+                    'x-icon-action' => 'Botón o enlace de acción solo con icono y tooltip accesible',
                     'x-input' => 'Campo de entrada',
                     'x-input-error' => 'Error de validación de campo',
                     'x-label' => 'Etiqueta de formulario',
                     'x-modal' => 'Contenedor modal',
                     'x-nav-link' => 'Enlace de navegación',
+                    'x-password-toggle-button' => 'Botón para mostrar u ocultar contraseña',
                     'x-responsive-nav-link' => 'Enlace de navegación adaptable',
                     'x-secondary-button' => 'Botón secundario',
                     'x-section-border' => 'Separador de sección',
@@ -202,10 +204,15 @@
                 $fontAwesomeIcons = [
                     'fa-download', 'fa-eye', 'fa-eye-slash', 'fa-file-pdf', 'fa-plus', 'fa-trash', 'fa-user', 'fa-users',
                     'fa-regular fa-eye', 'fa-regular fa-house', 'fa-regular fa-rectangle-list', 'fa-regular fa-square-plus',
-                    'fa-solid fa-bars', 'fa-solid fa-eye', 'fa-solid fa-file-csv', 'fa-solid fa-file-export',
-                    'fa-solid fa-filter', 'fa-solid fa-house', 'fa-solid fa-igloo', 'fa-solid fa-list', 'fa-solid fa-pen-to-square', 'fa-solid fa-pencil',
-                    'fa-solid fa-plus', 'fa-solid fa-save', 'fa-solid fa-times', 'fa-solid fa-trash-can',
-                    'fa-solid fa-user', 'fa-solid fa-user-plus', 'fa-solid fa-users',
+                    'fa-solid fa-arrow-left', 'fa-solid fa-bars', 'fa-solid fa-check', 'fa-solid fa-download',
+                    'fa-solid fa-eraser', 'fa-solid fa-eye', 'fa-solid fa-file-csv', 'fa-solid fa-file-export',
+                    'fa-solid fa-file-pdf', 'fa-solid fa-filter', 'fa-solid fa-floppy-disk', 'fa-solid fa-house',
+                    'fa-solid fa-igloo', 'fa-solid fa-image', 'fa-solid fa-key', 'fa-solid fa-list',
+                    'fa-solid fa-paper-plane', 'fa-solid fa-pen-to-square', 'fa-solid fa-pencil', 'fa-solid fa-plus',
+                    'fa-solid fa-right-from-bracket', 'fa-solid fa-right-to-bracket', 'fa-solid fa-save',
+                    'fa-solid fa-shield-halved', 'fa-solid fa-sliders', 'fa-solid fa-times', 'fa-solid fa-trash',
+                    'fa-solid fa-trash-can', 'fa-solid fa-upload', 'fa-solid fa-user', 'fa-solid fa-user-pen',
+                    'fa-solid fa-user-plus', 'fa-solid fa-users', 'fa-solid fa-xmark',
                 ];
 
                 $inlineSvgViews = [
@@ -215,6 +222,7 @@
                     'components/authentication-card-logo.blade.php',
                     'components/banner.blade.php',
                     'components/confirmation-modal.blade.php',
+                    'components/password-toggle-button.blade.php',
                     'components/switchable-team.blade.php',
                     'components/welcome.blade.php',
                     'layouts/_navbar.blade.php',

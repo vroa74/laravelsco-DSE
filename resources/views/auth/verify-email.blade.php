@@ -14,30 +14,23 @@
             </div>
         @endif
 
-        <div class="mt-4 flex items-center justify-between">
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-2">
             <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
 
-                <div>
-                    <x-button type="submit">
-                        {{ __('Resend Verification Email') }}
-                    </x-button>
-                </div>
+                <x-icon-action variant="success" icon="fa-solid fa-paper-plane"
+                    label="Reenviar correo de verificación" size="md" type="submit" />
             </form>
 
-            <div>
-                <a
-                    href="{{ route('profile.show') }}"
-                    class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                >
-                    {{ __('Edit Profile') }}</a>
+            <div class="flex items-center gap-2">
+                <x-icon-action variant="info" icon="fa-solid fa-user-pen" label="Editar perfil" size="md"
+                    :href="route('profile.show')" />
 
-                <form method="POST" action="{{ route('logout') }}" class="inline">
+                <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <button type="submit" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800 ms-2">
-                        {{ __('Log Out') }}
-                    </button>
+                    <x-icon-action variant="danger" icon="fa-solid fa-right-from-bracket" label="Cerrar sesión"
+                        size="md" type="submit" />
                 </form>
             </div>
         </div>
