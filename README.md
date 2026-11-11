@@ -35,38 +35,51 @@ Versiones declaradas en `composer.json` y `package.json` (fuente de verdad del p
 
 | Paquete | Versión | Uso |
 | --- | --- | --- |
-| PHP | `^8.2` | Requisito de plataforma |
-| `laravel/framework` | `^11.31` | Framework base |
-| `laravel/jetstream` | `^5.3` | Autenticación, perfil y stack Livewire |
+| PHP | `^8.2` (plataforma Composer 8.4) | Requisito de plataforma |
+| `laravel/framework` | `^12.0` | Framework base |
+| `laravel/jetstream` | `^5.5` | Autenticación, perfil y stack Livewire |
 | `laravel/fortify` | v1 (transitiva) | Backend de autenticación (`config/fortify.php`) |
-| `laravel/sanctum` | `^4.0` | Tokens de API (`/api/user`) |
-| `livewire/livewire` | `^3.0` | Componentes reactivos del servidor |
-| `wireui/wireui` | `^2.2` | Componentes UI (instalado; sin uso detectado en las vistas) |
-| `barryvdh/laravel-dompdf` | `^3.0` | Generación de reportes PDF |
+| `laravel/sanctum` | `^4.4` | Tokens de API (`/api/user`) |
+| `livewire/livewire` | `^3.8` | Componentes reactivos del servidor |
+| `wireui/wireui` | `^2.6` | Componentes UI (instalado; sin uso detectado en las vistas) |
+| `barryvdh/laravel-dompdf` | `^3.1` | Generación de reportes PDF |
 | `barryvdh/laravel-snappy` | `^1.0` | PDF alternativo (instalado; sin uso detectado) |
-| `maatwebsite/excel` | `^3.1` | Exportaciones a Excel/CSV |
-| `endroid/qr-code` | `^6.0` | Códigos QR |
-| `laravel-lang/common` | `^6.7` | Traducciones de Laravel |
-| `laravel/tinker` | `^2.10` | REPL de depuración |
+| `maatwebsite/excel` | `^4.0` | Exportaciones a Excel/CSV (instalado; sin uso detectado) |
+| `endroid/qr-code` | `^6.0` | Códigos QR (instalado; el 2FA usa el QR de Fortify) |
+| `laravel-lang/common` | `^6.9` | Traducciones de Laravel |
+| `laravel/tinker` | `^3.1` | REPL de depuración |
 
 ### Frontend
 
 | Paquete | Versión | Uso |
 | --- | --- | --- |
-| `tailwindcss` | `^3.4.0` | Estilos utilitarios (+ `@tailwindcss/forms`, `@tailwindcss/typography`) |
-| `vite` / `laravel-vite-plugin` | `^6.0` / `^1.0` | Compilación de assets |
-| `alpinejs` | `^3.14.8` | Interacciones del cliente |
+| `tailwindcss` | `^3.4.19` | Estilos utilitarios (+ `@tailwindcss/forms`, `@tailwindcss/typography`) |
+| `vite` / `laravel-vite-plugin` | `^8.3` / `^3.2` | Compilación de assets |
+| `alpinejs` | `^3.17.5` | Interacciones del cliente |
 | `flowbite` | `^2.5.2` | Componentes Tailwind + plugin JS (CDN) |
-| `vue` / `@vitejs/plugin-vue` | `^3.5.13` / `^5.2.1` | Instalado; no se importa en `resources/js/app.js` |
-| `axios` | `^1.7.4` | Peticiones HTTP (`resources/js/bootstrap.js`) |
-| `@fontsource/roboto`, `@fontsource/arimo` | `^5.1.1` | Tipografías empaquetadas |
-| `concurrently` | `^9.0.1` | Script `composer run dev` |
+| `vue` / `@vitejs/plugin-vue` | `^3.5.45` / `^6.0.10` | Instalado; no se importa en `resources/js/app.js` |
+| `axios` | `^1.21.1` | Peticiones HTTP (`resources/js/bootstrap.js`) |
+| `@fontsource/roboto`, `@fontsource/arimo` | `^5.3.0` | Tipografías empaquetadas |
+| `concurrently` | `^10.0.7` | Script `composer run dev` |
 
 ### Desarrollo
 
-Pest `^3.7`, PHPUnit (implícito), Pint `^1.13`, Pail `^1.1`, Collision `^8.1`, Sail `^1.26`, Faker, Mockery.
+Pest `^4.7` (PHPUnit 12), Pint `^1.32`, Pail `^1.3`, Collision `^8.9`, Sail `^1.70`, Faker, Mockery.
 
-> **Nota de entorno:** el equipo local ejecuta PHP 8.5.11 en Laragon. Esa versión produce avisos de deprecación en Pest/Collision y en `PDO::MYSQL_ATTR_SSL_CA`, que no cambian el resultado de las pruebas.
+> **Nota de entorno:** el equipo local ejecuta PHP 8.5.11 en Laragon, pero `composer.json` fija `config.platform.php` en **8.4.0** porque varias dependencias (`phpoffice/phpspreadsheet` 1.30, `wireui/wireui` 2.6) todavía declaran máximos por debajo de 8.5. El runtime 8.5 funciona sin avisos tras ajustar `PDO::MYSQL_ATTR_SSL_CA` en `config/database.php`.
+
+### Techo de versiones verificado
+
+Actualizado a las versiones más recientes que **no rompen el código**:
+
+| Dependencia | Instalada | Última disponible | Motivo del límite |
+| --- | --- | --- | --- |
+| `laravel/framework` | 12.72.0 | 13.42.0 | `laravel/jetstream` 5.5 exige `illuminate/support ^11.0\|^12.0` |
+| `livewire/livewire` | 3.8.11 | 4.4.8 | Jetstream 5.5 exige `^3.3` y WireUI 2.6 exige `^3.6` |
+| `pestphp/pest` | 4.7.8 | 5.3.5 | Pest 5 exige PHP `^8.4` y `pest-plugin-laravel` 5 exige Laravel `^13.23` |
+| `tailwindcss` | 3.4.19 | 4.3.5 | `wireui` aporta el preset de v3 y Flowbite 2 usa el plugin de v3 |
+| `flowbite` | 2.5.2 | 4.0.2 | Flowbite 4 depende de `tailwindcss ^4.1` |
+| `endroid/qr-code` | 6.1.3 | 6.2.0 | La 6.2 exige PHP `^8.5`; la plataforma de Composer es 8.4 |
 
 ---
 
@@ -74,7 +87,7 @@ Pest `^3.7`, PHPUnit (implícito), Pint `^1.13`, Pail `^1.1`, Collision `^8.1`, 
 
 - PHP 8.2 o superior con extensiones `pdo_mysql`, `mbstring`, `openssl`, `fileinfo`, `zip`, `gd`.
 - Composer 2.
-- Node.js 18+ y npm.
+- Node.js 20.19+ o 22.12+ y npm (requisito de Vite 8).
 - MySQL/MariaDB para desarrollo (la base de pruebas es SQLite en memoria).
 - (Opcional) Laragon o cualquier servidor local con virtual host `laravelsco-dse.test`.
 
@@ -423,7 +436,7 @@ App\Livewire\Profile\UpdateProfileInformationForm
 
 ## 11. Pruebas automatizadas
 
-- Framework: **Pest 3** sobre PHPUnit, con `tests/Pest.php` aplicando `Tests\TestCase` y `RefreshDatabase` a `Feature`.
+- Framework: **Pest 4** sobre **PHPUnit 12**, con `tests/Pest.php` aplicando `Tests\TestCase` y `RefreshDatabase` a `Feature`.
 - **Base de datos de pruebas:** `phpunit.xml` fuerza `DB_CONNECTION=sqlite`, `DB_DATABASE=:memory:` y `DB_URL=""` (vacío) con `force="true"`.
 - **Guardia adicional:** `tests/TestCase.php` aborta con `RuntimeException` si la conexión por defecto no es SQLite en memoria.
 - **Bloqueo de comandos destructivos:** `AppServiceProvider::boot()` ejecuta `DB::prohibitDestructiveCommands(! $this->app->runningUnitTests())`.
@@ -447,7 +460,7 @@ vendor/bin/pint --dirty --format agent
 | `tests/Feature/AuthenticationTest.php` | Login de Jetstream (sin RFC) | ❌ 1 fallo: el test no envía `rfc` y el login personalizado lo exige |
 | Suite Jetstream (`ProfileInformationTest`, `UpdatePasswordTest`, `TwoFactorAuthenticationTest`, `PasswordResetTest`, `BrowserSessionsTest`, `ApiTokenPermissionsTest`, `CreateApiTokenTest`, `DeleteApiTokenTest`, `DeleteAccountTest`, `EmailVerificationTest`, `PasswordConfirmationTest`, `RegistrationTest`) | Funciones de Jetstream/Fortify | ✅ ejecutan con avisos de deprecación |
 
-**Último resultado (entorno local, PHP 8.5.11):** `36 pruebas`, `53 aserciones`, `35 con avisos de deprecación`, `1 fallo` (el descrito arriba).
+**Último resultado (entorno local, PHP 8.5.11):** `36 pruebas`, `53 aserciones`, `27 correctas`, `8 omitidas` (`->skip()` de funciones Jetstream deshabilitadas: API, registro y verificación de correo) y `1 fallo` (el descrito arriba). Sin avisos de deprecación tras el ajuste de `config/database.php`.
 
 ---
 
@@ -471,7 +484,7 @@ vendor/bin/pint --dirty --format agent
 
 | # | Regla en `AGENTS.md` | Estado real |
 | --- | --- | --- |
-| 1 | PHP 8.3, Laravel 13, Pest 4, Livewire 3, Sanctum 4, Pint 1, Pail 1, Tailwind 3 | `composer.json` declara PHP `^8.2`, Laravel `^11.31`, Pest `^3.7`; Livewire, Sanctum, Pint y Pail coinciden en la rama declarada |
+| 1 | PHP 8.3, Laravel 13, Pest 4, Livewire 3, Sanctum 4, Pint 1, Pail 1, Tailwind 3 | Alineado salvo Laravel: el proyecto quedó en **Laravel 12** porque Jetstream 5.5 no admite 13; PHP local 8.5 con plataforma Composer 8.4. Pest 4, Livewire 3, Sanctum 4, Pint 1, Pail 1 y Tailwind 3 coinciden |
 | 2 | Paquetes `laravel/boost`, `laravel/mcp`, `laravel/prompts` | No figuran en `composer.json`; las herramientas MCP de Boost (`search-docs`, `database-query`, `database-schema`, `browser-logs`) no están disponibles en este entorno |
 | 3 | Pruebas en la carpeta `/pruebas` | El proyecto usa `tests/` con la estructura estándar de Laravel; no existe `/pruebas` |
 | 4 | Habilidades en `**/skills/**` | Están en `.agents/skills/`; `.agents/` no figura en `.gitignore` y suma 1 929 archivos / 39.6 MB (incluye `.agents/skill-backups/`), por lo que hoy queda fuera del commit |
@@ -480,7 +493,7 @@ vendor/bin/pint --dirty --format agent
 | 7 | Inventario de componentes sincronizado | Falta registrar el componente propio `x-nav` (`resources/views/components/nav.php`) |
 | 8 | Documentación solo si se solicita | `README.md` se reescribe por solicitud explícita en este cambio |
 
-> Recomendación: alinear `AGENTS.md` con las versiones reales o planificar la actualización de dependencias como tarea independiente y con aprobación, ya que cambiar de Laravel 11 a 13 y de Pest 3 a 4 afecta migraciones, pruebas y paquetes.
+> Recomendación: mantener el techo documentado en §2 (Laravel 12, Livewire 3, Tailwind 3, Flowbite 2) hasta que `laravel/jetstream` soporte Laravel 13 y `wireui`/`flowbite` migren a Tailwind 4. Ese salto debe planificarse como tarea independiente porque afecta el preset de Tailwind y todos los estilos.
 
 ---
 
@@ -499,7 +512,7 @@ Detectadas al revisar el proyecto y el diff del último commit. **No se corrigie
 9. **Dos límites distintos de tamaño:** `cos_files` permite 15 MB y `report_files` 10 MB. Confirmar con negocio cuál aplica a cada flujo.
 10. **Inactividad de 60 segundos** en el login: redirige a `/` sin cerrar sesión formalmente; puede ser agresivo para el usuario.
 11. **`config/app.php`** usa `locale = es`, pero `.env.example` declara `APP_LOCALE=en`; un `.env` nuevo arrancaría en inglés.
-12. **PHP 8.5 local** emite deprecaciones de Pest, Collision y `PDO::MYSQL_ATTR_SSL_CA`; conviene fijar la versión de PHP del servidor (8.2/8.3) para evitar ruido.
+12. **PHP 8.5 local** ya no emite deprecaciones en la suite: `config/database.php` usa `Pdo\Mysql::ATTR_SSL_CA` cuando existe y `composer.json` fija la plataforma en 8.4. Aun así, conviene desplegar con la misma versión de PHP declarada (8.4).
 13. **Rutas de imágenes públicas:** `welcome` usa `media/img/background.png` y `media/img/logos.png`, `layouts.app` usa `media/img/favicon.png` y `layouts.navbar` usa `media/img/ple_legis_65.png`. Las cuatro existen en `public/media/img`; el fallo de imágenes en despliegues proviene de no publicar esa carpeta.
 14. **`AppServiceProvider`** ahora bloquea comandos destructivos; documentar que `migrate:fresh`, `migrate:refresh`, `migrate:reset` y `db:wipe` fallarán fuera de las pruebas.
 15. **`.agents/` fuera del control de versiones:** contiene 1 929 archivos (39.6 MB) entre `skills/` y `skill-backups/`; falta decidir si se versiona `skills/` e ignora `skill-backups/`.
@@ -526,7 +539,7 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 - Las migraciones generadas automáticamente por herramientas no se conservan (se retiraron en `up000038`).
 - Los cambios se documentan también en el inventario `/componentes` cuando afectan dependencias, componentes o iconos.
 
-### Cambios incluidos en este commit
+### Cambios incluidos en `up000040`
 
 | Archivo | Cambio |
 | --- | --- |
@@ -544,7 +557,21 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 | `tests/Feature/ComponentesTest.php` *(nuevo)* | Prueba del inventario de componentes |
 | `AGENTS.md` *(nuevo)* | Reglas operativas del proyecto |
 
-### Pendientes fuera de este commit
+### Actualización de dependencias (`up000041`)
+
+| Archivo | Cambio |
+| --- | --- |
+| `composer.json` | Laravel `^12.0`, Jetstream `^5.5`, Livewire `^3.8`, Sanctum `^4.4`, WireUI `^2.6`, Tinker `^3.1`, Excel `^4.0`, Pest `^4.0`, Pint `^1.32`, Pail `^1.3`, Sail `^1.70`, Collision `^8.9`, DomPDF `^3.1`, Laravel Lang `^6.9`; se agrega `config.platform.php = 8.4.0` |
+| `composer.lock` | Resolución completa de las nuevas versiones (Laravel 12.72.0, Livewire 3.8.11, Pest 4.7.8, PHPUnit 12.5.33, Excel 4.0.6, Tinker 3.1.0) |
+| `package.json` | Vite `^8.3.8`, `laravel-vite-plugin` `^3.2.1`, `@vitejs/plugin-vue` `^6.0.10`, Alpine `^3.17.5`, Tailwind `^3.4.19`, Axios `^1.21.1`, fuentes `^5.3.0`, `concurrently` `^10.0.7` |
+| `package-lock.json` | Resolución de las nuevas versiones de frontend |
+| `config/database.php` | Usa `Pdo\Mysql::ATTR_SSL_CA` (PHP ≥8.4) con reserva a `PDO::MYSQL_ATTR_SSL_CA`, eliminando la deprecación de PHP 8.5 en las pruebas |
+| `AGENTS.md` | Versiones reales del stack y nueva sección «Techo de versiones verificado» |
+| `README.md` | Stack, requisitos, pruebas y análisis de `AGENTS.md` alineados a las versiones instaladas |
+
+**Validación:** `composer validate` correcto, 50 rutas, `npm run build` correcto con Vite 8 y suite con 27 pruebas correctas, 8 omitidas y 1 fallo preexistente (`AuthenticationTest`).
+
+### Pendientes fuera de estos commits
 
 - `.agents/` (habilidades y respaldos, 39.6 MB) y `zREADME.md` (bitácora anterior) quedan sin versionar a la espera de decisión.
 - `AuthenticationTest` debe actualizarse con `rfc` para volver a verde.

@@ -13,19 +13,29 @@ Las directrices de Laravel Boost están especialmente curadas por los mantenedor
 
 Esta aplicación es un proyecto Laravel y los principales paquetes del ecosistema con sus versiones están listados a continuación. Eres un experto en todos ellos. Asegúrate de cumplir con estos paquetes y versiones específicos.
 
-- php - 8.3
+- php - 8.5 (Composer fija `config.platform.php` en 8.4.0)
+- laravel/framework (LARAVEL) - v12
+- laravel/jetstream (JETSTREAM) - v5
 - laravel/fortify (FORTIFY) - v1
-- laravel/framework (LARAVEL) - v13
-- laravel/prompts (PROMPTS) - v0
 - laravel/sanctum (SANCTUM) - v4
 - livewire/livewire (LIVEWIRE) - v3
-- laravel/boost (BOOST) - v2
-- laravel/mcp (MCP) - v0
+- laravel/prompts (PROMPTS) - v0
 - laravel/pail (PAIL) - v1
 - laravel/pint (PINT) - v1
 - pestphp/pest (PEST) - v4
 - phpunit/phpunit (PHPUNIT) - v12
 - tailwindcss (TAILWINDCSS) - v3
+- vite - v8
+
+## Techo de versiones verificado
+
+Estas son las versiones máximas que la aplicación admite hoy sin romper el código; no las subas por encima sin resolver antes el bloqueo indicado.
+
+- **Laravel 12** es el límite: `laravel/jetstream` 5.5 exige `illuminate/support ^11.0|^12.0`, por lo que Laravel 13 falla al resolver dependencias.
+- **Livewire 3** es el límite: Jetstream 5.5 exige `livewire/livewire ^3.3` y WireUI 2.6 exige `^3.6`.
+- **Tailwind 3** es el límite: `wireui/wireui` aporta el preset de Tailwind v3 en `tailwind.config.js` y `flowbite` 2 usa el plugin de v3.
+- **Flowbite 2** es el límite: `flowbite` 4 depende de `tailwindcss ^4.1`, lo que obliga a migrar el preset de WireUI y revisar todos los estilos.
+- `endroid/qr-code` se mantiene en 6.1 porque la rama 6.2 exige PHP `^8.5` y la plataforma de Composer es 8.4.
 
 ## Activación de habilidades
 
@@ -53,6 +63,7 @@ Este proyecto tiene habilidades específicas de dominio disponibles en `**/skill
 - Campos de contraseña: todo input de contraseña debe incluir el botón de mostrar/ocultar con el estilo del login (icono de ojo SVG, `text-gray-400 hover:text-gray-600`, posicionado a la derecha). En Livewire/Blade usa el componente `<x-password-toggle-button />` dentro de un contenedor `relative` con `x-data="{ show: false }"` y `x-bind:type="show ? 'text' : 'password'"` en el input.
 - Mensajes de sesión: conserva claves estándar observadas (`message`, `error`) y textos claros en español.
 - Comentarios: usa comentarios breves y útiles, preferentemente en español, solo cuando aporten contexto no obvio.
+- El diseño de esta web ap debe ser responsivo.
 
 ## Scripts de verificación
 
