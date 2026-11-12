@@ -1,0 +1,11 @@
+{
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "modelContextOverrides": [
+    {
+      "modelId": "nvidia/nemotron-3-ultra-550b-a55b",
+      "contextWindowOverride": 262144,
+      "contextWindowOverrideSource": "manual"
+    }
+  ]
+}

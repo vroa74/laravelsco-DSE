@@ -66,3 +66,9 @@ Disponibilidad de inferencia no acredita arranque ni trabajo terminado del agent
 ### Incidencia de arranque del trabajador NVIDIA
 
 El primer intento de trabajador falló por compactación; no equivale a fallo de la prueba de inferencia. El límite de 128000 declarado desde el catálogo del gateway se ajustó a 262144 de contexto, 240000 de entrada y 8192 de salida, con respaldo verificado. La [documentación oficial](https://docs.nvidia.com/nim/large-language-models/2.0.5/day-0/get-started-nemotron-3-ultra.html) indica 256K nativo y hasta 1M según despliegue; no se ensayó el máximo del endpoint alojado. Intento fallido detenido con confirmación; reintento pendiente. Backend DeepSeek con recibo de arranque, sin informe. Registro up000049; sin cambios de interfaz ni datos.
+
+### Límite efectivo del gateway y entrega backend
+
+El segundo intento de NVIDIA fue rechazado por OmniRoute: estimación de 146280 tokens frente a su límite declarado de 128000. Ajustar solo el alias de OpenCode no modificaba ese límite. Se guardaron metadatos anteriores/posteriores sin secretos en `pruebas/evidencias/integracion-nvidia` y se aplicó por API una única excepción de contexto de 262144 al modelo Nemotron Ultra. PUT HTTP 200, lectura posterior y catálogo de inferencia con 262144 comprobados. La fuente oficial permanece enlazada arriba; no se mide aquí el máximo real del endpoint ni se eluden protecciones. Reversión: retirar únicamente esa excepción para recuperar el valor anterior; no borrar otras configuraciones.
+
+Intento fallido detenido con confirmación; nuevo reintento todavía pendiente de informe. DeepSeek ya entregó matriz de contratos backend en solo lectura: no hay contrato operativo de tema identificado y coexisten convenciones de URL de foto, entre otros riesgos a contrastar antes de implementar. El informe del trabajador es evidencia estática, no una prueba del sistema real. Registro up000050; sin cambios de producto.

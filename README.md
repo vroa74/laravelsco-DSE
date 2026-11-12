@@ -676,6 +676,16 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** respaldo SHA-256 y comparación del resto de la configuración correctos; contexto nativo 256K contrastado con documentación oficial. Intento fallido detenido con confirmación; no se afirma trabajo realizado por el agente, capacidad máxima alojada ni resolución completa. Sin pruebas de aplicación, interfaz ni MySQL.
 
+### Límite efectivo del gateway NVIDIA ("up000050")
+
+| Archivo | Cambio |
+| --- | --- |
+| `AGENTS.md` y `DOC/sistema/estandar-visual.md` | Diferencia entre límite del alias y del gateway; excepción única documentada y entrega backend de solo lectura. |
+| `pruebas/evidencias/integracion-nvidia` | Metadatos del límite anterior/posterior, sin claves ni conversaciones. |
+| `README.md` | Bitácora y resultado real de verificación. |
+
+**Validación:** actualización de metadatos vía API HTTP 200, readback y catálogo de inferencia con contexto262144 para Nemotron Ultra. Intento fallido detenido con confirmación; frontend todavía pendiente de informe. DeepSeek entregó revisión estática de contratos. Sin claves, código de producto, datos de SCO ni MySQL modificados.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
