@@ -1,3 +1,11 @@
+## Reparto de trabajo NVIDIA/DeepSeek — 12/11/2026
+
+- Por instrucción expresa del usuario, el frontend y sus detalles visuales se asignan a NVIDIA NIM mediante OmniRoute; el backend a DeepSeek mediante OmniRoute. El coordinador conserva arquitectura, revisión, documentación, seguridad, costos e integración. Esta distribución sustituye la atribución anterior de todo desarrollo a DeepSeek; no cambia los límites de datos ni la prioridad visual.
+- Modelo frontend comprobado: `nvidia/nvidia/nemotron-3-ultra-550b-a55b`; alias compartido de OpenCode `omniroute/frontend-nvidia-ultra`. Modelo backend existente: `omniroute/deepseek-v4.1-flash-1017`. No afirmar ejecución del trabajador por una prueba de inferencia ni actividad por haber enviado un mensaje.
+- Primero entregar diagnóstico y estándar visual contra `/agen` antes de implementar. Mientras tanto, el backend revisa contratos y compatibilidad con la UI en solo lectura; no adelanta correcciones funcionales. No modificar archivos compartidos simultáneamente.
+- **Registro de validación:** metadatos técnicos de OmniRoute leídos sin cuerpos de conversación; prueba autenticada del modelo NVIDIA con HTTP 200 y llamada `report_ready`. Se agregó un único alias a la configuración compartida de OpenCode, con respaldo SHA-256 comprobado y comparación del resto de la configuración sin cambios. Sin claves expuestas ni configuración de SCO modificada. La ruta sirve a trabajadores OpenCode/Orca y su CLI; no equivale a cambiar el modelo coordinador ni a configurar o probar NVIDIA en Codex Desktop/CLI. No se incorporó MCP, plugin ni skill nuevos.
+- **Pendientes:** recepción de informes, revisión del coordinador y aplicación/verificación visual. Tres asignaciones visuales anteriores detenidas con confirmación para consolidar el trabajo, sin revertir sus archivos locales. Esta actualización documental se registra en `README.md` §15 como up000048; sin pruebas de aplicación, MySQL ni cambios de producto.
+
 ## Prioridad y estándar visual obligatorio — 12/11/2026
 
 - **Prioridad expresa del usuario:** realizar primero la homogeneización visual y sus reglas; posponer nuevas correcciones funcionales. Los parches RG/grupos ya recibidos permanecen pendientes de revisión e integración; esta instrucción no autoriza revertirlos ni mezclarlos con la entrega visual.

@@ -657,6 +657,16 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** lectura posterior, enlaces locales, disponibilidad de los tres SKILL.md y revisión de diferencias documentales. Sin cambios de interfaz, instalación de plugins ni acceso a datos. Aplicación del estándar y verificación visual pendientes; las correcciones RG/grupos no forman parte de este commit.
 
+### Reparto NVIDIA frontend y DeepSeek backend ("up000048")
+
+| Archivo | Cambio |
+| --- | --- |
+| `AGENTS.md` | Asigna frontend a NVIDIA NIM y backend a DeepSeek, con prioridad visual y límites de implementación. Solo esta incorporación se incluye; cambios previos preservados. |
+| `DOC/sistema/estandar-visual.md` | Registra roles, modelo NVIDIA comprobado y límites de la integración OpenCode/Orca. |
+| `README.md` | Bitácora del reparto y validación. |
+
+**Validación:** inferencia NVIDIA vía OmniRoute HTTP 200 con llamada a herramienta; alias único agregado fuera del repositorio con respaldo SHA-256 verificado y comparación del resto sin cambios. Tres intentos anteriores detenidos con confirmación. Lectura/diferencias documentales revisadas; informes y verificación visual pendientes. Sin claves publicadas, nuevas dependencias, MySQL ni código de producto modificado en esta entrega. No se afirma configuración ni prueba de NVIDIA en Codex Desktop/CLI.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.

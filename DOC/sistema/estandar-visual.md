@@ -56,3 +56,9 @@ Disponibilidad, lectura, aplicación y ejecución de herramientas son hechos dif
 Evidencias y pruebas nuevas en `/pruebas`; pruebas de aplicación únicamente sintéticas en SQLite en memoria con guardias. No abrir la aplicación real ni consultar MySQL para este análisis. Registrar cada implementación en AGENTS.md, README.md y DOC/sistema conforme a las reglas de entrega.
 
 Validación de esta entrega: lectura documental, referencias locales y revisión de diferencias; sin build, pruebas de aplicación, auditoría visual ni cambios de interfaz.
+
+## Reparto de trabajo confirmado
+
+Desde el 12/11/2026, NVIDIA NIM asume frontend y DeepSeek backend, ambos mediante OmniRoute; el coordinador mantiene documentación y revisión. Se verificó Nemotron 3 Ultra con HTTP 200 y llamada a herramienta; el alias compartido OpenCode es `omniroute/frontend-nvidia-ultra`. Respaldo de configuración y preservación del resto comprobados, sin secretos en la evidencia. El backend analiza contratos en paralelo, sin adelantar correcciones mientras la prioridad es la homogeneización visual. Los informes preceden a implementar.
+
+Disponibilidad de inferencia no acredita arranque ni trabajo terminado del agente. Este alias sirve a OpenCode CLI y trabajadores Orca; no se ha configurado ni probado como modelo de Codex Desktop/CLI. Sin MCP, plugins ni skills nuevos. La incorporación queda documentada en up000048; faltan informes y aceptación visual.
