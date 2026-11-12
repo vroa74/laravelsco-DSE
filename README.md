@@ -635,6 +635,18 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** Pint pasó. `php artisan test --compact --cache-directory=pruebas/.cache/phpunit`: 62 aprobadas, 8 omitidas y 163 aserciones, 74.27 s, con entorno forzado a SQLite `:memory:` y artefactos temporales bajo `/pruebas`. El desarrollador verificó además Pest y PHPUnit para la suite nueva: 11 pruebas, 60 aserciones. El fixture negativo comprobó controladores MySQL deshabilitados y ausencia de contenedor, bootstrap de aplicación y gestor de BD. Sin acceso a MySQL, cambios de esquema real, dependencias ni interfaz. F1.3 aceptada; F1.1/F1.2 permanecen en revisión de diseño.
 
+### Contrato técnico y reglas funcionales de la reestructuración ("up000046")
+
+| Archivo | Cambio |
+| --- | --- |
+| `DOC/sistema/diccionario-primer-recorrido.md` | Modelo canónico, consumidores legados, tipos, nulabilidad, integridad y registro de migraciones por tabla/fase. |
+| `DOC/sistema/compatibilidad-y-transicion.md` | Stack objetivo, adaptadores y fuentes oficiales, transición por recorrido y validaciones de integración pendientes. |
+| `DOC/sistema/reglas-funcionales.md` | Cuentas desde 18 años cumplidos y adjuntos durante 15 días naturales desde publicación; metadatos/historia permanentes. |
+| `DOC/sistema/fase-1.md` | Cierre de preparación, evidencia F1.3 y límites; no acredita instalación del stack nuevo ni migración de datos. |
+| `README.md` | Bitácora de este cierre documental. |
+
+**Validación:** documentos leídos de vuelta en UTF-8; estructura, referencias, decisiones y diferencias revisadas. No se ejecutan Pint/build/pruebas por este cambio exclusivamente documental. La regresión de F1.3 permanece en up000045: 62 aprobadas, 8 omitidas y 163 aserciones. Sin datos, .env, dependencias ni interfaz modificados.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
