@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ config('app.name') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -26,7 +26,6 @@
             <img id="background" class="absolute -left-20 top-0 max-w-[877px] opacity-10 " src="{{ asset('media/img/background.png') }}" alt="Laravel background" />
             @include('layouts.navbar')
 
-            ++++++
             {{--            <link id="background"  class="absolute -left-20 top-0 max-w-[877px]" href="{{ asset('media/img/background.png') }}">--}}
             <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                 <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
@@ -63,7 +62,7 @@
                     <main class="mt-6">
 
                         <div class="max-w-8xl mx-auto text-white bg-gray-800 bg-opacity-50 mt-6 p-4 rounded shadow">
-                            <h3 class="text-xl pb-1" >Ques es Oficialía de Partes
+                            <h3 class="text-xl pb-1" >¿Qué es la Oficialía de Partes?
                             </h3>
                             <p>Organizar y coordinar de manera eficiente la recepción, registro, distribución y resguardo de documentos oficiales y correspondencia institucional, asegurando su adecuada canalización y cumplimiento de los plazos establecidos en los procedimientos administrativos y legales.</p>
 

@@ -507,7 +507,7 @@ Detectadas al revisar el proyecto y el diff del último commit. **No se corrigie
 2. **`ReportFileController` sin rutas:** `upload`, `download`, `list`, `delete` y `stats` no están expuestos en `routes/web.php`; la funcionalidad de 10 MB / 5 descargas / 7 días existe pero no es accesible desde la interfaz.
 3. **Modelos duplicados:** `Co` y `Cos` apuntan a la misma tabla `cos`. Conviene dejar un solo modelo canónico y conservar el otro como alias deprecado.
 4. **`UserFactory` referencia `App\Models\Team`**, clase que no existe. Solo falla si se usa `withPersonalTeam()` o se habilitan equipos de Jetstream. No se ejecuta en las pruebas actuales.
-5. **`resources/views/welcome.blade.php`**: contiene el texto suelto `++++++` (línea 29) y el `<title>` fijo `Laravel` en lugar de `config('app.name')`.
+5. **`resources/views/welcome.blade.php`**: ✅ resuelto en `up000043`; se retiró el texto suelto `++++++`, el `<title>` usa `config('app.name')` y se corrigió el encabezado de la portada.
 6. **Vista huérfana:** `resources/views/livewire/rg/index.blade.php` no tiene clase `App\Livewire\Rg\Index` asociada.
 7. **Copias de vistas:** `resources/views/ofi/of1.blade - copia.php` y `of2.blade - copia*.php` deberían retirarse del proyecto.
 8. **Descarga de adjuntos:** `CosFile::exists()` y `deleteFile()` usan el disco por defecto (`local`), mientras `HandlesFileUploads` guarda en el disco `public` con `storeAs(..., 'public')`. Revisar para evitar descargas fallidas.
@@ -602,9 +602,18 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** `vendor/bin/pint --dirty --format agent` limpio, `npm run build` correcto (`app-BaXTTsVI.css` exporta `.tabla-apilada`, `attr(data-label)` y `overflow-x:clip`), `php artisan view:cache` correcto y suite con 58 pruebas, 100 aserciones, 50 correctas, 8 omitidas y 0 fallos.
 
+### Portada pública sin texto residual y con título institucional (`up000043`)
+
+| Archivo | Cambio |
+| --- | --- |
+| `resources/views/welcome.blade.php` | El `<title>` pasa de `Laravel` a `config('app.name')`; se retira el texto suelto `++++++` que se mostraba en el cuerpo y se corrige el encabezado «Ques es Oficialía de Partes» a «¿Qué es la Oficialía de Partes?» |
+| `tests/Feature/LogoutTest.php` | Nueva prueba de la portada: exige el título con el nombre de la aplicación y la ausencia del texto residual |
+| `README.md` | Punto 5 de §13.5 marcado como resuelto y retiro del pendiente equivalente en §15 |
+
+**Validación:** `vendor/bin/pint --dirty --format agent` limpio y `php artisan test --compact` con 59 pruebas (51 correctas, 8 omitidas) y 0 fallos.
+
 ### Pendientes fuera de estos commits
 
 - `.agents/` (habilidades y respaldos, 39.6 MB) y `zREADME.md` (bitácora anterior) quedan sin versionar a la espera de decisión.
-- `welcome.blade.php` conserva el texto suelto `++++++` y el `<title>` fijo (ver §13.5).
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
 
