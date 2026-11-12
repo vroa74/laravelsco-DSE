@@ -667,6 +667,15 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** inferencia NVIDIA vía OmniRoute HTTP 200 con llamada a herramienta; alias único agregado fuera del repositorio con respaldo SHA-256 verificado y comparación del resto sin cambios. Tres intentos anteriores detenidos con confirmación. Lectura/diferencias documentales revisadas; informes y verificación visual pendientes. Sin claves publicadas, nuevas dependencias, MySQL ni código de producto modificado en esta entrega. No se afirma configuración ni prueba de NVIDIA en Codex Desktop/CLI.
 
+### Contexto del trabajador NVIDIA ("up000049")
+
+| Archivo | Cambio |
+| --- | --- |
+| `AGENTS.md` y `DOC/sistema/estandar-visual.md` | Registra el fallo de compactación del primer arranque NVIDIA, ajuste de límites declarados con fuente oficial y estado pendiente de reintento. |
+| `README.md` | Bitácora del ajuste; configuración privada fuera del repositorio. |
+
+**Validación:** respaldo SHA-256 y comparación del resto de la configuración correctos; contexto nativo 256K contrastado con documentación oficial. Intento fallido detenido con confirmación; no se afirma trabajo realizado por el agente, capacidad máxima alojada ni resolución completa. Sin pruebas de aplicación, interfaz ni MySQL.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
