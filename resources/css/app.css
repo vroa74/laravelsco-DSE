@@ -22,6 +22,33 @@ body {
 
 @layer components {
     /*
+     * Fondo institucional: escudo de Campeche en plata, sin letras,
+     * centrado, responsivo, con gradiente 80% y blend.
+     * Usa campechecon.png (solo escudo, 590x481 RGBA).
+     */
+    .bg-institucional {
+        @apply pointer-events-none fixed inset-0 z-0 overflow-hidden;
+    }
+
+    .bg-institucional__gradient-base {
+        @apply absolute inset-0 bg-gradient-to-br from-blue-950 via-slate-950 to-black;
+    }
+
+    .bg-institucional__shield {
+        @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+        @apply opacity-80 mix-blend-screen select-none;
+        width: min(94vw, 1100px);
+        max-width: none;
+        max-height: 90svh;
+        object-fit: contain;
+        filter: grayscale(100%) brightness(1.35) contrast(1.1);
+    }
+
+    .bg-institucional__gradient-overlay {
+        @apply absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-950/20;
+    }
+
+    /*
      * Tablas responsivas sin desplazamiento horizontal.
      * En móvil cada fila se convierte en una tarjeta con sus etiquetas;
      * a partir de 768px vuelve a comportarse como tabla normal.

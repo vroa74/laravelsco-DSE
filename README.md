@@ -686,6 +686,18 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** actualización de metadatos vía API HTTP 200, readback y catálogo de inferencia con contexto262144 para Nemotron Ultra. Intento fallido detenido con confirmación; frontend todavía pendiente de informe. DeepSeek entregó revisión estática de contratos. Sin claves, código de producto, datos de SCO ni MySQL modificados.
 
+### Fondo de acceso plateado, ampliado y sin letras ("up000051")
+
+| Archivo | Cambio |
+| --- | --- |
+| `resources/views/layouts/guest.blade.php` | Fondo con el escudo sin leyenda y clases compartidas; formularios y cabecera conservados. |
+| `resources/css/app.css` | Filtro plateado, tamaño adaptable hasta1100px, alto máximo90svh y gradientes/opacidad previos. |
+| `public/media/img/campechecon.png` | Incluye el PNG original proporcionado por el usuario que consume el nuevo fondo, sin editarlo. |
+| `pruebas/evidencias/fondo-acceso` y `pruebas/prototipos/fondo-acceso-plata.html` | Regresión y vista previa estática del fondo sin backend. |
+| `AGENTS.md`, `DOC/sistema/estandar-visual.md` y `README.md` | Decisión del usuario, alcance y pendientes. |
+
+**Validación:** build correcto del trabajador (19.13s); CSS compilado y diff check revisados; guardias verificadas y 22 pruebas aprobadas con45 aserciones en87.54s, datos sintéticos enSQLite memoria. Sin MySQL ni pruebas nuevas que repliquen CSS. Revisión renderizada y aceptación estética pendientes; la estandarización general no está implementada. Otros PNG/favicons y parches previos quedan fuera del commit.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.

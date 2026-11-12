@@ -22,12 +22,12 @@
         @livewireStyles
     </head>
     <body class="relative min-h-screen bg-slate-950 text-white">
-        {{-- Fondo institucional: escudo del Estado de Campeche con degradado al 80% --}}
-        <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
-            <div class="absolute inset-0 bg-gradient-to-br from-blue-950 via-slate-950 to-black"></div>
-            <img src="{{ asset('media/img/ple_legis_65.png') }}" alt=""
-                class="absolute left-1/2 top-1/2 w-[min(92vw,780px)] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-80 mix-blend-screen select-none" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-950/20"></div>
+        {{-- Fondo institucional: escudo de Campeche en plata, sin letras, centrado, responsivo --}}
+        <div class="bg-institucional" aria-hidden="true">
+            <div class="bg-institucional__gradient-base"></div>
+            <img src="{{ asset('media/img/campechecon.png') }}" alt=""
+                class="bg-institucional__shield" />
+            <div class="bg-institucional__gradient-overlay"></div>
         </div>
 
         <div class="relative z-10 font-sans text-gray-900 dark:text-gray-100 antialiased">
