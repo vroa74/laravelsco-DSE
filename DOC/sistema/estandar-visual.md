@@ -80,3 +80,13 @@ La autorización puntual del usuario permite un escudo plateado, más grande y s
 El componente CSS común del fondo aplica escala de grises, brillo1.35, contraste1.1, ancho `min(94vw,1100px)`, alto máximo `90svh` y `object-fit:contain`; opacidad0.8 y gradientes históricos conservados. Es decoración no interactiva con `aria-hidden`. No se modifica el contrato de tema ni se incorpora selector/persistencia; la homogeneización general sigue pendiente.
 
 Validación: build correcto comunicado por el trabajador (19.13s), CSS compilado y diferencias revisados por el coordinador, guardia aceptada antes de Laravel y 22 pruebas existentes de componentes/responsive aprobadas, 45 aserciones, 87.54s, exclusivamente con SQLite en memoria y datos sintéticos. Evidencia: `pruebas/evidencias/fondo-acceso/regresion.txt`. Vista previa estática sin backend: `pruebas/prototipos/fondo-acceso-plata.html`, vinculada al CSS del build local actual. No hubo inspección renderizada en navegador; siguen pendientes revisión visual por tamaño/tema y aprobación estética. No se declara estandarizada la aplicación completa.
+
+## Aclaración global: escudo y superficies al80% (up000052)
+
+La captura de `/dashboard` precisa el resultado requerido: el escudo plateado debe verse detrás del contenido de todas las páginas. El fondo de acceso de up000051 es solo una parte; no acredita esta cobertura global.
+
+Usar un fondo decorativo común, grande y sin letras con `campechecon.png`. Cada panel principal o contenedor de tabla lleva color de superficie con alfa0.8, manteniendo texto/iconos/controles al100%. No usar `opacity` en el contenedor completo. Quitar fondos opacos internos y evitar acumulación de transparencias anidadas que esconda el escudo; conservar encabezados, filas, selección, ayudas y errores legibles. Los colores claro/oscuro se definen una vez y el contraste se verifica contra la composición final, incluida la parte más clara del escudo.
+
+Cobertura: layouts de acceso y aplicación, dashboard, correspondencia, directorio, usuarios, grupos, catálogos, perfil y vistas secundarias pertinentes. Reutilizar componentes/tokens y conservar flujos y datos. Móvil/tableta/escritorio y ambos temas; no se agrega aquí selector/persistencia de tema ni se traslada la transparencia a PDF/correo.
+
+Criterio de aceptación: evidencia de cada familia de pantalla sobre el fondo real, superficies sin atenuación de sus descendientes, contraste, teclado y ausencia de desplazamiento lateral. Una captura aislada o pruebas de cadenas no acreditan cobertura. Estado: regla confirmada; implementación global pendiente.

@@ -698,6 +698,16 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** build correcto del trabajador (19.13s); CSS compilado y diff check revisados; guardias verificadas y 22 pruebas aprobadas con45 aserciones en87.54s, datos sintéticos enSQLite memoria. Sin MySQL ni pruebas nuevas que repliquen CSS. Revisión renderizada y aceptación estética pendientes; la estandarización general no está implementada. Otros PNG/favicons y parches previos quedan fuera del commit.
 
+### Escudo global y superficies translúcidas ("up000052")
+
+| Archivo | Cambio |
+| --- | --- |
+| `AGENTS.md` | Precisa escudo global y alfa0.8 solo del fondo de paneles/tablas; descendientes al100%, sin capas que oculten el escudo. |
+| `DOC/sistema/estandar-visual.md` | Cobertura por familia de pantalla, ambos temas, responsive y contraste de la composición real. |
+| `README.md` | Registra la aclaración y diferencia fondo de acceso de homogeneización global. |
+
+**Validación:** lectura y diferencias documentales comprobadas. El fondo de acceso está implementado en up000051; la cobertura global y estandarización siguen pendientes. Sin código, datos, pruebas de aplicación ni dependencias modificados en esta entrega.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
