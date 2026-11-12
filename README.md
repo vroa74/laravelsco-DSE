@@ -708,6 +708,16 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** lectura y diferencias documentales comprobadas. El fondo de acceso está implementado en up000051; la cobertura global y estandarización siguen pendientes. Sin código, datos, pruebas de aplicación ni dependencias modificados en esta entrega.
 
+### Pausa y punto de reanudación ("up000053")
+
+| Archivo | Cambio |
+| --- | --- |
+| `AGENTS.md` | Registra pausa expresa, detención confirmada y homogeneización pendiente. |
+| `DOC/sistema/reanudacion.md` | Estado local, objetivo visual, Task/Dispatch y pasos para continuar sin descartar cambios. |
+| `README.md` | Bitácora de la suspensión; producto inconcluso fuera del commit. |
+
+**Validación:** suspensión enviada y detención Orca confirmada; checkpoint local de diferencias y archivos nuevos de resources guardado y nota leída de vuelta. Sin build, pruebas ni datos en esta pausa. No continúa trabajo en la nube; esperar petición de reanudación.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
