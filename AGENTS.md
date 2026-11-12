@@ -1,3 +1,16 @@
+## Prioridad y estándar visual obligatorio — 12/11/2026
+
+- **Prioridad expresa del usuario:** realizar primero la homogeneización visual y sus reglas; posponer nuevas correcciones funcionales. Los parches RG/grupos ya recibidos permanecen pendientes de revisión e integración; esta instrucción no autoriza revertirlos ni mezclarlos con la entrega visual.
+- **Fuente única:** todos los CRUD y pantallas siguen [DOC/sistema/estandar-visual.md](DOC/sistema/estandar-visual.md). `/agen` es la referencia aprobada. Conservar navegación, información, acciones y flujos existentes; uniformar presentación sin introducir funciones por iniciativa estética.
+- **Colores y contraste:** definir pares compartidos de fondo/texto para claro y oscuro. Fondo claro con texto oscuro y fondo oscuro con texto claro; verificar valores, etiquetas, opciones, placeholder, autofill, errores, foco y hover. Contraste mínimo de 4.5:1 para texto normal y 3:1 para texto grande y elementos no textuales aplicables. Prohibido combinar fondo oscuro con texto negro fijo o depender de una herencia sin verificarla.
+- **Medidas comunes:** mismos tamaños y variantes por función para inputs, botones, iconos, tablas, imágenes, paneles y diálogos. Mismo significado implica misma apariencia en cualquier sección. Reutilizar componentes/tokens; no definir una paleta ni copiar clases contradictorias por CRUD.
+- **Responsive y temas:** aplicar el estándar en móvil, tableta y escritorio, en claro y oscuro y en todos los estados. Ajustar contenido sin desplazamiento horizontal ni recorte de información; no usar ocultación global del desborde como prueba de cumplimiento.
+- **Equipo de diseño permanente:** Taste (`design-taste-frontend`) dirige identidad y criterio estético; `ui-ux-pro-max` fundamenta tokens, medidas y accesibilidad; `impeccable` audita consistencia, contraste y acabado. Leer el SKILL.md aplicable, identificar su versión y registrar instrucciones aplicadas y herramientas realmente ejecutadas. Las preferencias del usuario y el stack real prevalecen sobre defaults incompatibles de una skill.
+- **Skills/plugins:** comprobar disponibilidad y capacidades reales. Estas tres referencias son skills: no afirmar que son plugins instalados. No instalar dependencias, activar hooks ni modificar configuración por inferencia. Toda incorporación autorizada conserva descubrimiento compatible en Codex Desktop y CLI, con verificación de ambas interfaces y límites expresos.
+- **Aceptación:** el análisis visual y su informe preceden a implementar el estándar. Antes de anunciar uniformidad, verificar render, contraste y teclado en ambos temas y los tres tamaños, incluidos vacío, carga, error y deshabilitado. Una lectura de código, build o prueba de cadenas no acredita revisión visual.
+
+**Registro — 12/11/2026, normativa visual (up000047):** Se incorporan esta prioridad y reglas, se crea DOC/sistema/estandar-visual.md y se enlaza en README.md §15. Motivo: unificar apariencia entre CRUD antes de continuar correcciones. Validación documental y enlaces locales; sin cambios de interfaz, datos, plugins ni configuración en esta entrega. Pendientes: informe de diseño, aplicación y verificación visual del estándar; foto de usuario y cierre de parches RG/grupos aplazados.
+
 <laravel-boost-guidelines>
 === reglas base ===
 

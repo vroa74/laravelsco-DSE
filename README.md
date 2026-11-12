@@ -647,6 +647,16 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** documentos leídos de vuelta en UTF-8; estructura, referencias, decisiones y diferencias revisadas. No se ejecutan Pint/build/pruebas por este cambio exclusivamente documental. La regresión de F1.3 permanece en up000045: 62 aprobadas, 8 omitidas y 163 aserciones. Sin datos, .env, dependencias ni interfaz modificados.
 
+### Estándar visual transversal y prioridad de homogeneización ("up000047")
+
+| Archivo | Cambio |
+| --- | --- |
+| `AGENTS.md` | Regla global de estilos y prioridad visual: contraste, componentes, tamaños, imágenes, temas y responsabilidades de las skills. Solo esta incorporación entra en el commit; cambios locales anteriores preservados. |
+| [DOC/sistema/estandar-visual.md](DOC/sistema/estandar-visual.md) | Contrato de uniformidad para todos los CRUD tomando `/agen` como referencia, requisitos responsive y comprobaciones previas a la entrega. |
+| `README.md` | Enlace al estándar y registro de su alcance. |
+
+**Validación:** lectura posterior, enlaces locales, disponibilidad de los tres SKILL.md y revisión de diferencias documentales. Sin cambios de interfaz, instalación de plugins ni acceso a datos. Aplicación del estándar y verificación visual pendientes; las correcciones RG/grupos no forman parte de este commit.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
