@@ -21,3 +21,8 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# Archivos locales que no se versionan
+/.agents
+/DOC
+/zREADME.md

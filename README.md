@@ -612,8 +612,17 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** `vendor/bin/pint --dirty --format agent` limpio y `php artisan test --compact` con 59 pruebas (51 correctas, 8 omitidas) y 0 fallos.
 
+### Exclusiones locales de Git (`up000044`)
+
+| Archivo | Cambio |
+| --- | --- |
+| `.gitignore` | Se excluyen `.agents/` (39.6 MB de habilidades y respaldos), `DOC/` (36.8 MB: propuesta, diagramas y `sco.sql`, respaldo de la base con 650 `INSERT`) y `zREADME.md` (bitácora anterior) para que el árbol de trabajo quede limpio sin subir datos ni peso innecesario |
+| `README.md` | Esta sección y actualización de «Pendientes fuera de estos commits» |
+
+**Validación:** `git status --short` sin archivos sin seguimiento, `vendor/bin/pint --dirty --format agent` limpio y `php artisan test --compact` con 59 pruebas (51 correctas, 8 omitidas) y 0 fallos.
+
 ### Pendientes fuera de estos commits
 
-- `.agents/` (habilidades y respaldos, 39.6 MB) y `zREADME.md` (bitácora anterior) quedan sin versionar a la espera de decisión.
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
+- `DOC/` y `.agents/` viven solo en local; si se requiere versionar la documentación de `DOC/`, se retira esa línea de `.gitignore` y se excluye únicamente `DOC/sco.sql`.
 
