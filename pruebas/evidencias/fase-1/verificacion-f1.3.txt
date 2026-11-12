@@ -1,0 +1,92 @@
+F1.3 (correccion) - Prioridad de fuentes y guardia previa al arranque
+Fecha: 12/11/2026 (America/Mexico_City)
+
+Motivo de la correccion
+La version anterior leia $_ENV antes de $_SERVER. El repositorio efectivo de Laravel no usa
+ese orden:
+- vendor/vlucas/phpdotenv/src/Repository/RepositoryBuilder.php: DEFAULT_ADAPTERS =
+  [ServerConstAdapter, EnvConstAdapter] => $_SERVER tiene prioridad sobre $_ENV.
+- vendor/laravel/framework/src/Illuminate/Support/Env.php: getRepository() agrega
+  PutenvAdapter despues => getenv()/putenv() queda en tercer lugar.
+- vendor/phpunit/phpunit/src/TextUI/Configuration/PhpHandler.php:handleEnvVariables()
+  con force=true escribe putenv() y $_ENV, pero NO $_SERVER.
+Consecuencia real: un DB_CONNECTION heredado en $_SERVER podia hacer que la guardia aceptara
+mientras Laravel leia mysql. Se corrige con rechazo fail-closed.
+
+Cambios
+1. pruebas/bootstrap.php: la guardia lee las tres fuentes por clave y aborta si dos valores
+   definidos se contradicen; ademas valida el valor efectivo con la prioridad real de Laravel
+   ($_SERVER > $_ENV > putenv). No reescribe ni normaliza el entorno.
+   Claves cubiertas: APP_ENV=testing, DB_CONNECTION=sqlite, DB_DATABASE=:memory:, DB_URL vacia,
+   CACHE_STORE=array, SESSION_DRIVER=array, MAIL_MAILER=array, QUEUE_CONNECTION=sync.
+   DB_URL vacia y ausente se consideran equivalentes. Los mensajes no muestran DB_DATABASE,
+   DB_URL ni credenciales; solo nombran la clave, las fuentes en conflicto y, cuando es seguro,
+   el valor que Laravel usaria.
+   Se conserva el bloqueo por bootstrap/cache/config.php y el mensaje de aborto previo.
+2. phpunit.xml: force="true" tambien en CACHE_STORE, SESSION_DRIVER, MAIL_MAILER y
+   QUEUE_CONNECTION (antes solo APP_ENV y las tres DB_).
+3. pruebas/arranque-forzado.php (nuevo): fixture aislado que instancia la implementacion real
+   de Tests\TestCase::createApplication() sin constructor de PHPUnit y con un escenario
+   contradictorio (putenv/$_ENV=sqlite/:memory: frente a $_SERVER=mysql/base inexistente).
+4. pruebas/Feature/GuardiaEntornoPruebasTest.php: se elimina la prueba que buscaba texto y
+   posiciones; se sustituye por la prueba conductual del fixture, mas los casos de herencia,
+   dato sintetico y phpunit.xml.
+5. pruebas/Unit/GuardiaEntornoTest.php: guarda y restaura por separado $_SERVER, $_ENV y
+   putenv, incluyendo la ausencia; 7 casos puros sin arrancar Laravel (conflicto ENV/SERVER,
+   valor efectivo de SERVER, DB_URL oculta, sqlite en archivo con ruta oculta, entorno vacio).
+6. tests/TestCase.php: sin cambios en esta correccion; conserva la guardia previa, la guardia
+   posterior sobre la configuracion efectiva y el aborto por conexion distinta.
+
+Comandos y resultados reales
+- php -l en los 4 archivos PHP: sin errores.
+- vendor\bin\pest --testsuite=Pruebas: 11 passed (57 assertions), 1.16 s.
+- vendor\bin\phpunit --testsuite=Pruebas: OK (11 tests, 57 assertions), 0.629 s, 48 MB.
+- vendor\bin\pint pruebas\bootstrap.php pruebas\arranque-forzado.php pruebas\Feature
+  pruebas\Unit tests\TestCase.php --format=agent: fixed pruebas\arranque-forzado.php
+  (class_definition, fully_qualified_strict_types, braces_position, single_line_empty_body).
+  Suite repetida tras el formato: 11 passed (57 assertions).
+- git diff --check -- phpunit.xml tests/TestCase.php: exit 0.
+  git diff --check global informa espacio final en AGENTS.md lineas 1-3, contenido previo del
+  usuario/coordinador que esta tarea no debe tocar.
+- bootstrap/cache/config.php: ausente al inicio y al cierre.
+
+Evidencia conductual (php pruebas/arranque-forzado.php)
+RESULTADO=ABORTADO
+EXCEPCION=RuntimeException
+ORIGEN=guardia
+MENSAJE=Prueba abortada antes del arranque, sin crear aplicacion ni abrir conexiones:
+  conflicto entre fuentes para DB_CONNECTION (ENV y PUTENV y SERVER); Laravel usaria "mysql";
+  conflicto entre fuentes para DB_DATABASE (ENV y PUTENV y SERVER); Laravel usaria un valor
+  distinto de ":memory:" y no se muestra por seguridad.
+CONTENEDOR_CREADO=no
+BOOTSTRAP_APP_INCLUIDO=no
+DB_MANAGER_CARGADO=no
+
+Lectura de los marcadores: no existe instancia del contenedor de Laravel, bootstrap/app.php no
+figura en get_included_files() y la clase del gestor de base de datos no fue cargada. Por tanto
+no se registraron proveedores y ninguna conexion pudo abrirse. No se afirma un conteo de
+conexiones medido: se informa la ausencia de las condiciones necesarias para abrirlas.
+
+Limites
+- Solo se ejecuto la suite nueva afectada; no la suite existente de tests/.
+- Sin migraciones, seeders, Tinker, servidores, colas, Scheduler, composer/npm, MySQL, .env ni
+  DOC/1sco.sql. Sin commit.
+- El fixture no ejecuta consultas: si la guardia fallara, solo se crearia la aplicacion y el
+  test fallaria al leer los marcadores.
+- Duracion de la sesion de trabajo registrada en el informe de entrega; costo y tokens no
+  disponibles en el arnes y no estimados.
+
+Ajuste final: proceso hijo sin php.ini y sin drivers MySQL
+- El proceso de la prueba negativa se lanza como PHP_BINARY -n, de modo que no carga php.ini ni
+  extensiones.
+- pruebas/arranque-forzado.php comprueba extension_loaded('pdo_mysql') y extension_loaded('mysqli')
+  antes de recorrer createApplication. Si alguno estuviera disponible imprime
+  RESULTADO=ABORTADO_POR_DRIVER y termina sin arrancar, para que una regresion de la guardia no
+  pueda disponer de un driver MySQL en esta prueba.
+- php -n pruebas/arranque-forzado.php -> PDO_MYSQL=no, MYSQLI=no, RESULTADO=ABORTADO, ORIGEN=guardia,
+  CONTENEDOR_CREADO=no, BOOTSTRAP_APP_INCLUIDO=no, DB_MANAGER_CARGADO=no.
+- Control sin -n: php pruebas/arranque-forzado.php -> PDO_MYSQL=si, MYSQLI=si,
+  RESULTADO=ABORTADO_POR_DRIVER (el fixture se niega a ejecutarse con driver disponible).
+- Suites: pest --testsuite=Pruebas 11 passed (60 assertions), 0.91 s; phpunit --testsuite=Pruebas
+  OK (11 tests, 60 assertions), 0.646 s. Pint: passed. git diff --check -- phpunit.xml tests/TestCase.php:
+  exit 0.

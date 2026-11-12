@@ -621,6 +621,20 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** `git status --short` sin archivos sin seguimiento, `vendor/bin/pint --dirty --format agent` limpio y `php artisan test --compact` con 59 pruebas (51 correctas, 8 omitidas) y 0 fallos.
 
+### Pruebas aisladas y guardia previa al arranque ("up000045")
+
+| Archivo | Cambio |
+| --- | --- |
+| `phpunit.xml` | Registra la suite `Pruebas` y fuerza entorno testing, SQLite en memoria, URL vacía y servicios aislados. |
+| `tests/TestCase.php` | Ejecuta una guardia antes de arrancar Laravel y conserva la comprobación posterior de la conexión efectiva. |
+| `pruebas/bootstrap.php` | Rechaza configuraciones cacheadas, valores no permitidos y contradicciones entre SERVER, ENV y putenv; no imprime rutas de base ni URLs. |
+| `pruebas/arranque-forzado.php` | Fixture negativo con `php -n`, controladores MySQL deshabilitados y observables del aborto antes del bootstrap. |
+| `pruebas/Feature` y `pruebas/Unit` | 11 pruebas de descubrimiento, dato sintético, aislamiento y conflictos de entorno, compatibles con Pest y PHPUnit. |
+| `pruebas/evidencias/fase-1` y `DOC/sistema/fase-1.md` | Evidencia de ejecución y revisión del coordinador, límites y tareas pendientes de la fase. |
+| `README.md` | Registro de esta entrega en la sección 15. |
+
+**Validación:** Pint pasó. `php artisan test --compact --cache-directory=pruebas/.cache/phpunit`: 62 aprobadas, 8 omitidas y 163 aserciones, 74.27 s, con entorno forzado a SQLite `:memory:` y artefactos temporales bajo `/pruebas`. El desarrollador verificó además Pest y PHPUnit para la suite nueva: 11 pruebas, 60 aserciones. El fixture negativo comprobó controladores MySQL deshabilitados y ausencia de contenedor, bootstrap de aplicación y gestor de BD. Sin acceso a MySQL, cambios de esquema real, dependencias ni interfaz. F1.3 aceptada; F1.1/F1.2 permanecen en revisión de diseño.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
