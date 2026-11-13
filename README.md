@@ -728,6 +728,20 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** lectura de reglas/plan/checkpoint, Git y diferencias; catálogo OmniRoute HTTP200 con contexto262144. Sin build, pruebas ni datos de SCO; arranque del trabajador y aplicación global pendientes de verificar.
 
+### Unificación visual y escudo tenue ("up000055")
+
+| Archivo | Cambio |
+| --- | --- |
+| `resources/css/app.css` | Tokens de claro/oscuro, superficies azul marino al62%, escudo al48%, campos legibles y degradados semánticos. |
+| `resources/views/components/` | Botones de una sola pieza, tamaños comunes, iconos/etiquetas accesibles y controles compartidos. |
+| `resources/views/layouts/`, `navigation-menu.blade.php` | Fondo común, controles temáticos y navegación sin desbordamiento en tableta. |
+| Vistas de dashboard, catálogos, directorio, usuarios, grupos y correspondencia | Elimina variantes locales contradictorias; agregar verde, editar naranja, ver amarillo y eliminar rojo; cada reporte con color propio. |
+| `tests/Feature/IconActionTest.php`, `ResponsiveLayoutTest.php` | Ajusta contratos de presentación y elimina la expectativa de ocultar overflow para simular responsive. |
+| `pruebas/herramientas/`, `pruebas/evidencias/estandar-visual/` | Exportación y revisión visual aisladas, capturas sintéticas, mediciones de contraste, foco y ancho. |
+| `AGENTS.md`, `DOC/sistema/` | Reglas ratificadas de color, transparencia y orden MVC; responsabilidades y límites de aceptación. |
+
+**Validación:** build Vite correcto; Pint y detector Impeccable sin incidencias en el alcance ejecutado; 34 pruebas con112 aserciones en SQLite `:memory:` (22/45 UI,11/60 guardias,1/7 exportación). Capturas de siete páginas y componentes compartidos en ambos temas y tres tamaños:48, sin desbordamiento. Medición de contraste y foco en componentes; no sustituye aceptación estética ni prueba dinámica integral. Sin MySQL, aplicación con datos reales, dependencias o configuración privada. Parches backend anteriores y favicon/otros PNG del usuario permanecen fuera del commit. `public/build` se genera localmente y no se versiona.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex flex-wrap items-center justify-between gap-2">
-            <h2 class="font-semibold text-base text-gray-800 dark:text-gray-200 leading-tight sm:text-lg">
+            <h2 class="font-semibold text-base leading-tight sm:text-lg text-primary">
                 {{ __('Detalles del Grupo') }}: {{ $userGroup->name }}
             </h2>
             <div class="flex items-center gap-2">
@@ -17,31 +17,31 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <!-- Información del grupo -->
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-5 text-gray-900 dark:text-gray-100">
-                        <h3 class="text-sm font-medium text-gray-900 dark:text-white mb-3">
+                <div class="overflow-hidden shadow-sm sm:rounded-lg surface-panel">
+                    <div class="p-5 text-primary">
+                        <h3 class="text-sm font-medium mb-3 text-primary">
                             Información del Grupo
                         </h3>
 
                         <div class="space-y-3">
                             <div>
                                 <label
-                                    class="block text-xs font-medium text-gray-700 dark:text-gray-300">Nombre:</label>
-                                <p class="mt-1 text-xs text-gray-900 dark:text-white">{{ $userGroup->name }}</p>
+                                    class="block text-xs font-medium text-primary">Nombre:</label>
+                                <p class="mt-1 text-xs text-primary">{{ $userGroup->name }}</p>
                             </div>
 
                             @if ($userGroup->description)
                                 <div>
                                     <label
-                                        class="block text-xs font-medium text-gray-700 dark:text-gray-300">Descripción:</label>
-                                    <p class="mt-1 text-xs text-gray-900 dark:text-white">{{ $userGroup->description }}
+                                        class="block text-xs font-medium text-primary">Descripción:</label>
+                                    <p class="mt-1 text-xs text-primary">{{ $userGroup->description }}
                                     </p>
                                 </div>
                             @endif
 
                             <div>
                                 <label
-                                    class="block text-xs font-medium text-gray-700 dark:text-gray-300">Estado:</label>
+                                    class="block text-xs font-medium text-primary">Estado:</label>
                                 <span
                                     class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium {{ $userGroup->active ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' }}">
                                     {{ $userGroup->active ? 'Activo' : 'Inactivo' }}
@@ -49,16 +49,16 @@
                             </div>
 
                             <div>
-                                <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Creado
+                                <label class="block text-xs font-medium text-primary">Creado
                                     por:</label>
-                                <p class="mt-1 text-xs text-gray-900 dark:text-white">
+                                <p class="mt-1 text-xs text-primary">
                                     {{ $userGroup->creator->name ?? 'N/A' }}</p>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Fecha de
+                                <label class="block text-xs font-medium text-primary">Fecha de
                                     creación:</label>
-                                <p class="mt-1 text-xs text-gray-900 dark:text-white">
+                                <p class="mt-1 text-xs text-primary">
                                     {{ $userGroup->created_at->format('d/m/Y H:i') }}</p>
                             </div>
                         </div>
@@ -66,10 +66,10 @@
                 </div>
 
                 <!-- Miembros del grupo -->
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-5 text-gray-900 dark:text-gray-100">
+                <div class="overflow-hidden shadow-sm sm:rounded-lg surface-panel">
+                    <div class="p-5 text-primary">
                         <div class="flex justify-between items-center mb-3">
-                            <h3 class="text-sm font-medium text-gray-900 dark:text-white">
+                            <h3 class="text-sm font-medium text-primary">
                                 Miembros del Grupo
                             </h3>
                             <span
@@ -82,7 +82,7 @@
                             <div class="space-y-2">
                                 @foreach ($userGroup->members as $member)
                                     <div
-                                        class="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                                        class="flex items-center justify-between p-2 rounded-lg surface-panel">
                                         <div class="flex items-center space-x-2">
                                             <div class="flex-shrink-0">
                                                 @if ($member->profile_photo_path)
@@ -99,9 +99,9 @@
                                                 @endif
                                             </div>
                                             <div>
-                                                <div class="text-xs font-medium text-gray-900 dark:text-white">
+                                                <div class="text-xs font-medium text-primary">
                                                     {{ $member->name }}</div>
-                                                <div class="text-xs text-gray-500 dark:text-gray-400">
+                                                <div class="text-xs text-primary">
                                                     {{ $member->email }}</div>
                                             </div>
                                         </div>
@@ -115,8 +115,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
-                                <h3 class="mt-2 text-xs font-medium text-gray-900 dark:text-white">No hay miembros</h3>
-                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Este grupo no tiene miembros
+                                <h3 class="mt-2 text-xs font-medium text-primary">No hay miembros</h3>
+                                <p class="mt-1 text-xs text-primary">Este grupo no tiene miembros
                                     asignados.</p>
                             </div>
                         @endif
@@ -125,10 +125,10 @@
 
                 <!-- Estadísticas de Archivos -->
                 @if (isset($filesStats))
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-5 text-gray-900 dark:text-gray-100">
+                    <div class="overflow-hidden shadow-sm sm:rounded-lg surface-panel">
+                        <div class="p-5 text-primary">
                             <div class="flex justify-between items-center mb-3">
-                                <h3 class="text-sm font-medium text-gray-900 dark:text-white">
+                                <h3 class="text-sm font-medium text-primary">
                                     Archivos Asociados
                                 </h3>
                                 <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor"
@@ -183,13 +183,13 @@
 
                                 @if (isset($documentsWithFiles) && $documentsWithFiles->count() > 0)
                                     <div>
-                                        <h4 class="text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        <h4 class="text-xs font-medium mb-2 text-primary">
                                             Documentos con Archivos Activos ({{ $documentsWithFiles->count() }})
                                         </h4>
                                         <div class="space-y-1 max-h-32 overflow-y-auto">
                                             @foreach ($documentsWithFiles as $document)
                                                 <div
-                                                    class="flex justify-between items-center p-1.5 bg-gray-50 dark:bg-gray-700 rounded text-xs">
+                                                    class="flex justify-between items-center p-1.5 rounded text-xs surface-panel">
                                                     <span class="text-gray-900 dark:text-white truncate">
                                                         {{ $document->des ?? 'Sin descripción' }}
                                                     </span>

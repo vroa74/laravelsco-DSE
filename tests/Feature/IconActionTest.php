@@ -10,17 +10,17 @@ it('renderiza un botón de acción solo con icono y etiqueta accesible', functio
         ->toContain('aria-label="Eliminar grupo"')
         ->toContain('title="Eliminar grupo"')
         ->toContain('fa-solid fa-trash')
-        ->toContain('from-orange-400')
+        ->toContain('btn-danger')
         ->not->toContain('<a ');
 });
 
 it('renderiza un enlace cuando recibe href', function () {
-    $html = Blade::render('<x-icon-action icon="fa-regular fa-eye" label="Ver detalles" variant="info" href="/rg/1" />');
+    $html = Blade::render('<x-icon-action icon="fa-regular fa-eye" label="Ver detalles" variant="view" href="/rg/1" />');
 
     expect($html)
         ->toContain('<a href="/rg/1"')
         ->toContain('aria-label="Ver detalles"')
-        ->toContain('from-sky-400');
+        ->toContain('btn-view');
 });
 
 it('renderiza el botón de mostrar u ocultar contraseña', function () {

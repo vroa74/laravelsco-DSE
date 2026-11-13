@@ -1,13 +1,13 @@
-<div class="text-white">
+<div class="text-primary">
     <!-- Título responsivo -->
     <h3 class="text-center text-sm md:text-base font-semibold mb-2 md:mb-3">Clasificación de Correspondencia</h3>
 
     <!-- Selector de Nivel de Correspondencia -->
     <div class="mb-3 md:mb-4">
         <div class="flex flex-col md:flex-row items-center space-y-1 md:space-y-0 md:space-x-2">
-            <label for="tcorSelect" class="text-xs md:text-sm font-medium text-white">Niv. Cor.</label>
+            <label for="tcorSelect" class="text-xs md:text-sm font-medium text-primary">Niv. Cor.</label>
             <select id="tcorSelect" wire:model.live="tcccid" wire:change="miFuncionPersonalizada($event.target.value)"
-                class="flex-1 md:w-auto p-1.5 md:p-2 text-xs md:text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                class="flex-1 md:w-auto p-1.5 md:p-2 text-xs md:text-sm border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors text-primary input-base">
                 <option value="">Seleccione una opción</option>
                 @foreach ($tcc as $items)
                     <option value="{{ $items->id }}">{{ $items->tcor }}</option>
@@ -22,10 +22,10 @@
     <!-- Información del TCOR Seleccionado -->
     <div class="mb-3 md:mb-4 text-center">
         @if ($tccc && $tccctxt)
-            <p class="text-xs md:text-sm font-medium text-gray-300">TCOR Seleccionado: {{ $tccc }} -
+            <p class="text-xs md:text-sm font-medium text-primary">TCOR Seleccionado: {{ $tccc }} -
                 {{ $tccctxt }}</p>
         @elseif($tcccid)
-            <p class="text-xs md:text-sm text-gray-400">(Cargando detalles...)</p>
+            <p class="text-xs md:text-sm text-primary">(Cargando detalles...)</p>
         @endif
     </div>
 
@@ -33,7 +33,7 @@
     <div class="mb-3 md:mb-4">
         <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
             <input type="text" id="ccorInput" wire:model="newCcorText" placeholder="Texto Clasificación"
-                class="flex-1 p-1.5 md:p-2 text-xs md:text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                class="flex-1 p-1.5 md:p-2 text-xs md:text-sm border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-colors text-primary input-base">
 
             <div class="flex space-x-1 md:flex-shrink-0">
                 @if ($editingId)
@@ -82,10 +82,10 @@
 
     <!-- Lista de Clasificaciones -->
     <div class="space-y-1 md:space-y-2">
-        <h4 class="text-xs md:text-sm font-medium text-gray-300 mb-1 md:mb-2">Clasificaciones Registradas:</h4>
+        <h4 class="text-xs md:text-sm font-medium mb-1 md:mb-2 text-primary">Clasificaciones Registradas:</h4>
         @foreach ($ccc as $items)
             <div
-                class="flex justify-between items-center p-1.5 md:p-2 bg-gray-800 rounded-lg hover:bg-gray-750 transition-colors">
+                class="flex justify-between items-center p-1.5 md:p-2 rounded-lg hover:bg-gray-750 transition-colors surface-panel">
                 <span class="text-white text-xs md:text-sm">{{ $items->tcor }} -- {{ $items->ccor }}</span>
                 <div class="flex space-x-1">
                     <x-icon-action variant="warning" icon="fa-solid fa-pencil" label="Editar" wire:click="startEdit({{ $items->id }})" />

@@ -24,18 +24,26 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="sco-ui font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        {{-- Fondo institucional: escudo de Campeche en plata, sin letras, centrado, responsivo --}}
+        <div class="bg-institucional" aria-hidden="true">
+            <div class="bg-institucional__gradient-base"></div>
+            <img src="{{ asset('media/img/campechecon.png') }}" alt=""
+                class="bg-institucional__shield" />
+            <div class="bg-institucional__gradient-overlay"></div>
+        </div>
+
+        <div class="relative min-h-screen z-10">
             <!-- Barra superior fija (navegación + encabezado) -->
-            <div class="sticky top-0 z-50 bg-gray-100 dark:bg-gray-900">
+            <div class="sticky top-0 z-50 bg-transparent">
                 @livewire('navigation-menu')
 
                 <!-- Page Heading -->
                 @if (isset($header))
-                    <header class="bg-white dark:bg-gray-800 shadow">
-                        <div class="max-w-7xl mx-auto py-1 px-4 sm:px-6 lg:px-8">
+                    <header class="surface-panel border-b border-primary px-4 sm:px-6 lg:px-8 py-2">
+                        <div class="max-w-7xl mx-auto">
                             {{ $header }}
                         </div>
                     </header>
@@ -43,7 +51,7 @@
             </div>
 
             <!-- Page Content (Scrollable) -->
-            <main class="pb-8">
+            <main class="pb-8 px-4 sm:px-6 lg:px-8">
                 {{ $slot }}
             </main>
         </div>

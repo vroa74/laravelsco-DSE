@@ -21,7 +21,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="relative min-h-screen bg-slate-950 text-white">
+    <body class="sco-ui relative min-h-screen">
         {{-- Fondo institucional: escudo de Campeche en plata, sin letras, centrado, responsivo --}}
         <div class="bg-institucional" aria-hidden="true">
             <div class="bg-institucional__gradient-base"></div>

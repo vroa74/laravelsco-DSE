@@ -1,4 +1,4 @@
-<div class="text-stone-200">
+<div class="text-primary">
 
 
     <div id="accordion-collapse" class="items-center w-full mx-auto text-center">
@@ -8,7 +8,7 @@
                     <!-- Botón de filtros -->
                     <button
                         type="button"
-                        class="flex w-full items-center justify-between gap-3 rounded-xl border border-gray-700 bg-blue-950 px-4 py-2.5 text-sm font-medium text-gray-200 transition hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-gray-700 sm:flex-1"
+                        class="filter-toggle flex w-full items-center justify-between gap-3 rounded-xl border border-primary  px-4 py-2.5 text-sm font-medium  transition  focus:outline-none focus:ring-4 focus:ring-primary/50 sm:flex-1"
                         wire:click="toggleAccordion"
                         aria-expanded="{{ $isOpen ? 'true' : 'false' }}"
                         aria-controls="accordion-collapse-body-1">
@@ -34,11 +34,11 @@
                         <x-icon-action variant="success" icon="fa-regular fa-square-plus"
                             :href="route('rg.create')" label="Agregar registro" />
 
-                        <x-icon-action variant="danger" icon="fa-solid fa-file-pdf" label="Exportar a PDF"
+                        <x-icon-action variant="export-pdf" icon="fa-solid fa-file-pdf" label="Exportar a PDF"
                             wire:click="exportPDF" wire:loading.attr="disabled"
                             wire:loading.class="opacity-50 cursor-not-allowed" />
 
-                        <x-icon-action variant="warning" icon="fa-solid fa-file-csv" label="Exportar a CSV"
+                        <x-icon-action variant="export-csv" icon="fa-solid fa-file-csv" label="Exportar a CSV"
                             wire:click="exportCSV" wire:loading.attr="disabled"
                             wire:loading.class="opacity-50 cursor-not-allowed" />
 
@@ -50,17 +50,17 @@
         </h2>
 
         <div id="accordion-collapse-body-1"
-             class="{{ $isOpen ? '' : 'hidden' }} p-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+             class="{{ $isOpen ? '' : 'hidden' }} p-1 border border-primary panel-base">
             {{--      begin section containes filter--}}
 
-                {{-------------------------------------------------------------------------------------------------------------------------------------------------------------------}}
                 <div class="grid w-full h-full grid-cols-1 gap-1 px-2 sm:grid-cols-2 sm:px-4 xl:grid-cols-4">
-                    <div class="items-center p-1 space-y-1 text-center border-2 border-red-400 rounded-lg">
+                    <div class="items-center p-1 space-y-1 text-center border-2 border-primary rounded-lg">
                         {{-- inline-block se usa para un tamaño especifico           --}}
-                        Mostrar:: <select
+                        <label class="label-base">Mostrar:</label>
+                        <select
                             id="countries"
                             wire:model.live="NumPag"
-                            class="inline-block w-auto p-1 text-xs text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="input-base inline-block w-auto p-1 text-xs">
                             <option value="10" selected>Registros a mostrar</option>
                             <option value="10">10</option>
                             <option value="20">20</option>
@@ -69,171 +69,172 @@
                             <option value="200">200</option>
                             <option value="500">500</option>
                             <option value="1000">1000</option>
-                        </select> Registros.
+                        </select>
+                        <span class="text-secondary">Registros.</span>
                     </div>
                     {{--   fin  numero de registros a mostrar----------------------------------------------------}}
                     {{--            filtrar por id y por folio ya sea un registro o por un intervalo --------------------------------------------------------}}
-                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-blue-400 rounded-lg">
+                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-primary rounded-lg">
                         {{-- Public folioinit, foliofin --}}
                         <div class="flex flex-wrap items-center justify-center gap-1">
-                            <span class="text-sm">Folio</span>
+                            <label class="label-base">Folio</label>
                             <input type="number"
                                    id="folio_init"
                                    wire:model.live="folioinit"
-                                   class="w-[100px] p-1 text-gray-900 border border-gray-300 rounded-md bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <span class="text-sm">al</span>
+                                   class="input-base w-[144px] p-1 text-xs">
+                            <label class="label-base">al</label>
                             <input type="number"
                                    id="folio_fin"
                                    wire:model.live="foliofin"
-                                   class="w-[100px] p-1 text-gray-900 border border-gray-300 rounded-md bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                   class="input-base w-[144px] p-1 text-xs">
                         </div>
                     </div>
                     {{--           fin filtrar por id y por folio ya sea un registro o por un intervalo --------------------------------------------------------}}
                     {{--        filtro por descripcion u por seguimiento -----------------------------------------------------------}}
-                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-green-400 rounded-lg">
+                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-primary rounded-lg">
                         <div class="flex flex-wrap items-center justify-center gap-1">
-                            <span class="text-sm">Des.</span>
+                            <label class="label-base">Des.</label>
                             <input type="text"
                                    id="des"
                                    wire:model.live="des"
-                                   class="w-[80px] p-1 text-gray-900 border border-gray-300 rounded-md bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <span class="text-sm">Seg.</span>
+                                   class="input-base w-[80px] p-1 text-xs">
+                            <label class="label-base">Seg.</label>
                             <input type="text"
                                    id="seg"
                                    wire:model.live="seg"
-                                   class="w-[80px] p-1 text-gray-900 border border-gray-300 rounded-md bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                   class="input-base w-[80px] p-1 text-xs">
                         </div>
                     </div>
                     {{--        fin filtro por descripcion u por seguimiento -----------------------------------------------------------}}
                     {{--        filtro por estatus de la correspondencia ------------------------------------------------------}}
-                    <div class="p-1 text-center border-2 border-yellow-400 rounded-lg">
+                    <div class="p-1 text-center border-2 border-primary rounded-lg">
                         {{-- estatus --}}
-                        <p>Total paginado: {{ $cos->total() }}</p>
-                        <p>Total filtrado: {{ $this->getFilteredCount() }}</p>
-                        <p class="text-xs text-orange-600">Límite PDF: 2000 | CSV: 5000</p>
-                        <p>{{ $myquery }}</p>
+                        <p class="text-secondary">Total paginado: {{ $cos->total() }}</p>
+                        <p class="text-secondary">Total filtrado: {{ $this->getFilteredCount() }}</p>
+                        <p class="text-xs text-muted">Límite PDF: 2000 | CSV: 5000</p>
+                        <p class="text-secondary">{{ $myquery }}</p>
                     </div>
                     {{--        fin filtro por estatus de la correspondencia ------------------------------------------------------}}
                     {{--         filtro por fechas ---------------------------------------------------------------------------}}
-                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-purple-400 rounded-lg">
+                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-primary rounded-lg">
                         <div class="flex flex-wrap items-center justify-center gap-2">
-                            <label for="fcapini" class="text-xs font-medium text-gray-700 dark:text-gray-300">F. Cap.</label>
+                            <label for="fcapini" class="label-base">F. Cap.</label>
                             <div class="relative">
                                 <input
                                     id="fcapini"
                                     type="date"
                                     wire:model.live="fcapini"
-                                    class="bg-gray-800 border border-gray-600 text-white text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[100px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="input-base block w-[144px] p-1 text-xs"
                                     placeholder="YYYY/MM/DD"
                                 />
                             </div>
-                            <label for="fcapfin" class="text-xs font-medium text-gray-700 dark:text-gray-300">Al</label>
+                            <label for="fcapfin" class="label-base">Al</label>
                             <div class="relative">
                                 <input id="fcapfin"
                                        type="date"
                                        wire:model.live="fcapfin"
                                        data-date-format="yyyy/mm/dd"
                                        placeholder="YYYY/MM/DD"
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[100px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Date">
+                                       class="input-base block w-[144px] p-1 text-xs" placeholder="Date">
                             </div>
                         </div>
                         <div class="flex flex-wrap items-center justify-center gap-2">
-                            <label for="remcargoini" class="text-xs font-medium text-gray-700 dark:text-gray-300">F. Rec</label>
+                            <label for="remcargoini" class="label-base">F. Rec</label>
                             <div class="relative">
                                 <input id="remcargoini"
                                        type="date"
                                        wire:model.live="remcargoini"
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[100px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Date">
+                                       class="input-base block w-[144px] p-1 text-xs" placeholder="Date">
                             </div>
-                            <label for="remcargofin" class="text-xs font-medium text-gray-700 dark:text-gray-300">Al</label>
+                            <label for="remcargofin" class="label-base">Al</label>
                             <div class="relative">
                                 <input id="remcargofin"
                                        type="date"
                                        {{--                           datepicker--}}
                                        wire:model.live="remcargofin"
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[100px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Date">
+                                       class="input-base block w-[144px] p-1 text-xs" placeholder="Date">
                             </div>
                         </div>
                         <div class="flex flex-wrap items-center justify-center gap-2">
-                            <label for="remdeporgini" class="text-xs font-medium text-gray-700 dark:text-gray-300">F. Ofi.</label>
+                            <label for="remdeporgini" class="label-base">F. Ofi.</label>
                             <div class="relative">
                                 <input id="remdeporgini"
                                        type="date"
                                        {{--                           datepicker--}}
                                        wire:model.live="remdeporgini"
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[100px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Date">
+                                       class="input-base block w-[144px] p-1 text-xs" placeholder="Date">
                             </div>
 
-                            <label for="remdeporgfin" class="text-xs font-medium text-gray-700 dark:text-gray-300">Al</label>
+                            <label for="remdeporgfin" class="label-base">Al</label>
                             <div class="relative">
                                 <input id="remdeporgfin"
                                        type="date"
                                        {{--                           datepicker--}}
                                        wire:model.live="remdeporgfin"
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[100px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Date">
+                                       class="input-base block w-[144px] p-1 text-xs" placeholder="Date">
                             </div>
                         </div>
                         {{ $fcapini }} - {{ $fcapfin }}
                     </div>
                     {{--       fin  filtro por fechas ---------------------------------------------------------------------------}}
                     {{--            filtro por remitente ------------------------------------------------------}}
-                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-pink-400 rounded-lg">
+                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-primary rounded-lg">
                         <div class="flex items-center p-0 space-x-1">
-                            <span class="text-sm">Rem. Nom.</span>
+                            <label class="label-base">Rem. Nom.</label>
                             <input type="text"
                                    id="remnombre"
                                    wire:model.live="remnombre"
-                                   class="w-[160px] p-1 text-gray-900 border border-gray-300 rounded-md bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                   class="input-base w-[160px] p-1 text-xs">
                         </div>
                         <div class="flex items-center p-0 space-x-1">
-                            <span class="text-sm">Rem. Cargo</span>
+                            <label class="label-base">Rem. Cargo</label>
                             <input type="text"
                                    id="remcargo"
                                    wire:model.live="remcargo"
-                                   class="w-[160px] p-1 text-gray-900 border border-gray-300 rounded-md bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                   class="input-base w-[160px] p-1 text-xs">
                         </div>
                         <div class="flex items-center p-0 space-x-1">
-                            <span class="text-sm">Rem. Dep.</span>
+                            <label class="label-base">Rem. Dep.</label>
                             <input type="text"
                                    id="remdeporg"
                                    wire:model.live="remdeporg"
-                                   class="w-[160px] p-1 text-gray-900 border border-gray-300 rounded-md bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                   class="input-base w-[160px] p-1 text-xs">
                         </div>
                     </div>
                     {{--          fin  filtro por remitente ------------------------------------------------------}}
                     {{--                filtro por elementos turnado -------------------------------------------------}}
-                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-teal-400 rounded-lg">
+                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-primary rounded-lg">
                         <div class="flex items-center p-0 space-x-1">
-                            <span class="text-sm">Tur. Nom.</span>
+                            <label class="label-base">Tur. Nom.</label>
                             <input type="text"
                                    id="turnom"
                                    wire:model.live="turnom"
-                                   class="w-[160px] p-1 text-gray-900 border border-gray-300 rounded-md bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                   class="input-base w-[160px] p-1 text-xs">
                         </div>
                         <div class="flex items-center p-0 space-x-1">
-                            <span class="text-sm">Tur. Car.</span>
+                            <label class="label-base">Tur. Car.</label>
                             <input type="text"
                                    id="turcargo"
                                    wire:model.live="turcargo"
-                                   class="w-[160px] p-1 text-gray-900 border border-gray-300 rounded-md bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                   class="input-base w-[160px] p-1 text-xs">
                         </div>
                         <div class="flex items-center p-0 space-x-1">
-                            <span class="text-sm">Tur. Dep.</span>
+                            <label class="label-base">Tur. Dep.</label>
                             <input type="text"
                                    id="turdeporg"
                                    wire:model.live="turdeporg"
-                                   class="w-[160px] p-1 text-gray-900 border border-gray-300 rounded-md bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                   class="input-base w-[160px] p-1 text-xs">
                         </div>
                     </div>
                     {{--             fin   filtro por elementos turnado -------------------------------------------------}}
-                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-orange-400 rounded-lg">
+                    <div class="flex flex-col items-center p-1 space-y-1 text-center border-2 border-primary rounded-lg">
                         <div class="flex items-center max-w-sm mx-auto space-x-2">
                             <!-- Label -->
-                            <label for="nnncor" class="text-xs font-medium text-gray-900 dark:text-white">N. Cor.</label>
+                            <label for="nnncor" class="label-base">N. Cor.</label>
                             <!-- Select -->
                             <select id="nnncor"
                                     wire:model.live="ncor_filter"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[120px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="input-base block w-[120px] p-1 text-xs">
                                 <option value="">Seleccione una opción</option>
                                 @foreach($Nccors as $Nccor)
                                     <option value="{{ $Nccor->id }}">{{ $Nccor->ncor }}</option>
@@ -243,11 +244,11 @@
                         </div>
                         <div class="flex items-center max-w-sm mx-auto space-x-2">
                             <!-- Label -->
-                            <label for="tttcor" class="text-xs font-medium text-gray-900 dark:text-white">T. Cor.</label>
+                            <label for="tttcor" class="label-base">T. Cor.</label>
                             <!-- Select -->
-                            <select id="tttcor" 
+                            <select id="tttcor"
                                     wire:model.live="tcor_filter"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[120px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="input-base block w-[120px] p-1 text-xs">
                                 <option value="">Seleccione una opción</option>
                                 @foreach($Tccors as $Tccor)
                                     <option value="{{ $Tccor->id }}">{{ $Tccor->tcor }}</option>
@@ -256,11 +257,11 @@
                         </div>
                         <div class="flex items-center max-w-sm mx-auto space-x-2">
                             <!-- Label -->
-                            <label for="cccor" class="text-xs font-medium text-gray-900 dark:text-white">Clas. Cor</label>
+                            <label for="cccor" class="label-base">Clas. Cor</label>
                             <!-- Select -->
-                            <select id="cccor" 
+                            <select id="cccor"
                                     wire:model.live="ccor_filter"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[120px] p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="input-base block w-[120px] p-1 text-xs">
                                 <option value="">Seleccione una opción</option>
                                 @foreach($Cccors as $Cccor)
                                     <option value="{{ $Cccor->id }}">{{ $Cccor->ccor }}</option>
@@ -283,9 +284,9 @@
 
 {{--     numero de registros a mostrar----------------------------------------------------}}
 
-    <div class="relative pt-4 shadow-md sm:rounded-lg">
-        <table class="tabla-apilada text-xs text-center text-gray-500 bg-blue-900 rtl:text-right dark:text-gray-400 dark:hover:font-bold dark:hover:bg-blue-950"  >
-            <thead>
+    <div class="relative pt-4 panel-base overflow-x-auto">
+        <table class="tabla-apilada text-xs text-center text-secondary"  >
+            <thead class="text-primary">
             <tr>
                 <th scope="col" class="px-6 py-3 w-[4%]">
                     id
@@ -316,66 +317,66 @@
             <tbody class="text-center">
             @foreach ($cos as $co)
                 @if($co->estatus)
-                       <tr class="bg-white border-b dark:bg-red-950 dark:border-red-800 hover:bg-gray-50 dark:hover:bg-red-900 dark:hover:text-base ">
+                       <tr class="state-hover">
                       @else
-                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:text-black dark:hover:text-base "  >
+                      <tr class="state-hover"  >
                 @endif
                 <td class="px-3 py-2" data-label="Id">
                     {{$co->id}}
-                    <p class="text-yellow-300">{{ $co->legislaturaRel->legislatura ?? $co->legislatura }}</p>
+                    <p class="text-muted">{{ $co->legislaturaRel->legislatura ?? $co->legislatura }}</p>
                 </td>
                 <td class="px-3 py-2" data-label="Correspondencia">
                     @if(!empty($co->ncor))
-                    <p> <span class="text-yellow-300"> Nivel: </span>   {{ $co->ncor  }}</p>
+                    <p> <span class="text-muted"> Nivel: </span>   {{ $co->ncor  }}</p>
                     @endif
                     @if(!empty($co->tcor))
-                    <p> <span class="text-yellow-300"> Tipo: </span>   {{ $co->tcor  }}</p>
+                    <p> <span class="text-muted"> Tipo: </span>   {{ $co->tcor  }}</p>
                     @endif
                     @if(!empty($co->ccor))
-                        <p> <span class="text-yellow-300"> Clas.: </span> {{ $co->ccor }}</p>
+                        <p> <span class="text-muted"> Clas.: </span> {{ $co->ccor }}</p>
                     @endif
                 </td>
                 <td class="px-3 py-2" data-label="Fecha">
 
                     @if(!empty($co->fcap))
-                        <p> <span class="text-yellow-300" >Cap.: </span> {{ $co->fcap  }}</p>
+                        <p> <span class="text-muted" >Cap.: </span> {{ $co->fcap  }}</p>
                     @endif
                     @if(!empty($co->frec))
-                        <p> <span class="text-yellow-300" >Rec.: </span>  {{ $co->frec  }}</p>
+                        <p> <span class="text-muted" >Rec.: </span>  {{ $co->frec  }}</p>
                     @endif
                     @if(!empty($co->fofi))
-                        <p> <span class="text-yellow-300" >Ofi.: </span>  {{ $co->fofi  }}</p>
+                        <p> <span class="text-muted" >Ofi.: </span>  {{ $co->fofi  }}</p>
                     @endif
                     @if(!empty($co->nhoj))
-                        <p> <span class="text-yellow-300" ># hojas: </span>  {{ $co->nhoj  }}</p>
+                        <p> <span class="text-muted" ># hojas: </span>  {{ $co->nhoj  }}</p>
                     @endif
                     @if(!empty($co->nofi))
-                        <p> <span class="text-yellow-600" ># oficio: </span>  {{ $co->nofi  }}</p>
+                        <p> <span class="text-muted" ># oficio: </span>  {{ $co->nofi  }}</p>
                     @endif
                 </td>
                 <td class="px-3 py-2" data-label="Remitente">
                     @if(!empty($co->rem_nombre))
-                    <p> <span class="text-yellow-300" >Nombre:</span>  {{ $co->rem_nombre  }}</p>
+                    <p> <span class="text-muted" >Nombre:</span>  {{ $co->rem_nombre  }}</p>
                     @endif
                     @if(!empty($co->rem_cargo))
-                    <p> <span class="text-yellow-300" >Cargo:</span>   {{ $co->rem_cargo  }}</p>
+                    <p> <span class="text-muted" >Cargo:</span>   {{ $co->rem_cargo  }}</p>
                     @endif
                     @if(!empty($co->rem_deporg))
-                    <p> <span class="text-yellow-300" >Dep. Org.:</span>   {{ $co->rem_deporg  }}</p>
+                    <p> <span class="text-muted" >Dep. Org.:</span>   {{ $co->rem_deporg  }}</p>
                     @endif
                     @if(!empty($co->rem_dir))
-                    <p> <span class="text-yellow-300" >Dir.:</span>  {{ $co->rem_dir  }}</p>
+                    <p> <span class="text-muted" >Dir.:</span>  {{ $co->rem_dir  }}</p>
                     @endif
                 </td>
                 <td class="px-3 py-2" data-label="Turnado a">
                     @if(!empty($co->tur_nom))
-                    <p> <span class="text-yellow-300" >nombre: </span> {{ $co->tur_nom  }}</p>
+                    <p> <span class="text-muted" >nombre: </span> {{ $co->tur_nom  }}</p>
                     @endif
                     @if(!empty($co->tur_cargo))
-                    <p> <span class="text-yellow-300" >Cargo: </span> {{ $co->tur_cargo  }}</p>
+                    <p> <span class="text-muted" >Cargo: </span> {{ $co->tur_cargo  }}</p>
                     @endif
                     @if(!empty($co->tur_deporg))
-                    <p> <span class="text-yellow-300" >Dep. Org.: </span> {{ $co->tur_deporg  }}</p>
+                    <p> <span class="text-muted" >Dep. Org.: </span> {{ $co->tur_deporg  }}</p>
                     @endif
                 </td>
                 <td class="px-3 py-2" data-label="Descripción">
@@ -386,19 +387,19 @@
                 </td>
                 <td class="px-3 py-2" data-label="Acciones">
                     <div class="flex flex-wrap items-center justify-center gap-2">
-                        <x-icon-action variant="info" icon="fa-regular fa-eye" :href="route('rg.show', $co->id)"
+                        <x-icon-action variant="view" icon="fa-regular fa-eye" :href="route('rg.show', $co->id)"
                             label="Ver detalles" />
 
                         <x-icon-action variant="warning" icon="fa-solid fa-pencil" :href="route('rg.edit', $co->id)"
                             label="Editar registro" />
 
-                        <x-icon-action variant="report" icon="fa-regular fa-rectangle-list" href="javascript:void(0)"
+                        <x-icon-action variant="report-normal" icon="fa-regular fa-rectangle-list" href="javascript:void(0)"
                             onclick="abrirReporte({{ $co->id }}, 'reporte1')" label="Generar reporte normal" />
 
-                        <x-icon-action variant="report" icon="fa-solid fa-bars" href="javascript:void(0)"
+                        <x-icon-action variant="report-special" icon="fa-solid fa-bars" href="javascript:void(0)"
                             onclick="abrirReporte({{ $co->id }}, 'reporte2')" label="Generar reporte especial" />
 
-                        <x-icon-action variant="report" icon="fa-solid fa-list" href="javascript:void(0)"
+                        <x-icon-action variant="report-request" icon="fa-solid fa-list" href="javascript:void(0)"
                             onclick="abrirReporte({{ $co->id }}, 'reporte3')" label="Generar reporte de solicitud" />
                     </div>
 
@@ -415,7 +416,7 @@
     <script>
         document.addEventListener('livewire:init', () => {
             console.log('Livewire initialized');
-            
+
             Livewire.on('reporteGenerado', (mensaje) => {
                 console.log('Evento reporteGenerado recibido:', mensaje);
                 alert('Éxito: ' + mensaje);
@@ -431,10 +432,10 @@
         function abrirReporte(id, tipo) {
             // Configuración de la ventana
             const windowFeatures = 'width=1200,height=800,scrollbars=yes,resizable=yes,menubar=yes,toolbar=yes,location=yes,status=yes';
-            
+
             // URL base para los reportes usando las rutas correctas
             let url = '';
-            
+
             switch(tipo) {
                 case 'reporte1':
                     url = `/reporte-normal/${id}/reporte1`;
@@ -449,10 +450,10 @@
                     console.error('Tipo de reporte no válido');
                     return;
             }
-            
+
             // Abrir nueva ventana
             const nuevaVentana = window.open(url, '_blank', windowFeatures);
-            
+
             // Verificar si la ventana se abrió correctamente
             if (nuevaVentana) {
                 nuevaVentana.focus();

@@ -1,11 +1,11 @@
-<div class="p-6 bg-white border-b border-gray-200 lg:p-8 dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent dark:border-gray-700">
+<div class="p-6 lg:p-8">
     <x-application-logo class="block w-auto h-12" />
 
-    <h1 class="mt-6 text-2xl font-medium text-gray-900 dark:text-white">
+    <h1 class="mt-6 text-2xl font-medium text-primary">
         ¡Bienvenido a tu aplicación sistema  de Control documental <span  class="font-bold">(SiCDoc).</span>
     </h1>
 
-    <p class="mt-6 leading-relaxed text-gray-200 dark:text-gray-200">
+    <p class="mt-6 leading-relaxed text-secondary">
         <span class="font-bold" >SiCDoc</span>
          ofrece un punto de partida sólido y atractivo esta aplicación cuenta con un modelo basado en
         prototipos para su desarrolla y el clásico y muy efectivo MVC una mayor robustes y una construcción
@@ -13,7 +13,7 @@
         Cada modulo ha sido probado y se han realizado las pruebas para su despliegue.
     </p>
 
-    <p class="mt-3 leading-relaxed text-gray-200 dark:text-gray-200">
+    <p class="mt-3 leading-relaxed text-secondary">
         <span class="font-bold" >SiCDoc</span>
         Siendo una herramienta sencilla y con un nivel de aprendizaje con una curva de aprendizaje muy ligera para el usuario.
         Durante el inicio estableceremos un periodo de beta el cual nos servirá para poder atacar y corregir incidente que hayan escapado a las pruebas unitarias y a las pruebas de integración, tomando en consideración que el desarrollo fue creado por un ser humano y el ser humano no es perfecto.
@@ -21,19 +21,19 @@
 
     </p>
 
-    <p class="mt-3 leading-relaxed text-gray-200 dark:text-gray-200">
+    <p class="mt-3 leading-relaxed text-secondary">
         Espero que el sistema sea como una bocanada de aire fresco con una capacidad de mejorar y expandirse.
     </p>
 
-    <p class="mt-3 leading-relaxed text-gray-200 dark:text-gray-200">
+    <p class="mt-3 leading-relaxed text-secondary">
         Espero que disfrute el trabajo de este sistema de control documental.
     </p>
 
-    <p class="mt-3 leading-relaxed text-gray-200 dark:text-gray-200">
+    <p class="mt-3 leading-relaxed text-secondary">
         Atte.
     </p>
 
-    <p class="mt-3 leading-relaxed text-gray-200 dark:text-gray-200">
+    <p class="mt-3 leading-relaxed text-secondary">
         VROA
     </p>
 </div>

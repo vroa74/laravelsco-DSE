@@ -1,145 +1,175 @@
-@import '@fontsource/arimo'; /* Alternativa similar a Arial */
+@import '@fontsource/arimo';
 @import '@fontsource/roboto';
-@import "flowbite";
+@import 'flowbite';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-/* Regla del sitio: nunca hay desplazamiento lateral, solo vertical. */
-html {
-    overflow-x: clip;
+/* Presentación compartida; consultas y reglas pertenecen a Laravel. */
+:root {
+  color-scheme: light;
+  --font-sans: 'Roboto', Arial, sans-serif;
+  --surface-panel: rgb(241 247 255 / .62);
+  --surface-card: var(--surface-panel);
+  --surface-elevated: #f4f8ff;
+  --text-primary: #101e34;
+  --text-secondary: #203650;
+  --text-muted: #304760;
+  --border-primary: #647a96;
+  --border-focus: #164fba;
+  --border-error: #b91c1c;
+  --state-hover: rgb(38 92 156 / .08);
+  --state-focus: rgb(37 99 235 / .2);
+  --radius-lg: .5rem;
+  --radius-xl: .75rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --shadow-sm: 0 1px 2px rgb(3 12 28 / .08);
+  --shadow-md: 0 4px 12px rgb(3 12 28 / .12);
+  --shadow-xl: 0 16px 40px rgb(3 12 28 / .25);
 }
-
-body {
-    font-family: 'Roboto', Arial, sans-serif;
-    overflow-x: clip;
+html.dark {
+  color-scheme: dark;
+  --surface-panel: rgb(7 24 51 / .62);
+  --surface-elevated: #08162b;
+  --text-primary: #f5f8ff;
+  --text-secondary: #e0eafb;
+  --text-muted: #ceddf3;
+  --border-primary: #7289a8;
+  --border-focus: #a9ccff;
+  --border-error: #fca5a5;
+  --state-hover: rgb(137 181 242 / .1);
+  --state-focus: rgb(169 204 255 / .25);
 }
-
-[x-cloak] {
-    display: none;
+body { font-family: var(--font-sans); }
+.sco-ui, .text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.border-primary { border-color: var(--border-primary); }
+.border-focus { border-color: var(--border-focus); }
+.border-error { border-color: var(--border-error); }
+.surface-panel, .panel-base, .surface-card, .panel-card {
+  background-color: var(--surface-panel); color: var(--text-primary);
 }
-
-@layer components {
-    /*
-     * Fondo institucional: escudo de Campeche en plata, sin letras,
-     * centrado, responsivo, con gradiente 80% y blend.
-     * Usa campechecon.png (solo escudo, 590x481 RGBA).
-     */
-    .bg-institucional {
-        @apply pointer-events-none fixed inset-0 z-0 overflow-hidden;
-    }
-
-    .bg-institucional__gradient-base {
-        @apply absolute inset-0 bg-gradient-to-br from-blue-950 via-slate-950 to-black;
-    }
-
-    .bg-institucional__shield {
-        @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
-        @apply opacity-80 mix-blend-screen select-none;
-        width: min(94vw, 1100px);
-        max-width: none;
-        max-height: 90svh;
-        object-fit: contain;
-        filter: grayscale(100%) brightness(1.35) contrast(1.1);
-    }
-
-    .bg-institucional__gradient-overlay {
-        @apply absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-950/20;
-    }
-
-    /*
-     * Tablas responsivas sin desplazamiento horizontal.
-     * En móvil cada fila se convierte en una tarjeta con sus etiquetas;
-     * a partir de 768px vuelve a comportarse como tabla normal.
-     */
-    .tabla-apilada {
-        display: block;
-        width: 100%;
-    }
-
-    .tabla-apilada thead {
-        display: none;
-    }
-
-    .tabla-apilada tbody {
-        display: block;
-    }
-
-    .tabla-apilada tr {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 0.75rem;
-        border-radius: 0.5rem;
-        overflow: hidden;
-    }
-
-    .tabla-apilada tr > * {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.25rem;
-        width: auto;
-        max-width: 100%;
-        text-align: left;
-        white-space: normal;
-        word-break: break-word;
-    }
-
-    .tabla-apilada tr > *::before {
-        content: attr(data-label);
-        font-size: 0.625rem;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: #94a3b8;
-    }
-
-    .tabla-apilada tr > :not([data-label])::before {
-        content: none;
-    }
-
-    /* La celda de acciones mantiene sus botones en línea dentro de la tarjeta. */
-    .tabla-apilada tr > [data-label='Acciones'] {
-        display: block;
-    }
-
-    .tabla-apilada tr > [data-label='Acciones']::before {
-        display: block;
-        margin-bottom: 0.25rem;
-    }
-
-    @media (min-width: 768px) {
-        .tabla-apilada {
-            display: table;
-        }
-
-        .tabla-apilada thead {
-            display: table-header-group;
-        }
-
-        .tabla-apilada tbody {
-            display: table-row-group;
-        }
-
-        .tabla-apilada tr {
-            display: table-row;
-            margin-bottom: 0;
-            border-radius: 0;
-            overflow: visible;
-        }
-
-        .tabla-apilada tr > * {
-            display: table-cell;
-            text-align: inherit;
-        }
-
-        .tabla-apilada tr > *::before {
-            content: none;
-        }
-
-        .tabla-apilada tr > [data-label='Acciones'] {
-            display: table-cell;
-        }
-    }
+.panel-base, .panel-card {
+  border: 1px solid var(--border-primary); border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md); min-width: 0;
 }
+/* Una sola capa por panel: el interior no vuelve a tapar el escudo. */
+:is(.panel-base, .panel-card) :is(.panel-base, .panel-card, .surface-panel, .surface-card) {
+  background-color: transparent; box-shadow: none;
+}
+.surface-elevated, .modal-elevated { background-color: var(--surface-elevated); color: var(--text-primary); }
+.modal-elevated { border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); }
+.shadow-soft { box-shadow: var(--shadow-sm); }
+.shadow-card { box-shadow: var(--shadow-md); }
+.shadow-modal, .shadow-elevated { box-shadow: var(--shadow-xl); }
+.state-hover:hover { background-color: var(--state-hover); }
+
+/* También cubre campos nativos heredados, sin alterar bindings o validación. */
+.input-base,
+.sco-ui input:not([type='checkbox']):not([type='radio']):not([type='hidden']):not([type='submit']):not([type='button']),
+.sco-ui select, .sco-ui textarea {
+  background-color: var(--surface-elevated); color: var(--text-primary);
+  border-color: var(--border-primary); border-radius: .375rem;
+  max-width: 100%; min-width: 0; caret-color: var(--text-primary); color-scheme: inherit;
+}
+.input-base { padding: .5rem .625rem; font-size: .875rem; }
+.sco-ui :is(input, textarea)::placeholder, .input-base::placeholder { color: var(--text-muted); opacity: 1; }
+.sco-ui :is(select option, select optgroup) { background-color: var(--surface-elevated); color: var(--text-primary); }
+.sco-ui :is(input, textarea, select):focus, .input-base:focus {
+  border-color: var(--border-focus); outline: 2px solid var(--border-focus); outline-offset: 2px; box-shadow: none;
+}
+.sco-ui input:-webkit-autofill {
+  -webkit-text-fill-color: var(--text-primary); box-shadow: 0 0 0 1000px var(--surface-elevated) inset;
+}
+.sco-ui :is(input, select, textarea):disabled { color: var(--text-muted); cursor: not-allowed; }
+.sco-ui [aria-invalid='true'], .input-error { border-color: var(--border-error); }
+.label-base { display: block; margin-bottom: .25rem; font-size: .875rem; font-weight: 500; color: var(--text-primary); }
+
+/* Variante = color; componente = tamaño. Sin relleno ni botones anidados. */
+.btn-base, .btn-icon {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  flex-shrink: 0; border: 1px solid transparent; border-radius: .5rem;
+  font-weight: 600; line-height: 1.25;
+  background-image: linear-gradient(135deg, var(--action-from), var(--action-to));
+  color: var(--action-text, #fff); transition: filter 150ms ease, transform 150ms ease;
+}
+.btn-base { padding: .625rem 1rem; min-height: 2.5rem; font-size: .875rem; }
+.btn-icon { width: 2.25rem; height: 2.25rem; padding: 0; }
+.btn-icon-md { width: 2.5rem; height: 2.5rem; }
+.btn-icon > i { font-size: .875rem; line-height: 1; }
+:is(.btn-base, .btn-icon):hover:not(:disabled) { filter: brightness(1.12); }
+:is(.btn-base, .btn-icon):active:not(:disabled) { transform: translateY(1px); }
+:is(.btn-base, .btn-icon):focus-visible, .sco-ui a:focus-visible, .sco-ui button:focus-visible {
+  outline: 2px solid var(--border-focus); outline-offset: 3px;
+}
+:is(.btn-base, .btn-icon):disabled { opacity: .55; cursor: not-allowed; }
+.btn-success { --action-from: #166534; --action-to: #06705a; }
+.btn-warning { --action-from: #ffb24c; --action-to: #f18b33; --action-text: #281407; }
+.btn-view { --action-from: #fde477; --action-to: #eabe36; --action-text: #282008; }
+.btn-danger { --action-from: #b91c1c; --action-to: #991b32; }
+.btn-info, .btn-primary, .btn-report, .btn-report-normal { --action-from: #1d4ed8; --action-to: #075985; }
+.btn-report-special { --action-from: #6941b4; --action-to: #573084; }
+.btn-report-request { --action-from: #0f766e; --action-to: #155e75; }
+.btn-export-pdf { --action-from: #9d2861; --action-to: #7b2358; }
+.btn-export-csv { --action-from: #075985; --action-to: #155e75; }
+.btn-neutral, .btn-secondary, .btn-ghost { --action-from: #354c6b; --action-to: #233950; }
+
+/* Tablas transparentes en un único panel, también como tarjetas móviles. */
+.tabla-apilada { display: block; width: 100%; color: var(--text-secondary); }
+.tabla-apilada thead { display: none; }
+.tabla-apilada tbody { display: block; }
+.sco-ui .tabla-apilada :is(thead, tbody, tr, th, td) { background-color: transparent; color: inherit; }
+.tabla-apilada tr {
+  display: flex; flex-direction: column; margin-bottom: .75rem;
+  border: 1px solid var(--border-primary); border-radius: .5rem;
+}
+.tabla-apilada tr > * {
+  display: flex; flex-direction: column; align-items: flex-start; gap: .25rem;
+  width: auto; max-width: 100%; text-align: left; white-space: normal;
+  overflow-wrap: anywhere; padding: .625rem .75rem;
+}
+.tabla-apilada tr > [data-label]::before {
+  content: attr(data-label); font-size: .75rem; font-weight: 700; color: var(--text-primary);
+}
+.tabla-apilada tr > [data-label='Acciones'] { display: block; }
+.tabla-apilada tr > [data-label='Acciones']::before { display: block; margin-bottom: .5rem; }
+.sco-ui .tabla-apilada tbody tr:hover { background-color: var(--state-hover); }
+.sco-ui .tabla-apilada thead { color: var(--text-primary); }
+.tabla-apilada td, .tabla-apilada th { border-color: var(--border-primary); }
+@media (min-width: 768px) {
+  .tabla-apilada { display: table; table-layout: fixed; }
+  .tabla-apilada thead { display: table-header-group; }
+  .tabla-apilada tbody { display: table-row-group; }
+  .tabla-apilada tr { display: table-row; border: 0; border-radius: 0; margin: 0; }
+  .tabla-apilada tr > *, .tabla-apilada tr > [data-label='Acciones'] {
+    display: table-cell; padding: .75rem; vertical-align: middle; text-align: inherit;
+    border-bottom: 1px solid var(--border-primary);
+  }
+  .tabla-apilada tr > [data-label]::before { display: none; }
+}
+@media (pointer: coarse), (max-width: 767px) {
+  .btn-base, .btn-icon { min-width: 44px; min-height: 44px; }
+  .sco-ui :is(input, select, textarea) { font-size: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) { .btn-base, .btn-icon { transition: none; } }
+
+/* Decoración común sin eventos, lectura accesible ni scroll artificial. */
+.bg-institucional { pointer-events: none; position: fixed; inset: 0; z-index: 0; overflow: hidden; }
+.bg-institucional__gradient-base { position: absolute; inset: 0; background: linear-gradient(135deg, #e0ecff, #c2d4ee, #edf4ff); }
+.bg-institucional__shield {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: min(94vw, 1100px); max-width: none; max-height: 90svh; object-fit: contain;
+  opacity: .48; user-select: none; filter: grayscale(100%) brightness(1.35) contrast(1.1);
+}
+.bg-institucional__gradient-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgb(217 231 250 / .25), transparent); }
+html.dark .bg-institucional__gradient-base { background: linear-gradient(135deg, #0c1c43, #040d20, #020617); }
+html.dark .bg-institucional__shield { mix-blend-mode: screen; }
+html.dark .bg-institucional__gradient-overlay { background: linear-gradient(0deg, rgb(2 6 23 / .5), rgb(2 6 23 / .25)); }
+.sco-ui ::selection { background: #1d4ed8; color: #fff; }
+[x-cloak] { display: none; }
+
+.filter-toggle { background: linear-gradient(135deg, #203c62, #102747); color: #f5f8ff; }
+
+html.dark .sco-ui :is(input[type="date"], input[type="datetime-local"], select) { color-scheme: dark; }

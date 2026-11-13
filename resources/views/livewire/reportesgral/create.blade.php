@@ -22,18 +22,18 @@
         </div>
     @endif
 
-    <div class="mx-auto bg-gray-900 rounded-lg shadow-md max-w-2sm border-amber-200">
-        <h2 class="mb-0 font-bold text-center text-white text-md">Formulario de Registro</h2>
+    <div class="mx-auto rounded-lg shadow-md max-w-2sm border-amber-200 surface-panel">
+        <h2 class="mb-0 font-bold text-center text-md text-primary">Formulario de Registro</h2>
         {{-- //! Formulario de Registro --}}
-        <form wire:submit="save" class="m-4 text-white ">
+        <form wire:submit="save" class="m-4 text-primary">
             @csrf
             <div>
-                <label for="lleg" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label for="lleg" class="block mb-2 text-sm font-medium text-primary">
                     Legislatura
                 </label>
                 {{-- //! hay que corregir que no queda selecionada la legislatura actual --}}
                 <select id="lleg" wire:model="selectedLegislaturaId"
-                    class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="block w-full p-1 text-sm border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                     <option value="">Seleccione...</option>
                     @foreach ($legs as $item)
                         <option value="{{ $item->id }}">{{ $item->legislatura }}</option>
@@ -45,26 +45,26 @@
                 <!-- Columna 1 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
                     <!-- Etiqueta -->
-                    <label for="ffcap" class="w-1/4 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="ffcap" class="w-1/4 text-sm font-medium text-primary">
                         Fecha de Captura
                     </label>
                     <!-- Campo de Entrada -->
                     <input type="date" id="ffcapt" wire:model="fcap"
-                        class="w-3/4 p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="w-3/4 p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                 </div>
                 <!-- Columna 2 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
                     <label for="ffrec" wire:model.live="frec"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de recepcion</label>
+                        class="block mb-2 text-sm font-medium text-primary">Fecha de recepcion</label>
                     <input type="date" id="ffrec" wire:model="frec"
-                        class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="block w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                 </div>
                 <div class="flex items-center w-full col-span-1 gap-2">
-                    <label for="nncor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="nncor" class="block mb-2 text-sm font-medium text-primary">
                         Nivel de Correspondencia
                     </label>
                     <select id="nncor" wire:model="ncor"
-                        class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="block w-full p-1 text-sm border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                         <option selected>Selecione el Nivel:</option>
                         @foreach ($ncors as $item)
                             <option value="{{ $item->ncor }}"> {{ $item->ncor }} </option>
@@ -74,11 +74,11 @@
                 </div>
                 <!-- Columna 4 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
-                    <label for="tncor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="tncor" class="block mb-2 text-sm font-medium text-primary">
                         Tipo de Correspondencia
                     </label>
                     <select id="tcorSelect"
-                        class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="block w-full p-1 text-sm border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base"
                         wire:model.live="tcccid" x-data="{ selectedText: '' }"
                         x-on:change="selectedText = $event.target.options[$event.target.selectedIndex].text">
                         <option value="">Seleccione una opción</option>
@@ -93,11 +93,11 @@
                 <!-- Fila 2 - Columna 1 ---------------------------------------------------------------------------------------------------------->
                 <div class="flex items-center w-full col-span-1 gap-2">
                     <label for="cccor" wire:model.live="ccor"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        class="block mb-2 text-sm font-medium text-primary">
                         Clasificacion de Correspondencia
                     </label>
                     <select id="cccor" wire:model="ccor"
-                        class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="block w-full p-1 text-sm border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base"
                         @if (!$isCccorEnabled) disabled @endif>
                         <option selected>Selecione la Clasificacion:</option>
                         @foreach ($filteredCcor as $item)
@@ -107,34 +107,34 @@
                 </div>
                 <!-- Fila 2 - Columna 2 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
-                    <label for="nnh" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="nnh" class="block mb-2 text-sm font-medium text-primary">
                         No. de hojas
                     </label>
                     <input type="number" id="nnh" wire:model="nhoj"
-                        class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="block w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                 </div>
                 <!-- Fila 2 - Columna 3 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
-                    <label for="nno" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="nno" class="block mb-2 text-sm font-medium text-primary">
                         No. de Oficio
                     </label>
                     <input type="text" id="nno" wire:model="nofi"
-                        class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="block w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                 </div>
                 <!-- Fila 2 - Columna 4 -->
                 <div class="flex items-center w-full col-span-1 gap-2">
-                    <label for="ffo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="ffo" class="block mb-2 text-sm font-medium text-primary">
                         Fecha del oficio
                     </label>
                     <input type="date" id="ffo" wire:model="fofi"
-                        class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="block w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                 </div>
             </div>
             {{-- -------------------------------------------------------------------------------------------------------------- --}}
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <!-- Fila 1 - Columna 1 -->
                 <div class="col-span-1">
-                    <label for="des" class="block mb-8 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="des" class="block mb-8 text-sm font-medium text-primary">
                         Descripcion:
                         <button type="button" wire:click="openModalAgent('des')"
                             class="px-2 py-1 text-xs text-white bg-orange-500 rounded-md hover:bg-orange-700 focus:ring focus:ring-orange-300 relative group"
@@ -156,11 +156,11 @@
                         </button>
                     </label>
                     <textarea id="des" rows="4" spellcheck="true" lang="es" wire:model="des"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="block p-2.5 w-full text-sm rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base"
                         placeholder="Escribe aquí...">{{ $des }}</textarea>
                 </div>
                 <div class="col-span-1 m-4">
-                    <p class="py-1 mb-8 ">Remitente:
+                    <p class="py-1 mb-8">Remitente:
 
                         <button type="button" wire:click="openModalAgent('Remitente')"
                             class="px-2 py-1 text-xs text-white bg-orange-500 rounded-md hover:bg-orange-700 focus:ring focus:ring-orange-300 relative group"
@@ -172,43 +172,43 @@
                             </span>
                         </button>
                     </p>
-                    <div class="flex items-center m-1 space-x-4 ">
+                    <div class="flex items-center m-1 space-x-4">
                         <!-- Etiqueta -->
-                        <label for="remnom" class="text-sm font-medium text-gray-900 dark:text-white">
+                        <label for="remnom" class="text-sm font-medium text-primary">
                             Nombre:
                         </label>
                         <!-- Campo de Entrada -->
                         <input type="text" id="rem_nom" wire:model="rem_nombre" readonly
-                            class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                     </div>
-                    <div class="flex items-center m-1 space-x-4 ">
+                    <div class="flex items-center m-1 space-x-4">
                         <!-- Etiqueta -->
-                        <label for="rencar" class="text-sm font-medium text-gray-900 dark:text-white">
+                        <label for="rencar" class="text-sm font-medium text-primary">
                             Cargo:
                         </label>
                         <!-- Campo de Entrada -->
                         <input type="text" id="rem_cargo" wire:model="rem_cargo" readonly
-                            class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                     </div>
-                    <div class="flex items-center m-1 space-x-4 ">
+                    <div class="flex items-center m-1 space-x-4">
                         <!-- Etiqueta -->
-                        <label for="remdep" class="text-sm font-medium text-gray-900 dark:text-white">
+                        <label for="remdep" class="text-sm font-medium text-primary">
                             Dep:
                         </label>
                         <!-- Campo de Entrada -->
                         <input type="text" id="rem_deporg" wire:model="rem_deporg" readonly
-                            class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                     </div>
-                    <div class="flex items-center m-1 space-x-4 ">
-                        <label for="remdir" class="text-sm font-medium text-gray-900 dark:text-white">
+                    <div class="flex items-center m-1 space-x-4">
+                        <label for="remdir" class="text-sm font-medium text-primary">
                             Direccion:
                         </label>
                         <input type="text" id="remdir" wire:model="rem_dir" readonly
-                            class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                     </div>
                 </div>
-                <div class="col-span-1 ">
-                    <label for="seg" class="block mb-8  text-sm font-medium text-gray-900 dark:text-white">
+                <div class="col-span-1">
+                    <label for="seg" class="block mb-8 text-sm font-medium text-primary">
                         Seguimiento:
                         <button type="button" wire:click="openModalAgent('seguimiento')"
                             class="px-2 py-1 text-xs text-white bg-orange-500 rounded-md hover:bg-orange-700 focus:ring focus:ring-orange-300 relative group"
@@ -230,11 +230,11 @@
                         </button>
                     </label>
                     <textarea id="seg" rows="4" spellcheck="true" lang="es" wire:model="seguimiento"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="block p-2.5 w-full text-sm rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base"
                         placeholder="Escribe aquí...">{{ $seguimiento }}</textarea>
                 </div>
                 <div class="col-span-1 mb-8">
-                    <label for="turnado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="turnado" class="block mb-2 text-sm font-medium text-primary">
                         Turnado:
                         <div class="inline-flex ml-2 space-x-1">
                             <button type="button" wire:click="switchToUserTurnado"
@@ -273,55 +273,55 @@
 
                     @if ($turnadoType === 'user')
                         <!-- Campos para usuario individual -->
-                        <div class="flex items-center mb-1 space-x-4 ">
-                            <label for="turnom" class="text-xs font-medium text-gray-900 dark:text-white">
+                        <div class="flex items-center mb-1 space-x-4">
+                            <label for="turnom" class="text-xs font-medium text-primary">
                                 Nombre:
                             </label>
                             <input type="text" id="tur_nom" wire:model="tur_nom" readonly
-                                class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                         </div>
-                        <div class="flex items-center mb-1 space-x-4 ">
-                            <label for="turcargo" class="text-xs font-medium text-gray-900 dark:text-white">
+                        <div class="flex items-center mb-1 space-x-4">
+                            <label for="turcargo" class="text-xs font-medium text-primary">
                                 Cargo:
                             </label>
                             <input type="text" id="tur_cargo" wire:model="tur_cargo" readonly
-                                class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                         </div>
-                        <div class="flex items-center mb-1 space-x-4 ">
-                            <label for="turdeporg" class="text-xs font-medium text-gray-900 dark:text-white">
+                        <div class="flex items-center mb-1 space-x-4">
+                            <label for="turdeporg" class="text-xs font-medium text-primary">
                                 Depto:
                             </label>
                             <input type="text" id="tur_deporg" wire:model="tur_deporg" readonly
-                                class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                         </div>
                         @if ($rem_id)
-                            <div class="flex items-center mb-1 space-x-4 ">
-                                <label for="rem_id_debug" class="text-xs font-medium text-gray-900 dark:text-white">
+                            <div class="flex items-center mb-1 space-x-4">
+                                <label for="rem_id_debug" class="text-xs font-medium text-primary">
                                     ID Usuario:
                                 </label>
                                 <input type="text" id="rem_id_debug" value="{{ $rem_id }}" readonly
-                                    class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                             </div>
                         @endif
                     @else
                         <!-- Campos para grupo -->
-                        <div class="flex items-center mb-1 space-x-4 ">
-                            <label for="groupname" class="text-xs font-medium text-gray-900 dark:text-white">
+                        <div class="flex items-center mb-1 space-x-4">
+                            <label for="groupname" class="text-xs font-medium text-primary">
                                 Grupo:
                             </label>
                             <input type="text" id="groupname"
                                 value="{{ $selectedGroup ? $selectedGroup->name : '' }}" readonly
-                                class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                         </div>
                         @if ($selectedGroup)
                             @if (count($groupMembers) > 0)
-                                <div class="mt-1 p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                                    <h4 class="text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Miembros del
+                                <div class="mt-1 p-2 rounded-lg surface-panel">
+                                    <h4 class="text-xs font-medium mb-1 text-primary">Miembros del
                                         grupo ({{ count($groupMembers) }}):</h4>
                                     <div class="space-y-1 max-h-24 overflow-y-auto">
                                         @foreach ($groupMembers as $member)
                                             <div
-                                                class="flex items-center justify-between p-1 bg-white dark:bg-gray-700 rounded text-xs">
+                                                class="flex items-center justify-between p-1 rounded text-xs surface-panel">
                                                 <div>
                                                     <span class="font-medium">{{ $member->name }}</span>
                                                     @if ($member->position)
@@ -337,12 +337,12 @@
                                 </div>
                             @endif
 
-                            <div class="flex items-center mb-1 space-x-4 ">
-                                <label for="group_id_debug" class="text-xs font-medium text-gray-900 dark:text-white">
+                            <div class="flex items-center mb-1 space-x-4">
+                                <label for="group_id_debug" class="text-xs font-medium text-primary">
                                     ID Grupo:
                                 </label>
                                 <input type="text" id="group_id_debug" value="{{ $selectedGroup->id }}" readonly
-                                    class="w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                             </div>
                         @endif
                     @endif
@@ -350,15 +350,15 @@
             </div>
 
             {{-- Sección de Archivos --}}
-            <div class="mt-6 p-4 bg-gray-800 rounded-lg">
-                <h3 class="mb-4 text-lg font-semibold text-white">Archivos Adjuntos</h3>
+            <div class="mt-6 p-4 rounded-lg surface-panel">
+                <h3 class="mb-4 text-lg font-semibold text-primary">Archivos Adjuntos</h3>
 
                 @if (!empty($files))
                     <div class="mb-4">
-                        <h4 class="mb-2 text-sm font-medium text-gray-300">Archivos seleccionados:</h4>
+                        <h4 class="mb-2 text-sm font-medium text-primary">Archivos seleccionados:</h4>
                         <div class="space-y-2">
                             @foreach ($files as $index => $file)
-                                <div class="flex items-center justify-between p-2 bg-gray-700 rounded">
+                                <div class="flex items-center justify-between p-2 rounded surface-panel">
                                     <div class="flex items-center space-x-2">
                                         <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd"
@@ -384,18 +384,18 @@
 
                 <div class="space-y-4">
                     <div>
-                        <label for="file-{{ count($files) }}" class="block text-sm font-medium text-gray-300 mb-2">
+                        <label for="file-{{ count($files) }}" class="block text-sm font-medium mb-2 text-primary">
                             Seleccionar archivo PDF
                         </label>
                         <input type="file" id="file-{{ count($files) }}" wire:model="files" accept=".pdf"
-                            class="block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 bg-gray-700 border border-gray-600 rounded-lg cursor-pointer">
+                            class="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border border-gray-600 rounded-lg cursor-pointer text-primary input-base">
                         @error('files')
                             <span class="text-red-400 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
 
-                <div class="mt-4 text-sm text-gray-400">
+                <div class="mt-4 text-sm text-primary">
                     <p>• Solo se permiten archivos PDF</p>
                     <p>• Tamaño máximo: 15MB por archivo</p>
                 </div>
@@ -419,12 +419,12 @@
                             <button type="button" wire:click="openModalAgent('columna1')" class="w-full px-4 py-2 mb-2 text-white bg-pink-600 rounded-md hover:bg-pink-700 focus:ring focus:ring-pink-300">
                                 t1
                             </button>
-                            <textarea 
-                                id="textarea_1" 
-                                name="textarea_1" 
-                                rows="4" 
+                            <textarea
+                                id="textarea_1"
+                                name="textarea_1"
+                                rows="4"
                                 wire:model="textarea_1"
-                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                class="block p-2.5 w-full text-sm rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base"
                                 placeholder="Escribe aquí..."></textarea>
                         </td>
                         <!-- Segunda columna - Textarea -->
@@ -432,12 +432,12 @@
                             <button type="button" wire:click="openModalAgent('columna2')" class="w-full px-4 py-2 mb-2 text-white bg-pink-600 rounded-md hover:bg-pink-700 focus:ring focus:ring-pink-300">
                                 t2
                             </button>
-                            <textarea 
-                                id="textarea_2" 
-                                name="textarea_2" 
-                                rows="4" 
+                            <textarea
+                                id="textarea_2"
+                                name="textarea_2"
+                                rows="4"
                                 wire:model="textarea_2"
-                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                class="block p-2.5 w-full text-sm rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base"
                                 placeholder="Escribe aquí..."></textarea>
                         </td>
                         <!-- Tercera columna - 4 inputs -->
@@ -446,22 +446,22 @@
                                 input1
                             </button>
                             <div class="space-y-2">
-                                <input type="text" id="input_3_1" name="input_3_1" wire:model="input_3_1" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 1">
-                                <input type="text" id="input_3_2" name="input_3_2" wire:model="input_3_2" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 2">
-                                <input type="text" id="input_3_3" name="input_3_3" wire:model="input_3_3" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 3">
-                                <input type="text" id="input_3_4" name="input_3_4" wire:model="input_3_4" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 4">
+                                <input type="text" id="input_3_1" name="input_3_1" wire:model="input_3_1" class="block w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base" placeholder="Campo 1">
+                                <input type="text" id="input_3_2" name="input_3_2" wire:model="input_3_2" class="block w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base" placeholder="Campo 2">
+                                <input type="text" id="input_3_3" name="input_3_3" wire:model="input_3_3" class="block w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base" placeholder="Campo 3">
+                                <input type="text" id="input_3_4" name="input_3_4" wire:model="input_3_4" class="block w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base" placeholder="Campo 4">
                             </div>
                         </td>
                         <!-- Cuarta columna - 4 inputs -->
                         <td class="w-1/4 border border-gray-300 p-2">
                             <button type="button" wire:click="openModalAgent('columna4')" class="w-full px-4 py-2 mb-2 text-white bg-pink-600 rounded-md hover:bg-pink-700 focus:ring focus:ring-pink-300">
-                                input 2 
+                                input 2
                             </button>
                             <div class="space-y-2">
-                                <input type="text" id="input_4_1" name="input_4_1" wire:model="input_4_1" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 1">
-                                <input type="text" id="input_4_2" name="input_4_2" wire:model="input_4_2" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 2">
-                                <input type="text" id="input_4_3" name="input_4_3" wire:model="input_4_3" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 3">
-                                <input type="text" id="input_4_4" name="input_4_4" wire:model="input_4_4" class="block w-full p-1 text-xs text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Campo 4">
+                                <input type="text" id="input_4_1" name="input_4_1" wire:model="input_4_1" class="block w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base" placeholder="Campo 1">
+                                <input type="text" id="input_4_2" name="input_4_2" wire:model="input_4_2" class="block w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base" placeholder="Campo 2">
+                                <input type="text" id="input_4_3" name="input_4_3" wire:model="input_4_3" class="block w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base" placeholder="Campo 3">
+                                <input type="text" id="input_4_4" name="input_4_4" wire:model="input_4_4" class="block w-full p-1 text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base" placeholder="Campo 4">
                             </div>
                         </td>
                     </tr>
@@ -482,10 +482,10 @@
     <!-- Modal de descripcion -->
     <div id="modal_des" tabindex="-1" aria-hidden="true"
         class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full h-full max-h-full overflow-x-hidden overflow-y-auto bg-gray-900 bg-opacity-50">
-        <div class="relative w-full max-w-4xl bg-white rounded-lg shadow dark:bg-gray-800">
+        <div class="relative w-full max-w-4xl rounded-lg shadow modal-elevated">
             <!-- Modal header -->
             <div class="flex items-center justify-between px-4 py-3 border-b dark:border-gray-700">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                <h3 class="text-lg font-semibold text-primary">
                     Usuarios
                 </h3>
                 <button type="button"
@@ -501,8 +501,8 @@
             </div>
             <!-- Modal Body -->
             <div class="p-4 space-y-4">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="bg-gray-50 dark:bg-gray-700">
+                <table class="w-full text-sm text-left text-primary">
+                    <thead class="">
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
@@ -533,50 +533,50 @@
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
             <div x-show="show"
-                class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
-                <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                class="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full modal-elevated">
+                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 surface-panel">
                     <div class="sm:flex sm:items-start">
                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                            <h3 class="text-sm leading-6 font-medium text-gray-900 dark:text-gray-100">
+                            <h3 class="text-sm leading-6 font-medium text-primary">
                                 Seleccionar Agente
                             </h3>
                             <div class="mt-2">
                                 <input type="text" wire:model.live="modalAgeFilter" placeholder="Buscar agente..."
-                                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs">
+                                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs text-primary input-base">
                             </div>
                             <div class="mt-4 max-h-96 overflow-y-auto">
                                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                    <thead class="bg-gray-50 dark:bg-gray-700">
+                                    <thead class="">
                                         <tr>
                                             <th
-                                                class="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                class="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-primary">
                                                 Nombre</th>
                                             <th
-                                                class="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                class="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-primary">
                                                 Cargo</th>
                                             <th
-                                                class="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                class="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-primary">
                                                 Dependencia</th>
                                             <th
-                                                class="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                class="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-primary">
                                                 Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody
-                                        class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                        class="divide-y divide-gray-200 dark:divide-gray-700">
                                         @foreach ($modalAges as $age)
                                             <tr>
                                                 <td
-                                                    class="px-3 py-2 whitespace-nowrap text-xs text-gray-900 dark:text-gray-300">
+                                                    class="px-3 py-2 whitespace-nowrap text-xs text-primary">
                                                     {{ $age->nombre }}</td>
                                                 <td
-                                                    class="px-3 py-2 whitespace-nowrap text-xs text-gray-900 dark:text-gray-300">
+                                                    class="px-3 py-2 whitespace-nowrap text-xs text-primary">
                                                     {{ $age->cargo }}</td>
                                                 <td
-                                                    class="px-3 py-2 whitespace-nowrap text-xs text-gray-900 dark:text-gray-300">
+                                                    class="px-3 py-2 whitespace-nowrap text-xs text-primary">
                                                     {{ $age->deporg }}</td>
                                                 <td
-                                                    class="px-3 py-2 whitespace-nowrap text-xs text-gray-900 dark:text-gray-300">
+                                                    class="px-3 py-2 whitespace-nowrap text-xs text-primary">
                                                     <x-icon-action variant="success" icon="fa-solid fa-check" label="Seleccionar" wire:click="selectAgeFromModal({{ $age->des }})" />
                                                 </td>
                                             </tr>
@@ -587,7 +587,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse surface-panel">
                     <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cerrar" size="md" wire:click="closeAgeModal" />
                 </div>
             </div>
@@ -597,10 +597,10 @@
     @if ($showModalAgent)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div
-                class="w-full h-3/4 mx-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-white flex flex-col">
+                class="w-full h-3/4 mx-4 rounded-2xl shadow-lg border border-white flex flex-col surface-panel">
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between p-4 border-b border-white">
-                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-sm font-semibold text-primary">
                         Lista de Ages -
                         {{ $selectedColumn ? 'Columna ' . str_replace('columna', '', $selectedColumn) : '' }}
                     </h3>
@@ -617,22 +617,22 @@
                 <div class="p-4 border-b border-white">
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
                         <div>
-                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Nombre</label>
+                            <label class="block text-xs font-medium text-primary">Nombre</label>
                             <input wire:model.live.debounce.300ms="searchNombre" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:border-gray-600 text-primary input-base"
                                 placeholder="Buscar por nombre">
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Cargo</label>
+                            <label class="block text-xs font-medium text-primary">Cargo</label>
                             <input wire:model.live.debounce.300ms="searchCargo" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:border-gray-600 text-primary input-base"
                                 placeholder="Buscar por cargo">
                         </div>
                         <div>
                             <label
-                                class="block text-xs font-medium text-gray-700 dark:text-gray-300">Departamento</label>
+                                class="block text-xs font-medium text-primary">Departamento</label>
                             <input wire:model.live.debounce.300ms="searchDeporg" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:border-gray-600 text-primary input-base"
                                 placeholder="Buscar por departamento">
                         </div>
                     </div>
@@ -640,8 +640,8 @@
 
                 <!-- Tabla de Ages -->
                 <div class="flex-1 overflow-y-auto p-4">
-                    <table class="w-full text-xs text-left text-gray-900 dark:text-white">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <table class="w-full text-xs text-left text-primary">
+                        <thead class="text-xs uppercase text-primary">
                             <tr>
                                 <th class="px-3 py-2">ID</th>
                                 <th class="px-3 py-2">Nombre</th>
@@ -652,7 +652,7 @@
                         </thead>
                         <tbody>
                             @foreach ($modalAges as $age)
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <tr class="border-b dark:border-gray-700">
                                     <td class="px-3 py-2">{{ $age->id }}</td>
                                     <td class="px-3 py-2">{{ $age->nombre }}</td>
                                     <td class="px-3 py-2">{{ $age->cargo }}</td>
@@ -678,10 +678,10 @@
     @if ($showModalUsers)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div
-                class="w-full h-3/4 mx-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-white flex flex-col">
+                class="w-full h-3/4 mx-4 rounded-2xl shadow-lg border border-white flex flex-col surface-panel">
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between p-4 border-b border-white">
-                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-sm font-semibold text-primary">
                         Lista de Usuarios - {{ $selectedUserColumn ? $selectedUserColumn : '' }}
                     </h3>
                     <button wire:click="closeModalUsers"
@@ -697,21 +697,21 @@
                 <div class="p-4 border-b border-white">
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
                         <div>
-                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Nombre</label>
+                            <label class="block text-xs font-medium text-primary">Nombre</label>
                             <input wire:model.live.debounce.300ms="searchUserName" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:border-gray-600 text-primary input-base"
                                 placeholder="Buscar por nombre">
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Cargo</label>
+                            <label class="block text-xs font-medium text-primary">Cargo</label>
                             <input wire:model.live.debounce.300ms="searchUserPosition" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:border-gray-600 text-primary input-base"
                                 placeholder="Buscar por cargo">
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Dirección</label>
+                            <label class="block text-xs font-medium text-primary">Dirección</label>
                             <input wire:model.live.debounce.300ms="searchUserDirection" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:border-gray-600 text-primary input-base"
                                 placeholder="Buscar por dirección">
                         </div>
                     </div>
@@ -719,8 +719,8 @@
 
                 <!-- Tabla de Usuarios -->
                 <div class="flex-1 overflow-y-auto p-4">
-                    <table class="w-full text-xs text-left text-gray-900 dark:text-white">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <table class="w-full text-xs text-left text-primary">
+                        <thead class="text-xs uppercase text-primary">
                             <tr>
                                 <th class="px-3 py-2">ID</th>
                                 <th class="px-3 py-2">Nombre</th>
@@ -732,7 +732,7 @@
                         </thead>
                         <tbody>
                             @foreach ($modalUsers as $user)
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <tr class="border-b dark:border-gray-700">
                                     <td class="px-3 py-2">{{ $user->id }}</td>
                                     <td class="px-3 py-2">{{ $user->name }}</td>
                                     <td class="px-3 py-2">{{ $user->position }}</td>
@@ -759,10 +759,10 @@
     @if ($showModalGroups)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div
-                class="w-full h-3/4 mx-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-white flex flex-col">
+                class="w-full h-3/4 mx-4 rounded-2xl shadow-lg border border-white flex flex-col surface-panel">
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between p-4 border-b border-white">
-                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-sm font-semibold text-primary">
                         Lista de Grupos - {{ $selectedGroupColumn ? $selectedGroupColumn : '' }}
                     </h3>
                     <button wire:click="closeModalGroups"
@@ -778,17 +778,17 @@
                 <div class="p-4 border-b border-white">
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
-                            <label class="block text-xs font-medium text-gray-700 dark:text-gray-300">Nombre del
+                            <label class="block text-xs font-medium text-primary">Nombre del
                                 Grupo</label>
                             <input wire:model.live.debounce.300ms="searchGroupName" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:border-gray-600 text-primary input-base"
                                 placeholder="Buscar por nombre del grupo">
                         </div>
                         <div>
                             <label
-                                class="block text-xs font-medium text-gray-700 dark:text-gray-300">Descripción</label>
+                                class="block text-xs font-medium text-primary">Descripción</label>
                             <input wire:model.live.debounce.300ms="searchGroupDescription" type="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-xs dark:border-gray-600 text-primary input-base"
                                 placeholder="Buscar por descripción">
                         </div>
                     </div>
@@ -796,8 +796,8 @@
 
                 <!-- Tabla de Grupos -->
                 <div class="flex-1 overflow-y-auto p-4">
-                    <table class="w-full text-xs text-left text-gray-900 dark:text-white">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <table class="w-full text-xs text-left text-primary">
+                        <thead class="text-xs uppercase text-primary">
                             <tr>
                                 <th class="px-3 py-2">ID</th>
                                 <th class="px-3 py-2">Nombre</th>
@@ -808,7 +808,7 @@
                         </thead>
                         <tbody>
                             @foreach ($modalGroups as $group)
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <tr class="border-b dark:border-gray-700">
                                     <td class="px-3 py-2">{{ $group->id }}</td>
                                     <td class="px-3 py-2">{{ $group->name }}</td>
                                     <td class="px-3 py-2">{{ $group->description ?: 'Sin descripción' }}</td>

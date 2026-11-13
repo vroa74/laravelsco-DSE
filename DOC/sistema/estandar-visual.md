@@ -1,8 +1,32 @@
 # Estándar visual transversal de SCO
 
-Fecha: 12/11/2026. Responsable: coordinador. Estado: reglas documentadas; análisis completo, implementación e inspección visual pendientes.
+Fecha: 12/11/2026. Responsable de esta corrección: Codex. Estado: implementación local y verificación visual en revisión; aprobación estética pendiente.
 
 Autoridad: [AGENTS.md](../../AGENTS.md). Referencia aprobada por el usuario: `/agen`. Mantener funcionalidad, navegación, información y flujos existentes. Primero homogeneización visual; después correcciones funcionales. Los parches previos RG/grupos permanecen locales, pendientes de revisión, sin revertirlos.
+
+## Decisiones vigentes tras revisión del usuario
+
+El azul marino translúcido y los degradados solicitados prevalecen sobre preferencias genéricas de las skills. No rediseñar la navegación ni los flujos.
+
+| Acción | Variante compartida | Color |
+| --- | --- | --- |
+| Agregar / guardar | success | Verde |
+| Editar | warning | Naranja |
+| Ver / show | view | Amarillo |
+| Eliminar | danger | Rojo, reservado a destrucción |
+| Reporte normal | report-normal | Azul |
+| Reporte especial | report-special | Violeta |
+| Reporte solicitud | report-request | Turquesa |
+| Exportar PDF | export-pdf | Magenta |
+| Exportar CSV | export-csv | Azul petróleo |
+| Filtrar | info | Azul |
+| Cancelar / volver | neutral | Azul grisáceo |
+
+Escudo: opacidad0.48; equivale a reducir un40% la intensidad anterior de0.8. Esta última petición busca un fondo apenas perceptible, conservando escala, filtro y archivo. No confundir opacidad de la imagen con alfa del panel.
+
+Superficie oscura: `rgb(7 24 51 / .62)`; clara: `rgb(241 247 255 / .62)`. Sustituyen el alfa0.8 anterior por petición de mayor transparencia. Los controles usan superficie sólida legible y texto contrastado; las tablas no acumulan fondos por fila o celda. Tamaño de icono compartido: 14px; botón de icono 36px o 40px, mínimo táctil 44px en móvil/puntero grueso. No introducir tamaños distintos por CRUD.
+
+La selección nativa de fecha recibe `color-scheme: dark` en oscuro. Se verifica en Chrome con preferencia oscura; el popup depende del navegador/OS. No se promete control CSS de todos sus detalles.
 
 ## Colores y temas
 
@@ -81,12 +105,20 @@ El componente CSS común del fondo aplica escala de grises, brillo1.35, contrast
 
 Validación: build correcto comunicado por el trabajador (19.13s), CSS compilado y diferencias revisados por el coordinador, guardia aceptada antes de Laravel y 22 pruebas existentes de componentes/responsive aprobadas, 45 aserciones, 87.54s, exclusivamente con SQLite en memoria y datos sintéticos. Evidencia: `pruebas/evidencias/fondo-acceso/regresion.txt`. Vista previa estática sin backend: `pruebas/prototipos/fondo-acceso-plata.html`, vinculada al CSS del build local actual. No hubo inspección renderizada en navegador; siguen pendientes revisión visual por tamaño/tema y aprobación estética. No se declara estandarizada la aplicación completa.
 
-## Aclaración global: escudo y superficies al80% (up000052)
+## Antecedente: escudo y superficies al80% (up000052; alfa sustituido por 0.62)
 
 La captura de `/dashboard` precisa el resultado requerido: el escudo plateado debe verse detrás del contenido de todas las páginas. El fondo de acceso de up000051 es solo una parte; no acredita esta cobertura global.
 
-Usar un fondo decorativo común, grande y sin letras con `campechecon.png`. Cada panel principal o contenedor de tabla lleva color de superficie con alfa0.8, manteniendo texto/iconos/controles al100%. No usar `opacity` en el contenedor completo. Quitar fondos opacos internos y evitar acumulación de transparencias anidadas que esconda el escudo; conservar encabezados, filas, selección, ayudas y errores legibles. Los colores claro/oscuro se definen una vez y el contraste se verifica contra la composición final, incluida la parte más clara del escudo.
+Usar un fondo decorativo común, grande y sin letras con `campechecon.png`. La regla original de cada panel principal o contenedor de tabla indicaba alfa0.8 (actualmente sustituido por alfa0.62), manteniendo texto/iconos/controles al100%. No usar `opacity` en el contenedor completo. Quitar fondos opacos internos y evitar acumulación de transparencias anidadas que esconda el escudo; conservar encabezados, filas, selección, ayudas y errores legibles. Los colores claro/oscuro se definen una vez y el contraste se verifica contra la composición final, incluida la parte más clara del escudo.
 
 Cobertura: layouts de acceso y aplicación, dashboard, correspondencia, directorio, usuarios, grupos, catálogos, perfil y vistas secundarias pertinentes. Reutilizar componentes/tokens y conservar flujos y datos. Móvil/tableta/escritorio y ambos temas; no se agrega aquí selector/persistencia de tema ni se traslada la transparencia a PDF/correo.
 
 Criterio de aceptación: evidencia de cada familia de pantalla sobre el fondo real, superficies sin atenuación de sus descendientes, contraste, teclado y ausencia de desplazamiento lateral. Una captura aislada o pruebas de cadenas no acreditan cobertura. Estado: regla confirmada; implementación global pendiente.
+
+## Organización y alcance de esta entrega
+
+Tokens y material visual: `resources/css/app.css`. Botones, campos y diálogos: `resources/views/components`. Composición: vistas existentes de cada recurso; no se agregan consultas ni reglas de negocio a Blade. No se modifica el backend ni se instalan dependencias. Las pruebas, herramientas y capturas sintéticas quedan bajo `/pruebas`; no son código de producto.
+
+Se revisan las plantillas efectivas: Jetstream monta `resources/views/navigation-menu.blade.php`, no su duplicado bajo livewire. Los CRUD montan People, Usuarios/Index, UserGroups/Index y Reportesgral/Index. La barra plegable de navegación se usa hasta 1023px para evitar desbordamiento, conservando los mismos enlaces.
+
+Skills aplicadas: Taste (identidad aprobada y stack existente sobre defaults React/movimiento), UI/UX Pro Max (búsqueda local de contraste en campos) e Impeccable 4.7.0 (context, craft-floor y polish). El contexto permite refinamiento del sistema existente sin crear un rediseño. No se instalaron plugins ni hooks.

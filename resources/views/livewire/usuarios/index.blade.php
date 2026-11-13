@@ -10,7 +10,7 @@
                 <div class="flex flex-col gap-2 sm:flex-row sm:items-stretch">
                     <!-- Botón de filtros -->
                     <button type="button"
-                        class="flex w-full items-center justify-between gap-3 rounded-xl border border-gray-700 bg-blue-950 px-4 py-2.5 text-sm font-medium text-gray-200 transition hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-gray-700 sm:flex-1"
+                        class="filter-toggle flex w-full items-center justify-between gap-3 rounded-xl border border-gray-700  px-4 py-2.5 text-sm font-medium  transition  focus:outline-none focus:ring-4 focus:ring-gray-700 sm:flex-1"
                         wire:click="toggleAccordion" aria-expanded="{{ $isOpen ? 'true' : 'false' }}"
                         aria-controls="accordion-collapse-body-1">
                         <span class="inline-flex items-center gap-2">
@@ -38,16 +38,16 @@
         </h2>
 
         <div id="accordion-collapse-body-1"
-            class="{{ $isOpen ? '' : 'hidden' }} p-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+            class="{{ $isOpen ? '' : 'hidden' }} p-1 border border-gray-200 dark:border-gray-700 surface-panel">
             {{--      begin section containes filter --}}
 
 
-            <div class="grid grid-cols-1 gap-1 w-full h-full px-2 text-xs text-white sm:grid-cols-2 sm:px-4 xl:grid-cols-4">
+            <div class="grid grid-cols-1 gap-1 w-full h-full px-2 text-xs sm:grid-cols-2 sm:px-4 xl:grid-cols-4 text-primary">
                 <div class="border-2 border-gray-300 rounded-lg p-1 items-center text-center space-y-1">
                     {{-- inline-block se usa para un tamaño especifico           --}}
                     Mostrar::
                     <select id="countries" wire:model.live="perPage"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-md focus:ring-blue-500 focus:border-blue-500 inline-block w-auto p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="border border-gray-300 text-xs rounded-md focus:ring-blue-500 focus:border-blue-500 inline-block w-auto p-1 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 text-primary input-base">
                         <option value="10" selected>Registros a mostrar</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
@@ -64,26 +64,26 @@
                 </div>
                 <div class="border-2 border-gray-400 rounded-lg p-1 text-center flex flex-col items-center space-y-1">
                     <div class="flex items-center space-x-2">
-                        <label for="name" class="text-sm text-gray-900 dark:text-white">Nombre</label>
+                        <label for="name" class="text-sm text-primary">Nombre</label>
                         <input type="text" id="name" placeholder="Nombre completo" wire:model.live="filname"
-                            class="p-1 border rounded bg-gray-50 text-xs dark:bg-gray-700" style="width: 150px;">
+                            class="p-1 border rounded text-xs input-base" style="width: 150px;">
                     </div>
                     <div class="flex items-center space-x-2">
-                        <label for="rfc" class="text-sm text-gray-900 dark:text-white">RFC</label>
+                        <label for="rfc" class="text-sm text-primary">RFC</label>
                         <input type="text" id="rfc" placeholder="RFC" wire:model.live="filrfc"
-                            class="p-1 border rounded bg-gray-50 text-xs dark:bg-gray-700" style="width: 150px;">
+                            class="p-1 border rounded text-xs input-base" style="width: 150px;">
                     </div>
                     <div class="flex items-center space-x-2">
-                        <label for="curp" class="text-sm text-gray-900 dark:text-white">CURP</label>
+                        <label for="curp" class="text-sm text-primary">CURP</label>
                         <input type="text" id="curp" placeholder="CURP" wire:model.live="filcurp"
-                            class="p-1 border rounded bg-gray-50 text-xs dark:bg-gray-700" style="width: 150px;">
+                            class="p-1 border rounded text-xs input-base" style="width: 150px;">
                     </div>
                 </div>
                 <div class="border-2 border-gray-300 rounded-lg p-1 text-center flex flex-col items-center space-y-1">
                     <div class="flex items-center space-x-2">
-                        <label for="position" class="text-sm text-gray-900 dark:text-white">Cargo</label>
+                        <label for="position" class="text-sm text-primary">Cargo</label>
                         <select id="position" wire:model.live="filposition"
-                            class="p-1 border rounded bg-gray-50 text-xs dark:bg-gray-700" style="width: 150px;">
+                            class="p-1 border rounded text-xs input-base" style="width: 150px;">
                             <option value="">Todos los cargos</option>
                             @foreach ($uniquePositions as $position)
                                 <option value="{{ $position }}">{{ $position }}</option>
@@ -91,9 +91,9 @@
                         </select>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <label for="sex" class="text-sm text-gray-900 dark:text-white">Sexo</label>
+                        <label for="sex" class="text-sm text-primary">Sexo</label>
                         <select id="sex" wire:model.live="filsex"
-                            class="p-1 border rounded bg-gray-50 text-xs dark:bg-gray-700" style="width: 150px;">
+                            class="p-1 border rounded text-xs input-base" style="width: 150px;">
                             <option value="">Todos</option>
                             <option value="masculino">Masculino</option>
                             <option value="femenino">Femenino</option>
@@ -102,9 +102,9 @@
                 </div>
                 <div class="border-2 border-gray-400 rounded-lg p-1 text-center flex flex-col items-center space-y-1">
                     <div class="flex items-center space-x-2">
-                        <label for="lvl" class="text-sm text-gray-900 dark:text-white">Nivel</label>
+                        <label for="lvl" class="text-sm text-primary">Nivel</label>
                         <select id="lvl" wire:model.live="fillvl"
-                            class="p-1 border rounded bg-gray-50 text-xs dark:bg-gray-700" style="width: 150px;">
+                            class="p-1 border rounded text-xs input-base" style="width: 150px;">
                             <option value="">Todos los niveles</option>
                             @foreach ($uniqueLevels as $level)
                                 <option value="{{ $level }}">{{ $level }}</option>
@@ -112,14 +112,14 @@
                         </select>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <label for="email" class="text-sm text-gray-900 dark:text-white">E-mail</label>
+                        <label for="email" class="text-sm text-primary">E-mail</label>
                         <input type="text" id="email" placeholder="Email" wire:model.live="filemail"
-                            class="p-1 border rounded bg-gray-50 text-xs dark:bg-gray-700" style="width: 150px;">
+                            class="p-1 border rounded text-xs input-base" style="width: 150px;">
                     </div>
                     <div class="flex items-center space-x-2">
-                        <label for="direction" class="text-sm text-gray-900 dark:text-white">Dirección</label>
+                        <label for="direction" class="text-sm text-primary">Dirección</label>
                         <select id="direction" wire:model.live="fildirection"
-                            class="p-1 border rounded bg-gray-50 text-xs dark:bg-gray-700" style="width: 150px;">
+                            class="p-1 border rounded text-xs input-base" style="width: 150px;">
                             <option value="">Todas las direcciones</option>
                             @foreach ($uniqueDirections as $direction)
                                 <option value="{{ $direction }}">{{ $direction }}</option>
@@ -137,11 +137,9 @@
     <div class="relative pt-1 px-4 shadow-md sm:rounded-lg">
         <div class="mx-auto w-full sm:w-[96%]">
             <table
-                class="tabla-apilada rounded-2xl text-xs text-left rtl:text-right text-gray-500
-                          dark:text-gray-400">
+                class="tabla-apilada rounded-2xl text-xs text-left rtl:text-right text-primary">
                 <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-blue-900
-                              dark:text-gray-400">
+                    class="text-xs uppercase dark:bg-blue-900 text-primary">
                     <tr>
                         <th class="px-6 py-3 w-16">Foto</th>
                         <th class="px-6 py-3 w-12">ID</th>
@@ -154,15 +152,14 @@
                         <th class="px-6 py-3 w-20">Tipo</th>
                         <th class="px-6 py-3 w-20">Estado</th>
                         <th class="px-6 py-3 w-40">Email</th>
-                        <th class="px-6 py-3 text-right  w-[150px]">Acciones</th>
+                        <th class="px-6 py-3 text-right w-[150px]">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if ($users->count() > 0)
                         @foreach ($users as $items)
                             <tr
-                                class="bg-white border-b text-xs dark:bg-gray-800 dark:border-gray-700
-                                    hover:bg-gray-50 dark:hover:bg-gray-950">
+                                class="border-b text-xs dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-950">
                                 <td class="px-3 py-3 text-center md:w-16 md:px-6 md:py-4" data-label="Foto">
                                     @if ($items->profile_photo_path)
                                         <img src="{{ asset('storage/' . $items->profile_photo_path) }}"
@@ -176,7 +173,7 @@
                                     @endif
                                 </td>
                                 <th scope="row"
-                                    class="px-3 py-3 font-medium text-gray-900 dark:text-white md:w-12 md:px-6 md:py-4"
+                                    class="px-3 py-3 font-medium md:w-12 md:px-6 md:py-4 text-primary"
                                     data-label="ID">
                                     {{ $items->id }}
                                 </th>
@@ -196,46 +193,17 @@
                                 <td class="px-3 py-3 md:w-40 md:px-6 md:py-4" data-label="Email">{{ $items->email }}</td>
                                 <td class="px-3 py-3 text-right md:w-[150px] md:px-6 md:py-4" data-label="Acciones">
                                     {{--                                seccion de botones de acciones de la tabla --}}
-                                    <button wire:click="showRecord({{ $items->id }})"
-                                        title="Ver detalles del usuario"
-                                        class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                                        <span
-                                            class="relative px-1 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </span>
-                                    </button>
+                                    <x-icon-action variant="view" icon="fa-solid fa-eye" label="Ver detalles" wire:click="showRecord({{ $items->id }})"
+                                        title="Ver detalles del usuario" />
 
-                                    <button wire:click="editRecord({{ $items->id }})" title="Editar usuario"
-                                        class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2
-                                               overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
-                                               bg-gradient-to-br from-yellow-300 to-orange-600
-                                               group-hover:from-yellow-500 group-hover:to-orange-700 hover:text-white
-                                               dark:text-white focus:ring-4 focus:outline-none focus:ring-yellow-200
-                                               dark:focus:ring-yellow-800">
-                                        <span
-                                            class="relative px-1.5 py-1 transition-all ease-in duration-75
-                                                bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </span>
-                                    </button>
-                                    {{-- <button wire:click="confirmDelete({{ $items->id }})"
-                                        class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2
-                                               overflow-hidden text-sm font-medium text-gray-900 rounded-lg group
-                                               bg-gradient-to-br from-red-600 to-orange-400
-                                               group-hover:from-red-500 group-hover:to-orange-700 hover:text-white
-                                               dark:text-white focus:ring-4 focus:outline-none focus:ring-red-200
-                                               dark:focus:ring-red-800">
-                                    <span class="relative px-1.5 py-1 transition-all ease-in duration-75
-                                                bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                 <i class="fa-solid fa-trash-can"></i>
-                                   </span>
-                                </button> --}}
+                                    <x-icon-action variant="warning" icon="fa-solid fa-pen-to-square" label="Editar registro" wire:click="editRecord({{ $items->id }})" title="Editar usuario" />
+                                    {{-- <x-icon-action variant="danger" icon="fa-solid fa-trash-can" label="Eliminar registro" wire:click="confirmDelete({{ $items->id }})" /> --}}
                                 </td>
                             </tr>
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="12" class="px-3 py-3 text-center text-gray-500">
+                            <td colspan="12" class="px-3 py-3 text-center text-primary">
                                 No se encontraron registros.
                             </td>
                         </tr>
@@ -252,10 +220,10 @@
     @if ($selectedRecord)
         <div id="record-modal" tabindex="-1"
             class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
-            <div class="relative w-full max-w-2xl h-auto bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-xl font-semibold text-primary">
                         Detalles del Registro
                     </h3>
                     <button wire:click="closeModal" type="button"
@@ -269,7 +237,7 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div class="p-6 space-y-4 bg-gray-500 text-white">
+                <div class="p-6 space-y-4 surface-panel text-primary">
                     <p><strong>ID:</strong> {{ $selectedRecord->id }}</p>
                     <p><strong>Nombre:</strong> {{ $selectedRecord->name }}</p>
                     <p><strong>RFC:</strong> {{ $selectedRecord->rfc }}</p>
@@ -306,10 +274,10 @@
     @if ($editRecordId)
         <div id="edit-modal" tabindex="-1"
             class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
-            <div class="relative w-full max-w-2xl h-auto bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-xl font-semibold text-primary">
                         Editar Registro
                     </h3>
                     <button wire:click="closeEditModal" type="button"
@@ -324,21 +292,21 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 space-y-4">
-                    <div class="grid grid-cols-2 gap-4 bg-gray-900 p-1">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-1 surface-panel">
                         <!-- Fila 1 -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Nombre:</label>
                             <input wire:model="editName" type="text"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black"
+                                class="w-full p-2 border rounded text-primary input-base"
                                 placeholder="Nombre completo">
                             @error('editName')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Email:</label>
                             <input wire:model="editEmail" type="email"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black"
+                                class="w-full p-2 border rounded text-primary input-base"
                                 placeholder="correo@ejemplo.com">
                             @error('editEmail')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
@@ -346,19 +314,19 @@
                         </div>
 
                         <!-- Fila 2 -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">RFC:</label>
                             <input wire:model="editRfc" type="text"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black"
+                                class="w-full p-2 border rounded text-primary input-base"
                                 placeholder="RFC (13 caracteres)" maxlength="13">
                             @error('editRfc')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">CURP:</label>
                             <input wire:model="editCurp" type="text"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black"
+                                class="w-full p-2 border rounded text-primary input-base"
                                 placeholder="CURP (18 caracteres)" maxlength="20">
                             @error('editCurp')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
@@ -366,20 +334,20 @@
                         </div>
 
                         <!-- Fila 3 -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Cargo:</label>
                             <select wire:model="editPosition"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                                class="w-full p-2 border rounded text-primary input-base">
                                 <option value="">Seleccionar cargo</option>
                                 @foreach ($uniquePositions as $position)
                                     <option value="{{ $position }}">{{ $position }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Nivel:</label>
                             <select wire:model="editLvl"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                                class="w-full p-2 border rounded text-primary input-base">
                                 <option value="">Seleccionar nivel</option>
                                 @foreach ($uniqueLevels as $level)
                                     <option value="{{ $level }}">{{ $level }}</option>
@@ -388,19 +356,19 @@
                         </div>
 
                         <!-- Fila 4 -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Sexo:</label>
                             <select wire:model="editSex"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                                class="w-full p-2 border rounded text-primary input-base">
                                 <option value="">Seleccionar sexo</option>
                                 <option value="masculino">Masculino</option>
                                 <option value="femenino">Femenino</option>
                             </select>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Tipo:</label>
                             <select wire:model="editTipo"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                                class="w-full p-2 border rounded text-primary input-base">
                                 <option value="">Seleccionar tipo</option>
                                 <option value="1">Administrador</option>
                                 <option value="2">Supervisor</option>
@@ -409,18 +377,18 @@
                         </div>
 
                         <!-- Fila 5 -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Estado:</label>
                             <select wire:model="editStatus"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                                class="w-full p-2 border rounded text-primary input-base">
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                             </select>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Dirección:</label>
                             <select wire:model="editDirection"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                                class="w-full p-2 border rounded text-primary input-base">
                                 <option value="">Seleccionar dirección</option>
                                 @foreach ($uniqueDirections as $direction)
                                     <option value="{{ $direction }}">{{ $direction }}</option>
@@ -429,11 +397,11 @@
                         </div>
 
                         <!-- Fila 6 - Contraseña -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Nueva Contraseña:</label>
                             <div class="relative">
                                 <input wire:model="editPassword" type="{{ $showEditPassword ? 'text' : 'password' }}"
-                                    class="w-full p-2 pr-10 border rounded dark:bg-gray-800 text-black"
+                                    class="w-full p-2 pr-10 border rounded text-primary input-base"
                                     placeholder="Dejar vacío para mantener la actual">
                                 <button type="button" wire:click="toggleEditPassword"
                                     class="absolute inset-y-0 right-0 pr-3 flex items-center"
@@ -446,12 +414,12 @@
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Confirmar Contraseña:</label>
                             <div class="relative">
                                 <input wire:model="editPasswordConfirmation"
                                     type="{{ $showEditPasswordConfirmation ? 'text' : 'password' }}"
-                                    class="w-full p-2 pr-10 border rounded dark:bg-gray-800 text-black"
+                                    class="w-full p-2 pr-10 border rounded text-primary input-base"
                                     placeholder="Confirmar nueva contraseña">
                                 <button type="button" wire:click="toggleEditPasswordConfirmation"
                                     class="absolute inset-y-0 right-0 pr-3 flex items-center"
@@ -466,7 +434,7 @@
                         </div>
 
                         <!-- Fila 7 - Foto de perfil -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg col-span-2">
+                        <div class="p-1 rounded-lg col-span-2 surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Foto de Perfil:</label>
                             <div class="flex items-center space-x-4">
                                 <!-- Vista previa de foto actual o nueva -->
@@ -482,15 +450,15 @@
                                     @else
                                         <!-- Avatar por defecto con iniciales -->
                                         <div
-                                            class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-xl">
+                                            class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-semibold text-xl text-primary">
                                             {{ strtoupper(substr($editName, 0, 2)) }}
                                         </div>
                                     @endif
                                 </div>
                                 <div class="flex-1">
                                     <input wire:model.live="editProfilePhoto" type="file" accept="image/*"
-                                        class="w-full p-2 border rounded dark:bg-gray-800 text-black text-sm">
-                                    <p class="text-xs text-gray-300 mt-1">Formatos: JPG, PNG, GIF. Máximo 2MB</p>
+                                        class="w-full p-2 border rounded text-sm text-primary input-base">
+                                    <p class="text-xs mt-1 text-primary">Formatos: JPG, PNG, GIF. Máximo 2MB</p>
                                     @if ($editProfilePhoto)
                                         <p class="text-xs text-green-300 mt-1">Archivo seleccionado:
                                             {{ $editProfilePhoto->getClientOriginalName() }}</p>
@@ -515,10 +483,10 @@
     @if ($createModalOpen)
         <div id="create-modal" tabindex="-1"
             class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
-            <div class="relative w-full max-w-2xl h-auto bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-xl font-semibold text-primary">
                         Crear Nuevo Usuario
                     </h3>
                     <button wire:click="closeCreateModal" type="button"
@@ -533,21 +501,21 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 space-y-4">
-                    <div class="grid grid-cols-2 gap-4 bg-gray-900 p-1">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-1 surface-panel">
                         <!-- Fila 1 -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Nombre:</label>
                             <input wire:model="createName" type="text"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black"
+                                class="w-full p-2 border rounded text-primary input-base"
                                 placeholder="Nombre completo">
                             @error('createName')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Email:</label>
                             <input wire:model="createEmail" type="email"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black"
+                                class="w-full p-2 border rounded text-primary input-base"
                                 placeholder="correo@ejemplo.com">
                             @error('createEmail')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
@@ -555,19 +523,19 @@
                         </div>
 
                         <!-- Fila 2 -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">RFC:</label>
                             <input wire:model="createRfc" type="text"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black"
+                                class="w-full p-2 border rounded text-primary input-base"
                                 placeholder="RFC (13 caracteres)" maxlength="13">
                             @error('createRfc')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">CURP:</label>
                             <input wire:model="createCurp" type="text"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black"
+                                class="w-full p-2 border rounded text-primary input-base"
                                 placeholder="CURP (18 caracteres)" maxlength="20">
                             @error('createCurp')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
@@ -575,20 +543,20 @@
                         </div>
 
                         <!-- Fila 3 -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Cargo:</label>
                             <select wire:model="createPosition"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                                class="w-full p-2 border rounded text-primary input-base">
                                 <option value="">Seleccionar cargo</option>
                                 @foreach ($uniquePositions as $position)
                                     <option value="{{ $position }}">{{ $position }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Nivel:</label>
                             <select wire:model="createLvl"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                                class="w-full p-2 border rounded text-primary input-base">
                                 <option value="">Seleccionar nivel</option>
                                 @foreach ($uniqueLevels as $level)
                                     <option value="{{ $level }}">{{ $level }}</option>
@@ -597,19 +565,19 @@
                         </div>
 
                         <!-- Fila 4 -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Sexo:</label>
                             <select wire:model="createSex"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                                class="w-full p-2 border rounded text-primary input-base">
                                 <option value="">Seleccionar sexo</option>
                                 <option value="masculino">Masculino</option>
                                 <option value="femenino">Femenino</option>
                             </select>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Tipo:</label>
                             <select wire:model="createTipo"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                                class="w-full p-2 border rounded text-primary input-base">
                                 <option value="">Seleccionar tipo</option>
                                 <option value="1">Administrador</option>
                                 <option value="2">Supervisor</option>
@@ -618,18 +586,18 @@
                         </div>
 
                         <!-- Fila 5 -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Estado:</label>
                             <select wire:model="createStatus"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                                class="w-full p-2 border rounded text-primary input-base">
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                             </select>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Dirección:</label>
                             <select wire:model="createDirection"
-                                class="w-full p-2 border rounded dark:bg-gray-800 text-black">
+                                class="w-full p-2 border rounded text-primary input-base">
                                 <option value="">Seleccionar dirección</option>
                                 @foreach ($uniqueDirections as $direction)
                                     <option value="{{ $direction }}">{{ $direction }}</option>
@@ -638,12 +606,12 @@
                         </div>
 
                         <!-- Fila 6 - Contraseña -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Contraseña:</label>
                             <div class="relative">
                                 <input wire:model="createPassword"
                                     type="{{ $showCreatePassword ? 'text' : 'password' }}"
-                                    class="w-full p-2 pr-10 border rounded dark:bg-gray-800 text-black"
+                                    class="w-full p-2 pr-10 border rounded text-primary input-base"
                                     placeholder="Mínimo 8 caracteres" required>
                                 <button type="button" wire:click="toggleCreatePassword"
                                     class="absolute inset-y-0 right-0 pr-3 flex items-center"
@@ -656,12 +624,12 @@
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Confirmar Contraseña:</label>
                             <div class="relative">
                                 <input wire:model="createPasswordConfirmation"
                                     type="{{ $showCreatePasswordConfirmation ? 'text' : 'password' }}"
-                                    class="w-full p-2 pr-10 border rounded dark:bg-gray-800 text-black"
+                                    class="w-full p-2 pr-10 border rounded text-primary input-base"
                                     placeholder="Confirmar contraseña" required>
                                 <button type="button" wire:click="toggleCreatePasswordConfirmation"
                                     class="absolute inset-y-0 right-0 pr-3 flex items-center"
@@ -676,7 +644,7 @@
                         </div>
 
                         <!-- Fila 7 - Foto de perfil -->
-                        <div class="bg-gray-500 text-white p-1 rounded-lg col-span-2">
+                        <div class="p-1 rounded-lg col-span-2 surface-panel text-primary">
                             <label class="block text-sm font-medium mb-1">Foto de Perfil:</label>
                             <div class="flex items-center space-x-4">
                                 <!-- Vista previa de nueva imagen -->
@@ -688,15 +656,15 @@
                                     @else
                                         <!-- Avatar por defecto con iniciales -->
                                         <div
-                                            class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-xl">
+                                            class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-semibold text-xl text-primary">
                                             <i class="fa-solid fa-user-plus text-2xl"></i>
                                         </div>
                                     @endif
                                 </div>
                                 <div class="flex-1">
                                     <input wire:model.live="createProfilePhoto" type="file" accept="image/*"
-                                        class="w-full p-2 border rounded dark:bg-gray-800 text-black text-sm">
-                                    <p class="text-xs text-gray-300 mt-1">Formatos: JPG, PNG, GIF. Máximo 2MB</p>
+                                        class="w-full p-2 border rounded text-sm text-primary input-base">
+                                    <p class="text-xs mt-1 text-primary">Formatos: JPG, PNG, GIF. Máximo 2MB</p>
                                     @if ($createProfilePhoto)
                                         <p class="text-xs text-green-300 mt-1">Archivo seleccionado:
                                             {{ $createProfilePhoto->getClientOriginalName() }}</p>
@@ -723,10 +691,10 @@
     @if ($isInsertModalOpen)
         <div id="insert-modal" tabindex="-1"
             class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
-            <div class="relative w-full max-w-2xl h-auto bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-xl font-semibold text-primary">
                         Agregar Nuevo Registro
                     </h3>
                     <button wire:click="closeInsertModal" type="button"
@@ -741,102 +709,102 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 space-y-4">
-                    <div class="grid grid-cols-2 gap-4 bg-gray-900 p-1">
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-1 surface-panel">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>Nombre:</label>
                             <input wire:model="newName" type="text"
-                                class="w-full p-2 border rounded dark:bg-gray-800" placeholder="Nombre completo"
+                                class="w-full p-2 border rounded input-base" placeholder="Nombre completo"
                                 required>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>RFC:</label>
                             <input wire:model="newRfc" type="text"
-                                class="w-full p-2 border rounded dark:bg-gray-800" placeholder="RFC (13 caracteres)"
+                                class="w-full p-2 border rounded input-base" placeholder="RFC (13 caracteres)"
                                 maxlength="13">
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>CURP:</label>
                             <input wire:model="newCurp" type="text"
-                                class="w-full p-2 border rounded dark:bg-gray-800" placeholder="CURP (18 caracteres)"
+                                class="w-full p-2 border rounded input-base" placeholder="CURP (18 caracteres)"
                                 maxlength="20">
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>Cargo:</label>
-                            <select wire:model="newPosition" class="w-full p-2 border rounded dark:bg-gray-800">
+                            <select wire:model="newPosition" class="w-full p-2 border rounded input-base">
                                 <option value="">Seleccionar cargo</option>
                                 @foreach ($uniquePositions as $position)
                                     <option value="{{ $position }}">{{ $position }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>Sexo:</label>
-                            <select wire:model="newSex" class="w-full p-2 border rounded dark:bg-gray-800">
+                            <select wire:model="newSex" class="w-full p-2 border rounded input-base">
                                 <option value="">Seleccionar</option>
                                 <option value="masculino">Masculino</option>
                                 <option value="femenino">Femenino</option>
                             </select>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>Nivel:</label>
-                            <select wire:model="newLvl" class="w-full p-2 border rounded dark:bg-gray-800">
+                            <select wire:model="newLvl" class="w-full p-2 border rounded input-base">
                                 <option value="">Seleccionar nivel</option>
                                 @foreach ($uniqueLevels as $level)
                                     <option value="{{ $level }}">{{ $level }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>Tipo:</label>
-                            <select wire:model="newTipo" class="w-full p-2 border rounded dark:bg-gray-800">
+                            <select wire:model="newTipo" class="w-full p-2 border rounded input-base">
                                 <option value="">Seleccionar tipo</option>
                                 <option value="1">Administrador</option>
                                 <option value="2">Supervisor</option>
                                 <option value="3">Usuario</option>
                             </select>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>Estado:</label>
-                            <select wire:model="newStatus" class="w-full p-2 border rounded dark:bg-gray-800">
+                            <select wire:model="newStatus" class="w-full p-2 border rounded input-base">
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                             </select>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>Email:</label>
                             <input wire:model="newEmail" type="email"
-                                class="w-full p-2 border rounded dark:bg-gray-800" placeholder="correo@ejemplo.com">
+                                class="w-full p-2 border rounded input-base" placeholder="correo@ejemplo.com">
                         </div>
                     </div>
                     <div class="grid grid-cols-1 gap-4 p-1">
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>Dirección:</label>
-                            <select wire:model="newDirection" class="w-full p-2 border rounded dark:bg-gray-800">
+                            <select wire:model="newDirection" class="w-full p-2 border rounded input-base">
                                 <option value="">Seleccionar dirección</option>
                                 @foreach ($uniqueDirections as $direction)
                                     <option value="{{ $direction }}">{{ $direction }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>Contraseña:</label>
                             <input wire:model="newPassword" type="password"
-                                class="w-full p-2 border rounded dark:bg-gray-800" placeholder="Mínimo 8 caracteres"
+                                class="w-full p-2 border rounded input-base" placeholder="Mínimo 8 caracteres"
                                 required>
                             @error('newPassword')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>Confirmar Contraseña:</label>
                             <input wire:model="newPasswordConfirmation" type="password"
-                                class="w-full p-2 border rounded dark:bg-gray-800" placeholder="Confirmar contraseña"
+                                class="w-full p-2 border rounded input-base" placeholder="Confirmar contraseña"
                                 required>
                             @error('newPasswordConfirmation')
                                 <span class="text-red-400 text-xs">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="bg-gray-500 text-white p-1 rounded-lg">
+                        <div class="p-1 rounded-lg surface-panel text-primary">
                             <label>Foto de Perfil:</label>
                             <div class="flex items-center space-x-4">
                                 <!-- Vista previa de nueva imagen -->
@@ -846,15 +814,15 @@
                                             class="w-full h-full object-cover">
                                     @else
                                         <div
-                                            class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-xl">
+                                            class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-semibold text-xl text-primary">
                                             <i class="fa-solid fa-user-plus text-2xl"></i>
                                         </div>
                                     @endif
                                 </div>
                                 <div class="flex-1">
                                     <input wire:model.live="newProfilePhoto" type="file" accept="image/*"
-                                        class="w-full p-2 border rounded dark:bg-gray-800 text-sm">
-                                    <p class="text-xs text-gray-300 mt-1">Formatos: JPG, PNG, GIF. Máximo 2MB</p>
+                                        class="w-full p-2 border rounded text-sm input-base">
+                                    <p class="text-xs mt-1 text-primary">Formatos: JPG, PNG, GIF. Máximo 2MB</p>
                                     @if ($newProfilePhoto)
                                         <p class="text-xs text-green-300 mt-1">Archivo seleccionado:
                                             {{ $newProfilePhoto->getClientOriginalName() }}</p>
@@ -876,19 +844,19 @@
     @if ($deleteRecordId && $recordToDelete)
         <div id="delete-modal" tabindex="-1"
             class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
-            <div class="relative w-full max-w-md h-auto bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="relative w-full max-w-md h-auto rounded-lg shadow modal-elevated">
                 <!-- Modal header -->
                 <div class="p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-xl font-semibold text-primary">
                         Confirmar Borrado
                     </h3>
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 text-center">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                    <p class="text-sm text-primary">
                         ¿Estás seguro de que deseas eliminar este registro? Esta acción no se puede deshacer.
                     </p>
-                    <div class="mt-4 text-left text-white">
+                    <div class="mt-4 text-left text-primary">
                         <p><strong>ID:</strong> {{ $recordToDelete->id }}</p>
                         <p><strong>Nombre:</strong> {{ $recordToDelete->name }}</p>
                         <p><strong>RFC:</strong> {{ $recordToDelete->rfc }}</p>
@@ -912,10 +880,10 @@
     @if ($isViewqueryModalOpen)
         <div id="record-modal" tabindex="-1"
             class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
-            <div class="relative w-full max-w-2xl h-auto bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-xl font-semibold text-primary">
                         Detalles de la consulta
                     </h3>
                     <button wire:click="closeViewQuery" type="button"
@@ -929,7 +897,7 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div class="p-6 space-y-4 bg-gray-500 text-white">
+                <div class="p-6 space-y-4 surface-panel text-primary">
                     <p class="text-blue-400"> {{ $queryStringPreview }} </p>
                 </div>
                 <!-- Modal footer -->

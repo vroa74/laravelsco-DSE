@@ -1,0 +1,17 @@
+PASS  Pruebas\Feature\GuardiaEntornoPruebasTest
+  ✓ la suite hereda la base protegida y usa sqlite en memoria                                                    0.59s
+  ✓ acepta un dato sintetico sin migraciones                                                                     0.07s
+  ✓ phpunit fuerza el entorno aislado y registra la suite                                                        0.06s
+  ✓ el arranque real se aborta antes del bootstrap con fuentes contradictorias                                   0.31s
+
+   PASS  Pruebas\Unit\GuardiaEntornoTest
+  ✓ acepta un entorno coherente en las tres fuentes                                                              0.02s
+  ✓ acepta db url ausente en todas las fuentes
+  ✓ rechaza conflicto entre env seguro y server no permitido
+  ✓ rechaza el valor efectivo de server sin conflicto de fuentes                                                 0.01s
+  ✓ rechaza db url sin revelarla
+  ✓ rechaza sqlite apuntando a un archivo sin mostrar la ruta
+  ✓ rechaza un entorno sin declarar
+
+  Tests:    11 passed (60 assertions)
+  Duration: 1.61s

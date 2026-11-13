@@ -1,0 +1,280 @@
+[
+  {
+    "theme": "light",
+    "ratios": [
+      {
+        "name": "H1",
+        "minimum": 11.903118891040695
+      },
+      {
+        "name": "H2",
+        "minimum": 12.781753277259952
+      },
+      {
+        "name": "LABEL",
+        "minimum": 14.28988699251034
+      },
+      {
+        "name": "nombre",
+        "minimum": 15.682131750956525
+      },
+      {
+        "name": "LABEL",
+        "minimum": 13.719415715427779
+      },
+      {
+        "name": "direccion",
+        "minimum": 15.682131750956525
+      },
+      {
+        "name": "LABEL",
+        "minimum": 14.253735182923764
+      },
+      {
+        "name": "tipo",
+        "minimum": 15.682131750956525
+      },
+      {
+        "name": "LABEL",
+        "minimum": 12.781753277259952
+      },
+      {
+        "name": "BUTTON",
+        "minimum": 6.431817734383692
+      },
+      {
+        "name": "BUTTON",
+        "minimum": 9.208501999039301
+      },
+      {
+        "name": "success",
+        "minimum": 6.429059454026763
+      },
+      {
+        "name": "view",
+        "minimum": 10.195551478227776
+      },
+      {
+        "name": "warning",
+        "minimum": 7.907918631226854
+      },
+      {
+        "name": "danger",
+        "minimum": 6.838997296989448
+      },
+      {
+        "name": "report-normal",
+        "minimum": 6.952886123378022
+      },
+      {
+        "name": "report-special",
+        "minimum": 7.496536578875046
+      },
+      {
+        "name": "report-request",
+        "minimum": 5.811343588548915
+      },
+      {
+        "name": "export-pdf",
+        "minimum": 7.630097674759649
+      },
+      {
+        "name": "export-csv",
+        "minimum": 7.3796469926316695
+      },
+      {
+        "name": "neutral",
+        "minimum": 9.352218322371664
+      },
+      {
+        "name": "LABEL",
+        "minimum": 12.81562490999266
+      },
+      {
+        "name": "fecha",
+        "minimum": 15.682131750956525
+      },
+      {
+        "name": "H2",
+        "minimum": 13.023731202569701
+      },
+      {
+        "name": "TD",
+        "minimum": 10.417078665101876
+      },
+      {
+        "name": "TD",
+        "minimum": 9.604618058637673
+      },
+      {
+        "name": "TD",
+        "minimum": 9.604618058637673
+      },
+      {
+        "name": "Ver ejemplo",
+        "minimum": 10.195551478227776
+      },
+      {
+        "name": "TD",
+        "minimum": 10.330316716810906
+      },
+      {
+        "name": "TD",
+        "minimum": 9.604618058637673
+      },
+      {
+        "name": "TD",
+        "minimum": 9.694625186548745
+      },
+      {
+        "name": "Reporte de ejemplo",
+        "minimum": 6.9256458934148695
+      }
+    ],
+    "keyboard": {
+      "first": "nombre",
+      "outline": "solid",
+      "width": "2px"
+    },
+    "picker": "showPicker aceptado"
+  },
+  {
+    "theme": "dark",
+    "ratios": [
+      {
+        "name": "H1",
+        "minimum": 17.081189548777303
+      },
+      {
+        "name": "H2",
+        "minimum": 13.716645859060394
+      },
+      {
+        "name": "LABEL",
+        "minimum": 16.88537690230257
+      },
+      {
+        "name": "nombre",
+        "minimum": 17.029250373218844
+      },
+      {
+        "name": "LABEL",
+        "minimum": 16.962455499721344
+      },
+      {
+        "name": "direccion",
+        "minimum": 17.029250373218844
+      },
+      {
+        "name": "LABEL",
+        "minimum": 16.910060814306675
+      },
+      {
+        "name": "tipo",
+        "minimum": 17.029250373218844
+      },
+      {
+        "name": "LABEL",
+        "minimum": 14.094365461599532
+      },
+      {
+        "name": "BUTTON",
+        "minimum": 6.431817734383692
+      },
+      {
+        "name": "BUTTON",
+        "minimum": 9.208501999039301
+      },
+      {
+        "name": "success",
+        "minimum": 6.429059454026763
+      },
+      {
+        "name": "view",
+        "minimum": 10.195551478227776
+      },
+      {
+        "name": "warning",
+        "minimum": 7.907918631226854
+      },
+      {
+        "name": "danger",
+        "minimum": 6.838997296989448
+      },
+      {
+        "name": "report-normal",
+        "minimum": 6.952886123378022
+      },
+      {
+        "name": "report-special",
+        "minimum": 7.496536578875046
+      },
+      {
+        "name": "report-request",
+        "minimum": 5.811343588548915
+      },
+      {
+        "name": "export-pdf",
+        "minimum": 7.630097674759649
+      },
+      {
+        "name": "export-csv",
+        "minimum": 7.3796469926316695
+      },
+      {
+        "name": "neutral",
+        "minimum": 9.352218322371664
+      },
+      {
+        "name": "LABEL",
+        "minimum": 14.252500041688666
+      },
+      {
+        "name": "fecha",
+        "minimum": 17.029250373218844
+      },
+      {
+        "name": "H2",
+        "minimum": 14.611240783013674
+      },
+      {
+        "name": "TD",
+        "minimum": 15.106980050221917
+      },
+      {
+        "name": "TD",
+        "minimum": 12.976391666887821
+      },
+      {
+        "name": "TD",
+        "minimum": 12.976391666887821
+      },
+      {
+        "name": "Ver ejemplo",
+        "minimum": 10.195551478227776
+      },
+      {
+        "name": "TD",
+        "minimum": 15.127537324466001
+      },
+      {
+        "name": "TD",
+        "minimum": 12.996009207698233
+      },
+      {
+        "name": "TD",
+        "minimum": 13.110060098448507
+      },
+      {
+        "name": "Reporte de ejemplo",
+        "minimum": 6.9256458934148695
+      }
+    ],
+    "keyboard": {
+      "first": "nombre",
+      "outline": "solid",
+      "width": "2px"
+    },
+    "picker": "showPicker aceptado"
+  }
+]

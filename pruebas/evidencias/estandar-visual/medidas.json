@@ -1,0 +1,4520 @@
+[
+  {
+    "page": "dark",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "success",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "view",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "warning",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "danger",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "report-normal",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "report-special",
+        "bg": "linear-gradient(135deg, rgb(105, 65, 180), rgb(87, 48, 132))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "report-request",
+        "bg": "linear-gradient(135deg, rgb(15, 118, 110), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "export-pdf",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "export-csv",
+        "bg": "linear-gradient(135deg, rgb(7, 89, 133), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "neutral",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Ver ejemplo",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Reporte de ejemplo",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      }
+    ]
+  },
+  {
+    "page": "light",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "success",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "view",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "warning",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "danger",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "report-normal",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "report-special",
+        "bg": "linear-gradient(135deg, rgb(105, 65, 180), rgb(87, 48, 132))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "report-request",
+        "bg": "linear-gradient(135deg, rgb(15, 118, 110), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "export-pdf",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "export-csv",
+        "bg": "linear-gradient(135deg, rgb(7, 89, 133), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "neutral",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Ver ejemplo",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Reporte de ejemplo",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      }
+    ]
+  },
+  {
+    "page": "dashboard-dark",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [],
+    "buttons": []
+  },
+  {
+    "page": "dashboard-light",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [],
+    "buttons": []
+  },
+  {
+    "page": "catalogos-dark",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      }
+    ]
+  },
+  {
+    "page": "catalogos-light",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      }
+    ]
+  },
+  {
+    "page": "usuario.index-dark",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Mostrar consulta",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      }
+    ]
+  },
+  {
+    "page": "usuario.index-light",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Mostrar consulta",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      }
+    ]
+  },
+  {
+    "page": "agen.index-dark",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Exportar a PDF",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Aplicar filtros",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Eliminar registro",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      }
+    ]
+  },
+  {
+    "page": "agen.index-light",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Exportar a PDF",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Aplicar filtros",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Eliminar registro",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      }
+    ]
+  },
+  {
+    "page": "user-groups.index-dark",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Crear grupo",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Limpiar filtros",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Ver grupo",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar grupo",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Gestionar miembros",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Eliminar grupo",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      }
+    ]
+  },
+  {
+    "page": "user-groups.index-light",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Crear grupo",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Limpiar filtros",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Ver grupo",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar grupo",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Gestionar miembros",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Eliminar grupo",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      }
+    ]
+  },
+  {
+    "page": "reportgral-dark",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Exportar a PDF",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Exportar a CSV",
+        "bg": "linear-gradient(135deg, rgb(7, 89, 133), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Aplicar filtros",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Generar reporte normal",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Generar reporte especial",
+        "bg": "linear-gradient(135deg, rgb(105, 65, 180), rgb(87, 48, 132))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Generar reporte de solicitud",
+        "bg": "linear-gradient(135deg, rgb(15, 118, 110), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      }
+    ]
+  },
+  {
+    "page": "reportgral-light",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Exportar a PDF",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Exportar a CSV",
+        "bg": "linear-gradient(135deg, rgb(7, 89, 133), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Aplicar filtros",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Generar reporte normal",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Generar reporte especial",
+        "bg": "linear-gradient(135deg, rgb(105, 65, 180), rgb(87, 48, 132))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Generar reporte de solicitud",
+        "bg": "linear-gradient(135deg, rgb(15, 118, 110), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      }
+    ]
+  },
+  {
+    "page": "rg.create-dark",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(206, 221, 243)",
+        "scheme": "dark"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Cancelar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Guardar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Cerrar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 0,
+        "height": 0
+      },
+      {
+        "label": "Cerrar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 0,
+        "height": 0
+      }
+    ]
+  },
+  {
+    "page": "rg.create-light",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "clientWidth": 375,
+    "scrollWidth": 375,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(48, 71, 96)",
+        "scheme": "light"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Cancelar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Guardar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "label": "Cerrar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 0,
+        "height": 0
+      },
+      {
+        "label": "Cerrar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 0,
+        "height": 0
+      }
+    ]
+  },
+  {
+    "page": "dark",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "success",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "view",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "warning",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "danger",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "report-normal",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "report-special",
+        "bg": "linear-gradient(135deg, rgb(105, 65, 180), rgb(87, 48, 132))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "report-request",
+        "bg": "linear-gradient(135deg, rgb(15, 118, 110), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "export-pdf",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "export-csv",
+        "bg": "linear-gradient(135deg, rgb(7, 89, 133), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "neutral",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver ejemplo",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Reporte de ejemplo",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "light",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "success",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "view",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "warning",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "danger",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "report-normal",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "report-special",
+        "bg": "linear-gradient(135deg, rgb(105, 65, 180), rgb(87, 48, 132))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "report-request",
+        "bg": "linear-gradient(135deg, rgb(15, 118, 110), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "export-pdf",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "export-csv",
+        "bg": "linear-gradient(135deg, rgb(7, 89, 133), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "neutral",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver ejemplo",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Reporte de ejemplo",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "dashboard-dark",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [],
+    "buttons": []
+  },
+  {
+    "page": "dashboard-light",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [],
+    "buttons": []
+  },
+  {
+    "page": "catalogos-dark",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "catalogos-light",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "usuario.index-dark",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Mostrar consulta",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "usuario.index-light",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Mostrar consulta",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "agen.index-dark",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Exportar a PDF",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Aplicar filtros",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar registro",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "agen.index-light",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Exportar a PDF",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Aplicar filtros",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar registro",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "user-groups.index-dark",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Crear grupo",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Limpiar filtros",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver grupo",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar grupo",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Gestionar miembros",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar grupo",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "user-groups.index-light",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Crear grupo",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Limpiar filtros",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver grupo",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar grupo",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Gestionar miembros",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar grupo",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "reportgral-dark",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Exportar a PDF",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Exportar a CSV",
+        "bg": "linear-gradient(135deg, rgb(7, 89, 133), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Aplicar filtros",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Generar reporte normal",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Generar reporte especial",
+        "bg": "linear-gradient(135deg, rgb(105, 65, 180), rgb(87, 48, 132))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Generar reporte de solicitud",
+        "bg": "linear-gradient(135deg, rgb(15, 118, 110), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "reportgral-light",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Exportar a PDF",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Exportar a CSV",
+        "bg": "linear-gradient(135deg, rgb(7, 89, 133), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Aplicar filtros",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Generar reporte normal",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Generar reporte especial",
+        "bg": "linear-gradient(135deg, rgb(105, 65, 180), rgb(87, 48, 132))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Generar reporte de solicitud",
+        "bg": "linear-gradient(135deg, rgb(15, 118, 110), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "rg.create-dark",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(206, 221, 243)",
+        "scheme": "dark"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Cancelar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Guardar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Cerrar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 0,
+        "height": 0
+      },
+      {
+        "label": "Cerrar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 0,
+        "height": 0
+      }
+    ]
+  },
+  {
+    "page": "rg.create-light",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(48, 71, 96)",
+        "scheme": "light"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Cancelar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Guardar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Cerrar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 0,
+        "height": 0
+      },
+      {
+        "label": "Cerrar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 0,
+        "height": 0
+      }
+    ]
+  },
+  {
+    "page": "dark",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "success",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "view",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "warning",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "danger",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "report-normal",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "report-special",
+        "bg": "linear-gradient(135deg, rgb(105, 65, 180), rgb(87, 48, 132))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "report-request",
+        "bg": "linear-gradient(135deg, rgb(15, 118, 110), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "export-pdf",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "export-csv",
+        "bg": "linear-gradient(135deg, rgb(7, 89, 133), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "neutral",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver ejemplo",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Reporte de ejemplo",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "light",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "success",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "view",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "warning",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "danger",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "report-normal",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "report-special",
+        "bg": "linear-gradient(135deg, rgb(105, 65, 180), rgb(87, 48, 132))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "report-request",
+        "bg": "linear-gradient(135deg, rgb(15, 118, 110), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "export-pdf",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "export-csv",
+        "bg": "linear-gradient(135deg, rgb(7, 89, 133), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "neutral",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver ejemplo",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Reporte de ejemplo",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "dashboard-dark",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [],
+    "buttons": []
+  },
+  {
+    "page": "dashboard-light",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [],
+    "buttons": []
+  },
+  {
+    "page": "catalogos-dark",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "catalogos-light",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Agregar",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Editar",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "usuario.index-dark",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Mostrar consulta",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "usuario.index-light",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Mostrar consulta",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "agen.index-dark",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Exportar a PDF",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Aplicar filtros",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar registro",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "agen.index-light",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Exportar a PDF",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Aplicar filtros",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar registro",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "user-groups.index-dark",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Crear grupo",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Limpiar filtros",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver grupo",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar grupo",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Gestionar miembros",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar grupo",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "user-groups.index-light",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Crear grupo",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Limpiar filtros",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver grupo",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar grupo",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Gestionar miembros",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Eliminar grupo",
+        "bg": "linear-gradient(135deg, rgb(185, 28, 28), rgb(153, 27, 50))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "reportgral-dark",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Exportar a PDF",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Exportar a CSV",
+        "bg": "linear-gradient(135deg, rgb(7, 89, 133), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Aplicar filtros",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Generar reporte normal",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Generar reporte especial",
+        "bg": "linear-gradient(135deg, rgb(105, 65, 180), rgb(87, 48, 132))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Generar reporte de solicitud",
+        "bg": "linear-gradient(135deg, rgb(15, 118, 110), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "reportgral-light",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Agregar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Exportar a PDF",
+        "bg": "linear-gradient(135deg, rgb(157, 40, 97), rgb(123, 35, 88))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Exportar a CSV",
+        "bg": "linear-gradient(135deg, rgb(7, 89, 133), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Aplicar filtros",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Ver detalles",
+        "bg": "linear-gradient(135deg, rgb(253, 228, 119), rgb(234, 190, 54))",
+        "color": "rgb(40, 32, 8)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Editar registro",
+        "bg": "linear-gradient(135deg, rgb(255, 178, 76), rgb(241, 139, 51))",
+        "color": "rgb(40, 20, 7)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Generar reporte normal",
+        "bg": "linear-gradient(135deg, rgb(29, 78, 216), rgb(7, 89, 133))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Generar reporte especial",
+        "bg": "linear-gradient(135deg, rgb(105, 65, 180), rgb(87, 48, 132))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      },
+      {
+        "label": "Generar reporte de solicitud",
+        "bg": "linear-gradient(135deg, rgb(15, 118, 110), rgb(21, 94, 117))",
+        "color": "rgb(255, 255, 255)",
+        "width": 36,
+        "height": 36
+      }
+    ]
+  },
+  {
+    "page": "rg.create-dark",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "dark",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(206, 221, 243)",
+        "scheme": "dark"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(8, 22, 43)",
+        "color": "rgb(245, 248, 255)",
+        "scheme": "dark"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Cancelar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Guardar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Cerrar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 0,
+        "height": 0
+      },
+      {
+        "label": "Cerrar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 0,
+        "height": 0
+      }
+    ]
+  },
+  {
+    "page": "rg.create-light",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "clientWidth": 1366,
+    "scrollWidth": 1366,
+    "overflow": [],
+    "scheme": "light",
+    "inputs": [
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "date",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "select-one",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(48, 71, 96)",
+        "scheme": "light"
+      },
+      {
+        "type": "number",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      },
+      {
+        "type": "text",
+        "bg": "rgb(244, 248, 255)",
+        "color": "rgb(16, 30, 52)",
+        "scheme": "light"
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Cancelar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Guardar registro",
+        "bg": "linear-gradient(135deg, rgb(22, 101, 52), rgb(6, 112, 90))",
+        "color": "rgb(255, 255, 255)",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "label": "Cerrar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 0,
+        "height": 0
+      },
+      {
+        "label": "Cerrar",
+        "bg": "linear-gradient(135deg, rgb(53, 76, 107), rgb(35, 57, 80))",
+        "color": "rgb(255, 255, 255)",
+        "width": 0,
+        "height": 0
+      }
+    ]
+  }
+]

@@ -27,11 +27,11 @@ function vistasDelSitio(): array
     return $vistas;
 }
 
-it('bloquea el desplazamiento horizontal en el documento base', function () {
+it('define tablas adaptables sin ocultar el desbordamiento del documento', function () {
     $css = File::get(resource_path('css/app.css'));
 
     expect($css)
-        ->toContain('overflow-x: clip')
+        ->not->toContain('overflow-x: clip')
         ->toContain('.tabla-apilada')
         ->toContain('content: attr(data-label)');
 });
