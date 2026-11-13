@@ -50,7 +50,7 @@ final class ExportadorPaginasVisualesTest extends TestCase
         DB::table('ccors')->insert(['tcor' => '1', 'ccor' => 'Clasificación sintética']);
 
         $destination = dirname(__DIR__).'/prototipos/estandar';
-        foreach (['dashboard', 'catalogos', 'usuario.index', 'agen.index', 'user-groups.index', 'reportgral', 'rg.create'] as $route) {
+        foreach (['dashboard', 'catalogos', 'componentes', 'usuario.index', 'agen.index', 'user-groups.index', 'reportgral', 'rg.create'] as $route) {
             $response = $this->get(route($route))->assertOk();
             $html = $response->getContent();
             // Evidencia estática: no JS, peticiones externas, sesión ni datos reales.

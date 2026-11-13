@@ -128,3 +128,11 @@ Skills aplicadas: Taste (identidad aprobada y stack existente sobre defaults Rea
 - **CSS descriptivo obligatorio:** usar nombres semánticos de clases y variables que expliquen la función del componente o estado; evitar nombres ambiguos como caja1, estilo2 o nuevo. Organizar por bloques con encabezados descriptivos y comentar propiedades visuales importantes (opacidad, capas, filtros, temas y excepciones responsive), indicando qué controlan y cómo modificarlas. Mantener una propiedad por línea en esos bloques para facilitar su localización. Reutilizar tokens/componentes; no copiar estilos por CRUD ni renombrar consumidores sin revisar sus referencias.
 
 El bloque de fondo institucional identifica sus tres capas, transparencia del escudo, acabado plateado y variantes por tema. Los comentarios documentan presentación; no introducen lógica de negocio.
+
+## Comentarios completos y cobertura de paneles (up000058)
+
+- **Comentarios por selector CSS:** cada bloque de app.css, incluidos selectores agrupados, estados hover/focus/disabled, pseudoelementos y condiciones responsive, debe explicar en español su finalidad y los elementos que afecta. Documentar las variables compartidas y señalar cuando sean reservas sin consumidor actual. Los comentarios no autorizan cambiar valores, selectores ni comportamiento.
+
+app.css contiene comentarios en sus78 bloques de selectores y explica variables, temas, estados y media queries. La comparación estructural comprueba que documentar CSS no cambia su funcionamiento. Las vistas efectivas usuarios/index y componentes/index usan ahora el panel-base compartido, retirando fondos opacos e interiores que tapaban el escudo. Se preservan datos, acciones, marcadores de categoría y navegación.
+
+Verificación:23 pruebas/53 aserciones con SQLite en memoria, build y12 capturas sintéticas en ambos temas y tres tamaños; sin desbordamiento y paneles alfa0.62. Evidencias bajo pruebas/evidencias/css-comentado y paneles-usuario-componentes. No es una validación sobre datos reales ni una certificación de accesibilidad integral.

@@ -1,164 +1,453 @@
+
+/* FUENTE ARIMO: importa la alternativa tipográfica disponible; no cambia por sí sola la fuente de body. */
 @import '@fontsource/arimo';
+/* FUENTE ROBOTO: importa la familia usada por --font-sans. */
 @import '@fontsource/roboto';
+/* FLOWBITE: carga estilos del paquete existente de componentes, sin instalarlo ni ejecutar JavaScript. */
 @import 'flowbite';
+/* TAILWIND BASE: inserta estilos base y normalización al compilar. */
 @tailwind base;
+/* TAILWIND COMPONENTS: inserta la capa de componentes al compilar. */
 @tailwind components;
+/* TAILWIND UTILITIES: inserta las utilidades usadas por las vistas al compilar. */
 @tailwind utilities;
 
 /* Presentación compartida; consultas y reglas pertenecen a Laravel. */
+/* VARIABLES GLOBALES: valores del tema claro y escala compartida; los componentes que usan var(...) reciben estos valores. */
 :root {
   color-scheme: light;
+  /* Familia que consume body: Roboto con alternativas locales. */
   --font-sans: 'Roboto', Arial, sans-serif;
+  /* Color y alfa del fondo de paneles; controla cuánto escudo se ve detrás. */
   --surface-panel: rgb(241 247 255 / .62);
+  /* Alias disponible para tarjetas; los selectores actuales de tarjeta usan --surface-panel. */
   --surface-card: var(--surface-panel);
+  /* Fondo sólido que consumen campos y capas elevadas. */
   --surface-elevated: #f4f8ff;
+  /* Color para contenido principal y valores de controles. */
   --text-primary: #101e34;
+  /* Color para descripciones y datos de tablas. */
   --text-secondary: #203650;
+  /* Color para ayudas, placeholder y texto de campos deshabilitados. */
   --text-muted: #304760;
+  /* Color normal de bordes de paneles, campos y celdas. */
   --border-primary: #647a96;
+  /* Color del borde y contorno de controles con foco. */
   --border-focus: #164fba;
+  /* Color del borde de campos marcados como inválidos. */
   --border-error: #b91c1c;
+  /* Fondo suave de hover en filas y elementos con .state-hover. */
   --state-hover: rgb(38 92 156 / .08);
+  /* Color reservado para efectos de foco; el contorno actual usa --border-focus. */
   --state-focus: rgb(37 99 235 / .2);
+  /* Reserva de radio de8px; sin consumidor var(...) en esta hoja actualmente. */
   --radius-lg: .5rem;
+  /* Radio de12px que consumen paneles y diálogos elevados. */
   --radius-xl: .75rem;
+  /* Reserva de espaciado de12px; sin consumidor var(...) en esta hoja actualmente. */
   --space-3: .75rem;
+  /* Reserva de espaciado de16px; sin consumidor var(...) en esta hoja actualmente. */
   --space-4: 1rem;
+  /* Sombra que consume .shadow-soft. */
   --shadow-sm: 0 1px 2px rgb(3 12 28 / .08);
+  /* Sombra de paneles y de .shadow-card. */
   --shadow-md: 0 4px 12px rgb(3 12 28 / .12);
+  /* Sombra de .modal-elevated, .shadow-modal y .shadow-elevated. */
   --shadow-xl: 0 16px 40px rgb(3 12 28 / .25);
 }
+/* TEMA OSCURO: sustituye los colores compartidos cuando html tiene la clase dark; no crea un selector ni guarda la preferencia de tema. */
 html.dark {
   color-scheme: dark;
+  /* Color y alfa del fondo de paneles; controla cuánto escudo se ve detrás. */
   --surface-panel: rgb(7 24 51 / .62);
+  /* Fondo sólido que consumen campos y capas elevadas. */
   --surface-elevated: #08162b;
+  /* Color para contenido principal y valores de controles. */
   --text-primary: #f5f8ff;
+  /* Color para descripciones y datos de tablas. */
   --text-secondary: #e0eafb;
+  /* Color para ayudas, placeholder y texto de campos deshabilitados. */
   --text-muted: #ceddf3;
+  /* Color normal de bordes de paneles, campos y celdas. */
   --border-primary: #7289a8;
+  /* Color del borde y contorno de controles con foco. */
   --border-focus: #a9ccff;
+  /* Color del borde de campos marcados como inválidos. */
   --border-error: #fca5a5;
+  /* Fondo suave de hover en filas y elementos con .state-hover. */
   --state-hover: rgb(137 181 242 / .1);
+  /* Color reservado para efectos de foco; el contorno actual usa --border-focus. */
   --state-focus: rgb(169 204 255 / .25);
 }
-body { font-family: var(--font-sans); }
-.sco-ui, .text-primary { color: var(--text-primary); }
-.text-secondary { color: var(--text-secondary); }
-.text-muted { color: var(--text-muted); }
-.border-primary { border-color: var(--border-primary); }
-.border-focus { border-color: var(--border-focus); }
-.border-error { border-color: var(--border-error); }
-.surface-panel, .panel-base, .surface-card, .panel-card {
-  background-color: var(--surface-panel); color: var(--text-primary);
+/* TIPOGRAFÍA DEL DOCUMENTO: aplica la familia definida en --font-sans a todo el cuerpo de la página. */
+body {
+  font-family: var(--font-sans);
 }
+/* TEXTO PRINCIPAL: .sco-ui da el color base a la interfaz y .text-primary lo aplica explícitamente a un elemento. */
+.sco-ui, .text-primary {
+  color: var(--text-primary);
+}
+/* TEXTO SECUNDARIO: .text-secondary colorea descripciones y contenido de menor jerarquía según el tema. */
+.text-secondary {
+  color: var(--text-secondary);
+}
+/* TEXTO AUXILIAR: .text-muted colorea ayudas y referencias; no oculta ni deshabilita el elemento. */
+.text-muted {
+  color: var(--text-muted);
+}
+/* BORDE NORMAL: .border-primary cambia solo el color del borde; no añade grosor ni estilo de borde. */
+.border-primary {
+  border-color: var(--border-primary);
+}
+/* BORDE DE FOCO: .border-focus aplica el color de énfasis; por sí sola no detecta el foco del teclado. */
+.border-focus {
+  border-color: var(--border-focus);
+}
+/* BORDE DE ERROR: .border-error cambia el color del borde para señalar un problema, sin validar datos. */
+.border-error {
+  border-color: var(--border-error);
+}
+/* SUPERFICIES COMPARTIDAS: .surface-panel, .panel-base, .surface-card y .panel-card dan fondo translúcido y texto del tema a paneles y tarjetas. */
+.surface-panel, .panel-base, .surface-card, .panel-card {
+  background-color: var(--surface-panel);
+  color: var(--text-primary);
+}
+/* ESTRUCTURA DE PANEL: .panel-base y .panel-card añaden borde, esquinas y sombra; min-width:0 permite encoger dentro de flex o grid. */
 .panel-base, .panel-card {
-  border: 1px solid var(--border-primary); border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-md); min-width: 0;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  min-width: 0;
 }
 /* Una sola capa por panel: el interior no vuelve a tapar el escudo. */
+/* PANELES ANIDADOS: quita el fondo y la sombra de paneles internos para evitar que varias capas oculten el escudo. */
 :is(.panel-base, .panel-card) :is(.panel-base, .panel-card, .surface-panel, .surface-card) {
-  background-color: transparent; box-shadow: none;
+  background-color: transparent;
+  box-shadow: none;
 }
-.surface-elevated, .modal-elevated { background-color: var(--surface-elevated); color: var(--text-primary); }
-.modal-elevated { border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); }
-.shadow-soft { box-shadow: var(--shadow-sm); }
-.shadow-card { box-shadow: var(--shadow-md); }
-.shadow-modal, .shadow-elevated { box-shadow: var(--shadow-xl); }
-.state-hover:hover { background-color: var(--state-hover); }
+/* SUPERFICIE ELEVADA: .surface-elevated y .modal-elevated dan fondo sólido y texto legible a diálogos o capas superpuestas. */
+.surface-elevated, .modal-elevated {
+  background-color: var(--surface-elevated);
+  color: var(--text-primary);
+}
+/* DIÁLOGO ELEVADO: .modal-elevated añade radio y sombra de mayor profundidad, sin abrir ni cerrar el modal. */
+.modal-elevated {
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+}
+/* SOMBRA SUAVE: .shadow-soft da una elevación mínima al elemento que la utiliza. */
+.shadow-soft {
+  box-shadow: var(--shadow-sm);
+}
+/* SOMBRA DE TARJETA: .shadow-card aplica la misma sombra media de los paneles. */
+.shadow-card {
+  box-shadow: var(--shadow-md);
+}
+/* SOMBRA ALTA: .shadow-modal y .shadow-elevated comparten la sombra de capas superpuestas; no cambian z-index. */
+.shadow-modal, .shadow-elevated {
+  box-shadow: var(--shadow-xl);
+}
+/* FONDO AL PASAR EL PUNTERO: .state-hover cambia el fondo solo durante hover y respeta el tema. */
+.state-hover:hover {
+  background-color: var(--state-hover);
+}
 
 /* También cubre campos nativos heredados, sin alterar bindings o validación. */
+/* CAMPOS DE FORMULARIO: .input-base y los inputs, selects y textareas de .sco-ui reciben fondo, texto, borde y cursor de escritura contrastados; se excluyen checkbox, radio, hidden y botones de input. No modifica datos ni validaciones. */
 .input-base,
 .sco-ui input:not([type='checkbox']):not([type='radio']):not([type='hidden']):not([type='submit']):not([type='button']),
 .sco-ui select, .sco-ui textarea {
-  background-color: var(--surface-elevated); color: var(--text-primary);
-  border-color: var(--border-primary); border-radius: .375rem;
-  max-width: 100%; min-width: 0; caret-color: var(--text-primary); color-scheme: inherit;
+  background-color: var(--surface-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-primary);
+  border-radius: .375rem;
+  max-width: 100%;
+  min-width: 0;
+  caret-color: var(--text-primary);
+  color-scheme: inherit;
 }
-.input-base { padding: .5rem .625rem; font-size: .875rem; }
-.sco-ui :is(input, textarea)::placeholder, .input-base::placeholder { color: var(--text-muted); opacity: 1; }
-.sco-ui :is(select option, select optgroup) { background-color: var(--surface-elevated); color: var(--text-primary); }
+/* MEDIDAS DEL CAMPO: .input-base define relleno y letra; el ancho se decide en la vista, no en esta regla. */
+.input-base {
+  padding: .5rem .625rem;
+  font-size: .875rem;
+}
+/* PLACEHOLDER: colorea el texto de ayuda interior de inputs y textareas sin confundirlo con el valor capturado. */
+.sco-ui :is(input, textarea)::placeholder, .input-base::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
+}
+/* OPCIONES DE SELECT: da fondo y texto a option y optgroup dentro de .sco-ui; la ventana nativa depende del navegador. */
+.sco-ui :is(select option, select optgroup) {
+  background-color: var(--surface-elevated);
+  color: var(--text-primary);
+}
+/* FOCO EN CAMPOS: resalta el control activo con borde y contorno separado; elimina la sombra automática que competiría con ese foco. */
 .sco-ui :is(input, textarea, select):focus, .input-base:focus {
-  border-color: var(--border-focus); outline: 2px solid var(--border-focus); outline-offset: 2px; box-shadow: none;
+  border-color: var(--border-focus);
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  box-shadow: none;
 }
+/* AUTOCOMPLETADO WEBKIT: conserva texto y fondo legibles cuando Chrome o Safari rellenan un input automáticamente. */
 .sco-ui input:-webkit-autofill {
-  -webkit-text-fill-color: var(--text-primary); box-shadow: 0 0 0 1000px var(--surface-elevated) inset;
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--surface-elevated) inset;
 }
-.sco-ui :is(input, select, textarea):disabled { color: var(--text-muted); cursor: not-allowed; }
-.sco-ui [aria-invalid='true'], .input-error { border-color: var(--border-error); }
-.label-base { display: block; margin-bottom: .25rem; font-size: .875rem; font-weight: 500; color: var(--text-primary); }
+/* CAMPOS DESHABILITADOS: aplica texto auxiliar y cursor de no permitido a controles que ya tienen disabled; no los deshabilita por sí misma. */
+.sco-ui :is(input, select, textarea):disabled {
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+/* ERROR DE CAMPO: colorea el borde de aria-invalid=true o .input-error; Laravel y el componente siguen siendo responsables de la validación. */
+.sco-ui [aria-invalid='true'], .input-error {
+  border-color: var(--border-error);
+}
+/* ETIQUETA DE CAMPO: .label-base coloca la etiqueta en bloque, con separación inferior y peso de lectura común. */
+.label-base {
+  display: block;
+  margin-bottom: .25rem;
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
 
 /* Variante = color; componente = tamaño. Sin relleno ni botones anidados. */
+/* BOTONES COMPARTIDOS: .btn-base y .btn-icon centran contenido y consumen los colores --action-* de su variante; comparten borde, radio y transiciones. La variante no decide el tamaño. */
 .btn-base, .btn-icon {
-  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-  flex-shrink: 0; border: 1px solid transparent; border-radius: .5rem;
-  font-weight: 600; line-height: 1.25;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+  border-radius: .5rem;
+  font-weight: 600;
+  line-height: 1.25;
   background-image: linear-gradient(135deg, var(--action-from), var(--action-to));
-  color: var(--action-text, #fff); transition: filter 150ms ease, transform 150ms ease;
+  color: var(--action-text, #fff);
+  transition: filter 150ms ease, transform 150ms ease;
 }
-.btn-base { padding: .625rem 1rem; min-height: 2.5rem; font-size: .875rem; }
-.btn-icon { width: 2.25rem; height: 2.25rem; padding: 0; }
-.btn-icon-md { width: 2.5rem; height: 2.5rem; }
-.btn-icon > i { font-size: .875rem; line-height: 1; }
-:is(.btn-base, .btn-icon):hover:not(:disabled) { filter: brightness(1.12); }
-:is(.btn-base, .btn-icon):active:not(:disabled) { transform: translateY(1px); }
+/* BOTÓN CON TEXTO: .btn-base fija relleno, altura mínima de40px y letra de14px. */
+.btn-base {
+  padding: .625rem 1rem;
+  min-height: 2.5rem;
+  font-size: .875rem;
+}
+/* BOTÓN DE ICONO: .btn-icon mide36x36px y no añade relleno; en móvil se amplía su objetivo táctil. */
+.btn-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+}
+/* BOTÓN DE ICONO MEDIANO: .btn-icon-md amplía el botón a40x40px; se combina con .btn-icon. */
+.btn-icon-md {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+/* DIBUJO DEL ICONO: ajusta a14px únicamente el elemento i que sea hijo directo de .btn-icon; no cambia el área del botón. */
+.btn-icon > i {
+  font-size: .875rem;
+  line-height: 1;
+}
+/* BOTÓN EN HOVER: ilumina el degradado de botones habilitados al pasar el puntero; el filtro también afecta su contenido. */
+:is(.btn-base, .btn-icon):hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+/* BOTÓN PRESIONADO: desplaza1px el botón habilitado mientras se pulsa; no ejecuta ninguna acción de negocio. */
+:is(.btn-base, .btn-icon):active:not(:disabled) {
+  transform: translateY(1px);
+}
+/* FOCO DE TECLADO: añade un contorno visible a botones compartidos y a enlaces/botones de .sco-ui cuando corresponde focus-visible. */
 :is(.btn-base, .btn-icon):focus-visible, .sco-ui a:focus-visible, .sco-ui button:focus-visible {
-  outline: 2px solid var(--border-focus); outline-offset: 3px;
+  outline: 2px solid var(--border-focus);
+  outline-offset: 3px;
 }
-:is(.btn-base, .btn-icon):disabled { opacity: .55; cursor: not-allowed; }
-.btn-success { --action-from: #166534; --action-to: #06705a; }
-.btn-warning { --action-from: #ffb24c; --action-to: #f18b33; --action-text: #281407; }
-.btn-view { --action-from: #fde477; --action-to: #eabe36; --action-text: #282008; }
-.btn-danger { --action-from: #b91c1c; --action-to: #991b32; }
-.btn-info, .btn-primary, .btn-report, .btn-report-normal { --action-from: #1d4ed8; --action-to: #075985; }
-.btn-report-special { --action-from: #6941b4; --action-to: #573084; }
-.btn-report-request { --action-from: #0f766e; --action-to: #155e75; }
-.btn-export-pdf { --action-from: #9d2861; --action-to: #7b2358; }
-.btn-export-csv { --action-from: #075985; --action-to: #155e75; }
-.btn-neutral, .btn-secondary, .btn-ghost { --action-from: #354c6b; --action-to: #233950; }
+/* BOTÓN DESHABILITADO: atenúa el botón completo y cambia el cursor cuando ya tiene disabled; no controla permisos. */
+:is(.btn-base, .btn-icon):disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+/* ACCIÓN VERDE: .btn-success define el degradado de agregar y guardar; combinar con .btn-base o .btn-icon. */
+.btn-success {
+  --action-from: #166534;
+  --action-to: #06705a;
+}
+/* ACCIÓN NARANJA: .btn-warning identifica editar y usa texto oscuro sobre el degradado claro; combinar con el tamaño de botón. */
+.btn-warning {
+  --action-from: #ffb24c;
+  --action-to: #f18b33;
+  --action-text: #281407;
+}
+/* ACCIÓN AMARILLA: .btn-view identifica ver o mostrar detalles; no debe reutilizarse para editar. */
+.btn-view {
+  --action-from: #fde477;
+  --action-to: #eabe36;
+  --action-text: #282008;
+}
+/* ACCIÓN DESTRUCTIVA ROJA: .btn-danger identifica eliminar; no usar esta variante para exportar documentos. */
+.btn-danger {
+  --action-from: #b91c1c;
+  --action-to: #991b32;
+}
+/* ACCIÓN AZUL: .btn-info y .btn-primary sirven a acciones informativas; .btn-report es alias de compatibilidad y .btn-report-normal identifica el reporte normal. Todas definen solo colores. */
+.btn-info, .btn-primary, .btn-report, .btn-report-normal {
+  --action-from: #1d4ed8;
+  --action-to: #075985;
+}
+/* REPORTE ESPECIAL: .btn-report-special define un degradado violeta para distinguirlo del normal y de solicitud. */
+.btn-report-special {
+  --action-from: #6941b4;
+  --action-to: #573084;
+}
+/* REPORTE DE SOLICITUD: .btn-report-request define el degradado turquesa del tercer tipo de reporte. */
+.btn-report-request {
+  --action-from: #0f766e;
+  --action-to: #155e75;
+}
+/* EXPORTACIÓN PDF: .btn-export-pdf define magenta para exportar; se distingue del rojo de eliminar. */
+.btn-export-pdf {
+  --action-from: #9d2861;
+  --action-to: #7b2358;
+}
+/* EXPORTACIÓN CSV: .btn-export-csv define azul petróleo para exportar tablas. */
+.btn-export-csv {
+  --action-from: #075985;
+  --action-to: #155e75;
+}
+/* ACCIÓN SECUNDARIA: .btn-neutral, .btn-secondary y .btn-ghost comparten degradado azul grisáceo para cancelar o volver; el alias ghost aquí también lleva degradado, no es transparente. */
+.btn-neutral, .btn-secondary, .btn-ghost {
+  --action-from: #354c6b;
+  --action-to: #233950;
+}
 
 /* Tablas transparentes en un único panel, también como tarjetas móviles. */
-.tabla-apilada { display: block; width: 100%; color: var(--text-secondary); }
-.tabla-apilada thead { display: none; }
-.tabla-apilada tbody { display: block; }
-.sco-ui .tabla-apilada :is(thead, tbody, tr, th, td) { background-color: transparent; color: inherit; }
+/* TABLA EN MÓVIL: .tabla-apilada ocupa el ancho disponible, usa texto secundario y permite representar las filas como tarjetas. */
+.tabla-apilada {
+  display: block;
+  width: 100%;
+  color: var(--text-secondary);
+}
+/* CABECERA EN MÓVIL: oculta thead porque las etiquetas se muestran junto a los datos de cada tarjeta. */
+.tabla-apilada thead {
+  display: none;
+}
+/* CUERPO EN MÓVIL: hace que tbody sea un bloque que contiene las tarjetas de registros. */
+.tabla-apilada tbody {
+  display: block;
+}
+/* CAPAS DE LA TABLA: deja transparentes thead, tbody, filas y celdas dentro de .sco-ui; hereda su texto para no tapar el escudo con fondos adicionales. */
+.sco-ui .tabla-apilada :is(thead, tbody, tr, th, td) {
+  background-color: transparent;
+  color: inherit;
+}
+/* FILA COMO TARJETA: apila las celdas y separa cada registro con borde, radio y margen inferior en móvil. */
 .tabla-apilada tr {
-  display: flex; flex-direction: column; margin-bottom: .75rem;
-  border: 1px solid var(--border-primary); border-radius: .5rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: .75rem;
+  border: 1px solid var(--border-primary);
+  border-radius: .5rem;
 }
+/* CELDAS EN MÓVIL: coloca etiqueta y dato en columna; permite partir texto largo sin fijar un ancho que desborde. */
 .tabla-apilada tr > * {
-  display: flex; flex-direction: column; align-items: flex-start; gap: .25rem;
-  width: auto; max-width: 100%; text-align: left; white-space: normal;
-  overflow-wrap: anywhere; padding: .625rem .75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .25rem;
+  width: auto;
+  max-width: 100%;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  padding: .625rem .75rem;
 }
+/* ETIQUETA MÓVIL: obtiene el nombre del campo del atributo data-label de cada celda y lo dibuja antes del contenido. */
 .tabla-apilada tr > [data-label]::before {
-  content: attr(data-label); font-size: .75rem; font-weight: 700; color: var(--text-primary);
+  content: attr(data-label);
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
-.tabla-apilada tr > [data-label='Acciones'] { display: block; }
-.tabla-apilada tr > [data-label='Acciones']::before { display: block; margin-bottom: .5rem; }
-.sco-ui .tabla-apilada tbody tr:hover { background-color: var(--state-hover); }
-.sco-ui .tabla-apilada thead { color: var(--text-primary); }
-.tabla-apilada td, .tabla-apilada th { border-color: var(--border-primary); }
+/* CELDA DE ACCIONES MÓVIL: usa un bloque para que los botones mantengan su disposición interior. */
+.tabla-apilada tr > [data-label='Acciones'] {
+  display: block;
+}
+/* ETIQUETA DE ACCIONES MÓVIL: separa el nombre Acciones de los botones de esa celda. */
+.tabla-apilada tr > [data-label='Acciones']::before {
+  display: block;
+  margin-bottom: .5rem;
+}
+/* FILA EN HOVER: realza suavemente el registro bajo el puntero, sin añadir un fondo opaco permanente. */
+.sco-ui .tabla-apilada tbody tr:hover {
+  background-color: var(--state-hover);
+}
+/* TEXTO DE CABECERA: usa el color principal en los encabezados de las tablas de .sco-ui. */
+.sco-ui .tabla-apilada thead {
+  color: var(--text-primary);
+}
+/* BORDES DE CELDA: aplica el color de borde compartido a th y td; el grosor se define en otras reglas. */
+.tabla-apilada td, .tabla-apilada th {
+  border-color: var(--border-primary);
+}
+/* CONDICIÓN RESPONSIVE/ACCESIBILIDAD: las reglas interiores solo se aplican cuando se cumple (min-width: 768px). */
 @media (min-width: 768px) {
-  .tabla-apilada { display: table; table-layout: fixed; }
-  .tabla-apilada thead { display: table-header-group; }
-  .tabla-apilada tbody { display: table-row-group; }
-  .tabla-apilada tr { display: table-row; border: 0; border-radius: 0; margin: 0; }
+  /* TABLA DESDE768px: recupera el comportamiento de tabla con columnas de reparto fijo para tableta y escritorio. */
+  .tabla-apilada {
+    display: table;
+    table-layout: fixed;
+  }
+  /* CABECERA DESDE768px: vuelve a mostrar thead como grupo de cabeceras de tabla. */
+  .tabla-apilada thead {
+    display: table-header-group;
+  }
+  /* CUERPO DESDE768px: vuelve a representar tbody como grupo de filas de tabla. */
+  .tabla-apilada tbody {
+    display: table-row-group;
+  }
+  /* FILA DESDE768px: sustituye la tarjeta móvil por una fila y retira sus márgenes, bordes y esquinas propias. */
+  .tabla-apilada tr {
+    display: table-row;
+    border: 0;
+    border-radius: 0;
+    margin: 0;
+  }
+  /* CELDAS DESDE768px: alinea cada dato como celda, añade relleno y línea inferior; incluye la celda Acciones. */
   .tabla-apilada tr > *, .tabla-apilada tr > [data-label='Acciones'] {
-    display: table-cell; padding: .75rem; vertical-align: middle; text-align: inherit;
+    display: table-cell;
+    padding: .75rem;
+    vertical-align: middle;
+    text-align: inherit;
     border-bottom: 1px solid var(--border-primary);
   }
-  .tabla-apilada tr > [data-label]::before { display: none; }
+  /* ETIQUETAS DESDE768px: deja de dibujar data-label porque los nombres ya están en la cabecera de columnas. */
+  .tabla-apilada tr > [data-label]::before {
+    display: none;
+  }
 }
+/* CONDICIÓN RESPONSIVE/ACCESIBILIDAD: las reglas interiores solo se aplican cuando se cumple (pointer: coarse), (max-width: 767px). */
 @media (pointer: coarse), (max-width: 767px) {
-  .btn-base, .btn-icon { min-width: 44px; min-height: 44px; }
-  .sco-ui :is(input, select, textarea) { font-size: 1rem; }
+  /* OBJETIVOS TÁCTILES: en móvil o con puntero grueso, .btn-base y .btn-icon tienen un área mínima de44x44px. */
+  .btn-base, .btn-icon {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  /* LETRA EN CONTROLES TÁCTILES: en móvil o con puntero grueso, inputs, selects y textareas de .sco-ui usan16px para facilitar lectura. */
+  .sco-ui :is(input, select, textarea) {
+    font-size: 1rem;
+  }
 }
-@media (prefers-reduced-motion: reduce) { .btn-base, .btn-icon { transition: none; } }
+/* CONDICIÓN RESPONSIVE/ACCESIBILIDAD: las reglas interiores solo se aplican cuando se cumple (prefers-reduced-motion: reduce). */
+@media (prefers-reduced-motion: reduce) {
+  /* MOVIMIENTO REDUCIDO: elimina las transiciones de botones cuando el usuario activa esa preferencia de accesibilidad. */
+  .btn-base, .btn-icon {
+    transition: none;
+  } }
 
 /* ========================================================================
    FONDO INSTITUCIONAL COMPARTIDO — páginas internas y acceso.
    La decoración no recibe clics y queda fuera de la lectura accesible.
    ======================================================================== */
+/* CONTENEDOR DECORATIVO: .bg-institucional fija las capas del fondo a la pantalla, detrás del contenido y sin recibir clics; su overflow se limita a la decoración. */
 .bg-institucional {
   pointer-events: none;
   position: fixed;
@@ -168,6 +457,7 @@ body { font-family: var(--font-sans); }
 }
 
 /* CAPA 1: degradado base del fondo en tema claro. */
+/* BASE DEL FONDO CLARO: .bg-institucional__gradient-base llena el contenedor con un degradado claro, detrás del PNG. */
 .bg-institucional__gradient-base {
   position: absolute;
   inset: 0;
@@ -175,6 +465,7 @@ body { font-family: var(--font-sans); }
 }
 
 /* CAPA 2: escudo de Campeche, centrado y adaptable al tamaño de pantalla. */
+/* ESCUDO DEL FONDO: .bg-institucional__shield centra y adapta el PNG, fija su transparencia y lo convierte visualmente a plata sin modificar el archivo original. */
 .bg-institucional__shield {
   position: absolute;
   left: 50%;
@@ -184,18 +475,17 @@ body { font-family: var(--font-sans); }
   max-width: none;
   max-height: 90svh;
   object-fit: contain;
-
   /* TRANSPARENCIA DEL ESCUDO: 0.12 = 12% visible y 88% transparente.
      Reducir este valor lo atenúa; aumentarlo hace que destaque más.
      Esta propiedad no modifica el texto ni el fondo de las tablas. */
   opacity: .12;
   user-select: none;
-
   /* ACABADO PLATEADO: convierte el color a gris y ajusta brillo/contraste. */
   filter: grayscale(100%) brightness(1.35) contrast(1.1);
 }
 
 /* CAPA 3: velo degradado por encima del escudo, solo en tema claro. */
+/* VELO CLARO: .bg-institucional__gradient-overlay añade un degradado sobre el escudo; este alfa es independiente de la opacidad del PNG. */
 .bg-institucional__gradient-overlay {
   position: absolute;
   inset: 0;
@@ -203,18 +493,35 @@ body { font-family: var(--font-sans); }
 }
 
 /* TEMA OSCURO: fondo azul marino y mezcla luminosa del escudo plateado. */
+/* BASE DEL FONDO OSCURO: cuando html tiene dark, sustituye únicamente el degradado base por azul marino. */
 html.dark .bg-institucional__gradient-base {
   background: linear-gradient(135deg, #0c1c43, #040d20, #020617);
 }
-html.dark .bg-institucional__shield { mix-blend-mode: screen; }
+/* MEZCLA DEL ESCUDO OSCURO: mezcla el PNG mediante screen para resaltar sus zonas claras sobre el fondo marino. */
+html.dark .bg-institucional__shield {
+  mix-blend-mode: screen;
+}
 
 /* VELO EN TEMA OSCURO: mantiene la lectura sin cambiar la opacidad del PNG. */
+/* VELO OSCURO: cambia solo el degradado superpuesto en tema oscuro; no altera texto ni tablas. */
 html.dark .bg-institucional__gradient-overlay {
   background: linear-gradient(0deg, rgb(2 6 23 / .5), rgb(2 6 23 / .25));
 }
-.sco-ui ::selection { background: #1d4ed8; color: #fff; }
-[x-cloak] { display: none; }
-
-.filter-toggle { background: linear-gradient(135deg, #203c62, #102747); color: #f5f8ff; }
-
-html.dark .sco-ui :is(input[type="date"], input[type="datetime-local"], select) { color-scheme: dark; }
+/* SELECCIÓN DE TEXTO: personaliza el fondo azul y la tinta blanca del texto seleccionado dentro de .sco-ui. */
+.sco-ui ::selection {
+  background: #1d4ed8;
+  color: #fff;
+}
+/* ESPERA DE ALPINE: oculta elementos con x-cloak mientras Alpine no los haya inicializado; cuando Alpine elimina el atributo, esta regla deja de afectarles. */
+[x-cloak] {
+  display: none;
+}
+/* BARRA DE FILTROS: .filter-toggle da degradado marino y texto claro al botón que despliega los filtros, sin abrirlo ni cerrarlo. */
+.filter-toggle {
+  background: linear-gradient(135deg, #203c62, #102747);
+  color: #f5f8ff;
+}
+/* CONTROLES NATIVOS OSCUROS: pide al navegador widgets oscuros para fecha, fecha/hora y select dentro de .sco-ui cuando html tiene dark; el dibujo final depende de navegador y sistema operativo. */
+html.dark .sco-ui :is(input[type="date"], input[type="datetime-local"], select) {
+  color-scheme: dark;
+}

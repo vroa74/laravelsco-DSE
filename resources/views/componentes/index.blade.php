@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-base text-gray-800 dark:text-gray-200 leading-tight sm:text-lg">
+        <h2 class="font-semibold text-base text-primary leading-tight sm:text-lg">
             {{ __('Componentes Instalados') }}
         </h2>
     </x-slot>
@@ -8,11 +8,11 @@
     <div class="py-6 sm:py-8">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <!-- Composer Components -->
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div class="panel-base overflow-hidden mb-6">
+                <div class="p-6 text-primary">
                     <div class="flex items-center mb-4">
                         <div class="w-4 h-4 bg-amber-500 rounded-full mr-3"></div>
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Componentes Composer</h3>
+                        <h3 class="text-lg font-semibold text-primary">Componentes Composer</h3>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -47,9 +47,9 @@
 
                         @foreach ($composerPackages as $package => $description)
                             <div
-                                class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
+                                class="bg-transparent border border-amber-200 dark:border-amber-800 rounded-lg p-4">
                                 <div class="flex items-start justify-between">
-                                    <div class="flex-1">
+                                    <div class="flex-1 min-w-0 break-words">
                                         <h4 class="text-sm font-semibold text-amber-900 dark:text-amber-100 mb-1">
                                             {{ $package }}
                                         </h4>
@@ -71,11 +71,11 @@
             </div>
 
             <!-- Node Components -->
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div class="panel-base overflow-hidden">
+                <div class="p-6 text-primary">
                     <div class="flex items-center mb-4">
                         <div class="w-4 h-4 bg-green-500 rounded-full mr-3"></div>
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Componentes Node.js</h3>
+                        <h3 class="text-lg font-semibold text-primary">Componentes Node.js</h3>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -104,9 +104,9 @@
 
                         @foreach ($nodePackages as $package => $description)
                             <div
-                                class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                                class="bg-transparent border border-green-200 dark:border-green-800 rounded-lg p-4">
                                 <div class="flex items-start justify-between">
-                                    <div class="flex-1">
+                                    <div class="flex-1 min-w-0 break-words">
                                         <h4 class="text-sm font-semibold text-green-900 dark:text-green-100 mb-1">
                                             {{ $package }}
                                         </h4>
@@ -243,27 +243,27 @@
                 ];
             @endphp
 
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-6">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div class="panel-base overflow-hidden mt-6">
+                <div class="p-6 text-primary">
                     <h3 class="text-lg font-semibold mb-4">Componentes Blade propios y Jetstream</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    <p class="text-sm text-secondary mb-4">
                         {{ count($bladeComponents) }} componentes disponibles en resources/views/components y los diseños de la aplicación.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         @foreach ($bladeComponents as $component => $description)
                             <div class="rounded border border-gray-200 dark:border-gray-700 p-3">
                                 <code class="text-sm font-semibold text-indigo-700 dark:text-indigo-300">{{ $component }}</code>
-                                <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ $description }}</p>
+                                <p class="text-xs text-secondary mt-1">{{ $description }}</p>
                             </div>
                         @endforeach
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-6">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div class="panel-base overflow-hidden mt-6">
+                <div class="p-6 text-primary">
                     <h3 class="text-lg font-semibold mb-4">Componentes Livewire</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    <p class="text-sm text-secondary mb-4">
                         {{ count($livewireComponents) }} clases encontradas en app/Livewire.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -274,34 +274,34 @@
                 </div>
             </div>
 
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-6">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div class="panel-base overflow-hidden mt-6">
+                <div class="p-6 text-primary">
                     <h3 class="text-lg font-semibold mb-4">Plugins e integraciones de interfaz</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                         @foreach ($frontendIntegrations as $integration)
                             <div class="rounded border border-gray-200 dark:border-gray-700 p-3">
                                 <h4 class="text-sm font-semibold">{{ $integration['nombre'] }}</h4>
-                                <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ $integration['uso'] }}</p>
+                                <p class="text-xs text-secondary mt-1">{{ $integration['uso'] }}</p>
                             </div>
                         @endforeach
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-6">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div class="panel-base overflow-hidden mt-6">
+                <div class="p-6 text-primary">
                     <h3 class="text-lg font-semibold mb-2">Iconos Font Awesome encontrados</h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    <p class="text-sm text-secondary mb-4">
                         {{ count($fontAwesomeIcons) }} clases o combinaciones encontradas en las vistas Blade.
                         Las clases sin prefijo de estilo se muestran tal como están escritas en el código.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         @foreach ($fontAwesomeIcons as $icon)
-                            <code class="rounded bg-gray-100 dark:bg-gray-700 px-3 py-2 text-xs">{{ $icon }}</code>
+                            <code class="rounded bg-transparent px-3 py-2 text-xs">{{ $icon }}</code>
                         @endforeach
                     </div>
                     <h4 class="font-semibold mt-6 mb-2">Iconos y gráficos SVG en línea</h4>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                    <p class="text-sm text-secondary mb-3">
                         No dependen de un plugin de iconos; están dibujados directamente en estas vistas:
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
@@ -347,13 +347,13 @@
             </div>
 
             <!-- Total -->
-            <div class="mt-6 bg-gray-100 dark:bg-gray-700 rounded-lg p-4">
+            <div class="mt-6 bg-transparent rounded-lg p-4">
                 <div class="text-center">
-                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Total de paquetes directos</h4>
-                    <p class="text-3xl font-bold text-gray-800 dark:text-gray-200">
+                    <h4 class="text-lg font-semibold text-primary mb-2">Total de paquetes directos</h4>
+                    <p class="text-3xl font-bold text-primary">
                         {{ count($composerPackages) + count($nodePackages) }}
                     </p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <p class="text-sm text-secondary mt-1">
                         {{ count($composerPackages) }} Composer + {{ count($nodePackages) }} Node.js
                     </p>
                 </div>

@@ -1,0 +1,18 @@
+PHPUnit 12.5.33 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.11
+Configuration: C:\laragon\www\laravelsco-DSE\phpunit.xml
+
+dashboard=200, datos sintéticos
+catalogos=200, datos sintéticos
+componentes=200, datos sintéticos
+usuario.index=200, datos sintéticos
+agen.index=200, datos sintéticos
+user-groups.index=200, datos sintéticos
+reportgral=200, datos sintéticos
+rg.create=200, datos sintéticos
+.                                                                   1 / 1 (100%)
+
+Time: 00:01.969, Memory: 64.00 MB
+
+OK (1 test, 8 assertions)

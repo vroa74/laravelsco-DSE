@@ -1,0 +1,10 @@
+[
+  {
+    "file": "resources/views/usuarios/index.blade.php",
+    "samePhpAndBladeExpressions": true
+  },
+  {
+    "file": "resources/views/componentes/index.blade.php",
+    "samePhpAndBladeExpressions": true
+  }
+]

@@ -762,6 +762,19 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** Vite correcto, opacidad0.12 y tablas al0.62 en ambos temas; ancho1366/1366 sin desbordamiento en snapshots. Sin datos reales, MySQL ni backend. Se conserva fuera del commit el cambio local previo del usuario en el velo claro. Aceptación estética pendiente.
 
+### CSS explicado y paneles de personal/componentes ("up000058")
+
+| Archivo | Cambio |
+| --- | --- |
+| `resources/css/app.css` | Comentarios por cada uno de78 bloques, variables, estados y responsive, conservando reglas y valores. |
+| `resources/views/usuarios/index.blade.php` | Sustituye el fondo opaco que impedía ver el escudo por el panel compartido. |
+| `resources/views/componentes/index.blade.php` | Paneles translúcidos y fondos interiores transparentes, conservando información y categorías. |
+| `pruebas/herramientas/ExportadorPaginasVisualesTest.php` | Añade la página de componentes a la exportación sintética protegida. |
+| `pruebas/evidencias/css-comentado/`, `paneles-usuario-componentes/` | Paridad estructural del CSS, build, regresión y capturas. |
+| `AGENTS.md`, `DOC/sistema/estandar-visual.md` | Regla de comentarios por selector y registro de cobertura. |
+
+**Validación:** mismos selectores y declaraciones antes/después de comentar CSS; Vite9.82s, Pint,23 pruebas/53 aserciones en SQLite :memory:,12 capturas en ambos temas y tres tamaños sin desbordamiento y con paneles alfa0.62. Sin backend ni MySQL. Se preserva fuera del commit el cambio previo del usuario en el velo claro. Aceptación estética pendiente.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.

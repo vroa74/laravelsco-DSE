@@ -1,0 +1,164 @@
+[
+  {
+    "page": "usuario.index",
+    "theme": "dark",
+    "width": 375,
+    "scroll": 375,
+    "opacity": "0.12",
+    "panels": [
+      "rgba(7, 24, 51, 0.62)"
+    ],
+    "table": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "page": "componentes",
+    "theme": "dark",
+    "width": 375,
+    "scroll": 375,
+    "opacity": "0.12",
+    "panels": [
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)"
+    ],
+    "table": null
+  },
+  {
+    "page": "usuario.index",
+    "theme": "light",
+    "width": 375,
+    "scroll": 375,
+    "opacity": "0.12",
+    "panels": [
+      "rgba(241, 247, 255, 0.62)"
+    ],
+    "table": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "page": "componentes",
+    "theme": "light",
+    "width": 375,
+    "scroll": 375,
+    "opacity": "0.12",
+    "panels": [
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)"
+    ],
+    "table": null
+  },
+  {
+    "page": "usuario.index",
+    "theme": "dark",
+    "width": 768,
+    "scroll": 768,
+    "opacity": "0.12",
+    "panels": [
+      "rgba(7, 24, 51, 0.62)"
+    ],
+    "table": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "page": "componentes",
+    "theme": "dark",
+    "width": 768,
+    "scroll": 768,
+    "opacity": "0.12",
+    "panels": [
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)"
+    ],
+    "table": null
+  },
+  {
+    "page": "usuario.index",
+    "theme": "light",
+    "width": 768,
+    "scroll": 768,
+    "opacity": "0.12",
+    "panels": [
+      "rgba(241, 247, 255, 0.62)"
+    ],
+    "table": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "page": "componentes",
+    "theme": "light",
+    "width": 768,
+    "scroll": 768,
+    "opacity": "0.12",
+    "panels": [
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)"
+    ],
+    "table": null
+  },
+  {
+    "page": "usuario.index",
+    "theme": "dark",
+    "width": 1366,
+    "scroll": 1366,
+    "opacity": "0.12",
+    "panels": [
+      "rgba(7, 24, 51, 0.62)"
+    ],
+    "table": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "page": "componentes",
+    "theme": "dark",
+    "width": 1366,
+    "scroll": 1366,
+    "opacity": "0.12",
+    "panels": [
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)",
+      "rgba(7, 24, 51, 0.62)"
+    ],
+    "table": null
+  },
+  {
+    "page": "usuario.index",
+    "theme": "light",
+    "width": 1366,
+    "scroll": 1366,
+    "opacity": "0.12",
+    "panels": [
+      "rgba(241, 247, 255, 0.62)"
+    ],
+    "table": "rgba(0, 0, 0, 0)"
+  },
+  {
+    "page": "componentes",
+    "theme": "light",
+    "width": 1366,
+    "scroll": 1366,
+    "opacity": "0.12",
+    "panels": [
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)",
+      "rgba(241, 247, 255, 0.62)"
+    ],
+    "table": null
+  }
+]
