@@ -18,7 +18,7 @@ class DetalleGrupoModalTest extends TestCase
     public function test_detalle_encapsula_titulo_datos_y_ambos_cierres_en_un_panel(): void
     {
         $this->app->useStoragePath(base_path('pruebas/.cache/grupo-detalle/storage'));
-        $actor = User::factory()->create(['tipo' => 0, 'name' => 'Responsable sintético']);
+        $actor = User::factory()->create(['tipo' => 0, 'status' => true, 'name' => 'Responsable sintético']);
         $this->actingAs($actor);
         $grupo = UserGroup::create([
             'name' => 'Grupo de revisión sintética',

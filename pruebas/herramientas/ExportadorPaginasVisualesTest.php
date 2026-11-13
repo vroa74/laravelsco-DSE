@@ -25,6 +25,8 @@ final class ExportadorPaginasVisualesTest extends TestCase
 
         $user = User::factory()->create([
             'name' => 'Cuenta sintética de revisión',
+            'tipo' => 2,
+            'status' => true,
             'email' => 'revision@example.invalid',
             'position' => 'Cargo sintético',
             'direction' => 'Dirección de prueba con descripción extensa',

@@ -2,12 +2,27 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Co extends Model
 {
+    /** Misma frontera para lista, total, exportaciones, detalle y archivos. */
+    public function scopeVisibleTo(Builder $query, ?User $user): Builder
+    {
+        if ($user?->administraSistema()) {
+            return $query;
+        }
+        if (! $user?->cuentaActiva() || $user->tipoVigente() !== 3) {
+            return $query->whereRaw('1 = 0');
+        }
+
+        // rem_id/nombres son ambiguos; los grupos esperan el snapshot de F4.
+        return $query->where('tur_type', 'user')->where('tur_id', $user->getKey());
+    }
+
     protected $table = 'cos';
-    
+
     protected $fillable = [
         'legislatura',
         'legislatura_id',
@@ -31,7 +46,7 @@ class Co extends Model
         'estatus',
         'rem_id',
         'tur_group_id',
-        'tur_type'
+        'tur_type',
     ];
 
     protected $casts = [
@@ -72,7 +87,7 @@ class Co extends Model
         if ($this->tur_type === 'group' && $this->turGroup) {
             return $this->turGroup->name;
         }
-        
+
         return $this->tur_nom;
     }
 
@@ -89,6 +104,6 @@ class Co extends Model
      */
     public function isTurnadoToUser()
     {
-        return $this->tur_type === 'user' || (!$this->tur_type && $this->tur_nom);
+        return $this->tur_type === 'user' || (! $this->tur_type && $this->tur_nom);
     }
 }

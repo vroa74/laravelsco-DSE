@@ -87,8 +87,10 @@
                 <div class="mt-6 flex items-center justify-end gap-2">
                     <x-icon-action variant="neutral" icon="fa-solid fa-arrow-left" label="Volver al listado"
                         size="md" :href="route('rg.index')" />
+                    @can('update', $co)
                     <x-icon-action variant="warning" icon="fa-solid fa-pencil" label="Editar registro"
                         size="md" :href="route('rg.edit', $co->id)" />
+                    @endcan
                 </div>
             </div>
         </div>

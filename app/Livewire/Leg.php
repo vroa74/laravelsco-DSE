@@ -2,14 +2,20 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Legislatura;
+use App\Traits\AuthorizesAdministration;
+use Livewire\Component;
 
 class Leg extends Component
 {
+    use AuthorizesAdministration;
+
     public $legis; // Lista de legislaturas
+
     public $newLegislatura = ''; // Input para la nueva legislatura
+
     public $editingId = null; // ID del elemento que se está editando
+
     public $temp;
 
     public function mount()
@@ -33,6 +39,7 @@ class Leg extends Component
         // Verificar duplicados
         if (Legislatura::where('legislatura', $this->newLegislatura)->exists()) {
             session()->flash('error', 'La legislatura ya existe.');
+
             return;
         }
 
@@ -63,8 +70,9 @@ class Leg extends Component
 
         // Verificar que el ID en edición exista
         $legislatura = Legislatura::find($this->editingId);
-        if (!$legislatura) {
+        if (! $legislatura) {
             session()->flash('error', 'Legislatura no encontrada.');
+
             return;
         }
 
@@ -73,6 +81,7 @@ class Leg extends Component
             ->where('id', '!=', $this->editingId)
             ->exists()) {
             session()->flash('error', 'La legislatura ya existe.');
+
             return;
         }
 

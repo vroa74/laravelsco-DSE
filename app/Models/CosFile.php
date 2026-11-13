@@ -15,7 +15,7 @@ class CosFile extends Model
         'file_type',
         'file_size',
         'description',
-        'uploaded_by'
+        'uploaded_by',
     ];
 
     protected $casts = [
@@ -35,7 +35,7 @@ class CosFile extends Model
      */
     public function getUrlAttribute()
     {
-        return Storage::url($this->file_path);
+        return route('correspondencia.archivo', ['documento' => $this->cos_id, 'archivo' => $this->id]);
     }
 
     /**
@@ -45,12 +45,12 @@ class CosFile extends Model
     {
         $bytes = $this->file_size;
         $units = ['B', 'KB', 'MB', 'GB'];
-        
+
         for ($i = 0; $bytes > 1024 && $i < count($units) - 1; $i++) {
             $bytes /= 1024;
         }
-        
-        return round($bytes, 2) . ' ' . $units[$i];
+
+        return round($bytes, 2).' '.$units[$i];
     }
 
     /**
@@ -58,7 +58,7 @@ class CosFile extends Model
      */
     public function exists()
     {
-        return Storage::exists($this->file_path);
+        return Storage::disk('public')->exists($this->file_path);
     }
 
     /**
@@ -67,7 +67,7 @@ class CosFile extends Model
     public function deleteFile()
     {
         if ($this->exists()) {
-            Storage::delete($this->file_path);
+            Storage::disk('public')->delete($this->file_path);
         }
     }
 

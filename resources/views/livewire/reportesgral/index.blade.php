@@ -31,8 +31,10 @@
 
                     <!-- Acciones de la barra: solo iconos con tooltip -->
                     <div class="flex flex-wrap items-center justify-center gap-2 sm:justify-end">
+                        @can('create', \App\Models\Co::class)
                         <x-icon-action variant="success" icon="fa-regular fa-square-plus"
                             :href="route('rg.create')" label="Agregar registro" />
+                        @endcan
 
                         <x-icon-action variant="export-pdf" icon="fa-solid fa-file-pdf" label="Exportar a PDF"
                             wire:click="exportPDF" wire:loading.attr="disabled"
@@ -112,7 +114,6 @@
                         <p class="text-secondary">Total paginado: {{ $cos->total() }}</p>
                         <p class="text-secondary">Total filtrado: {{ $this->getFilteredCount() }}</p>
                         <p class="text-xs text-muted">Límite PDF: 2000 | CSV: 5000</p>
-                        <p class="text-secondary">{{ $myquery }}</p>
                     </div>
                     {{--        fin filtro por estatus de la correspondencia ------------------------------------------------------}}
                     {{--         filtro por fechas ---------------------------------------------------------------------------}}
@@ -390,8 +391,10 @@
                         <x-icon-action variant="view" icon="fa-regular fa-eye" :href="route('rg.show', $co->id)"
                             label="Ver detalles" />
 
+                        @can('update', $co)
                         <x-icon-action variant="warning" icon="fa-solid fa-pencil" :href="route('rg.edit', $co->id)"
                             label="Editar registro" />
+                        @endcan
 
                         <x-icon-action variant="report-normal" icon="fa-regular fa-rectangle-list" href="javascript:void(0)"
                             onclick="abrirReporte({{ $co->id }}, 'reporte1')" label="Generar reporte normal" />

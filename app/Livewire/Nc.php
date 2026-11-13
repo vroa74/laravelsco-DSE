@@ -2,13 +2,18 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Ncor;
+use App\Traits\AuthorizesAdministration;
+use Livewire\Component;
 
 class Nc extends Component
 {
+    use AuthorizesAdministration;
+
     public $nncor; // Lista de elementos
+
     public $newNcor = ''; // Input para nuevo elemento
+
     public $editingId = null; // ID del elemento en edición
 
     public function mount()
@@ -31,6 +36,7 @@ class Nc extends Component
         // Verificar si ya existe
         if (Ncor::where('ncor', $this->newNcor)->exists()) {
             session()->flash('error', 'El elemento ya existe.');
+
             return;
         }
 
@@ -63,6 +69,7 @@ class Nc extends Component
             ->where('id', '!=', $this->editingId)
             ->exists()) {
             session()->flash('error', 'El elemento ya existe.');
+
             return;
         }
 

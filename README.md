@@ -896,3 +896,17 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 | `AGENTS.md`, `DOC/sistema/{fase-2,estado-actual}.md` | Alcance y evidencia de F2.2; Fase2 permanece abierta. |
 
 **Validación:**12 pruebas/102 aserciones,5.976s; regresión fotos27/129 y login existente3/5; Pint limpio. SQLite en memoria; sin MySQL, servidor real, migraciones ni dependencias cambiadas. No se exige MFA/correo nuevo a todas las cuentas; permisos y auditoría continúan pendientes. Sin frontend modificado: no requiere build.
+
+### Fronteras de recursos y permisos ("up000069")
+
+| Archivo | Cambio |
+| --- | --- |
+| `app/Policies/`, `app/Models/{User,Co}.php`, `app/Providers/AppServiceProvider.php` | Roles estrictos, permisos por acción y alcance compartido, sin promoción implícita al tipo0. |
+| `routes/web.php`, `CheckUserType.php`, `AuthorizesAdministration.php`, componentes Livewire | Administración protegida en rutas, montaje y actualizaciones; captura/edición restringidas. |
+| `RgController`, `ReportsController`, `Reportesgral/Index`, vistas de navegación y RG | Lista/conteo/exportaciones/detalle/reportes con mismo alcance; sin SQL mostrado ni botones denegados. |
+| `CorrespondenceFileController`, `Actions/Correspondence/DownloadCorrespondenceFile`, `CosFile`, `FileManager`, `HandlesFileUploads` | Descarga autenticada por documento/archivo y ruta acotada; sin mover archivos reales. |
+| `Usuarios/Index`, `UserPolicy` | Validación del tipo y protección del superadministrador frente a elevación/cambios ajenos. |
+| `pruebas/Feature/ResourceAuthorizationTest.php`, fixtures y evidencias Fase2 | Pruebas negativas, regresión conjunta y doce capturas responsive sintéticas. |
+| `AGENTS.md`, `DOC/sistema/{fase-2,estado-actual}.md` | Límites de identidad histórica, almacenamiento y tareas pendientes. |
+
+**Validación:**65 pruebas/416 aserciones en14.822s; Pint; Vite11.01s;12 casos responsive sin fallos. Solo SQLite :memory: y archivos sintéticos. PDF simulado únicamente para probar el alcance; sin mejora de rendimiento acreditada. No se incluyen parches antiguos de fechas/membresías ni se usan datos reales. Grupos sin snapshot y legados ambiguos no conceden acceso al tipo3; la captura del tur_id fiable y la distribución se completan en F4. Copias públicas históricas no se protegen por la nueva ruta: disco privado/retención en F5. Auditoría F2.3, edad verificable y servidor real pendientes; Fase2 abierta.

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Co;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RgController extends Controller
 {
@@ -12,6 +13,8 @@ class RgController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Co::class);
+
         return view('rg.index');
     }
 
@@ -20,6 +23,8 @@ class RgController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Co::class);
+
         return view('rg.create');
     }
 
@@ -53,7 +58,8 @@ class RgController extends Controller
      */
     public function show(string $id)
     {
-        $co = Co::findOrFail($id);
+        $co = Co::visibleTo(auth()->user())->findOrFail($id);
+
         return view('rg.show', compact('co'));
     }
 
@@ -62,6 +68,8 @@ class RgController extends Controller
      */
     public function edit(string $id)
     {
+        Gate::authorize('update', Co::findOrFail($id));
+
         return view('rg.edit', compact('id'));
     }
 
@@ -97,6 +105,7 @@ class RgController extends Controller
     public function destroy(string $id)
     {
         $co = Co::findOrFail($id);
+        Gate::authorize('delete', $co);
         $co->delete();
 
         return redirect()->route('rg.index')

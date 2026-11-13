@@ -2,23 +2,33 @@
 
 namespace App\Livewire\UserGroups;
 
+use App\Models\User;
+use App\Models\UserGroup;
+use App\Traits\AuthorizesAdministration;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\UserGroup;
-use App\Models\User;
 
 class Index extends Component
 {
+    use AuthorizesAdministration;
     use WithPagination;
 
     public $search = '';
+
     public $searchAvailableUsers = '';
+
     public $showModal = false;
+
     public $selectedGroup = null;
+
     public $showMembersModal = false;
+
     public $showAddMemberModal = false;
+
     public $selectedUser = null;
+
     public $availableUsers = [];
+
     public $filteredAvailableUsers = [];
 
     protected $queryString = [
@@ -35,12 +45,12 @@ class Index extends Component
         $query = UserGroup::with(['creator', 'members']);
 
         if ($this->search) {
-            $query->where('name', 'like', '%' . $this->search . '%')
-                  ->orWhere('description', 'like', '%' . $this->search . '%');
+            $query->where('name', 'like', '%'.$this->search.'%')
+                ->orWhere('description', 'like', '%'.$this->search.'%');
         }
 
         $groups = $query->orderBy('name')
-                       ->paginate(10);
+            ->paginate(10);
 
         return view('livewire.user-groups.index', [
             'groups' => $groups,
@@ -51,7 +61,6 @@ class Index extends Component
     {
         $this->resetPage();
     }
-
 
     public function showGroup(UserGroup $group)
     {
@@ -76,13 +85,14 @@ class Index extends Component
     {
         if ($user->groups()->count() > 0) {
             $this->dispatch('error', 'El usuario ya pertenece a un grupo.');
+
             return;
         }
 
         $this->selectedGroup->addMember($user, auth()->user());
         $this->loadAvailableUsers();
         $this->dispatch('success', 'Usuario agregado al grupo exitosamente.');
-        
+
         // Recargar el grupo seleccionado
         $this->selectedGroup->load(['members']);
     }
@@ -92,7 +102,7 @@ class Index extends Component
         $this->selectedGroup->removeMember($user);
         $this->loadAvailableUsers();
         $this->dispatch('success', 'Usuario removido del grupo exitosamente.');
-        
+
         // Recargar el grupo seleccionado
         $this->selectedGroup->load(['members']);
     }
@@ -102,12 +112,14 @@ class Index extends Component
         // Verificar si tiene miembros
         if ($group->members()->count() > 0) {
             $this->dispatch('error', 'No se puede eliminar un grupo que tiene miembros.');
+
             return;
         }
 
         // Verificar si tiene reportes turnados
         if ($group->cos()->count() > 0) {
             $this->dispatch('error', 'No se puede eliminar un grupo que tiene reportes turnados.');
+
             return;
         }
 
@@ -117,16 +129,16 @@ class Index extends Component
 
     public function toggleActive(UserGroup $group)
     {
-        $group->update(['active' => !$group->active]);
+        $group->update(['active' => ! $group->active]);
         $this->dispatch('success', 'Estado del grupo actualizado.');
     }
 
     private function loadAvailableUsers()
     {
         $this->availableUsers = User::whereDoesntHave('groups')
-                                   ->where('id', '!=', auth()->id())
-                                   ->select('id', 'name', 'email', 'position')
-                                   ->get();
+            ->where('id', '!=', auth()->id())
+            ->select('id', 'name', 'email', 'position')
+            ->get();
         $this->filterAvailableUsers();
     }
 

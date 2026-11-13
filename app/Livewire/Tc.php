@@ -2,13 +2,18 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Tcor;
+use App\Traits\AuthorizesAdministration;
+use Livewire\Component;
 
 class Tc extends Component
 {
+    use AuthorizesAdministration;
+
     public $ttc; // Lista de elementos
+
     public $newTcor = ''; // Texto ingresado en el input
+
     public $editingId = null; // ID del elemento en edición
 
     public function mount()
@@ -31,6 +36,7 @@ class Tc extends Component
         // Verificar si ya existe
         if (Tcor::where('tcor', $this->newTcor)->exists()) {
             session()->flash('error', 'El elemento ya existe.');
+
             return;
         }
 
@@ -63,6 +69,7 @@ class Tc extends Component
             ->where('id', '!=', $this->editingId)
             ->exists()) {
             session()->flash('error', 'El elemento ya existe.');
+
             return;
         }
 

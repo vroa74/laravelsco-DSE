@@ -4,8 +4,10 @@ namespace App\Livewire\Usuarios;
 
 use App\Helpers\AvatarHelper;
 use App\Models\User;
+use App\Traits\AuthorizesAdministration;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -13,6 +15,7 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use AuthorizesAdministration;
     use WithFileUploads, WithPagination;
 
     public $perPage = 10;
@@ -242,6 +245,7 @@ class Index extends Component
 
     public function saveCreateRecord()
     {
+        Gate::authorize('assignType', [User::class, $this->createTipo ?? 3]);
         $this->validate([
             'createName' => 'required|string|max:255',
             'createRfc' => 'nullable|string|max:13|unique:users,rfc',
@@ -249,7 +253,7 @@ class Index extends Component
             'createPosition' => 'nullable|string|max:35',
             'createSex' => 'nullable|in:masculino,femenino',
             'createLvl' => 'nullable|string|max:10',
-            'createTipo' => 'nullable|integer',
+            'createTipo' => 'nullable|integer|in:0,1,2,3',
             'createStatus' => 'nullable|boolean',
             'createEmail' => 'required|email|max:255|unique:users,email',
             'createDirection' => 'nullable|string|max:250',
@@ -385,6 +389,7 @@ class Index extends Component
 
     public function saveNewRecord()
     {
+        Gate::authorize('assignType', [User::class, $this->newTipo ?? 3]);
         $this->validate([
             'newName' => 'required|string|max:255',
             'newRfc' => 'nullable|string|max:13|unique:users,rfc',
@@ -392,7 +397,7 @@ class Index extends Component
             'newPosition' => 'nullable|string|max:35',
             'newSex' => 'nullable|in:masculino,femenino',
             'newLvl' => 'nullable|string|max:10',
-            'newTipo' => 'nullable|integer',
+            'newTipo' => 'nullable|integer|in:0,1,2,3',
             'newStatus' => 'nullable|boolean',
             'newEmail' => 'required|email|max:255|unique:users,email',
             'newDirection' => 'nullable|string|max:250',
@@ -436,13 +441,15 @@ class Index extends Component
     public function confirmDelete($id)
     {
         $this->deleteRecordId = $id;
-        $this->recordToDelete = User::find($id);
+        $this->recordToDelete = User::findOrFail($id);
+        Gate::authorize('delete', $this->recordToDelete);
     }
 
     public function deleteRecord()
     {
         if ($this->deleteRecordId) {
-            $record = User::find($this->deleteRecordId);
+            $record = User::findOrFail($this->deleteRecordId);
+            Gate::authorize('delete', $record);
             if ($record) {
                 $record->delete();
             }
@@ -470,6 +477,7 @@ class Index extends Component
     {
         $this->editRecordId = $id;
         $record = User::findOrFail($id);
+        Gate::authorize('update', $record);
 
         $this->editName = $record->name;
         $this->editRfc = $record->rfc;
@@ -495,7 +503,7 @@ class Index extends Component
             'editPosition' => 'nullable|string|max:35',
             'editSex' => 'nullable|in:masculino,femenino',
             'editLvl' => 'nullable|string|max:10',
-            'editTipo' => 'nullable|integer',
+            'editTipo' => 'nullable|integer|in:0,1,2,3',
             'editStatus' => 'nullable|boolean',
             'editEmail' => 'required|email|max:255|unique:users,email,'.$this->editRecordId,
             'editDirection' => 'nullable|string|max:250',
@@ -534,6 +542,8 @@ class Index extends Component
         }
 
         $user = User::findOrFail($this->editRecordId);
+        Gate::authorize('update', $user);
+        Gate::authorize('assignType', [User::class, $this->editTipo ?? 3]);
 
         // La foto anterior se conserva hasta que la nueva esté guardada y el
         // registro actualizado; así una escritura fallida no pierde la foto.
@@ -620,7 +630,7 @@ class Index extends Component
         'position' => 'nullable|string|max:35',
         'sex' => 'nullable|in:masculino,femenino',
         'lvl' => 'nullable|string|max:10',
-        'tipo' => 'nullable|integer',
+        'tipo' => 'nullable|integer|in:0,1,2,3',
         'status' => 'nullable|boolean',
         'email' => 'required|email|max:255',
         'direction' => 'nullable|string|max:250',
@@ -635,8 +645,11 @@ class Index extends Component
     {
         $this->validate();
         if ($this->editing) {
-            User::find($this->editing)->update($this->getValidated());
+            Gate::authorize('update', User::findOrFail($this->editing));
+            Gate::authorize('assignType', [User::class, $this->tipo ?? 3]);
+            User::findOrFail($this->editing)->update($this->getValidated());
         } else {
+            Gate::authorize('assignType', [User::class, $this->tipo ?? 3]);
             User::create($this->getValidated());
         }
         $this->resetForm();
@@ -647,6 +660,7 @@ class Index extends Component
     {
         $this->editRecordId = $id;
         $record = User::findOrFail($id);
+        Gate::authorize('update', $record);
 
         $this->editName = $record->name;
         $this->editRfc = $record->rfc;

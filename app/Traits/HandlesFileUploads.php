@@ -2,15 +2,20 @@
 
 namespace App\Traits;
 
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
-use Illuminate\Support\Facades\Storage;
+use App\Actions\Correspondence\DownloadCorrespondenceFile;
+use App\Models\Co;
 use App\Models\CosFile;
+use Illuminate\Support\Facades\Gate;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 trait HandlesFileUploads
 {
     public $files = [];
+
     public $fileDescriptions = [];
+
     public $maxFileSize = 15728640; // 15MB en bytes
+
     public $allowedFileTypes = ['pdf'];
 
     /**
@@ -22,15 +27,15 @@ trait HandlesFileUploads
             'files.*' => [
                 'required',
                 'file',
-                'max:' . ($this->maxFileSize / 1024 / 1024), // Convertir a MB
-                'mimes:' . implode(',', $this->allowedFileTypes)
+                'max:'.($this->maxFileSize / 1024 / 1024), // Convertir a MB
+                'mimes:'.implode(',', $this->allowedFileTypes),
             ],
-            'fileDescriptions.*' => 'nullable|string|max:255'
+            'fileDescriptions.*' => 'nullable|string|max:255',
         ], [
             'files.*.required' => 'Debe seleccionar al menos un archivo.',
             'files.*.file' => 'El archivo debe ser válido.',
             'files.*.max' => 'El archivo no puede ser mayor a 15MB.',
-            'files.*.mimes' => 'Solo se permiten archivos PDF.'
+            'files.*.mimes' => 'Solo se permiten archivos PDF.',
         ]);
     }
 
@@ -59,9 +64,10 @@ trait HandlesFileUploads
      */
     protected function saveSingleFile($file, $cosId, $index, $uploadedBy = null)
     {
+        Gate::authorize('update', Co::findOrFail($cosId));
         // Generar nombre único para el archivo
-        $fileName = time() . '_' . uniqid() . '.pdf';
-        $filePath = 'cos-files/' . $fileName;
+        $fileName = time().'_'.uniqid().'.pdf';
+        $filePath = 'cos-files/'.$fileName;
 
         // Guardar archivo en el almacenamiento
         $file->storeAs('cos-files', $fileName, 'public');
@@ -75,7 +81,7 @@ trait HandlesFileUploads
             'file_type' => 'pdf',
             'file_size' => $file->getSize(),
             'description' => $this->fileDescriptions[$index] ?? null,
-            'uploaded_by' => $uploadedBy
+            'uploaded_by' => $uploadedBy,
         ]);
     }
 
@@ -85,14 +91,15 @@ trait HandlesFileUploads
     public function deleteFile($fileId)
     {
         $file = CosFile::find($fileId);
-        
+
         if ($file) {
+            Gate::authorize('update', $file->cos);
             // Eliminar archivo físico
             $file->deleteFile();
-            
+
             // Eliminar registro de la base de datos
             $file->delete();
-            
+
             $this->dispatch('file-deleted', message: 'Archivo eliminado correctamente.');
         }
     }
@@ -103,11 +110,11 @@ trait HandlesFileUploads
     public function downloadFile($fileId)
     {
         $file = CosFile::find($fileId);
-        
+
         if ($file && $file->exists()) {
-            return Storage::disk('public')->download($file->file_path, $file->original_name);
+            return app(DownloadCorrespondenceFile::class)((string) $file->cos_id, (string) $file->id);
         }
-        
+
         $this->dispatch('file-error', message: 'El archivo no existe.');
     }
 
@@ -116,6 +123,8 @@ trait HandlesFileUploads
      */
     public function getFilesForCos($cosId)
     {
+        Co::visibleTo(auth()->user())->findOrFail($cosId);
+
         return CosFile::where('cos_id', $cosId)->orderBy('created_at', 'desc')->get();
     }
 
@@ -133,7 +142,7 @@ trait HandlesFileUploads
      */
     public function hasFiles()
     {
-        return !empty($this->files);
+        return ! empty($this->files);
     }
 
     /**
@@ -147,6 +156,7 @@ trait HandlesFileUploads
                 $total += $file->getSize();
             }
         }
+
         return $total;
     }
 

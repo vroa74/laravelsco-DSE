@@ -2,86 +2,172 @@
 
 namespace App\Livewire\Reportesgral;
 
-use Livewire\Attributes\Computed;
-use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
-use Livewire\WithPagination;
-use Livewire\WithFileUploads;
 use App\Models\Age;
+use App\Models\Ccor;
+use App\Models\Co;
 use App\Models\Legislatura;
 use App\Models\Ncor;
 use App\Models\Tcor;
-use App\Models\Ccor;
 use App\Models\User;
 use App\Models\UserGroup;
-use App\Models\Co;
-use App\Models\CosFile;
+use App\Traits\AuthorizesAdministration;
 use App\Traits\HandlesFileUploads;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class Create extends Component
 {
-    use WithPagination, WithFileUploads, HandlesFileUploads;
-    public $selectedLegislaturaId, $ffcap, $fncor, $ftcor, $ftcorid;
-    public $legislatura, $fcap, $frec, $ncor, $tcor, $ccor, $fofi, $nofi, $nhoj, $rem_nombre, $rem_cargo, $rem_deporg, $rem_dir;
-    public $des, $seguimiento, $tur_nom, $tur_cargo, $tur_deporg, $creo, $modifico, $reporte, $estatus;
+    use AuthorizesAdministration;
+    use HandlesFileUploads, WithFileUploads, WithPagination;
+
+    public $selectedLegislaturaId;
+
+    public $ffcap;
+
+    public $fncor;
+
+    public $ftcor;
+
+    public $ftcorid;
+
+    public $legislatura;
+
+    public $fcap;
+
+    public $frec;
+
+    public $ncor;
+
+    public $tcor;
+
+    public $ccor;
+
+    public $fofi;
+
+    public $nofi;
+
+    public $nhoj;
+
+    public $rem_nombre;
+
+    public $rem_cargo;
+
+    public $rem_deporg;
+
+    public $rem_dir;
+
+    public $des;
+
+    public $seguimiento;
+
+    public $tur_nom;
+
+    public $tur_cargo;
+
+    public $tur_deporg;
+
+    public $creo;
+
+    public $modifico;
+
+    public $reporte;
+
+    public $estatus;
+
     public $rem_id = null; // Para almacenar el ID del usuario seleccionado en Turnado
+
     public $tcccid = null;
+
     public $tccctext = '';
+
     public $accion = '';
 
     // Variables para los componentes de la tabla
     public $textarea_1 = 'Hola';
+
     public $textarea_2 = 'Hola';
+
     public $input_3_1 = 'Hola';
+
     public $input_3_2 = 'Hola';
+
     public $input_3_3 = 'Hola';
+
     public $input_3_4 = 'Hola';
+
     public $input_4_1 = 'Hola';
+
     public $input_4_2 = 'Hola';
+
     public $input_4_3 = 'Hola';
+
     public $input_4_4 = 'Hola';
 
     // Propiedades para el modal de Ages
     public $showModalAgent = false;
+
     public $searchNombre = '';
+
     public $searchCargo = '';
+
     public $searchDeporg = '';
+
     public $perPage = 10;
 
     // --- Propiedades para el Modal de Ages ---
     public $isAgeModalOpen = false;
+
     public $modalAgeFilter = '';
+
     public $currentAgeAction = ''; // Para saber qué hacer al seleccionar ('fillRemitente', 'fillTurnado', etc.)
+
     public $isCccorEnabled = false; // Para controlar si el select de clasificación está habilitado
+
     public $selectedColumn = null; // Para almacenar la columna seleccionada
     // No necesitamos una propiedad separada para $modalAges, filtraremos $this->ages en render
     // ------------------------------------------
 
     // --- Propiedades para el Modal de Users (Turnado) ---
     public $showModalUsers = false;
+
     public $searchUserName = '';
+
     public $searchUserPosition = '';
+
     public $searchUserDirection = '';
+
     public $perPageUsers = 10;
+
     public $selectedUserColumn = null; // Para almacenar la columna seleccionada para usuarios
-    
+
     // --- Propiedades para el Modal de Groups (Turnado) ---
     public $showModalGroups = false;
+
     public $searchGroupName = '';
+
     public $searchGroupDescription = '';
+
     public $perPageGroups = 10;
+
     public $selectedGroupColumn = null;
-    
+
     // --- Propiedades para manejo de Turnado ---
     public $turnadoType = 'user'; // 'user' o 'group'
+
     public $selectedGroup = null;
+
     public $groupMembers = [];
+
     public $showGroupMembers = false;
     // ------------------------------------------
 
     // --- Propiedades para manejo de archivos ---
     public $files = [];
+
     public $fileDescriptions = [];
     // ------------------------------------------
 
@@ -113,7 +199,7 @@ class Create extends Component
         }
 
         // Inicializar el estado de isCccorEnabled basado en tcccid
-        $this->isCccorEnabled = !empty($this->tcccid);
+        $this->isCccorEnabled = ! empty($this->tcccid);
     }
 
     // Catálogos pequeños: se calculan por petición y no viajan en el estado de Livewire
@@ -146,6 +232,7 @@ class Create extends Component
     {
         return $this->tcccid ? $this->ccors->where('tcor', $this->tcccid) : collect();
     }
+
     // Mantener la función selectCorrespondence optimizada
     public function selectCorrespondence($fid, $fttcor)
     {
@@ -176,27 +263,27 @@ class Create extends Component
     {
         $selectedAge = Age::find($ageId);
         if ($selectedAge) {
-            $textoSeleccionado = ' '.trim($selectedAge->nombre . ' ' . $selectedAge->cargo . ' ' . $selectedAge->deporg);
-            
+            $textoSeleccionado = ' '.trim($selectedAge->nombre.' '.$selectedAge->cargo.' '.$selectedAge->deporg);
+
             // Lógica para el modal principal
             switch ($this->selectedColumn) {
                 case 'seguimiento':
-                    $this->seguimiento = $this->seguimiento ? $this->seguimiento . "\n" . $textoSeleccionado : $textoSeleccionado;
+                    $this->seguimiento = $this->seguimiento ? $this->seguimiento."\n".$textoSeleccionado : $textoSeleccionado;
                     break;
                 case 'des':
-                    $this->des = $this->des ? $this->des . "\n" . $textoSeleccionado : $textoSeleccionado;
+                    $this->des = $this->des ? $this->des."\n".$textoSeleccionado : $textoSeleccionado;
                     break;
                 case 'Remitente':
-                    $this->rem_nombre = $this->rem_nombre ? $this->rem_nombre . "\n" . $selectedAge->nombre : $selectedAge->nombre;
-                    $this->rem_cargo = $this->rem_cargo ? $this->rem_cargo . "\n" . $selectedAge->cargo : $selectedAge->cargo;
-                    $this->rem_deporg = $this->rem_deporg ? $this->rem_deporg . "\n" . $selectedAge->deporg : $selectedAge->deporg;
-                    $this->rem_dir = $this->rem_dir ? $this->rem_dir . "\n" . $selectedAge->dir : $selectedAge->dir;
+                    $this->rem_nombre = $this->rem_nombre ? $this->rem_nombre."\n".$selectedAge->nombre : $selectedAge->nombre;
+                    $this->rem_cargo = $this->rem_cargo ? $this->rem_cargo."\n".$selectedAge->cargo : $selectedAge->cargo;
+                    $this->rem_deporg = $this->rem_deporg ? $this->rem_deporg."\n".$selectedAge->deporg : $selectedAge->deporg;
+                    $this->rem_dir = $this->rem_dir ? $this->rem_dir."\n".$selectedAge->dir : $selectedAge->dir;
                     break;
                 case 'Turnado:':
-                    $this->tur_nom = $this->tur_nom ? $this->tur_nom . "\n" . $selectedAge->nombre : $selectedAge->nombre;
-                    $this->tur_cargo = $this->tur_cargo ? $this->tur_cargo . "\n" . $selectedAge->cargo : $selectedAge->cargo;
-                    $this->tur_deporg = $this->tur_deporg ? $this->tur_deporg . "\n" . $selectedAge->deporg : $selectedAge->deporg;
-                    $this->input_4_4 = $this->input_4_4 ? $this->input_4_4 . "\n" . $selectedAge->dir : $selectedAge->dir;
+                    $this->tur_nom = $this->tur_nom ? $this->tur_nom."\n".$selectedAge->nombre : $selectedAge->nombre;
+                    $this->tur_cargo = $this->tur_cargo ? $this->tur_cargo."\n".$selectedAge->cargo : $selectedAge->cargo;
+                    $this->tur_deporg = $this->tur_deporg ? $this->tur_deporg."\n".$selectedAge->deporg : $selectedAge->deporg;
+                    $this->input_4_4 = $this->input_4_4 ? $this->input_4_4."\n".$selectedAge->dir : $selectedAge->dir;
                     break;
             }
             $this->closeModal();
@@ -206,8 +293,8 @@ class Create extends Component
     // --- Método para actualizar el estado de habilitación del select de clasificación ---
     public function updatedTcccid($value)
     {
-        $this->isCccorEnabled = !empty($value);
-        if (!$this->isCccorEnabled) {
+        $this->isCccorEnabled = ! empty($value);
+        if (! $this->isCccorEnabled) {
             $this->ccor = ''; // Resetear el valor de clasificación si se deshabilita
             $this->tccctext = ''; // Resetear el texto
         } else {
@@ -236,8 +323,8 @@ class Create extends Component
     {
         $selectedUser = User::find($userId);
         if ($selectedUser) {
-            $textoSeleccionado = ' '.trim($selectedUser->name . ' ' . $selectedUser->position . ' ' . $selectedUser->direction);
-            
+            $textoSeleccionado = ' '.trim($selectedUser->name.' '.$selectedUser->position.' '.$selectedUser->direction);
+
             switch ($this->selectedUserColumn) {
                 case 'Turnado':
                     $this->tur_nom = $selectedUser->name;
@@ -252,10 +339,10 @@ class Create extends Component
                     $this->rem_dir = $selectedUser->direction; // Usar direction como dirección
                     break;
                 case 'des':
-                    $this->des = $this->des ? $this->des . "\n" . $textoSeleccionado : $textoSeleccionado;
+                    $this->des = $this->des ? $this->des."\n".$textoSeleccionado : $textoSeleccionado;
                     break;
                 case 'seguimiento':
-                    $this->seguimiento = $this->seguimiento ? $this->seguimiento . "\n" . $textoSeleccionado : $textoSeleccionado;
+                    $this->seguimiento = $this->seguimiento ? $this->seguimiento."\n".$textoSeleccionado : $textoSeleccionado;
                     break;
             }
             $this->closeModalUsers();
@@ -268,15 +355,15 @@ class Create extends Component
         $query = User::query();
 
         if ($this->searchUserName) {
-            $query->where('name', 'like', '%' . $this->searchUserName . '%');
+            $query->where('name', 'like', '%'.$this->searchUserName.'%');
         }
 
         if ($this->searchUserPosition) {
-            $query->where('position', 'like', '%' . $this->searchUserPosition . '%');
+            $query->where('position', 'like', '%'.$this->searchUserPosition.'%');
         }
 
         if ($this->searchUserDirection) {
-            $query->where('direction', 'like', '%' . $this->searchUserDirection . '%');
+            $query->where('direction', 'like', '%'.$this->searchUserDirection.'%');
         }
 
         return $query->orderBy('name')->paginate($this->perPageUsers);
@@ -323,13 +410,13 @@ class Create extends Component
             $this->selectedGroup = $selectedGroup;
             $this->groupMembers = $selectedGroup->members;
             $this->turnadoType = 'group';
-            
+
             // Limpiar campos de usuario individual
             $this->tur_nom = '';
             $this->tur_cargo = '';
             $this->tur_deporg = '';
             $this->rem_id = null;
-            
+
             $this->closeModalGroups();
         }
     }
@@ -354,7 +441,7 @@ class Create extends Component
 
     public function toggleGroupMembers()
     {
-        $this->showGroupMembers = !$this->showGroupMembers;
+        $this->showGroupMembers = ! $this->showGroupMembers;
     }
 
     // Método para obtener los Groups paginados y filtrados
@@ -363,11 +450,11 @@ class Create extends Component
         $query = UserGroup::where('active', true);
 
         if ($this->searchGroupName) {
-            $query->where('name', 'like', '%' . $this->searchGroupName . '%');
+            $query->where('name', 'like', '%'.$this->searchGroupName.'%');
         }
 
         if ($this->searchGroupDescription) {
-            $query->where('description', 'like', '%' . $this->searchGroupDescription . '%');
+            $query->where('description', 'like', '%'.$this->searchGroupDescription.'%');
         }
 
         return $query->orderBy('name')->paginate($this->perPageGroups);
@@ -408,15 +495,15 @@ class Create extends Component
         $query = Age::query();
 
         if ($this->searchNombre) {
-            $query->where('nombre', 'like', '%' . $this->searchNombre . '%');
+            $query->where('nombre', 'like', '%'.$this->searchNombre.'%');
         }
 
         if ($this->searchCargo) {
-            $query->where('cargo', 'like', '%' . $this->searchCargo . '%');
+            $query->where('cargo', 'like', '%'.$this->searchCargo.'%');
         }
 
         if ($this->searchDeporg) {
-            $query->where('deporg', 'like', '%' . $this->searchDeporg . '%');
+            $query->where('deporg', 'like', '%'.$this->searchDeporg.'%');
         }
 
         return $query->orderBy('nombre')->paginate($this->perPage);
@@ -503,7 +590,7 @@ class Create extends Component
             ]);
 
             // Crear y guardar el nuevo registro
-            $correspondencia = new Co();
+            $correspondencia = new Co;
             $correspondencia->legislatura_id = $this->selectedLegislaturaId;
             $correspondencia->fcap = $this->fcap;
             $correspondencia->frec = $this->frec;
@@ -540,7 +627,7 @@ class Create extends Component
             $correspondencia->save();
 
             // Guardar archivos si existen
-            if (!empty($this->files)) {
+            if (! empty($this->files)) {
                 foreach ($this->files as $index => $file) {
                     $this->saveSingleFile($file, $correspondencia->id, $index, Auth::user()->email);
                 }
@@ -548,16 +635,17 @@ class Create extends Component
 
             // Mostrar mensaje de éxito
             session()->flash('success', 'Registro guardado exitosamente.');
-            
+
             // Redirigir a la página de listado
             return redirect()->route('rg.index');
-        } catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (ValidationException $e) {
             // Capturar errores de validación
             session()->flash('error', 'Por favor, verifica los datos del formulario.');
             throw $e;
         } catch (\Exception $e) {
             // Capturar otros errores
-            session()->flash('error', 'Error al guardar el registro: ' . $e->getMessage());
+            session()->flash('error', 'Error al guardar el registro: '.$e->getMessage());
+
             return;
         }
     }

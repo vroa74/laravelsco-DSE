@@ -58,6 +58,10 @@ class FotosPerfilUsuarioTest extends TestCase
             $table->text('two_factor_recovery_codes')->nullable();
             $table->timestamps();
         });
+        $this->actingAs(User::create([
+            'name' => 'Administración sintética', 'email' => 'admin-fotos@example.test',
+            'password' => bcrypt('ClaveSintetica123!'), 'tipo' => 0, 'status' => true,
+        ]));
     }
 
     /** PNG 1x1 sintetico; evita depender de la extension GD. */
@@ -332,6 +336,7 @@ class FotosPerfilUsuarioTest extends TestCase
     public function test_la_ruta_de_foto_exige_autenticacion(): void
     {
         $user = $this->usuarioConFoto();
+        $this->app['auth']->guard('web')->logout();
 
         $this->get(route('usuario.foto', ['usuario' => $user->id]))->assertRedirect();
     }

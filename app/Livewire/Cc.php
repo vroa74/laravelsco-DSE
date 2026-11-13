@@ -2,25 +2,30 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-
 use App\Models\Ccor;
 use App\Models\Tcor;
-
+use App\Traits\AuthorizesAdministration;
+use Livewire\Component;
 
 class Cc extends Component
 {
-    public $ccc, $tcc;
-    
+    use AuthorizesAdministration;
+
+    public $ccc;
+
+    public $tcc;
+
     // Propiedades para el formulario principal (añadir/editar)
     public $tcccid = null; // ID del Tcor seleccionado en el <select>
+
     public $newCcorText = ''; // Texto en el <input>
-    
+
     // ID del registro que se está editando (null si se está añadiendo)
     public $editingId = null;
-    
+
     // Propiedades para mostrar info debajo del select (opcional, mantenido de tu código)
     public $tccc = null;
+
     public $tccctxt = null;
 
     public function mount()
@@ -47,10 +52,10 @@ class Cc extends Component
                 $this->reset(['tccc', 'tccctxt', 'tcccid']);
             }
         } else {
-             $this->reset(['tccc', 'tccctxt', 'tcccid']);
+            $this->reset(['tccc', 'tccctxt', 'tcccid']);
         }
     }
-    
+
     public function addCcor()
     {
         $this->validate([
@@ -77,9 +82,9 @@ class Cc extends Component
         $this->editingId = $id;
         $this->tcccid = $ccor->tcor; // Carga el ID del Tcor en el select
         $this->newCcorText = $ccor->ccor; // Carga el texto en el input
-        
+
         // Actualiza la info mostrada debajo del select si la tienes
-        $this->miFuncionPersonalizada($this->tcccid); 
+        $this->miFuncionPersonalizada($this->tcccid);
     }
 
     public function updateCcor()
@@ -101,19 +106,19 @@ class Cc extends Component
             $this->loadData(); // Recarga la lista
             $this->resetForm(); // Limpia formulario y sale de modo edición
             session()->flash('message', 'Registro actualizado.');
-        } 
+        }
     }
 
     public function cancelEdit()
     {
         $this->resetForm();
     }
-    
+
     protected function resetForm()
     {
-         $this->reset(['editingId', 'tcccid', 'newCcorText', 'tccc', 'tccctxt']);
-         // Asegúrate que el select visualmente marque la opción por defecto
-         $this->dispatch('reset-select'); 
+        $this->reset(['editingId', 'tcccid', 'newCcorText', 'tccc', 'tccctxt']);
+        // Asegúrate que el select visualmente marque la opción por defecto
+        $this->dispatch('reset-select');
     }
 
     public function deleteCcor($id) // Cambiado para aceptar solo ID
@@ -125,9 +130,9 @@ class Cc extends Component
             session()->flash('message', 'Registro eliminado correctamente');
             $this->resetForm(); // << Añadir esta línea para limpiar el form
         } else {
-             session()->flash('error', 'No se pudo encontrar el registro para eliminar.');
-             // Opcional: ¿resetear form también en caso de error?
-             // $this->resetForm(); 
+            session()->flash('error', 'No se pudo encontrar el registro para eliminar.');
+            // Opcional: ¿resetear form también en caso de error?
+            // $this->resetForm();
         }
     }
 

@@ -1,0 +1,19 @@
+PHPUnit 12.5.33 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.11
+Configuration: C:\laragon\www\laravelsco-DSE\pruebas\.cache\permisos\phpunit-regresion.xml
+
+................................................................dashboard=200, datos sintéticos
+catalogos=200, datos sintéticos
+componentes=200, datos sintéticos
+usuario.index=200, datos sintéticos
+agen.index=200, datos sintéticos
+user-groups.index=200, datos sintéticos
+reportgral=200, datos sintéticos
+rg.create=200, datos sintéticos
+. 65 / 65 (100%)
+
+
+Time: 00:14.822, Memory: 84.00 MB
+
+OK (65 tests, 416 assertions)

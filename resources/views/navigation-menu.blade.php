@@ -20,6 +20,7 @@
                     <x-nav-link href="{{ route('rg.index') }}" :active="request()->routeIs('rg.index')">
                         Reportes generales{{--                       {{ __('Dashboard') }} --}}
                     </x-nav-link>
+                    @can('administrar-sistema')
                     <x-nav-link href="{{ route('user-groups.index') }}" :active="request()->routeIs('user-groups.*')">
                         Grupos
                     </x-nav-link>
@@ -36,6 +37,7 @@
                     <x-nav-link href="{{ route('componentes') }}" :active="request()->routeIs('componentes')">
                         Componentes
                     </x-nav-link>
+                    @endcan
                     {{-- <x-nav-link href="{{ route('add') }}" :active="request()->routeIs('add')">
                         Add
                     </x-nav-link>
@@ -195,12 +197,14 @@
             <x-responsive-nav-link href="{{ route('reportgral') }}" :active="request()->routeIs('reportgral')">
                 reportgral
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('usuarios')">
+            @can('administrar-sistema')
+            <x-responsive-nav-link href="{{ route('agen.index') }}" :active="request()->routeIs('agen.*')">
                 usuarios
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('catalogos') }}" :active="request()->routeIs('catalogos')">
                 catalogos
             </x-responsive-nav-link>
+            @endcan
 
         </div>
 

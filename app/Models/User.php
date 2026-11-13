@@ -24,6 +24,23 @@ class User extends Authenticatable
         return in_array($this->status, [true, 1, '1'], true);
     }
 
+    /** No convertir valores ausentes o desconocidos al tipo legado cero. */
+    public function tipoVigente(): ?int
+    {
+        return match ($this->tipo) {
+            0, '0' => 0,
+            1, '1' => 1,
+            2, '2' => 2,
+            3, '3' => 3,
+            default => null,
+        };
+    }
+
+    public function administraSistema(): bool
+    {
+        return $this->cuentaActiva() && in_array($this->tipoVigente(), [0, 1, 2], true);
+    }
+
     use HasApiTokens;
 
     /** @use HasFactory<UserFactory> */

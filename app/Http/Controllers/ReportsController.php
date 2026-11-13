@@ -2,41 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf as PDF;  // import dompdf
-use App\Models\Co;
-use App\Models\Ncor;
-use App\Models\Tcor;
-use App\Models\Ccor;
-
+use App\Models\Co;  // import dompdf
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class ReportsController extends Controller
 {
-    public function rg_report_1($id, $tipoReporte){
-         $registro = Co::find($id);
-         $filename = "file_".$registro->id."_".$registro->ncor."pdf";
-        $pdf = Pdf::loadView('reports.reportn', compact('registro', 'tipoReporte'));
+    public function rg_report_1($id, $tipoReporte)
+    {
+        $registro = Co::visibleTo(auth()->user())->findOrFail($id);
+        $filename = 'file_'.$registro->id.'_'.$registro->ncor.'pdf';
+        $pdf = PDF::loadView('reports.reportn', compact('registro', 'tipoReporte'));
+
         return $pdf->stream($filename);
     }
 
-    public function rg_report_2($id, $tipoReporte){
-        $registro = Co::find($id);
-        $filename = "file_".$registro->id."_".$registro->ncor."pdf";
-        $pdf = Pdf::loadView('reports.reporte', compact('registro', 'tipoReporte'));
-        return $pdf->stream($filename);
+    public function rg_report_2($id, $tipoReporte)
+    {
+        $registro = Co::visibleTo(auth()->user())->findOrFail($id);
+        $filename = 'file_'.$registro->id.'_'.$registro->ncor.'pdf';
+        $pdf = PDF::loadView('reports.reporte', compact('registro', 'tipoReporte'));
 
-    }
-
-    public function rg_report_3($id, $tipoReporte){
-        $registro = Co::find($id);
-        $filename = "file_".$registro->id."_".$registro->ncor."pdf";
-        $pdf = Pdf::loadView('reports.reports', compact('registro', 'tipoReporte'));
         return $pdf->stream($filename);
 
     }
 
-    public function user_report(){
+    public function rg_report_3($id, $tipoReporte)
+    {
+        $registro = Co::visibleTo(auth()->user())->findOrFail($id);
+        $filename = 'file_'.$registro->id.'_'.$registro->ncor.'pdf';
+        $pdf = PDF::loadView('reports.reports', compact('registro', 'tipoReporte'));
+
+        return $pdf->stream($filename);
 
     }
 
+    public function user_report() {}
 }
