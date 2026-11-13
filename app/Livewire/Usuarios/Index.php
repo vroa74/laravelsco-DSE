@@ -2,84 +2,210 @@
 
 namespace App\Livewire\Usuarios;
 
-use Livewire\Component;
-use Livewire\WithPagination;
-use Livewire\WithFileUploads;
+use App\Helpers\AvatarHelper;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
-    use WithPagination, WithFileUploads;
+    use WithFileUploads, WithPagination;
 
     public $perPage = 10;
+
     public $queryStringPreview = '';
 
     // Variables para los filtros
-    public $filname = '', $filrfc = '', $filcurp = '', $filposition = '', $filsex = '', $fillvl = '', $filtipo = '', $filstatus = '', $filemail = '', $fildirection = '';
+    public $filname = '';
+
+    public $filrfc = '';
+
+    public $filcurp = '';
+
+    public $filposition = '';
+
+    public $filsex = '';
+
+    public $fillvl = '';
+
+    public $filtipo = '';
+
+    public $filstatus = '';
+
+    public $filemail = '';
+
+    public $fildirection = '';
 
     public $selectedRecord;
 
     public $editRecordId;
-    public $editName, $editRfc, $editCurp, $editPosition, $editSex, $editLvl, $editTipo, $editStatus, $editEmail, $editDirection, $editPassword, $editPasswordConfirmation, $editProfilePhoto, $editProfilePhotoPath;
-    
+
+    public $editName;
+
+    public $editRfc;
+
+    public $editCurp;
+
+    public $editPosition;
+
+    public $editSex;
+
+    public $editLvl;
+
+    public $editTipo;
+
+    public $editStatus;
+
+    public $editEmail;
+
+    public $editDirection;
+
+    public $editPassword;
+
+    public $editPasswordConfirmation;
+
+    public $editProfilePhoto;
+
+    public $editProfilePhotoPath;
+
+    public $editProfilePhotoUrl;
+
     // Variables para el modal de creación (duplicado del modal de edición)
     public $createModalOpen = false;
-    public $createName, $createRfc, $createCurp, $createPosition, $createSex, $createLvl, $createTipo, $createStatus, $createEmail, $createDirection, $createPassword, $createPasswordConfirmation, $createProfilePhoto;
-    
+
+    public $createName;
+
+    public $createRfc;
+
+    public $createCurp;
+
+    public $createPosition;
+
+    public $createSex;
+
+    public $createLvl;
+
+    public $createTipo;
+
+    public $createStatus;
+
+    public $createEmail;
+
+    public $createDirection;
+
+    public $createPassword;
+
+    public $createPasswordConfirmation;
+
+    public $createProfilePhoto;
+
     // Variables para mostrar/ocultar contraseñas
     public $showEditPassword = false;
+
     public $showEditPasswordConfirmation = false;
+
     public $showCreatePassword = false;
+
     public $showCreatePasswordConfirmation = false;
+
     protected $paginationTheme = 'tailwind';
-    
+
     // Variables adicionales del componente original
     public $deleteRecordId = null;
+
     public $editing = null;
-    public $name, $rfc, $curp, $position, $sex, $lvl, $tipo, $status, $email, $direction;
-    
+
+    public $name;
+
+    public $rfc;
+
+    public $curp;
+
+    public $position;
+
+    public $sex;
+
+    public $lvl;
+
+    public $tipo;
+
+    public $status;
+
+    public $email;
+
+    public $direction;
+
     // Variables para el acordeón y modales
     public $isOpen = true;
+
     public $isInsertModalOpen = false;
+
     public $isViewqueryModalOpen = false;
+
     public $recordToDelete;
 
-    public $newName, $newRfc, $newCurp, $newPosition, $newSex, $newLvl, $newTipo, $newStatus, $newEmail, $newDirection, $newPassword, $newPasswordConfirmation, $newProfilePhoto;
+    public $newName;
+
+    public $newRfc;
+
+    public $newCurp;
+
+    public $newPosition;
+
+    public $newSex;
+
+    public $newLvl;
+
+    public $newTipo;
+
+    public $newStatus;
+
+    public $newEmail;
+
+    public $newDirection;
+
+    public $newPassword;
+
+    public $newPasswordConfirmation;
+
+    public $newProfilePhoto;
 
     public function buildFilteredQuery()
     {
         $query = User::query();
 
-        if (!empty($this->filname)) {
-            $query->where('name', 'like', '%' . $this->filname . '%');
+        if (! empty($this->filname)) {
+            $query->where('name', 'like', '%'.$this->filname.'%');
         }
-        if (!empty($this->filrfc)) {
-            $query->where('rfc', 'like', '%' . $this->filrfc . '%');
+        if (! empty($this->filrfc)) {
+            $query->where('rfc', 'like', '%'.$this->filrfc.'%');
         }
-        if (!empty($this->filcurp)) {
-            $query->where('curp', 'like', '%' . $this->filcurp . '%');
+        if (! empty($this->filcurp)) {
+            $query->where('curp', 'like', '%'.$this->filcurp.'%');
         }
-        if (!empty($this->filposition)) {
+        if (! empty($this->filposition)) {
             $query->where('position', $this->filposition);
         }
-        if (!empty($this->filsex)) {
+        if (! empty($this->filsex)) {
             $query->where('sex', $this->filsex);
         }
-        if (!empty($this->fillvl)) {
+        if (! empty($this->fillvl)) {
             $query->where('lvl', $this->fillvl);
         }
-        if (!empty($this->filtipo)) {
+        if (! empty($this->filtipo)) {
             $query->where('tipo', $this->filtipo);
         }
         if ($this->filstatus !== null && $this->filstatus !== '') {
             $query->where('status', $this->filstatus);
         }
-        if (!empty($this->filemail)) {
-            $query->where('email', 'like', '%' . $this->filemail . '%');
+        if (! empty($this->filemail)) {
+            $query->where('email', 'like', '%'.$this->filemail.'%');
         }
-        if (!empty($this->fildirection)) {
+        if (! empty($this->fildirection)) {
             $query->where('direction', $this->fildirection);
         }
 
@@ -108,9 +234,9 @@ class Index extends Component
         }
         // Resetear todos los campos
         $this->reset([
-            'createName', 'createRfc', 'createCurp', 'createPosition', 'createSex', 
-            'createLvl', 'createTipo', 'createStatus', 'createEmail', 'createDirection', 
-            'createPassword', 'createPasswordConfirmation', 'showCreatePassword', 'showCreatePasswordConfirmation'
+            'createName', 'createRfc', 'createCurp', 'createPosition', 'createSex',
+            'createLvl', 'createTipo', 'createStatus', 'createEmail', 'createDirection',
+            'createPassword', 'createPasswordConfirmation', 'showCreatePassword', 'showCreatePasswordConfirmation',
         ]);
     }
 
@@ -128,12 +254,13 @@ class Index extends Component
             'createEmail' => 'required|email|max:255|unique:users,email',
             'createDirection' => 'nullable|string|max:250',
             'createPassword' => 'required|string|min:8',
-            'createProfilePhoto' => 'nullable|image|max:2048', // 2MB máximo
+            'createProfilePhoto' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp,bmp|max:2048', // 2 MB; solo formatos web servibles
         ]);
 
         // Validar que las contraseñas coincidan manualmente
         if ($this->createPassword !== $this->createPasswordConfirmation) {
             $this->addError('createPasswordConfirmation', 'La confirmación de contraseña no coincide.');
+
             return;
         }
 
@@ -152,18 +279,57 @@ class Index extends Component
         ];
 
         // Manejar foto de perfil
-        if ($this->createProfilePhoto) {
-            $photoPath = $this->createProfilePhoto->store('profile-photos', 'public');
-            $createData['profile_photo_path'] = $photoPath;
+        if (! $this->crearUsuarioConFoto($createData, $this->createProfilePhoto, 'createProfilePhoto')) {
+            return;
         }
-
-        User::create($createData);
 
         $this->closeCreateModal();
         session()->flash('message', 'Usuario creado exitosamente.');
-        
+
         // Forzar actualización de la tabla para mostrar la nueva foto
         $this->dispatch('$refresh');
+    }
+
+    /**
+     * Crea el usuario y, si hay foto, la guarda primero. Si algo falla no se
+     * crea el registro y se borra el archivo recién escrito.
+     */
+    private function crearUsuarioConFoto(array $datos, ?UploadedFile $foto, string $campoError): bool
+    {
+        $photoPath = null;
+
+        try {
+            if ($foto) {
+                // El disco public no lanza errores y Livewire devuelve la ruta
+                // aunque el put() haya fallado: comprobar que el archivo existe.
+                $photoPath = $foto->store('profile-photos', 'public');
+
+                if (! is_string($photoPath) || User::rutaFotoValida($photoPath) === null || ! Storage::disk('public')->exists($photoPath)) {
+                    $this->addError($campoError, 'No se pudo guardar la fotografía; no se creó el registro.');
+
+                    return false;
+                }
+
+                $datos['profile_photo_path'] = $photoPath;
+            }
+
+            $creado = User::create($datos);
+
+            // Un evento creating cancelado devuelve false sin escribir el registro.
+            if (! $creado->exists) {
+                throw new \RuntimeException('El registro no se creó.');
+            }
+        } catch (\Throwable $e) {
+            if ($photoPath) {
+                Storage::disk('public')->delete($photoPath);
+            }
+
+            $this->addError($campoError, 'No se pudo guardar el usuario ni su fotografía; no se creó el registro.');
+
+            return false;
+        }
+
+        return true;
     }
 
     public function updatedCreateProfilePhoto()
@@ -178,22 +344,22 @@ class Index extends Component
     // Métodos para mostrar/ocultar contraseñas
     public function toggleEditPassword()
     {
-        $this->showEditPassword = !$this->showEditPassword;
+        $this->showEditPassword = ! $this->showEditPassword;
     }
 
     public function toggleEditPasswordConfirmation()
     {
-        $this->showEditPasswordConfirmation = !$this->showEditPasswordConfirmation;
+        $this->showEditPasswordConfirmation = ! $this->showEditPasswordConfirmation;
     }
 
     public function toggleCreatePassword()
     {
-        $this->showCreatePassword = !$this->showCreatePassword;
+        $this->showCreatePassword = ! $this->showCreatePassword;
     }
 
     public function toggleCreatePasswordConfirmation()
     {
-        $this->showCreatePasswordConfirmation = !$this->showCreatePasswordConfirmation;
+        $this->showCreatePasswordConfirmation = ! $this->showCreatePasswordConfirmation;
     }
 
     public function openViewQuery()
@@ -212,7 +378,7 @@ class Index extends Component
         if ($this->newProfilePhoto) {
             $this->newProfilePhoto = null;
         }
-        
+
         $this->isInsertModalOpen = false;
         $this->reset(['newName', 'newRfc', 'newCurp', 'newPosition', 'newSex', 'newLvl', 'newTipo', 'newStatus', 'newEmail', 'newDirection', 'newPassword', 'newPasswordConfirmation']);
     }
@@ -231,12 +397,13 @@ class Index extends Component
             'newEmail' => 'required|email|max:255|unique:users,email',
             'newDirection' => 'nullable|string|max:250',
             'newPassword' => 'required|string|min:8',
-            'newProfilePhoto' => 'nullable|image|max:2048', // 2MB máximo
+            'newProfilePhoto' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp,bmp|max:2048', // 2 MB; solo formatos web servibles
         ]);
 
         // Validar que las contraseñas coincidan manualmente
         if ($this->newPassword !== $this->newPasswordConfirmation) {
             $this->addError('newPasswordConfirmation', 'La confirmación de contraseña no coincide.');
+
             return;
         }
 
@@ -255,16 +422,13 @@ class Index extends Component
         ];
 
         // Manejar foto de perfil
-        if ($this->newProfilePhoto) {
-            $photoPath = $this->newProfilePhoto->store('profile-photos', 'public');
-            $createData['profile_photo_path'] = $photoPath;
+        if (! $this->crearUsuarioConFoto($createData, $this->newProfilePhoto, 'newProfilePhoto')) {
+            return;
         }
-
-        User::create($createData);
 
         $this->closeInsertModal();
         session()->flash('message', 'Usuario creado exitosamente.');
-        
+
         // Forzar actualización de la tabla para mostrar la nueva foto
         $this->dispatch('$refresh');
     }
@@ -286,7 +450,7 @@ class Index extends Component
         $this->deleteRecordId = null;
         $this->recordToDelete = null;
         session()->flash('message', 'Usuario eliminado correctamente.');
-        
+
         // Forzar actualización de la tabla
         $this->dispatch('$refresh');
     }
@@ -306,7 +470,7 @@ class Index extends Component
     {
         $this->editRecordId = $id;
         $record = User::findOrFail($id);
-        
+
         $this->editName = $record->name;
         $this->editRfc = $record->rfc;
         $this->editCurp = $record->curp;
@@ -318,30 +482,33 @@ class Index extends Component
         $this->editEmail = $record->email;
         $this->editDirection = $record->direction;
         $this->editProfilePhotoPath = $record->profile_photo_path;
+        // URL real de la foto ya guardada (null si no hay archivo disponible).
+        $this->editProfilePhotoUrl = $record->profile_photo_url;
     }
 
     public function updateRecord()
     {
         $rules = [
             'editName' => 'required|string|max:255',
-            'editRfc' => 'nullable|string|max:13|unique:users,rfc,' . $this->editRecordId,
-            'editCurp' => 'nullable|string|max:20|unique:users,curp,' . $this->editRecordId,
+            'editRfc' => 'nullable|string|max:13|unique:users,rfc,'.$this->editRecordId,
+            'editCurp' => 'nullable|string|max:20|unique:users,curp,'.$this->editRecordId,
             'editPosition' => 'nullable|string|max:35',
             'editSex' => 'nullable|in:masculino,femenino',
             'editLvl' => 'nullable|string|max:10',
             'editTipo' => 'nullable|integer',
             'editStatus' => 'nullable|boolean',
-            'editEmail' => 'required|email|max:255|unique:users,email,' . $this->editRecordId,
+            'editEmail' => 'required|email|max:255|unique:users,email,'.$this->editRecordId,
             'editDirection' => 'nullable|string|max:250',
-            'editProfilePhoto' => 'nullable|image|max:2048', // 2MB máximo
+            'editProfilePhoto' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp,bmp|max:2048', // 2 MB; solo formatos web servibles
         ];
 
         // Solo validar contraseña si se está cambiando
-        if (!empty($this->editPassword)) {
+        if (! empty($this->editPassword)) {
             $rules['editPassword'] = 'string|min:8';
             // Validar que las contraseñas coincidan manualmente
             if ($this->editPassword !== $this->editPasswordConfirmation) {
                 $this->addError('editPasswordConfirmation', 'La confirmación de edit password no coincide.');
+
                 return;
             }
         }
@@ -362,28 +529,65 @@ class Index extends Component
         ];
 
         // Actualizar contraseña si se proporcionó
-        if (!empty($this->editPassword)) {
+        if (! empty($this->editPassword)) {
             $updateData['password'] = bcrypt($this->editPassword);
         }
 
-        // Manejar foto de perfil
+        $user = User::findOrFail($this->editRecordId);
+
+        // La foto anterior se conserva hasta que la nueva esté guardada y el
+        // registro actualizado; así una escritura fallida no pierde la foto.
+        $photoAnterior = $user->profile_photo_path;
+        $photoNueva = null;
+
         if ($this->editProfilePhoto) {
-            // Eliminar foto anterior si existe
-            $user = User::find($this->editRecordId);
-            if ($user->profile_photo_path && Storage::disk('public')->exists($user->profile_photo_path)) {
-                Storage::disk('public')->delete($user->profile_photo_path);
+            try {
+                // El disco public no lanza errores: store() puede devolver false.
+                $photoNueva = $this->editProfilePhoto->store('profile-photos', 'public');
+            } catch (\Throwable $e) {
+                $this->addError('editProfilePhoto', 'No se pudo guardar la fotografía; se conserva la anterior.');
+
+                return;
             }
 
-            // Guardar nueva foto
-            $photoPath = $this->editProfilePhoto->store('profile-photos', 'public');
-            $updateData['profile_photo_path'] = $photoPath;
+            if (! is_string($photoNueva) || User::rutaFotoValida($photoNueva) === null || ! Storage::disk('public')->exists($photoNueva)) {
+                $this->addError('editProfilePhoto', 'No se pudo guardar la fotografía; se conserva la anterior.');
+
+                return;
+            }
+
+            $updateData['profile_photo_path'] = $photoNueva;
         }
 
-        User::find($this->editRecordId)->update($updateData);
+        try {
+            $guardado = $user->update($updateData);
+        } catch (\Throwable $e) {
+            $guardado = false;
+        }
+
+        // update() devuelve false si un evento cancela el guardado o si la
+        // escritura falla: en ambos casos la foto anterior sigue siendo válida.
+        if (! $guardado) {
+            if (is_string($photoNueva) && $photoNueva !== '') {
+                Storage::disk('public')->delete($photoNueva);
+            }
+
+            $this->addError('editProfilePhoto', 'No se pudo actualizar el usuario; se conserva la fotografía anterior.');
+
+            return;
+        }
+
+        // La foto sustituida se borra solo después de guardar con éxito.
+        if (is_string($photoNueva) && $photoNueva !== '' && $photoAnterior && $photoAnterior !== $photoNueva) {
+            // No borrar una ruta histórica ajena al directorio de fotos.
+            if (User::rutaFotoValida($photoAnterior) !== null) {
+                Storage::disk('public')->delete($photoAnterior);
+            }
+        }
 
         $this->closeEditModal();
         session()->flash('message', 'Usuario actualizado exitosamente.');
-        
+
         // Forzar actualización de la tabla para mostrar la nueva foto
         $this->dispatch('$refresh');
     }
@@ -394,9 +598,9 @@ class Index extends Component
         if ($this->editProfilePhoto) {
             $this->editProfilePhoto = null;
         }
-        
+
         $this->editRecordId = null;
-        $this->reset(['editName', 'editRfc', 'editCurp', 'editPosition', 'editSex', 'editLvl', 'editTipo', 'editStatus', 'editEmail', 'editDirection', 'editPassword', 'editPasswordConfirmation', 'editProfilePhotoPath', 'showEditPassword', 'showEditPasswordConfirmation']);
+        $this->reset(['editName', 'editRfc', 'editCurp', 'editPosition', 'editSex', 'editLvl', 'editTipo', 'editStatus', 'editEmail', 'editDirection', 'editPassword', 'editPasswordConfirmation', 'editProfilePhotoPath', 'editProfilePhotoUrl', 'showEditPassword', 'showEditPasswordConfirmation']);
     }
 
     public function showRecord($id)
@@ -424,7 +628,7 @@ class Index extends Component
 
     public function toggleAccordion()
     {
-        $this->isOpen = !$this->isOpen;
+        $this->isOpen = ! $this->isOpen;
     }
 
     public function save()
@@ -443,7 +647,7 @@ class Index extends Component
     {
         $this->editRecordId = $id;
         $record = User::findOrFail($id);
-        
+
         $this->editName = $record->name;
         $this->editRfc = $record->rfc;
         $this->editCurp = $record->curp;
@@ -454,10 +658,12 @@ class Index extends Component
         $this->editStatus = $record->status;
         $this->editEmail = $record->email;
         $this->editDirection = $record->direction;
-        
+        $this->editProfilePhotoPath = $record->profile_photo_path;
+        $this->editProfilePhotoUrl = $record->profile_photo_url;
+
         $this->toggleAccordion();
     }
-    
+
     public function resetForm()
     {
         $this->reset([
@@ -488,8 +694,8 @@ class Index extends Component
     public function clearFilters()
     {
         $this->reset([
-            'filname', 'filrfc', 'filcurp', 'filposition', 'filsex', 
-            'fillvl', 'filtipo', 'filstatus', 'filemail', 'fildirection'
+            'filname', 'filrfc', 'filcurp', 'filposition', 'filsex',
+            'fillvl', 'filtipo', 'filstatus', 'filemail', 'fildirection',
         ]);
         $this->resetPage();
     }
@@ -516,7 +722,7 @@ class Index extends Component
 
     public function generateAvatar($name, $size = 40)
     {
-        return \App\Helpers\AvatarHelper::generate($name, $size);
+        return AvatarHelper::generate($name, $size);
     }
 
     public function refreshTable()
@@ -533,31 +739,31 @@ class Index extends Component
     public function getUniquePositions()
     {
         return User::whereNotNull('position')
-                  ->where('position', '!=', '')
-                  ->distinct()
-                  ->pluck('position')
-                  ->sort()
-                  ->values();
+            ->where('position', '!=', '')
+            ->distinct()
+            ->pluck('position')
+            ->sort()
+            ->values();
     }
 
     public function getUniqueLevels()
     {
         return User::whereNotNull('lvl')
-                  ->where('lvl', '!=', '')
-                  ->distinct()
-                  ->pluck('lvl')
-                  ->sort()
-                  ->values();
+            ->where('lvl', '!=', '')
+            ->distinct()
+            ->pluck('lvl')
+            ->sort()
+            ->values();
     }
 
     public function getUniqueDirections()
     {
         return User::whereNotNull('direction')
-                  ->where('direction', '!=', '')
-                  ->distinct()
-                  ->pluck('direction')
-                  ->sort()
-                  ->values();
+            ->where('direction', '!=', '')
+            ->distinct()
+            ->pluck('direction')
+            ->sort()
+            ->values();
     }
 
     public function render()

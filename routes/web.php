@@ -6,6 +6,7 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RgController;
 use App\Http\Controllers\UserGroupController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\UsuarioFotoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -59,6 +60,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),  'verified'
     Route::resource('rg', RgController::class)->names('rg')->except(['store', 'update']);
     // Rutas para Age - Solo GET routes para Livewire - TODOS LOS USUARIOS
     Route::resource('agen', AgeController::class)->names('agen')->except(['store', 'update']);
+    // Foto de perfil: se sirve desde el disco "public" porque public/storage no
+    // es un enlace simbolico en esta instalacion. Solo lectura, autenticado.
+    Route::get('/usuario/{usuario}/foto', UsuarioFotoController::class)->name('usuario.foto');
+    // Misma foto para las URLs /storage/profile-photos/{archivo} que ya emiten
+    // las vistas actuales: el archivo real vive en storage/app/public.
+    Route::get('/storage/profile-photos/{archivo}', [UsuarioFotoController::class, 'porArchivo'])
+        ->name('usuario.foto.archivo');
+
     // Rutas para Usuario - Solo GET routes para Livewire - TODOS LOS USUARIOS
     Route::resource('usuario', UsuarioController::class)->names('usuario')->except(['store', 'update']);
 

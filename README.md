@@ -801,3 +801,16 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
 - `DOC/` y `.agents/` viven solo en local; si se requiere versionar la documentación de `DOC/`, se retira esa línea de `.gitignore` y se excluye únicamente `DOC/sco.sql`.
 
+
+
+### Backend de fotos persistidas ("up000061")
+
+| Archivo | Cambio |
+| --- | --- |
+| `app/Models/User.php` | Ruta de foto validada y URL autenticada con versión estable por archivo. |
+| `app/Livewire/Usuarios/Index.php` | Verifica escritura y persistencia en ambas altas y edición; conserva foto anterior ante fallos y protege archivos ajenos. |
+| `app/Http/Controllers/UsuarioFotoController.php`, `routes/web.php` | Descarga de foto autenticada desde disco public sin depender de public/storage; compatibilidad con URLs anteriores. |
+| `pruebas/Feature/FotosPerfilUsuarioTest.php`, `pruebas/evidencias/ajustes-20261113/fotos/` | Pruebas sintéticas de guardado, sustitución, formatos, errores, rutas y bytes servidos. |
+| `AGENTS.md`, `DOC/sistema/ajustes-20261113.md` | Estado preciso de integración y relevo de PDF a Gemini tras fallo de DeepInfra. |
+
+**Validación:** guardia previa aceptada sin cargar Laravel; PHPUnit directo,21 pruebas/94 aserciones en3.421s; Pint limpio en cinco PHP. SQLite :memory: y archivos/temporales en /pruebas. Sin MySQL, migraciones, datos reales, .env ni servidor web. Pendientes consumo de URL y revisión renderizada de las vistas; no se da por cerrado el defecto visual ni la ronda de estilos/reportes. No requiere build esta entrega PHP; los cambios frontend concurrentes no se incluyen.
