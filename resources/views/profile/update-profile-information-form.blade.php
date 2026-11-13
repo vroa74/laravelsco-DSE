@@ -28,7 +28,14 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full size-20 object-cover">
+                    @if ($this->user->profile_photo_url)
+                        <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full size-20 object-cover">
+                    @else
+                        <div data-photo-fallback role="img" aria-label="Fotografía no disponible"
+                            class="rounded-full size-20 surface-elevated border border-primary text-primary flex items-center justify-center font-semibold">
+                            {{ mb_strtoupper(mb_substr($this->user->name, 0, 2)) }}
+                        </div>
+                    @endif
                 </div>
 
                 <!-- New Profile Photo Preview -->

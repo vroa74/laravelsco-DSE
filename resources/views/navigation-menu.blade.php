@@ -112,9 +112,9 @@
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button
                                     class="flex text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300">
-                                    @if (Auth::user()->profile_photo_path)
+                                    @if (Auth::user()->profile_photo_path && Auth::user()->profile_photo_url)
                                         <img class="object-cover rounded-full size-8"
-                                            src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
+                                            src="{{ Auth::user()->profile_photo_url }}"
                                             alt="{{ Auth::user()->name }}" />
                                     @else
                                         <div class="size-8 bg-gray-300 rounded-full flex items-center justify-center">
@@ -209,9 +209,9 @@
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="shrink-0 me-3">
-                        @if (Auth::user()->profile_photo_path)
+                        @if (Auth::user()->profile_photo_path && Auth::user()->profile_photo_url)
                             <img class="object-cover rounded-full size-10"
-                                src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
+                                src="{{ Auth::user()->profile_photo_url }}"
                                 alt="{{ Auth::user()->name }}" />
                         @else
                             <div class="size-10 bg-gray-300 rounded-full flex items-center justify-center">

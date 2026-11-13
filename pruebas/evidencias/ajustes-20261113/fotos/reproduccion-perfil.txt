@@ -1,0 +1,34 @@
+PHPUnit 12.5.33 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.11
+Configuration: C:\laragon\www\laravelsco-DSE\phpunit.xml
+
+FFF                                                                 3 / 3 (100%)
+
+Time: 00:05.426, Memory: 58.00 MB
+
+There were 3 failures:
+
+1) Pruebas\Feature\FotosPerfilUsuarioTest::test_perfil_propio_guarda_y_muestra_foto_con_eventos_livewire_actuales
+Failed asserting that an event [saved] was fired.
+Failed asserting that false is true.
+
+C:\laragon\www\laravelsco-DSE\vendor\livewire\livewire\src\Features\SupportEvents\TestsEvents.php:24
+C:\laragon\www\laravelsco-DSE\pruebas\Feature\FotosPerfilUsuarioTest.php:170
+
+2) Pruebas\Feature\FotosPerfilUsuarioTest::test_perfil_propio_conserva_foto_anterior_si_el_registro_no_se_guarda
+Component has no errors.
+Failed asserting that false is true.
+
+C:\laragon\www\laravelsco-DSE\vendor\livewire\livewire\src\Features\SupportValidation\TestsValidation.php:40
+C:\laragon\www\laravelsco-DSE\pruebas\Feature\FotosPerfilUsuarioTest.php:192
+
+3) Pruebas\Feature\FotosPerfilUsuarioTest::test_perfil_propio_no_borra_archivo_si_no_puede_quitar_su_referencia
+Component has no errors.
+Failed asserting that false is true.
+
+C:\laragon\www\laravelsco-DSE\vendor\livewire\livewire\src\Features\SupportValidation\TestsValidation.php:40
+C:\laragon\www\laravelsco-DSE\pruebas\Feature\FotosPerfilUsuarioTest.php:208
+
+FAILURES!
+Tests: 3, Assertions: 4, Failures: 3.

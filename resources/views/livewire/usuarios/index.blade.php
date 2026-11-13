@@ -161,8 +161,8 @@
                             <tr
                                 class="border-b text-xs dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-950">
                                 <td class="px-3 py-3 text-center md:w-16 md:px-6 md:py-4" data-label="Foto">
-                                    @if ($items->profile_photo_path)
-                                        <img src="{{ asset('storage/' . $items->profile_photo_path) }}"
+                                    @if ($items->profile_photo_path && $items->profile_photo_url)
+                                        <img src="{{ $items->profile_photo_url }}"
                                             alt="Foto de perfil"
                                             class="w-10 h-10 rounded-full object-cover border border-gray-300 mx-auto">
                                     @else
@@ -219,15 +219,17 @@
 
     @if ($selectedRecord)
         <div id="record-modal" tabindex="-1"
-            class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
-            <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
+            class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full sco-modal-backdrop"
+            role="dialog" aria-modal="true" aria-labelledby="record-modal-title">
+            <div class="relative w-full max-w-2xl h-auto modal-elevated">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-primary">
+                    <h3 id="record-modal-title" class="text-xl font-semibold text-primary">
                         Detalles del Registro
                     </h3>
                     <button wire:click="closeModal" type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                        class="modal-close text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        aria-label="Cerrar modal">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -250,8 +252,8 @@
                     <p><strong>Email:</strong> {{ $selectedRecord->email }}</p>
                     <p><strong>Dirección:</strong> {{ $selectedRecord->direction }}</p>
                     <p><strong>Foto de Perfil:</strong>
-                        @if ($selectedRecord->profile_photo_path)
-                            <img src="{{ asset('storage/' . $selectedRecord->profile_photo_path) }}"
+                        @if ($selectedRecord->profile_photo_path && $selectedRecord->profile_photo_url)
+                            <img src="{{ $selectedRecord->profile_photo_url }}"
                                 alt="Foto de perfil"
                                 class="w-16 h-16 rounded-full object-cover border border-gray-300 mt-1">
                         @else
@@ -273,15 +275,17 @@
     {{--  Begin Modal de edir registro --}}
     @if ($editRecordId)
         <div id="edit-modal" tabindex="-1"
-            class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
-            <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
+            class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full sco-modal-backdrop"
+            role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+            <div class="relative w-full max-w-2xl h-auto modal-elevated">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-primary">
+                    <h3 id="edit-modal-title" class="text-xl font-semibold text-primary">
                         Editar Registro
                     </h3>
                     <button wire:click="closeEditModal" type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                        class="modal-close text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        aria-label="Cerrar modal">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -443,9 +447,9 @@
                                         <!-- Vista previa de nueva imagen seleccionada -->
                                         <img src="{{ $editProfilePhoto->temporaryUrl() }}" alt="Vista previa"
                                             class="w-full h-full object-cover">
-                                    @elseif($editProfilePhotoPath)
+                                    @elseif($editProfilePhotoPath && $editProfilePhotoUrl)
                                         <!-- Foto actual del usuario -->
-                                        <img src="{{ asset('storage/' . $editProfilePhotoPath) }}"
+                                        <img src="{{ $editProfilePhotoUrl }}"
                                             alt="Foto de perfil actual" class="w-full h-full object-cover">
                                     @else
                                         <!-- Avatar por defecto con iniciales -->
@@ -482,15 +486,17 @@
     {{-- Modal de creación (duplicado del modal de edición) --}}
     @if ($createModalOpen)
         <div id="create-modal" tabindex="-1"
-            class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
-            <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
+            class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full sco-modal-backdrop"
+            role="dialog" aria-modal="true" aria-labelledby="create-modal-title">
+            <div class="relative w-full max-w-2xl h-auto modal-elevated">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-primary">
+                    <h3 id="create-modal-title" class="text-xl font-semibold text-primary">
                         Crear Nuevo Usuario
                     </h3>
                     <button wire:click="closeCreateModal" type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                        class="modal-close text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        aria-label="Cerrar modal">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -690,15 +696,17 @@
     {{-- Modal de inserción --}}
     @if ($isInsertModalOpen)
         <div id="insert-modal" tabindex="-1"
-            class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
-            <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
+            class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full sco-modal-backdrop"
+            role="dialog" aria-modal="true" aria-labelledby="insert-modal-title">
+            <div class="relative w-full max-w-2xl h-auto modal-elevated">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-primary">
+                    <h3 id="insert-modal-title" class="text-xl font-semibold text-primary">
                         Agregar Nuevo Registro
                     </h3>
                     <button wire:click="closeInsertModal" type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                        class="modal-close text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        aria-label="Cerrar modal">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"

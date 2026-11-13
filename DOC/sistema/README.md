@@ -1,6 +1,6 @@
 # Documentación del sistema SCO
 
-Actualización: 12/11/2026. Responsable: coordinador del proyecto en Orca.
+Actualización:13/11/2026. Responsable: Codex, director del proyecto. Estado vigente: [estado-actual.md](estado-actual.md); fase activa: [Fase2](fase-2.md). La revisión estética general continúa abierta, con correcciones menores en paralelo por instrucción del CEO.
 
 ## Fuentes y alcance
 

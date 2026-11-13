@@ -863,3 +863,15 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 | `AGENTS.md`, `DOC/sistema/` | Aclaración aprobada, uso de ayudantes, Gemini solo hasta agotar crédito y límites de validación. |
 
 **Validación:** Vite15.46s, Pint,14 pruebas/32 aserciones en SQLite :memory:,6 casos offline sin fallos y contraste mínimo5.015:1. Gemini3.8 pidió sumar, se ejecutó localmente y respondió4:216 tokens,3.414s; no acredita trabajador Orca ni modifica configuración. Sin MySQL, datos reales o dependencias. Se retoma el siguiente bloque del plan; fotos/PDF y otras integraciones permanecen pendientes.
+
+
+### Fotos del perfil efectivo y estado Fase2 ("up000066")
+
+| Archivo | Cambio |
+| --- | --- |
+| `app/Models/User.php`, `app/Actions/Fortify/UpdateUserProfileInformation.php` | Guardado/baja seguros; datos y foto se persisten en una escritura con el recorrido efectivo de Jetstream. |
+| `resources/views/livewire/usuarios/index.blade.php`, `navigation-menu.blade.php`, `profile/update-profile-information-form.blade.php` | URL persistida en consumidores reales, fallback y modales con título/cierre accesible. |
+| `pruebas/Feature/FotosPerfilUsuarioTest.php`, `pruebas/evidencias/ajustes-20261113/fotos/` | Perfil efectivo, cancelaciones, fallos, bajas y HTML/bytes;27 pruebas/129 aserciones. |
+| `AGENTS.md`, `DOC/sistema/{README,estado-actual,fase-2}.md` | Fase2 autorizada expresamente, revisión visual aún abierta y matriz de roles confirmada por el CEO. |
+
+**Validación:** PHPUnit7.668s, Pint, Vite8.99s; solo SQLite :memory: y archivos sintéticos. BCRYPT4 solo en proceso de pruebas. Sin MySQL, vendor, datos reales o esquema modificados. Servidor real y aceptación estética pendientes; permisos completos/PDF no terminados. La expectativa inicial de saved fue corregida al identificar la clase efectiva que redirige tras foto.

@@ -7,9 +7,12 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\Features;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -79,6 +82,59 @@ class User extends Authenticatable
     public static function rutaFotoValida(?string $ruta): ?string
     {
         return is_string($ruta) && preg_match(self::PATRON_RUTA_FOTO, $ruta) === 1 ? $ruta : null;
+    }
+
+    /** Sustituye la foto solo después de comprobar archivo y persistencia. */
+    public function updateProfilePhoto(UploadedFile $photo, $storagePath = 'profile-photos'): void
+    {
+        $anterior = $this->profile_photo_path;
+        $nueva = null;
+        $disco = Storage::disk('public');
+
+        try {
+            if ($storagePath !== 'profile-photos') {
+                throw new \RuntimeException('Directorio de foto no admitido.');
+            }
+            $nueva = $photo->storePublicly($storagePath, ['disk' => 'public']);
+            if (! is_string($nueva) || self::rutaFotoValida($nueva) === null || ! $disco->exists($nueva)) {
+                throw new \RuntimeException('La fotografía no se escribió.');
+            }
+            if (! $this->forceFill(['profile_photo_path' => $nueva])->save()) {
+                throw new \RuntimeException('No se actualizó la referencia de foto.');
+            }
+        } catch (\Throwable $e) {
+            $this->profile_photo_path = $anterior;
+            if (is_string($nueva) && self::rutaFotoValida($nueva) !== null) {
+                $disco->delete($nueva);
+            }
+            throw ValidationException::withMessages([
+                'photo' => 'No se pudo guardar la fotografía; se conserva la anterior.',
+            ]);
+        }
+
+        if ($anterior !== $nueva && self::rutaFotoValida($anterior) !== null) {
+            $disco->delete($anterior);
+        }
+    }
+
+    /** Retira primero la referencia; un guardado fallido conserva el archivo. */
+    public function deleteProfilePhoto(): void
+    {
+        if (! Features::managesProfilePhotos() || $this->profile_photo_path === null) {
+            return;
+        }
+        $anterior = $this->profile_photo_path;
+        try {
+            if (! $this->forceFill(['profile_photo_path' => null])->save()) {
+                throw new \RuntimeException('No se retiró la referencia de foto.');
+            }
+        } catch (\Throwable $e) {
+            $this->profile_photo_path = $anterior;
+            throw ValidationException::withMessages(['photo' => 'No se pudo quitar la fotografía; se conserva la anterior.']);
+        }
+        if (self::rutaFotoValida($anterior) !== null) {
+            Storage::disk('public')->delete($anterior);
+        }
     }
 
     /**

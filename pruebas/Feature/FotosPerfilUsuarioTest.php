@@ -9,6 +9,7 @@ use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Livewire\Livewire;
 use Mockery;
 use RuntimeException;
@@ -144,6 +145,7 @@ class FotosPerfilUsuarioTest extends TestCase
 
         $componente = Livewire::test(Index::class)->call('showRecord', $user->id);
         $this->assertSame($esperada, $componente->get('selectedRecord')->profile_photo_url);
+        $this->assertStringContainsString('src="'.$esperada.'"', $componente->html());
     }
 
     public function test_edicion_carga_la_url_del_registro_actual(): void
@@ -153,6 +155,100 @@ class FotosPerfilUsuarioTest extends TestCase
         $componente = Livewire::test(Index::class)->call('editRecord', $user->id);
 
         $this->assertSame($user->profile_photo_url, $componente->get('editProfilePhotoUrl'));
+        $this->assertStringContainsString('src="'.$user->profile_photo_url.'"', $componente->html());
+    }
+
+    public function test_perfil_propio_guarda_y_muestra_foto_tras_la_redireccion_efectiva(): void
+    {
+        $user = $this->usuarioConFoto();
+        $anterior = $user->profile_photo_path;
+        $this->actingAs($user);
+
+        $componente = Livewire::test('profile.update-profile-information-form')
+            ->set('photo', $this->imagen('propia.png'))
+            ->call('updateProfileInformation')
+            ->assertHasNoErrors()
+            ->assertRedirect(route('profile.show'));
+
+        $actual = $user->fresh();
+        $this->assertNotSame($anterior, $actual->profile_photo_path);
+        Storage::disk('public')->assertMissing($anterior);
+        Storage::disk('public')->assertExists($actual->profile_photo_path);
+        $pagina = $this->get(route('profile.show'))->assertOk()->getContent();
+        $this->assertStringContainsString('src="'.$actual->profile_photo_url.'"', $pagina);
+        $this->assertStringContainsString('x-ref="photo"', $pagina);
+        $this->assertStringContainsString('src="'.$actual->profile_photo_url.'"', view('navigation-menu')->render());
+    }
+
+    public function test_perfil_propio_conserva_foto_anterior_si_el_registro_no_se_guarda(): void
+    {
+        $user = $this->usuarioConFoto();
+        $anterior = $user->profile_photo_path;
+        $this->actingAs($user);
+        User::updating(fn () => false);
+
+        Livewire::test('profile.update-profile-information-form')
+            ->set('photo', $this->imagen('fallida.png'))
+            ->call('updateProfileInformation')
+            ->assertHasErrors('photo')
+            ->assertNotDispatched('saved');
+
+        $this->assertSame($anterior, $user->fresh()->profile_photo_path);
+        Storage::disk('public')->assertExists($anterior);
+        $this->assertCount(1, Storage::disk('public')->allFiles('profile-photos'));
+    }
+
+    public function test_perfil_propio_no_borra_archivo_si_no_puede_quitar_su_referencia(): void
+    {
+        $user = $this->usuarioConFoto();
+        $anterior = $user->profile_photo_path;
+        $this->actingAs($user);
+        User::updating(fn () => false);
+
+        Livewire::test('profile.update-profile-information-form')
+            ->call('deleteProfilePhoto')->assertHasErrors('photo');
+
+        $this->assertSame($anterior, $user->fresh()->profile_photo_path);
+        Storage::disk('public')->assertExists($anterior);
+    }
+
+    public function test_perfil_propio_rechaza_una_escritura_de_archivo_fallida(): void
+    {
+        $user = $this->usuarioConFoto();
+        $anterior = $user->profile_photo_path;
+        $photo = Mockery::mock(UploadedFile::class);
+        $photo->shouldReceive('storePublicly')->once()->andReturn(false);
+
+        try {
+            $user->updateProfilePhoto($photo);
+            $this->fail('La escritura fallida debe producir un error de campo.');
+        } catch (ValidationException $e) {
+            $this->assertArrayHasKey('photo', $e->errors());
+        }
+        $this->assertSame($anterior, $user->fresh()->profile_photo_path);
+        Storage::disk('public')->assertExists($anterior);
+    }
+
+    public function test_perfil_propio_quita_foto_y_actualiza_navegacion(): void
+    {
+        $user = $this->usuarioConFoto();
+        $anterior = $user->profile_photo_path;
+        $this->actingAs($user);
+
+        Livewire::test('profile.update-profile-information-form')
+            ->call('deleteProfilePhoto')->assertHasNoErrors()
+            ->assertDispatched('refresh-navigation-menu');
+
+        $this->assertNull($user->fresh()->profile_photo_path);
+        Storage::disk('public')->assertMissing($anterior);
+    }
+
+    public function test_perfil_propio_muestra_fallback_cuando_falta_el_archivo(): void
+    {
+        $user = $this->usuarioConFoto();
+        Storage::disk('public')->delete($user->profile_photo_path);
+        $this->actingAs($user)->get(route('profile.show'))->assertOk()
+            ->assertSee('Fotografía no disponible')->assertDontSee('src=""', false);
     }
 
     public function test_sustitucion_exitosa_borra_la_foto_anterior(): void

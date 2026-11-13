@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
@@ -23,18 +24,11 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
-        if (isset($input['photo'])) {
-            $user->updateProfilePhoto($input['photo']);
-        }
-
         if ($input['email'] !== $user->email &&
             $user instanceof MustVerifyEmail) {
             $this->updateVerifiedUser($user, $input);
         } else {
-            $user->forceFill([
-                'name' => $input['name'],
-                'email' => $input['email'],
-            ])->save();
+            $this->persistProfile($user, $input);
         }
     }
 
@@ -45,12 +39,23 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      */
     protected function updateVerifiedUser(User $user, array $input): void
     {
-        $user->forceFill([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'email_verified_at' => null,
-        ])->save();
+        $this->persistProfile($user, $input, ['email_verified_at' => null]);
 
         $user->sendEmailVerificationNotification();
+    }
+
+    /** Guarda datos y referencia de foto en una sola escritura del usuario. */
+    private function persistProfile(User $user, array $input, array $extra = []): void
+    {
+        $user->forceFill(array_merge([
+            'name' => $input['name'],
+            'email' => $input['email'],
+        ], $extra));
+
+        if (isset($input['photo'])) {
+            $user->updateProfilePhoto($input['photo']);
+        } elseif (! $user->save()) {
+            throw ValidationException::withMessages(['name' => 'No se pudo actualizar el perfil.']);
+        }
     }
 }
