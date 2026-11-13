@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+use App\Livewire\People;
+use App\Models\Age;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 require dirname(__DIR__, 2).'/vendor/autoload.php';
@@ -66,5 +69,18 @@ final class ExportadorPaginasVisualesTest extends TestCase
             }
             echo $route."=200, datos sintéticos\n";
         }
+
+        // Revisa el encabezado del modal real: un cambio delegado había dejado
+        // sus atributos como texto y duplicado la apertura de h3 al editar.
+        $age = Age::firstOrFail();
+        $edicion = Livewire::test(People::class)
+            ->call('editRecord', $age->id)->html();
+        $dom = new DOMDocument;
+        @$dom->loadHTML('<?xml encoding="UTF-8">'.$edicion);
+        $xpath = new DOMXPath($dom);
+        $titulos = $xpath->query('//*[@id="edit-modal-title"]');
+        $this->assertCount(1, $titulos);
+        $this->assertSame('h3', $titulos->item(0)->nodeName);
+        $this->assertSame('Editar Registro', trim($titulos->item(0)->textContent));
     }
 }

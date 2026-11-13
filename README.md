@@ -839,3 +839,15 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 | `AGENTS.md`, `DOC/sistema/` | Sustituye el panel blanco rechazado y registra validación, límites y estado real de trabajadores. |
 
 **Validación:** Vite10.84s, Pint,23 pruebas/51 aserciones en SQLite :memory:;6 escenarios offline en ambos temas y375/768/1366 sin errores ni desbordamiento. Contraste mínimo de botones4.758:1; Tab, Escape y cierre comprobados con modal abierto. Sin MySQL ni datos reales. Aceptación estética y revisión completa de vistas/fotos/PDF pendientes; no se declara uniformidad integral. Velo claro previo del usuario y parches ajenos fuera del commit; public/build no versionado.
+
+
+### Agregar en la barra de acciones de RG y directorio ("up000064")
+
+| Archivo | Cambio |
+| --- | --- |
+| `resources/views/livewire/people.blade.php` | Integra modales con títulos/cierre accesibles y corrige el encabezado duplicado de edición. |
+| Vistas locales de `/rg` y `/agen` | Restaura Agregar junto a PDF/filtros; elimina su celda de filtros. La posición ya existía en HEAD, por lo que RG no genera diferencia versionable. |
+| `pruebas/herramientas/ExportadorPaginasVisualesTest.php`, `verificar-barras-listados.cjs` | Comprueba título de edición y distribución real de acciones/filtros con datos sintéticos. |
+| `pruebas/evidencias/ajustes-20261113/barras/`, `AGENTS.md`, `DOC/sistema/` | Doce capturas, mediciones, build y aclaración de la regla de ubicación. |
+
+**Validación:** Vite7.79s, Pint,1 prueba/11 aserciones en SQLite :memory:,12 escenarios offline sin desbordamiento. Agregar único y alineado con PDF en ambas rutas y temas; cuadrículas de8/4 bloques restauradas. Sin MySQL, aplicación real ni datos personales. Las imágenes de las capturas son sustituciones sintéticas: no validan fotos/logotipos. Resto de vistas/fotos y PDF pendientes.

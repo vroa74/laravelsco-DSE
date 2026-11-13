@@ -230,15 +230,18 @@
 {{--    begin modal  -------------------------------------------------------------------------------------------------}}
 
     @if($selectedRecord)
-        <div id="record-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
+        <div id="record-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full sco-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="record-modal-title">
             <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-primary">
+                    <h3 id="record-modal-title" class="text-xl font-semibold text-primary">
                         Detalles del Registro
                     </h3>
-                    <button wire:click="closeModal" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414 1.414L10 8.586 5.707 4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <button wire:click="closeModal" type="button" class="modal-close text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" aria-label="Cerrar modal">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
                     </button>
                 </div>
                 <!-- Modal body -->
@@ -260,14 +263,14 @@
 {{--    ----------------------------------------------------------------------------}}
 {{--  Begin Modal de edir registro--}}
     @if($editRecordId)
-        <div id="edit-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
+        <div id="edit-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full sco-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
             <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-primary">
+                    <h3 id="edit-modal-title" class="text-xl font-semibold text-primary">
                         Editar Registro
                     </h3>
-                    <button wire:click="closeEditModal" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    <button wire:click="closeEditModal" type="button" class="modal-close" aria-label="Cerrar modal">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 8.586 5.707 4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
                 </div>
@@ -338,15 +341,18 @@
 
 {{-- Modal de inserción --}}
 @if($isInsertModalOpen)
-    <div id="insert-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
+    <div id="insert-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full sco-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="insert-modal-title">
         <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
             <!-- Modal header -->
             <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-primary">
+                <h3 id="insert-modal-title" class="text-xl font-semibold text-primary">
                     Agregar Nuevo Registro
                 </h3>
-                <button wire:click="closeInsertModal" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 8.586 5.707 4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <button wire:click="closeInsertModal" type="button" class="modal-close text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" aria-label="Cerrar modal">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                 </button>
             </div>
             <!-- Modal body -->
@@ -402,13 +408,19 @@
 @endif
      {{-- end insert record --}}
     @if($deleteRecordId && $recordToDelete)
-        <div id="delete-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
+        <div id="delete-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full sco-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
             <div class="relative w-full max-w-md h-auto rounded-lg shadow modal-elevated">
                 <!-- Modal header -->
-                <div class="p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-primary">
+                <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
+                    <h3 id="delete-modal-title" class="text-xl font-semibold text-primary">
                         Confirmar Borrado
                     </h3>
+                    <button wire:click="$set('deleteRecordId', null)" type="button" class="modal-close text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" aria-label="Cerrar modal">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 text-center">
@@ -436,15 +448,18 @@
     {{--     end modal eresear record--}}
     {{--    --}}
     @if($isViewqueryModalOpen)
-        <div id="record-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50">
+        <div id="record-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full sco-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="viewquery-modal-title">
             <div class="relative w-full max-w-2xl h-auto rounded-lg shadow modal-elevated">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-primary">
+                    <h3 id="viewquery-modal-title" class="text-xl font-semibold text-primary">
                         Detalles de la consulta
                     </h3>
-                    <button wire:click="closeViewQuery" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414 1.414L10 8.586 5.707 4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <button wire:click="closeViewQuery" type="button" class="modal-close text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" aria-label="Cerrar modal">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
                     </button>
                 </div>
                 <!-- Modal body -->
