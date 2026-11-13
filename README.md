@@ -851,3 +851,15 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 | `pruebas/evidencias/ajustes-20261113/barras/`, `AGENTS.md`, `DOC/sistema/` | Doce capturas, mediciones, build y aclaración de la regla de ubicación. |
 
 **Validación:** Vite7.79s, Pint,1 prueba/11 aserciones en SQLite :memory:,12 escenarios offline sin desbordamiento. Agregar único y alineado con PDF en ambas rutas y temas; cuadrículas de8/4 bloques restauradas. Sin MySQL, aplicación real ni datos personales. Las imágenes de las capturas son sustituciones sintéticas: no validan fotos/logotipos. Resto de vistas/fotos y PDF pendientes.
+
+
+### Gradient outline vivo y comprobación de Gemini3.8 ("up000065")
+
+| Archivo | Cambio |
+| --- | --- |
+| `resources/css/app.css`, `resources/views/components/{button,secondary-button,danger-button,icon-action}.blade.php` | Exterior degradado y span interior, dos extremos vivos, hover transparente y contraste; sin cambiar acciones o enlaces. |
+| `pruebas/Feature/EstilosOutlineModalTest.php`, `pruebas/herramientas/verificar-outline-modal.cjs` | Usa componentes Blade reales y comprueba capas, colores y hover en ambos temas y tres tamaños. |
+| `pruebas/herramientas/comprobar-gemini-flash-38.mjs`, `pruebas/evidencias/ajustes-20261113/{degradados,gemini-38}/` | Doce capturas y ciclo API sintético de herramienta; sin datos del proyecto enviados. |
+| `AGENTS.md`, `DOC/sistema/` | Aclaración aprobada, uso de ayudantes, Gemini solo hasta agotar crédito y límites de validación. |
+
+**Validación:** Vite15.46s, Pint,14 pruebas/32 aserciones en SQLite :memory:,6 casos offline sin fallos y contraste mínimo5.015:1. Gemini3.8 pidió sumar, se ejecutó localmente y respondió4:216 tokens,3.414s; no acredita trabajador Orca ni modifica configuración. Sin MySQL, datos reales o dependencias. Se retoma el siguiente bloque del plan; fotos/PDF y otras integraciones permanecen pendientes.

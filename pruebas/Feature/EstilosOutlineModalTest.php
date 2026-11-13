@@ -72,7 +72,7 @@ class MuestraModalOutline extends Component
             <section class="panel-base p-4">
               <div class="flex flex-wrap gap-3" id="acciones-muestra">
                 @foreach (['success'=>'Agregar', 'warning'=>'Editar', 'view'=>'Ver', 'danger'=>'Eliminar', 'report-normal'=>'Normal', 'report-special'=>'Especial', 'report-request'=>'Solicitud', 'export-pdf'=>'PDF', 'export-csv'=>'CSV', 'neutral'=>'Volver'] as $variante=>$texto)
-                  <button type="button" class="btn-base btn-{{ $variante }}" data-variante="{{ $variante }}">{{ $texto }}</button>
+                  <x-button type="button" :variant="$variante" data-variante="{{ $variante }}">{{ $texto }}</x-button>
                 @endforeach
               </div>
               <button type="button" id="abrir-muestra" class="btn-base btn-info mt-4" x-data x-on:click="$dispatch('abrir-muestra')">Abrir diálogo de prueba</button>

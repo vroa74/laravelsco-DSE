@@ -1,0 +1,21 @@
+
+   PASS  Tests\Feature\IconActionTest
+  ✓ it renderiza un botón de acción solo con icono y etiqueta accesible                                          0.93s
+  ✓ it renderiza un enlace cuando recibe href                                                                    0.20s
+  ✓ it renderiza el botón de mostrar u ocultar contraseña                                                        0.22s
+  ✓ it usa el escudo del estado de Campeche como fondo de la sección auth                                        1.63s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('reportgral')                              4.72s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('rg.create')                               1.68s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('user-groups.index')                       1.21s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('user-groups.create')                      0.61s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('agen.index')                              1.83s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('catalogos')                               2.62s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('usuarios')                                0.22s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('dashboard')                               0.12s
+  ✓ it muestra las acciones de las barras como botones de icono                                                  0.12s
+
+   PASS  Pruebas\Feature\EstilosOutlineModalTest
+  ✓ exporta componentes reales con dialogo etiquetado                                                            1.70s
+
+  Tests:    14 passed (32 assertions)
+  Duration: 18.18s

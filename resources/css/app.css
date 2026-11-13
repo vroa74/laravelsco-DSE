@@ -247,117 +247,167 @@ html.dark .modal-elevated {
   color: var(--text-primary);
 }
 
-/* Variante = color; componente = tamaño. Contorno degradado sin botones anidados. */
-/* BOTONES COMPARTIDOS: .btn-base y .btn-icon centran contenido y consumen los colores --action-* de su variante; comparten borde, radio y transiciones. La variante no decide el tamaño. */
+/* CONTORNO FLOWBITE: la capa exterior muestra dos colores distintos y la interior los descubre en hover.
+   La variante controla colores; btn-base/btn-icon controlan medidas. No hay botones anidados. */
 .btn-base, .btn-icon {
+  --button-interior: var(--surface-elevated);
+  --visible-from: var(--action-from);
+  --visible-to: var(--action-to);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 2px;
+  border: 0;
+  border-radius: .5rem;
+  font-weight: 600;
+  line-height: 1.25;
+  background-image: linear-gradient(135deg, var(--visible-from), var(--visible-to));
+  color: var(--text-primary);
+  transition: color 150ms ease, transform 150ms ease;
+}
+/* BOTÓN CON TEXTO: conserva la altura mínima de40px; el relleno del texto vive en la capa interior. */
+.btn-base {
+  min-height: 2.5rem;
+  font-size: .875rem;
+}
+/* CAPA INTERIOR: deja un contorno degradado de2px y conserva texto/ícono legibles sobre el tema. */
+.btn-outline-interior {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: .5rem;
-  flex-shrink: 0;
-  border: 2px solid transparent;
-  border-radius: .5rem;
-  font-weight: 600;
-  line-height: 1.25;
-  /* Primera capa: interior del tema; segunda: borde degradado visible, patrón outline. */
-  background: linear-gradient(var(--surface-elevated), var(--surface-elevated)) padding-box,
-    linear-gradient(135deg, var(--action-from), var(--action-to)) border-box;
-  color: var(--text-primary);
-  transition: background-color 150ms ease, color 150ms ease, transform 150ms ease;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(.5rem - 2px);
+  background-color: var(--button-interior);
+  color: inherit;
+  pointer-events: none;
+  transition: background-color 75ms ease-in;
 }
-/* BOTÓN CON TEXTO: .btn-base fija relleno, altura mínima de40px y letra de14px. */
-.btn-base {
-  padding: .625rem 1rem;
-  min-height: 2.5rem;
-  font-size: .875rem;
+/* INTERIOR DEL BOTÓN DE TEXTO: aporta espacio alrededor de la etiqueta sin aumentar el borde. */
+.btn-base > .btn-outline-interior {
+  min-height: 2.25rem;
+  padding: .5rem .875rem;
 }
-/* BOTÓN DE ICONO: .btn-icon mide36x36px y no añade relleno; en móvil se amplía su objetivo táctil. */
+/* BOTÓN DE ICONO: mide36x36px; su interior llena el área restante tras los2px del contorno. */
 .btn-icon {
   width: 2.25rem;
   height: 2.25rem;
-  padding: 0;
 }
-/* BOTÓN DE ICONO MEDIANO: .btn-icon-md amplía el botón a40x40px; se combina con .btn-icon. */
+/* BOTÓN DE ICONO MEDIANO: amplía el control a40x40px; móvil mantiene el mínimo táctil definido más abajo. */
 .btn-icon-md {
   width: 2.5rem;
   height: 2.5rem;
 }
-/* DIBUJO DEL ICONO: ajusta a14px únicamente el elemento i que sea hijo directo de .btn-icon; no cambia el área del botón. */
-.btn-icon > i {
+/* DIBUJO DEL ICONO: incluye el span interior compartido y los consumidores directos heredados. */
+.btn-icon > i, .btn-icon > .btn-outline-interior > i {
   font-size: .875rem;
   line-height: 1;
 }
-/* BOTÓN EN HOVER: rellena el interior con el degradado semántico y usa su tinta contrastada; el texto no se filtra. */
+/* COMPATIBILIDAD VISUAL: botones heredados sin span conservan el mismo contorno mediante dos capas CSS. */
+:is(.btn-base, .btn-icon):not(:has(> .btn-outline-interior)) {
+  border: 2px solid transparent;
+  background: linear-gradient(var(--button-interior), var(--button-interior)) padding-box,
+    linear-gradient(135deg, var(--visible-from), var(--visible-to)) border-box;
+}
+/* TEXTO HEREDADO: conserva su relleno hasta que la vista componga el componente compartido. */
+.btn-base:not(:has(> .btn-outline-interior)) {
+  padding: .625rem 1rem;
+}
+/* ICONO HEREDADO: el borde ya reserva los2px; evita añadir otro relleno. */
+.btn-icon:not(:has(> .btn-outline-interior)) {
+  padding: 0;
+}
+/* HOVER HABILITADO: el interior queda transparente; las variantes luminosas profundizan el degradado
+   para mantener contraste del texto sin atenuarlo. Naranja y amarillo conservan tinta oscura. */
 :is(.btn-base, .btn-icon):hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--action-from), var(--action-to)) padding-box,
-    linear-gradient(135deg, var(--action-from), var(--action-to)) border-box;
+  --button-interior: transparent;
+  --visible-from: var(--action-hover-from, var(--action-from));
+  --visible-to: var(--action-hover-to, var(--action-to));
   color: var(--action-text, #fff);
 }
-/* BOTÓN PRESIONADO: desplaza1px el botón habilitado mientras se pulsa; no ejecuta ninguna acción de negocio. */
+/* BOTÓN PRESIONADO: desplaza1px el control habilitado durante la pulsación. */
 :is(.btn-base, .btn-icon):active:not(:disabled) {
   transform: translateY(1px);
 }
-/* FOCO DE TECLADO: añade un contorno visible a botones compartidos y a enlaces/botones de .sco-ui cuando corresponde focus-visible. */
+/* FOCO DE TECLADO: contorno separado del degradado, legible en ambos temas. */
 :is(.btn-base, .btn-icon):focus-visible, .sco-ui a:focus-visible, .sco-ui button:focus-visible {
   outline: 2px solid var(--border-focus);
   outline-offset: 3px;
 }
-/* BOTÓN DESHABILITADO: atenúa el botón completo y cambia el cursor cuando ya tiene disabled; no controla permisos. */
+/* DESHABILITADO: atenúa el control y conserva su forma; no altera permisos ni validación. */
 :is(.btn-base, .btn-icon):disabled {
   opacity: .55;
   cursor: not-allowed;
 }
-/* ACCIÓN VERDE: .btn-success define el degradado de agregar y guardar; combinar con .btn-base o .btn-icon. */
+/* AGREGAR/GUARDAR: verde vivo a azul, según el ejemplo del CEO; hover profundo con tinta blanca. */
 .btn-success {
-  --action-from: #15803d;
-  --action-to: #0f766e;
+  --action-from: #4ade80;
+  --action-to: #2563eb;
+  --action-hover-from: #15803d;
+  --action-hover-to: #1d4ed8;
 }
-/* ACCIÓN NARANJA INTENSA: .btn-warning identifica editar; en hover usa tinta oscura sobre naranja vivo. */
+/* EDITAR: naranja intenso a amarillo ámbar; tinta oscura para conservar contraste al rellenar. */
 .btn-warning {
   --action-from: #f97316;
-  --action-to: #f59e0b;
+  --action-to: #facc15;
   --action-text: #281407;
 }
-/* ACCIÓN AMARILLA: .btn-view identifica ver o mostrar detalles; no debe reutilizarse para editar. */
+/* VER: amarillo a lima, distinto del naranja de edición; tinta oscura en hover. */
 .btn-view {
-  --action-from: #fde477;
-  --action-to: #eabe36;
+  --action-from: #facc15;
+  --action-to: #a3e635;
   --action-text: #282008;
 }
-/* ACCIÓN DESTRUCTIVA ROJA: .btn-danger identifica eliminar; no usar esta variante para exportar documentos. */
+/* ELIMINAR: rojo a fucsia oscuro; el rojo queda reservado para la acción destructiva. */
 .btn-danger {
-  --action-from: #dc2626;
-  --action-to: #be123c;
+  --action-from: #ef4444;
+  --action-to: #db2777;
+  --action-hover-from: #b91c1c;
+  --action-hover-to: #9d174d;
 }
-/* ACCIÓN AZUL: .btn-info y .btn-primary sirven a acciones informativas; .btn-report es alias de compatibilidad y .btn-report-normal identifica el reporte normal. Todas definen solo colores. */
+/* INFORMACIÓN Y REPORTE NORMAL: azul a cyan; aliases de compatibilidad con igual significado. */
 .btn-info, .btn-primary, .btn-report, .btn-report-normal {
-  --action-from: #2563eb;
-  --action-to: #0369a1;
+  --action-from: #3b82f6;
+  --action-to: #06b6d4;
+  --action-hover-from: #1d4ed8;
+  --action-hover-to: #0e7490;
 }
-/* REPORTE ESPECIAL: .btn-report-special define un degradado violeta para distinguirlo del normal y de solicitud. */
+/* REPORTE ESPECIAL: violeta a azul, con dos extremos perceptiblemente distintos. */
 .btn-report-special {
-  --action-from: #7c3aed;
-  --action-to: #9333ea;
+  --action-from: #a855f7;
+  --action-to: #2563eb;
+  --action-hover-from: #7e22ce;
+  --action-hover-to: #1d4ed8;
 }
-/* REPORTE DE SOLICITUD: .btn-report-request define el degradado turquesa del tercer tipo de reporte. */
+/* REPORTE SOLICITUD: turquesa a lima; el hover preserva contraste sobre ambos extremos. */
 .btn-report-request {
-  --action-from: #0f766e;
-  --action-to: #155e75;
+  --action-from: #2dd4bf;
+  --action-to: #84cc16;
+  --action-hover-from: #0f766e;
+  --action-hover-to: #3f6212;
 }
-/* EXPORTACIÓN PDF: .btn-export-pdf usa cyan a azul; sustituye el magenta rechazado y nunca indica peligro. */
+/* EXPORTAR PDF: cyan vivo a azul, sin rojo destructivo. */
 .btn-export-pdf {
-  --action-from: #0e7490;
-  --action-to: #1d4ed8;
+  --action-from: #06b6d4;
+  --action-to: #3b82f6;
+  --action-hover-from: #0e7490;
+  --action-hover-to: #1d4ed8;
 }
-/* EXPORTACIÓN CSV: .btn-export-csv define azul petróleo para exportar tablas. */
+/* EXPORTAR CSV: azul cielo a turquesa, separado del PDF por orden y extremos. */
 .btn-export-csv {
-  --action-from: #075985;
-  --action-to: #155e75;
+  --action-from: #0ea5e9;
+  --action-to: #14b8a6;
+  --action-hover-from: #075985;
+  --action-hover-to: #0f766e;
 }
-/* ACCIÓN SECUNDARIA: .btn-neutral, .btn-secondary y .btn-ghost comparten degradado azul grisáceo para cancelar o volver; el alias ghost aquí también lleva degradado, no es transparente. */
+/* CANCELAR/VOLVER: azul grisáceo a azul, manteniendo el carácter secundario de la acción. */
 .btn-neutral, .btn-secondary, .btn-ghost {
-  --action-from: #64748b;
-  --action-to: #475569;
+  --action-from: #94a3b8;
+  --action-to: #3b82f6;
+  --action-hover-from: #475569;
+  --action-hover-to: #1e40af;
 }
 
 /* Tablas transparentes en un único panel, también como tarjetas móviles. */
@@ -625,7 +675,7 @@ html.dark .bg-institucional__gradient-overlay {
 /* MOVIMIENTO REDUCIDO: elimina animación decorativa de controles compartidos si el sistema lo solicita. */
 @media (prefers-reduced-motion: reduce) {
   /* CONTROLES SIN TRANSICIÓN: el estado sigue siendo visible de inmediato. */
-  .btn-base, .btn-icon, .modal-close {
+  .btn-base, .btn-icon, .btn-outline-interior, .modal-close {
     transition: none;
   }
 }

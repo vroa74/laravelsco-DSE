@@ -139,7 +139,7 @@ Verificación:23 pruebas/53 aserciones con SQLite en memoria, build y12 capturas
 
 ## Ajustes autorizados: outline, modales, fotos y reportes — 13/11/2026
 
-- Botones de acciones internas de tablas, edición y reportes: patrón Flowbite Gradient outline, con borde degradado, interior de superficie legible y hover relleno; mantener colores semánticos y tamaños compartidos. Intensificar naranja de editar; exportar PDF pasa a cyan/azul y nunca rojo destructivo. No cambiar por pantalla el mismo significado.
+- Botones internos: patrón Flowbite Gradient outline con capa exterior degradada y span interior del tema que se vuelve transparente en hover, según el código aportado por el CEO. Los dos extremos deben ser claramente distintos y llamativos, no dos tonos casi iguales: agregar/guardar verde→azul, editar naranja→ámbar, ver amarillo→lima, eliminar rojo→fucsia, normal azul→cyan, especial violeta→azul, solicitud turquesa→lima, PDF cyan→azul, CSV cielo→turquesa y secundario gris azulado→azul. Mantener iconos, tamaños, foco y significado; rojo reservado para eliminar. Profundizar los extremos en hover cuando sea necesario para contraste mínimo4.5:1, sin atenuar el texto.
 - Referencia de modales ratificada por el CEO el 13/11/2026: el gestor de miembros de la imagen aprobada. En tema oscuro usar azul marino (#08162b como base), letras claras, campos oscuros, listas delimitadas y distribución compacta; no panel blanco. Panel del modal al98% para separarlo de la página, borde/sombra definidos y backdrop independiente al50%, sin atenuar el contenido. En claro usar azul grisáceo claro con tinta oscura. El cierre es visible, tiene nombre accesible y objetivo de44px. Los botones siguen Gradient outline y los colores semánticos; la corrección de contraste no autoriza rediseñar la distribución. Esta instrucción sustituye el panel semiblanco anterior.
 - Un solo botón de búsqueda uniforme por sección de captura/edición RG (Descripción, Remitente, Seguimiento, Turnado). La futura distinción persona/grupo no se añade todavía. Conservar el selector canónico correspondiente y no inventar nuevos pasos de negocio.
 - La acción Agregar/Crear de un listado se ubica en la fila superior de su barra interna, junto a Exportar y Aplicar filtros, fuera del cuerpo plegable y de la cuadrícula de campos. Nunca crear una celda o fila de filtros exclusiva para Agregar. Debe seguir disponible al plegar filtros, conservar el orden de acciones y adaptarse a móvil sin desplazamiento horizontal.
@@ -150,3 +150,10 @@ Verificación:23 pruebas/53 aserciones con SQLite en memoria, build y12 capturas
 
 
 Estado: componentes comunes implementados en up000063, con23 pruebas/51 aserciones y6 escenarios de modal abierto en dos temas y tres tamaños. Aceptación estética del CEO y cobertura completa de vistas/estados pendientes. No usar una página base como prueba de un modal abierto.
+
+
+### Aclaración Gradient outline — up000065
+
+El CEO aportó el patrón exterior degradado + span interior y pidió dos colores llamativos. Se aplica en los componentes comunes, con pares diferenciados y hover transparente. La tinta conserva contraste; los extremos muy luminosos usan una versión más profunda al rellenar. No se altera el modal marino ni la distribución aprobada. Aprobación condicional expresada por el CEO: con estos cambios, pasar al siguiente bloque del plan; no equivale a declarar implementadas las fases funcionales.
+
+Validación: build15.46s, Pint,14 pruebas/32 aserciones y6 escenarios offline con12 capturas; mínimo de contraste5.015:1 y dos extremos distintos por variante. El fixture renderiza los botones Blade reales, no réplicas manuales.

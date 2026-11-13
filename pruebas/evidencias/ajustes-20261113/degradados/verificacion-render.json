@@ -1,0 +1,968 @@
+[
+  {
+    "theme": "light",
+    "width": 375,
+    "normal": [
+      {
+        "variant": "success",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 167.17356250316615
+      },
+      {
+        "variant": "warning",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 89.01123524589468
+      },
+      {
+        "variant": "view",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 96.27564593395363
+      },
+      {
+        "variant": "danger",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 61.98386886924693
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 81.6639455328972
+      },
+      {
+        "variant": "report-special",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 132.29134514396625
+      },
+      {
+        "variant": "report-request",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 190.24720760105785
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 81.6639455328972
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 69.89992846920518
+      },
+      {
+        "variant": "neutral",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 113.37548235840057
+      }
+    ],
+    "hover": [
+      {
+        "variant": "success",
+        "contrast": 5.0155974781114745,
+        "transparent": true
+      },
+      {
+        "variant": "warning",
+        "contrast": 6.277960028133493,
+        "transparent": true
+      },
+      {
+        "variant": "view",
+        "contrast": 10.545575396248784,
+        "transparent": true
+      },
+      {
+        "variant": "danger",
+        "contrast": 6.4700447145121895,
+        "transparent": true
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 5.3577549124490425,
+        "transparent": true
+      },
+      {
+        "variant": "report-special",
+        "contrast": 6.701618401398807,
+        "transparent": true
+      },
+      {
+        "variant": "report-request",
+        "contrast": 5.473250081210842,
+        "transparent": true
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 5.3577549124490425,
+        "transparent": true
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 5.473250081210842,
+        "transparent": true
+      },
+      {
+        "variant": "neutral",
+        "contrast": 7.577663953533317,
+        "transparent": true
+      }
+    ],
+    "modal": {
+      "name": "modal-muestra-title",
+      "colorScheme": "light",
+      "color": [
+        23,
+        32,
+        51
+      ],
+      "inputColor": [
+        23,
+        32,
+        51
+      ],
+      "inputBg": [
+        241,
+        245,
+        249
+      ],
+      "border": "solid",
+      "x": 16,
+      "right": 359,
+      "closeSize": [
+        44,
+        44
+      ],
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "tones": [
+        "rgb(23, 32, 51)",
+        "rgb(51, 65, 85)",
+        "rgb(71, 85, 105)",
+        "rgb(82, 97, 116)"
+      ]
+    },
+    "focus": {
+      "inside": true,
+      "outline": "solid",
+      "trapped": true
+    },
+    "escaped": true,
+    "closed": true,
+    "errors": [],
+    "blocked": []
+  },
+  {
+    "theme": "light",
+    "width": 768,
+    "normal": [
+      {
+        "variant": "success",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 167.17356250316615
+      },
+      {
+        "variant": "warning",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 89.01123524589468
+      },
+      {
+        "variant": "view",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 96.27564593395363
+      },
+      {
+        "variant": "danger",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 61.98386886924693
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 81.6639455328972
+      },
+      {
+        "variant": "report-special",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 132.29134514396625
+      },
+      {
+        "variant": "report-request",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 190.24720760105785
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 81.6639455328972
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 69.89992846920518
+      },
+      {
+        "variant": "neutral",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 113.37548235840057
+      }
+    ],
+    "hover": [
+      {
+        "variant": "success",
+        "contrast": 5.0155974781114745,
+        "transparent": true
+      },
+      {
+        "variant": "warning",
+        "contrast": 6.277960028133493,
+        "transparent": true
+      },
+      {
+        "variant": "view",
+        "contrast": 10.545575396248784,
+        "transparent": true
+      },
+      {
+        "variant": "danger",
+        "contrast": 6.4700447145121895,
+        "transparent": true
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 5.3577549124490425,
+        "transparent": true
+      },
+      {
+        "variant": "report-special",
+        "contrast": 6.701618401398807,
+        "transparent": true
+      },
+      {
+        "variant": "report-request",
+        "contrast": 5.473250081210842,
+        "transparent": true
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 5.3577549124490425,
+        "transparent": true
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 5.473250081210842,
+        "transparent": true
+      },
+      {
+        "variant": "neutral",
+        "contrast": 7.577663953533317,
+        "transparent": true
+      }
+    ],
+    "modal": {
+      "name": "modal-muestra-title",
+      "colorScheme": "light",
+      "color": [
+        23,
+        32,
+        51
+      ],
+      "inputColor": [
+        23,
+        32,
+        51
+      ],
+      "inputBg": [
+        241,
+        245,
+        249
+      ],
+      "border": "solid",
+      "x": 48,
+      "right": 720,
+      "closeSize": [
+        44,
+        44
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "tones": [
+        "rgb(23, 32, 51)",
+        "rgb(51, 65, 85)",
+        "rgb(71, 85, 105)",
+        "rgb(82, 97, 116)"
+      ]
+    },
+    "focus": {
+      "inside": true,
+      "outline": "solid",
+      "trapped": true
+    },
+    "escaped": true,
+    "closed": true,
+    "errors": [],
+    "blocked": []
+  },
+  {
+    "theme": "light",
+    "width": 1366,
+    "normal": [
+      {
+        "variant": "success",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 167.17356250316615
+      },
+      {
+        "variant": "warning",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 89.01123524589468
+      },
+      {
+        "variant": "view",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 96.27564593395363
+      },
+      {
+        "variant": "danger",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 61.98386886924693
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 81.6639455328972
+      },
+      {
+        "variant": "report-special",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 132.29134514396625
+      },
+      {
+        "variant": "report-request",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 190.24720760105785
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 81.6639455328972
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 69.89992846920518
+      },
+      {
+        "variant": "neutral",
+        "contrast": 15.682131750956525,
+        "outline": true,
+        "colorDistance": 113.37548235840057
+      }
+    ],
+    "hover": [
+      {
+        "variant": "success",
+        "contrast": 5.0155974781114745,
+        "transparent": true
+      },
+      {
+        "variant": "warning",
+        "contrast": 6.277960028133493,
+        "transparent": true
+      },
+      {
+        "variant": "view",
+        "contrast": 10.545575396248784,
+        "transparent": true
+      },
+      {
+        "variant": "danger",
+        "contrast": 6.4700447145121895,
+        "transparent": true
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 5.3577549124490425,
+        "transparent": true
+      },
+      {
+        "variant": "report-special",
+        "contrast": 6.701618401398807,
+        "transparent": true
+      },
+      {
+        "variant": "report-request",
+        "contrast": 5.473250081210842,
+        "transparent": true
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 5.3577549124490425,
+        "transparent": true
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 5.473250081210842,
+        "transparent": true
+      },
+      {
+        "variant": "neutral",
+        "contrast": 7.577663953533317,
+        "transparent": true
+      }
+    ],
+    "modal": {
+      "name": "modal-muestra-title",
+      "colorScheme": "light",
+      "color": [
+        23,
+        32,
+        51
+      ],
+      "inputColor": [
+        23,
+        32,
+        51
+      ],
+      "inputBg": [
+        241,
+        245,
+        249
+      ],
+      "border": "solid",
+      "x": 347,
+      "right": 1019,
+      "closeSize": [
+        44,
+        44
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "tones": [
+        "rgb(23, 32, 51)",
+        "rgb(51, 65, 85)",
+        "rgb(71, 85, 105)",
+        "rgb(82, 97, 116)"
+      ]
+    },
+    "focus": {
+      "inside": true,
+      "outline": "solid",
+      "trapped": true
+    },
+    "escaped": true,
+    "closed": true,
+    "errors": [],
+    "blocked": []
+  },
+  {
+    "theme": "dark",
+    "width": 375,
+    "normal": [
+      {
+        "variant": "success",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 167.17356250316615
+      },
+      {
+        "variant": "warning",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 89.01123524589468
+      },
+      {
+        "variant": "view",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 96.27564593395363
+      },
+      {
+        "variant": "danger",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 61.98386886924693
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 81.6639455328972
+      },
+      {
+        "variant": "report-special",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 132.29134514396625
+      },
+      {
+        "variant": "report-request",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 190.24720760105785
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 81.6639455328972
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 69.89992846920518
+      },
+      {
+        "variant": "neutral",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 113.37548235840057
+      }
+    ],
+    "hover": [
+      {
+        "variant": "success",
+        "contrast": 5.0155974781114745,
+        "transparent": true
+      },
+      {
+        "variant": "warning",
+        "contrast": 6.277960028133493,
+        "transparent": true
+      },
+      {
+        "variant": "view",
+        "contrast": 10.545575396248784,
+        "transparent": true
+      },
+      {
+        "variant": "danger",
+        "contrast": 6.4700447145121895,
+        "transparent": true
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 5.3577549124490425,
+        "transparent": true
+      },
+      {
+        "variant": "report-special",
+        "contrast": 6.701618401398807,
+        "transparent": true
+      },
+      {
+        "variant": "report-request",
+        "contrast": 5.473250081210842,
+        "transparent": true
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 5.3577549124490425,
+        "transparent": true
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 5.473250081210842,
+        "transparent": true
+      },
+      {
+        "variant": "neutral",
+        "contrast": 7.577663953533317,
+        "transparent": true
+      }
+    ],
+    "modal": {
+      "name": "modal-muestra-title",
+      "colorScheme": "dark",
+      "color": [
+        241,
+        245,
+        249
+      ],
+      "inputColor": [
+        241,
+        245,
+        249
+      ],
+      "inputBg": [
+        8,
+        22,
+        43
+      ],
+      "border": "solid",
+      "x": 16,
+      "right": 359,
+      "closeSize": [
+        44,
+        44
+      ],
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "tones": [
+        "rgb(241, 245, 249)",
+        "rgb(210, 220, 233)",
+        "rgb(184, 198, 217)",
+        "rgb(169, 187, 210)"
+      ]
+    },
+    "focus": {
+      "inside": true,
+      "outline": "solid",
+      "trapped": true
+    },
+    "escaped": true,
+    "closed": true,
+    "errors": [],
+    "blocked": []
+  },
+  {
+    "theme": "dark",
+    "width": 768,
+    "normal": [
+      {
+        "variant": "success",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 167.17356250316615
+      },
+      {
+        "variant": "warning",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 89.01123524589468
+      },
+      {
+        "variant": "view",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 96.27564593395363
+      },
+      {
+        "variant": "danger",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 61.98386886924693
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 81.6639455328972
+      },
+      {
+        "variant": "report-special",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 132.29134514396625
+      },
+      {
+        "variant": "report-request",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 190.24720760105785
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 81.6639455328972
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 69.89992846920518
+      },
+      {
+        "variant": "neutral",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 113.37548235840057
+      }
+    ],
+    "hover": [
+      {
+        "variant": "success",
+        "contrast": 5.0155974781114745,
+        "transparent": true
+      },
+      {
+        "variant": "warning",
+        "contrast": 6.277960028133493,
+        "transparent": true
+      },
+      {
+        "variant": "view",
+        "contrast": 10.545575396248784,
+        "transparent": true
+      },
+      {
+        "variant": "danger",
+        "contrast": 6.4700447145121895,
+        "transparent": true
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 5.3577549124490425,
+        "transparent": true
+      },
+      {
+        "variant": "report-special",
+        "contrast": 6.701618401398807,
+        "transparent": true
+      },
+      {
+        "variant": "report-request",
+        "contrast": 5.473250081210842,
+        "transparent": true
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 5.3577549124490425,
+        "transparent": true
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 5.473250081210842,
+        "transparent": true
+      },
+      {
+        "variant": "neutral",
+        "contrast": 7.577663953533317,
+        "transparent": true
+      }
+    ],
+    "modal": {
+      "name": "modal-muestra-title",
+      "colorScheme": "dark",
+      "color": [
+        241,
+        245,
+        249
+      ],
+      "inputColor": [
+        241,
+        245,
+        249
+      ],
+      "inputBg": [
+        8,
+        22,
+        43
+      ],
+      "border": "solid",
+      "x": 48,
+      "right": 720,
+      "closeSize": [
+        44,
+        44
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "tones": [
+        "rgb(241, 245, 249)",
+        "rgb(210, 220, 233)",
+        "rgb(184, 198, 217)",
+        "rgb(169, 187, 210)"
+      ]
+    },
+    "focus": {
+      "inside": true,
+      "outline": "solid",
+      "trapped": true
+    },
+    "escaped": true,
+    "closed": true,
+    "errors": [],
+    "blocked": []
+  },
+  {
+    "theme": "dark",
+    "width": 1366,
+    "normal": [
+      {
+        "variant": "success",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 167.17356250316615
+      },
+      {
+        "variant": "warning",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 89.01123524589468
+      },
+      {
+        "variant": "view",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 96.27564593395363
+      },
+      {
+        "variant": "danger",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 61.98386886924693
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 81.6639455328972
+      },
+      {
+        "variant": "report-special",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 132.29134514396625
+      },
+      {
+        "variant": "report-request",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 190.24720760105785
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 81.6639455328972
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 69.89992846920518
+      },
+      {
+        "variant": "neutral",
+        "contrast": 17.029250373218844,
+        "outline": true,
+        "colorDistance": 113.37548235840057
+      }
+    ],
+    "hover": [
+      {
+        "variant": "success",
+        "contrast": 5.0155974781114745,
+        "transparent": true
+      },
+      {
+        "variant": "warning",
+        "contrast": 6.277960028133493,
+        "transparent": true
+      },
+      {
+        "variant": "view",
+        "contrast": 10.545575396248784,
+        "transparent": true
+      },
+      {
+        "variant": "danger",
+        "contrast": 6.4700447145121895,
+        "transparent": true
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 5.3577549124490425,
+        "transparent": true
+      },
+      {
+        "variant": "report-special",
+        "contrast": 6.701618401398807,
+        "transparent": true
+      },
+      {
+        "variant": "report-request",
+        "contrast": 5.473250081210842,
+        "transparent": true
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 5.3577549124490425,
+        "transparent": true
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 5.473250081210842,
+        "transparent": true
+      },
+      {
+        "variant": "neutral",
+        "contrast": 7.577663953533317,
+        "transparent": true
+      }
+    ],
+    "modal": {
+      "name": "modal-muestra-title",
+      "colorScheme": "dark",
+      "color": [
+        241,
+        245,
+        249
+      ],
+      "inputColor": [
+        241,
+        245,
+        249
+      ],
+      "inputBg": [
+        8,
+        22,
+        43
+      ],
+      "border": "solid",
+      "x": 347,
+      "right": 1019,
+      "closeSize": [
+        44,
+        44
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "tones": [
+        "rgb(241, 245, 249)",
+        "rgb(210, 220, 233)",
+        "rgb(184, 198, 217)",
+        "rgb(169, 187, 210)"
+      ]
+    },
+    "focus": {
+      "inside": true,
+      "outline": "solid",
+      "trapped": true
+    },
+    "escaped": true,
+    "closed": true,
+    "errors": [],
+    "blocked": []
+  }
+]

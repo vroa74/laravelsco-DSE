@@ -3,7 +3,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const root = path.resolve('pruebas/prototipos/ajustes-modal');
-const evidence = path.resolve('pruebas/evidencias/ajustes-20261113/estilos');
+const evidence = path.resolve('pruebas/evidencias/ajustes-20261113/degradados');
+fs.mkdirSync(evidence, { recursive: true });
 const linear = n => (n /= 255) <= .04045 ? n / 12.92 : ((n + .055) / 1.055) ** 2.4;
 const lum = rgb => rgb.map(linear).reduce((v, n, i) => v + n * [.2126, .7152, .0722][i], 0);
 const ratio = (a, b) => (Math.max(lum(a), lum(b)) + .05) / (Math.min(lum(a), lum(b)) + .05);
@@ -25,7 +26,8 @@ const ratio = (a, b) => (Math.max(lum(a), lum(b)) + .05) / (Math.min(lum(a), lum
       const normal = await page.locator('[data-variante]').evaluateAll(els => els.map(el => {
         const c = getComputedStyle(el);
         const rgb = s => s.trim().startsWith('#') ? s.trim().slice(1).match(/../g).map(x => parseInt(x, 16)) : s.match(/[\d.]+/g).slice(0, 3).map(Number);
-        return { variant: el.dataset.variante, text: rgb(c.color), surface: rgb(c.getPropertyValue('--surface-elevated')), background: c.backgroundImage, border: c.borderWidth };
+        const inner = el.querySelector(':scope > .btn-outline-interior');
+        return { variant: el.dataset.variante, text: rgb(c.color), surface: rgb(c.getPropertyValue('--surface-elevated')), background: c.backgroundImage, border: c.borderWidth, padding: c.padding, hasInterior: !!inner, innerBackground: inner && getComputedStyle(inner).backgroundColor, from: rgb(c.getPropertyValue('--action-from')), to: rgb(c.getPropertyValue('--action-to')) };
       }));
       const hover = [];
       for (const button of await page.locator('[data-variante]').all()) {
@@ -33,9 +35,9 @@ const ratio = (a, b) => (Math.max(lum(a), lum(b)) + .05) / (Math.min(lum(a), lum
         const c = await button.evaluate(el => {
           const s = getComputedStyle(el), rgb = v => v.match(/[\d.]+/g).slice(0, 3).map(Number);
           const convert = hex => hex.trim().replace('#', '').match(/../g).map(x => parseInt(x, 16));
-          return { variant: el.dataset.variante, text: rgb(s.color), from: convert(s.getPropertyValue('--action-from')), to: convert(s.getPropertyValue('--action-to')) };
+          return { variant: el.dataset.variante, text: rgb(s.color), from: convert(s.getPropertyValue('--visible-from')), to: convert(s.getPropertyValue('--visible-to')), innerBackground: getComputedStyle(el.querySelector(':scope > .btn-outline-interior')).backgroundColor };
         });
-        hover.push({ variant: c.variant, contrast: Math.min(ratio(c.text, c.from), ratio(c.text, c.to)) });
+        hover.push({ variant: c.variant, contrast: Math.min(ratio(c.text, c.from), ratio(c.text, c.to)), transparent: c.innerBackground === 'rgba(0, 0, 0, 0)' });
       }
       await page.mouse.move(0, 0);
       await page.screenshot({ path: path.join(evidence, `botones-${theme}-${width}.png`), fullPage: true });
@@ -62,13 +64,13 @@ const ratio = (a, b) => (Math.max(lum(a), lum(b)) + .05) / (Math.min(lum(a), lum
       await page.getByRole('button', { name: 'Cerrar diálogo', exact: true }).click();
       await dialog.waitFor({ state: 'hidden' });
       const closed = await dialog.isHidden();
-      const item = { theme, width, normal: normal.map(c => ({ variant: c.variant, contrast: ratio(c.text, c.surface), outline: c.background.includes('linear-gradient') && c.border === '2px' })), hover, modal, focus, escaped, closed, errors, blocked };
+      const item = { theme, width, normal: normal.map(c => ({ variant: c.variant, contrast: ratio(c.text, c.surface), outline: c.background.includes('linear-gradient') && c.hasInterior && c.padding === '2px', colorDistance: Math.hypot(...c.from.map((n, i) => n - c.to[i])) })), hover, modal, focus, escaped, closed, errors, blocked };
       results.push(item);
       await page.close();
     }
   } finally { await browser.close(); }
   fs.writeFileSync(path.join(evidence, 'verificacion-render.json'), JSON.stringify(results, null, 2));
-  const failures = results.filter(r => r.errors.length || r.blocked.length || !r.escaped || !r.closed || !r.focus.inside || !r.focus.trapped || r.modal.colorScheme !== r.theme || r.modal.x < 0 || r.modal.right > r.width || r.modal.scrollWidth > r.modal.clientWidth || Math.min(...r.modal.closeSize) < 44 || r.normal.some(b => b.contrast < 4.5 || !b.outline) || r.hover.some(b => b.contrast < 4.5) || ratio(r.modal.inputColor, r.modal.inputBg) < 4.5);
+  const failures = results.filter(r => r.errors.length || r.blocked.length || !r.escaped || !r.closed || !r.focus.inside || !r.focus.trapped || r.modal.colorScheme !== r.theme || r.modal.x < 0 || r.modal.right > r.width || r.modal.scrollWidth > r.modal.clientWidth || Math.min(...r.modal.closeSize) < 44 || r.normal.some(b => b.contrast < 4.5 || !b.outline || b.colorDistance < 50) || r.hover.some(b => b.contrast < 4.5 || !b.transparent) || ratio(r.modal.inputColor, r.modal.inputBg) < 4.5);
   console.log(JSON.stringify({ cases: results.length, screenshots: results.length * 2, failures: failures.map(r => ({ theme: r.theme, width: r.width, hover: r.hover, modal: r.modal, focus: r.focus, escaped: r.escaped, closed: r.closed, errors: r.errors, blocked: r.blocked })) }, null, 2));
   process.exitCode = failures.length ? 1 : 0;
 })().catch(e => { console.error(e.message); process.exitCode = 1; });

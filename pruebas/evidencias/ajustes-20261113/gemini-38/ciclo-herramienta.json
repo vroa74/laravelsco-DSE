@@ -1,0 +1,31 @@
+{
+  "fecha": "2026-11-13T19:34:51.916Z",
+  "modeloSolicitado": "gemini/gemini-3.8-flash",
+  "modelosRespuesta": [
+    "gemini-3.8-flash",
+    "gemini-3.8-flash"
+  ],
+  "prueba": "Ciclo API: llamada sumar, ejecución local sintética y respuesta final",
+  "herramienta": "sumar",
+  "argumentos": {
+    "b": 2,
+    "a": 2
+  },
+  "resultadoLocal": 4,
+  "respuesta": "4",
+  "validado": true,
+  "duracionMs": 3414,
+  "usosDeclarados": [
+    {
+      "prompt_tokens": 84,
+      "completion_tokens": 17,
+      "total_tokens": 101
+    },
+    {
+      "prompt_tokens": 114,
+      "completion_tokens": 1,
+      "total_tokens": 115
+    }
+  ],
+  "limite": "No acredita edición ni ejecución de un trabajador completo en Orca/OpenCode. Sin archivos, código o datos de SCO enviados; sin cambios de configuración."
+}

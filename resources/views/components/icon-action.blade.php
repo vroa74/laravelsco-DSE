@@ -33,18 +33,18 @@
     $color = $variants[$variant] ?? $variants['neutral'];
     $dimensions = $sizes[$size] ?? $sizes['sm'];
 
-    $buttonClasses = 'btn-icon '.$color.' '.$dimensions;
+    $buttonClasses = 'btn-icon group '.$color.' '.$dimensions;
 @endphp
 
 @if ($href)
     <a href="{{ $href }}" title="{{ $label }}" aria-label="{{ $label }}"
         @if ($target) target="{{ $target }}" rel="noopener noreferrer" @endif
         {{ $attributes->merge(['class' => $buttonClasses]) }}>
-        <i class="{{ $icon }}" aria-hidden="true"></i>
+        <span class="btn-outline-interior"><i class="{{ $icon }}" aria-hidden="true"></i></span>
     </a>
 @else
     <button type="{{ $type }}" title="{{ $label }}" aria-label="{{ $label }}"
         {{ $attributes->merge(['class' => $buttonClasses]) }}>
-        <i class="{{ $icon }}" aria-hidden="true"></i>
+        <span class="btn-outline-interior"><i class="{{ $icon }}" aria-hidden="true"></i></span>
     </button>
 @endif
