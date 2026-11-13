@@ -875,3 +875,13 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 | `AGENTS.md`, `DOC/sistema/{README,estado-actual,fase-2}.md` | Fase2 autorizada expresamente, revisión visual aún abierta y matriz de roles confirmada por el CEO. |
 
 **Validación:** PHPUnit7.668s, Pint, Vite8.99s; solo SQLite :memory: y archivos sintéticos. BCRYPT4 solo en proceso de pruebas. Sin MySQL, vendor, datos reales o esquema modificados. Servidor real y aceptación estética pendientes; permisos completos/PDF no terminados. La expectativa inicial de saved fue corregida al identificar la clase efectiva que redirige tras foto.
+
+### Detalle de grupos contenido ("up000067")
+
+| Archivo | Cambio |
+| --- | --- |
+| `resources/views/livewire/user-groups/index.blade.php` | Encabezado, datos y pie del detalle en un solo panel; cierre derecho y contenido largo desplazable. |
+| `pruebas/Feature/DetalleGrupoModalTest.php`, `pruebas/herramientas/verificar-detalle-grupo.cjs` | DOM real, cierre del componente y seis capturas offline en ambos temas y tres tamaños. |
+| `AGENTS.md`, `DOC/sistema/{estado-actual,fase-2}.md` | Corrección menor documentada; Fase2 sigue en curso. |
+
+**Validación:**1 prueba/10 aserciones,57.748s; Pint; Vite11.69s; seis casos sin desbordamiento y cierre44px. SQLite en memoria, sin servidor real, MySQL, datos reales ni cambios de negocio. Las capturas exportadas no acreditan interacción contra el servidor.

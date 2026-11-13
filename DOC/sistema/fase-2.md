@@ -32,3 +32,7 @@ Evidencia: pruebas/evidencias/ajustes-20261113/fotos/{perfil-efectivo,reproducci
 - F2.2: comprobar endpoint efectivo de login, cuenta activa, limitación y desafío MFA cuando corresponda. No habilitar por inferencia correo/MFA obligatorio para todas las cuentas heredadas.
 - F2.3: auditoría mínima sin secretos, conservando actor e historia.
 - Mantener pendientes de fotos/servidor y PDF visibles; no cerrar fase por una lectura estática o un build.
+
+## Ajuste menor de grupos — up000067
+
+El detalle ya mantiene encabezado, datos y ambos cierres dentro del panel, con texto largo desplazable y cierre accesible. Una prueba/10 aserciones comprueba DOM y closeModal; seis casos offline en ambos temas y375/768/1366 sin desbordes. Build11.69s y Pint. Evidencia: pruebas/evidencias/ajustes-20261113/grupo-detalle. No altera permisos o membresías, no acredita servidor real y no cierra Fase2.

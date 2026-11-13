@@ -124,64 +124,54 @@
         </div>
     </div>
 
-    <!-- Modal de detalles del grupo -->
+    <!-- Modal de detalles: encabezado, datos y pie pertenecen al mismo panel. -->
     @if ($showModal && $selectedGroup)
-        <div class="fixed inset-0 z-50 overflow-y-auto" wire:click.self="closeModal">
-            <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-
-                <div
-                    class="inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full modal-elevated">
-                    <div class="px-4 pt-4 pb-3 sm:p-5 surface-panel">
-                        <div class="sm:flex sm:items-start">
-                            <div class="mt-2 text-center sm:mt-0 sm:ml-3 sm:text-left w-full">
-                                <h3 class="text-sm leading-5 font-medium mb-3 text-primary">
-                                    {{ $selectedGroup->name }}
-                                </h3>
-
-                                <div class="space-y-2">
-                                    @if ($selectedGroup->description)
-                                        <div>
-                                            <label
-                                                class="block text-xs font-medium text-primary">Descripción:</label>
-                                            <p class="mt-1 text-xs text-primary">
-                                                {{ $selectedGroup->description }}</p>
-                                        </div>
-                                    @endif
-
-                                    <div>
-                                        <label
-                                            class="block text-xs font-medium text-primary">Miembros:</label>
-                                        <span
-                                            class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
-                                            {{ $selectedGroup->members_count }} miembros
-                                        </span>
-                                    </div>
-
-                                    <div>
-                                        <label class="block text-xs font-medium text-primary">Creado
-                                            por:</label>
-                                        <p class="mt-1 text-xs text-primary">
-                                            {{ $selectedGroup->creator->name ?? 'N/A' }}</p>
-                                    </div>
-
-                                    <div>
-                                        <label
-                                            class="block text-xs font-medium text-primary">Estado:</label>
-                                        <span
-                                            class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium {{ $selectedGroup->active ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' }}">
-                                            {{ $selectedGroup->active ? 'Activo' : 'Inactivo' }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-4 sco-modal-backdrop"
+            wire:click.self="closeModal" role="dialog" aria-modal="true" aria-labelledby="group-detail-title"
+            x-data x-trap.inert.noscroll="true" x-on:keydown.escape.window="$wire.closeModal()">
+            <section class="relative flex w-full max-w-lg flex-col text-left modal-elevated" data-group-detail-panel>
+                <header class="flex shrink-0 items-center justify-between gap-4 border-b border-primary p-4">
+                    <h3 id="group-detail-title" class="min-w-0 break-words text-sm font-semibold text-primary">
+                        {{ $selectedGroup->name }}
+                    </h3>
+                    <button type="button" wire:click="closeModal" class="modal-close" aria-label="Cerrar detalle del grupo">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </header>
+                <dl class="min-h-0 space-y-4 overflow-y-auto break-words p-4">
+                    @if ($selectedGroup->description)
+                        <div>
+                            <dt class="text-xs font-medium text-primary">Descripción:</dt>
+                            <dd class="mt-1 text-xs text-secondary">{{ $selectedGroup->description }}</dd>
                         </div>
+                    @endif
+                    <div>
+                        <dt class="text-xs font-medium text-primary">Miembros:</dt>
+                        <dd class="mt-1">
+                            <span class="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
+                                {{ $selectedGroup->members_count }} miembros
+                            </span>
+                        </dd>
                     </div>
-                    <div class="flex items-center justify-end px-4 py-2 sm:px-5 surface-panel">
-                        <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cerrar" size="md" wire:click="closeModal" />
+                    <div>
+                        <dt class="text-xs font-medium text-primary">Creado por:</dt>
+                        <dd class="mt-1 text-xs text-secondary">{{ $selectedGroup->creator->name ?? 'N/A' }}</dd>
                     </div>
-                </div>
-            </div>
+                    <div>
+                        <dt class="text-xs font-medium text-primary">Estado:</dt>
+                        <dd class="mt-1">
+                            <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {{ $selectedGroup->active ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' }}">
+                                {{ $selectedGroup->active ? 'Activo' : 'Inactivo' }}
+                            </span>
+                        </dd>
+                    </div>
+                </dl>
+                <footer class="modal-actions shrink-0 border-t border-primary p-4">
+                    <x-icon-action variant="neutral" icon="fa-solid fa-xmark" label="Cerrar" size="md" wire:click="closeModal" />
+                </footer>
+            </section>
         </div>
     @endif
 
