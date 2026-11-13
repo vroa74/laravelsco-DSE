@@ -775,6 +775,16 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** mismos selectores y declaraciones antes/después de comentar CSS; Vite9.82s, Pint,23 pruebas/53 aserciones en SQLite :memory:,12 capturas en ambos temas y tres tamaños sin desbordamiento y con paneles alfa0.62. Sin backend ni MySQL. Se preserva fuera del commit el cambio previo del usuario en el velo claro. Aceptación estética pendiente.
 
+### Modelos nuevos y prioridad de Gemini ("up000059")
+
+| Archivo | Cambio |
+| --- | --- |
+| `AGENTS.md` | Registra prioridad temporal de Gemini y comprobación sintética de nuevas conexiones. |
+| `DOC/sistema/modelos-ia.md` | Identificadores, resultados, consumo observado y límites de la prueba. |
+| `pruebas/evidencias/integracion-modelos-20261113/pruebas-minimas.json` | Tres respuestas mínimas sin código ni datos del proyecto, incluyendo el primer intento inconcluso de Gemini. |
+
+**Validación:** Gemini3.1 Flash Lite y Qwen3.6-35B-A3B por DeepInfra respondieron HTTP200 y generaron report_ready con argumentos correctos.825 tokens declarados por API; costos y cuotas no medidos. Sin agentes completos, producto, MySQL, dependencias o configuración privada modificados; verificación documental y JSON, sin build/pruebas de aplicación.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.

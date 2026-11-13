@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-13T16:20:24.466Z",
+  "test": "2+2 y llamada sintética report_ready; sin código ni datos del proyecto",
+  "results": [
+    {
+      "label": "Gemini 3.1 Flash Lite",
+      "requestedModel": "gemini/gemini-3.1-flash-lite",
+      "http": 200,
+      "responseModel": "gemini-3.1-flash-lite",
+      "arguments": null,
+      "validated": false,
+      "elapsedMs": 2525,
+      "usage": {
+        "prompt_tokens": 97,
+        "completion_tokens": 124,
+        "total_tokens": 221,
+        "completion_tokens_details": {
+          "reasoning_tokens": 120
+        }
+      }
+    },
+    {
+      "label": "Qwen 3.6 35B A3B (DeepInfra)",
+      "requestedModel": "deepinfra/Qwen/Qwen3.6-35B-A3B",
+      "http": 200,
+      "responseModel": "Qwen/Qwen3.6-35B-A3B",
+      "tool": "report_ready",
+      "arguments": {
+        "suma": 4,
+        "estado": "OK"
+      },
+      "validated": true,
+      "elapsedMs": 2023,
+      "usage": {
+        "prompt_tokens": 322,
+        "completion_tokens": 40,
+        "total_tokens": 362,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": null
+        }
+      }
+    },
+    {
+      "label": "Gemini 3.1 Flash Lite",
+      "requestedModel": "gemini/gemini-3.1-flash-lite",
+      "http": 200,
+      "responseModel": "gemini-3.1-flash-lite",
+      "finishReason": "tool_calls",
+      "messageFields": [
+        "role",
+        "reasoning_content",
+        "tool_calls"
+      ],
+      "tool": "report_ready",
+      "arguments": {
+        "suma": 4,
+        "estado": "OK"
+      },
+      "validated": true,
+      "elapsedMs": 2700,
+      "maxOutputTokens": 384,
+      "usage": {
+        "prompt_tokens": 97,
+        "completion_tokens": 145,
+        "total_tokens": 242,
+        "completion_tokens_details": {
+          "reasoning_tokens": 125
+        }
+      }
+    }
+  ]
+}
