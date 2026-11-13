@@ -17,7 +17,7 @@ El azul marino translúcido y los degradados solicitados prevalecen sobre prefer
 | Reporte normal | report-normal | Azul |
 | Reporte especial | report-special | Violeta |
 | Reporte solicitud | report-request | Turquesa |
-| Exportar PDF | export-pdf | Magenta |
+| Exportar PDF | export-pdf | Cyan/azul |
 | Exportar CSV | export-csv | Azul petróleo |
 | Filtrar | info | Azul |
 | Cancelar / volver | neutral | Azul grisáceo |
@@ -136,3 +136,17 @@ El bloque de fondo institucional identifica sus tres capas, transparencia del es
 app.css contiene comentarios en sus78 bloques de selectores y explica variables, temas, estados y media queries. La comparación estructural comprueba que documentar CSS no cambia su funcionamiento. Las vistas efectivas usuarios/index y componentes/index usan ahora el panel-base compartido, retirando fondos opacos e interiores que tapaban el escudo. Se preservan datos, acciones, marcadores de categoría y navegación.
 
 Verificación:23 pruebas/53 aserciones con SQLite en memoria, build y12 capturas sintéticas en ambos temas y tres tamaños; sin desbordamiento y paneles alfa0.62. Evidencias bajo pruebas/evidencias/css-comentado y paneles-usuario-componentes. No es una validación sobre datos reales ni una certificación de accesibilidad integral.
+
+## Ajustes autorizados: outline, modales, fotos y reportes — 13/11/2026
+
+- Botones de acciones internas de tablas, edición y reportes: patrón Flowbite Gradient outline, con borde degradado, interior de superficie legible y hover relleno; mantener colores semánticos y tamaños compartidos. Intensificar naranja de editar; exportar PDF pasa a cyan/azul y nunca rojo destructivo. No cambiar por pantalla el mismo significado.
+- Todos los modales usan un panel semiblanco de alta presencia (aprox. alfa0.96), incluso con tema general oscuro, con texto/campos de contraste oscuro, borde, sombra y separadores definidos. Este es el estándar específico aprobado para modales y prevalece sobre el panel general marino alfa0.62. El escudo permanece tenue; un backdrop independiente oscurece la página sin atenuar el contenido del diálogo. El cierre debe ser visible, tener etiqueta accesible y objetivo táctil suficiente.
+- Un solo botón de búsqueda uniforme por sección de captura/edición RG (Descripción, Remitente, Seguimiento, Turnado). La futura distinción persona/grupo no se añade todavía. Conservar el selector canónico correspondiente y no inventar nuevos pasos de negocio.
+- La acción Agregar/Crear de un listado se ubica en su barra interna de filtros/búsqueda junto a acciones equivalentes, evitando dejarla separada en el encabezado de página. Mantener orden y responsive.
+- En listas de selección, distinguir nombre, cargo, dirección y correo mediante jerarquía y tonos grises compartidos con contraste suficiente; preservar información y permitir ajuste de línea, sin paletas locales por CRUD.
+- Fotos: alta, persistencia, listado, detalle y edición deben compartir un contrato de URL accesible; temporaryUrl solo describe la carga temporal. No borrar una foto anterior antes de completar con seguridad su sustitución. No reemplazar public/storage ni tocar datos reales por inferencia; reproducir con archivos y cuentas sintéticos.
+- Cada PDF identifica su tipo (normal, especial, solicitud) en filename y título. Mejoras de rendimiento deben medirse con el mismo fixture; no cachear PDFs de usuarios de forma compartida ni retirar contenido o fondo para aparentar velocidad.
+- El usuario autoriza desarrollar estos ajustes en paralelo: Gemini estilos comunes, DeepSeek backend de fotos, DeepInfra reportes y NVIDIA vistas. Cada archivo tiene un propietario; coordinación conserva revisión, documentación e integración. No anunciar trabajadores activos por una mera asignación. No arrancar la app con datos reales ni acceder a MySQL.
+
+
+Estado: encargos preparados, implementación y verificación pendientes. No usar una página base como prueba de un modal abierto.

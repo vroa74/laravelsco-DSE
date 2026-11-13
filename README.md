@@ -785,6 +785,17 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** Gemini3.1 Flash Lite y Qwen3.6-35B-A3B por DeepInfra respondieron HTTP200 y generaron report_ready con argumentos correctos.825 tokens declarados por API; costos y cuotas no medidos. Sin agentes completos, producto, MySQL, dependencias o configuración privada modificados; verificación documental y JSON, sin build/pruebas de aplicación.
 
+### Encargos de outline, modales, fotos y reportes ("up000060")
+
+| Archivo | Cambio |
+| --- | --- |
+| `AGENTS.md`, `DOC/sistema/estandar-visual.md` | Registra botones Flowbite Gradient outline, modales semiblancos, tonos por campo, barra interna y alcance autorizado de fotos/reportes. |
+| `DOC/sistema/ajustes-20261113.md` | Matriz de propietarios y contratos entre estilos, vistas, backend de foto y PDF. |
+| `pruebas/encargos/20261113-ajustes/` | Cuatro briefs pequeños y sin datos personales, con archivos exclusivos y evidencia exigida. |
+| Configuración compartida de OpenCode, fuera del repositorio | Dos aliases nuevos: Gemini y DeepInfra; respaldo SHA-256 y resto de configuración sin cambios. |
+
+**Validación:** lectura de reglas/plan/estado de Git; OpenCode CLI2.1.4 lista Gemini, DeepInfra, DeepSeek y NVIDIA; catálogo y llamadas mínimas previas verificados. Sin claves o configuraciones privadas versionadas. Arranque de trabajadores, implementación, build y pruebas de aplicación pendientes; no es una entrega de producto ni acredita ejecución en Codex Desktop/CLI. Recurso antiguo detenido/exited liberado con recibo. Sin MySQL ni datos reales.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.
