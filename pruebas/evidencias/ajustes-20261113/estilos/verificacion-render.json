@@ -1,0 +1,848 @@
+[
+  {
+    "theme": "light",
+    "width": 375,
+    "normal": [
+      {
+        "variant": "success",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "warning",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "view",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "danger",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "report-special",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "report-request",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "neutral",
+        "contrast": 15.682131750956525,
+        "outline": true
+      }
+    ],
+    "hover": [
+      {
+        "variant": "success",
+        "contrast": 5.0155974781114745
+      },
+      {
+        "variant": "warning",
+        "contrast": 6.277960028133493
+      },
+      {
+        "variant": "view",
+        "contrast": 9.164670612416774
+      },
+      {
+        "variant": "danger",
+        "contrast": 4.829404522659002
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 5.168555560022562
+      },
+      {
+        "variant": "report-special",
+        "contrast": 5.381521681093853
+      },
+      {
+        "variant": "report-request",
+        "contrast": 5.473250081210842
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 5.3577549124490425
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 7.266842816941486
+      },
+      {
+        "variant": "neutral",
+        "contrast": 4.758842787868666
+      }
+    ],
+    "modal": {
+      "name": "modal-muestra-title",
+      "colorScheme": "light",
+      "color": [
+        23,
+        32,
+        51
+      ],
+      "inputColor": [
+        23,
+        32,
+        51
+      ],
+      "inputBg": [
+        241,
+        245,
+        249
+      ],
+      "border": "solid",
+      "x": 16,
+      "right": 359,
+      "closeSize": [
+        44,
+        44
+      ],
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "tones": [
+        "rgb(23, 32, 51)",
+        "rgb(51, 65, 85)",
+        "rgb(71, 85, 105)",
+        "rgb(82, 97, 116)"
+      ]
+    },
+    "focus": {
+      "inside": true,
+      "outline": "solid",
+      "trapped": true
+    },
+    "escaped": true,
+    "closed": true,
+    "errors": [],
+    "blocked": []
+  },
+  {
+    "theme": "light",
+    "width": 768,
+    "normal": [
+      {
+        "variant": "success",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "warning",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "view",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "danger",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "report-special",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "report-request",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "neutral",
+        "contrast": 15.682131750956525,
+        "outline": true
+      }
+    ],
+    "hover": [
+      {
+        "variant": "success",
+        "contrast": 5.0155974781114745
+      },
+      {
+        "variant": "warning",
+        "contrast": 6.277960028133493
+      },
+      {
+        "variant": "view",
+        "contrast": 9.164670612416774
+      },
+      {
+        "variant": "danger",
+        "contrast": 4.829404522659002
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 5.168555560022562
+      },
+      {
+        "variant": "report-special",
+        "contrast": 5.381521681093853
+      },
+      {
+        "variant": "report-request",
+        "contrast": 5.473250081210842
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 5.3577549124490425
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 7.266842816941486
+      },
+      {
+        "variant": "neutral",
+        "contrast": 4.758842787868666
+      }
+    ],
+    "modal": {
+      "name": "modal-muestra-title",
+      "colorScheme": "light",
+      "color": [
+        23,
+        32,
+        51
+      ],
+      "inputColor": [
+        23,
+        32,
+        51
+      ],
+      "inputBg": [
+        241,
+        245,
+        249
+      ],
+      "border": "solid",
+      "x": 48,
+      "right": 720,
+      "closeSize": [
+        44,
+        44
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "tones": [
+        "rgb(23, 32, 51)",
+        "rgb(51, 65, 85)",
+        "rgb(71, 85, 105)",
+        "rgb(82, 97, 116)"
+      ]
+    },
+    "focus": {
+      "inside": true,
+      "outline": "solid",
+      "trapped": true
+    },
+    "escaped": true,
+    "closed": true,
+    "errors": [],
+    "blocked": []
+  },
+  {
+    "theme": "light",
+    "width": 1366,
+    "normal": [
+      {
+        "variant": "success",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "warning",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "view",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "danger",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "report-special",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "report-request",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 15.682131750956525,
+        "outline": true
+      },
+      {
+        "variant": "neutral",
+        "contrast": 15.682131750956525,
+        "outline": true
+      }
+    ],
+    "hover": [
+      {
+        "variant": "success",
+        "contrast": 5.0155974781114745
+      },
+      {
+        "variant": "warning",
+        "contrast": 6.277960028133493
+      },
+      {
+        "variant": "view",
+        "contrast": 9.164670612416774
+      },
+      {
+        "variant": "danger",
+        "contrast": 4.829404522659002
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 5.168555560022562
+      },
+      {
+        "variant": "report-special",
+        "contrast": 5.381521681093853
+      },
+      {
+        "variant": "report-request",
+        "contrast": 5.473250081210842
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 5.3577549124490425
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 7.266842816941486
+      },
+      {
+        "variant": "neutral",
+        "contrast": 4.758842787868666
+      }
+    ],
+    "modal": {
+      "name": "modal-muestra-title",
+      "colorScheme": "light",
+      "color": [
+        23,
+        32,
+        51
+      ],
+      "inputColor": [
+        23,
+        32,
+        51
+      ],
+      "inputBg": [
+        241,
+        245,
+        249
+      ],
+      "border": "solid",
+      "x": 347,
+      "right": 1019,
+      "closeSize": [
+        44,
+        44
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "tones": [
+        "rgb(23, 32, 51)",
+        "rgb(51, 65, 85)",
+        "rgb(71, 85, 105)",
+        "rgb(82, 97, 116)"
+      ]
+    },
+    "focus": {
+      "inside": true,
+      "outline": "solid",
+      "trapped": true
+    },
+    "escaped": true,
+    "closed": true,
+    "errors": [],
+    "blocked": []
+  },
+  {
+    "theme": "dark",
+    "width": 375,
+    "normal": [
+      {
+        "variant": "success",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "warning",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "view",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "danger",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "report-special",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "report-request",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "neutral",
+        "contrast": 17.029250373218844,
+        "outline": true
+      }
+    ],
+    "hover": [
+      {
+        "variant": "success",
+        "contrast": 5.0155974781114745
+      },
+      {
+        "variant": "warning",
+        "contrast": 6.277960028133493
+      },
+      {
+        "variant": "view",
+        "contrast": 9.164670612416774
+      },
+      {
+        "variant": "danger",
+        "contrast": 4.829404522659002
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 5.168555560022562
+      },
+      {
+        "variant": "report-special",
+        "contrast": 5.381521681093853
+      },
+      {
+        "variant": "report-request",
+        "contrast": 5.473250081210842
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 5.3577549124490425
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 7.266842816941486
+      },
+      {
+        "variant": "neutral",
+        "contrast": 4.758842787868666
+      }
+    ],
+    "modal": {
+      "name": "modal-muestra-title",
+      "colorScheme": "dark",
+      "color": [
+        241,
+        245,
+        249
+      ],
+      "inputColor": [
+        241,
+        245,
+        249
+      ],
+      "inputBg": [
+        8,
+        22,
+        43
+      ],
+      "border": "solid",
+      "x": 16,
+      "right": 359,
+      "closeSize": [
+        44,
+        44
+      ],
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "tones": [
+        "rgb(241, 245, 249)",
+        "rgb(210, 220, 233)",
+        "rgb(184, 198, 217)",
+        "rgb(169, 187, 210)"
+      ]
+    },
+    "focus": {
+      "inside": true,
+      "outline": "solid",
+      "trapped": true
+    },
+    "escaped": true,
+    "closed": true,
+    "errors": [],
+    "blocked": []
+  },
+  {
+    "theme": "dark",
+    "width": 768,
+    "normal": [
+      {
+        "variant": "success",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "warning",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "view",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "danger",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "report-special",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "report-request",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "neutral",
+        "contrast": 17.029250373218844,
+        "outline": true
+      }
+    ],
+    "hover": [
+      {
+        "variant": "success",
+        "contrast": 5.0155974781114745
+      },
+      {
+        "variant": "warning",
+        "contrast": 6.277960028133493
+      },
+      {
+        "variant": "view",
+        "contrast": 9.164670612416774
+      },
+      {
+        "variant": "danger",
+        "contrast": 4.829404522659002
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 5.168555560022562
+      },
+      {
+        "variant": "report-special",
+        "contrast": 5.381521681093853
+      },
+      {
+        "variant": "report-request",
+        "contrast": 5.473250081210842
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 5.3577549124490425
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 7.266842816941486
+      },
+      {
+        "variant": "neutral",
+        "contrast": 4.758842787868666
+      }
+    ],
+    "modal": {
+      "name": "modal-muestra-title",
+      "colorScheme": "dark",
+      "color": [
+        241,
+        245,
+        249
+      ],
+      "inputColor": [
+        241,
+        245,
+        249
+      ],
+      "inputBg": [
+        8,
+        22,
+        43
+      ],
+      "border": "solid",
+      "x": 48,
+      "right": 720,
+      "closeSize": [
+        44,
+        44
+      ],
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "tones": [
+        "rgb(241, 245, 249)",
+        "rgb(210, 220, 233)",
+        "rgb(184, 198, 217)",
+        "rgb(169, 187, 210)"
+      ]
+    },
+    "focus": {
+      "inside": true,
+      "outline": "solid",
+      "trapped": true
+    },
+    "escaped": true,
+    "closed": true,
+    "errors": [],
+    "blocked": []
+  },
+  {
+    "theme": "dark",
+    "width": 1366,
+    "normal": [
+      {
+        "variant": "success",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "warning",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "view",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "danger",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "report-special",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "report-request",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 17.029250373218844,
+        "outline": true
+      },
+      {
+        "variant": "neutral",
+        "contrast": 17.029250373218844,
+        "outline": true
+      }
+    ],
+    "hover": [
+      {
+        "variant": "success",
+        "contrast": 5.0155974781114745
+      },
+      {
+        "variant": "warning",
+        "contrast": 6.277960028133493
+      },
+      {
+        "variant": "view",
+        "contrast": 9.164670612416774
+      },
+      {
+        "variant": "danger",
+        "contrast": 4.829404522659002
+      },
+      {
+        "variant": "report-normal",
+        "contrast": 5.168555560022562
+      },
+      {
+        "variant": "report-special",
+        "contrast": 5.381521681093853
+      },
+      {
+        "variant": "report-request",
+        "contrast": 5.473250081210842
+      },
+      {
+        "variant": "export-pdf",
+        "contrast": 5.3577549124490425
+      },
+      {
+        "variant": "export-csv",
+        "contrast": 7.266842816941486
+      },
+      {
+        "variant": "neutral",
+        "contrast": 4.758842787868666
+      }
+    ],
+    "modal": {
+      "name": "modal-muestra-title",
+      "colorScheme": "dark",
+      "color": [
+        241,
+        245,
+        249
+      ],
+      "inputColor": [
+        241,
+        245,
+        249
+      ],
+      "inputBg": [
+        8,
+        22,
+        43
+      ],
+      "border": "solid",
+      "x": 347,
+      "right": 1019,
+      "closeSize": [
+        44,
+        44
+      ],
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "tones": [
+        "rgb(241, 245, 249)",
+        "rgb(210, 220, 233)",
+        "rgb(184, 198, 217)",
+        "rgb(169, 187, 210)"
+      ]
+    },
+    "focus": {
+      "inside": true,
+      "outline": "solid",
+      "trapped": true
+    },
+    "escaped": true,
+    "closed": true,
+    "errors": [],
+    "blocked": []
+  }
+]

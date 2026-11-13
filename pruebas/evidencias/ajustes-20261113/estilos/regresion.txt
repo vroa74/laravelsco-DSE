@@ -1,0 +1,32 @@
+
+   PASS  Tests\Feature\IconActionTest
+  ✓ it renderiza un botón de acción solo con icono y etiqueta accesible                                          6.72s
+  ✓ it renderiza un enlace cuando recibe href                                                                    0.18s
+  ✓ it renderiza el botón de mostrar u ocultar contraseña                                                        0.28s
+  ✓ it usa el escudo del estado de Campeche como fondo de la sección auth                                        2.27s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('reportgral')                              6.75s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('rg.create')                               2.15s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('user-groups.index')                       2.03s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('user-groups.create')                      1.64s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('agen.index')                              4.07s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('catalogos')                               3.82s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('usuarios')                                0.29s
+  ✓ it renderiza las vistas principales del sistema sin errores with ('dashboard')                               0.66s
+  ✓ it muestra las acciones de las barras como botones de icono                                                  0.14s
+
+   PASS  Tests\Feature\ResponsiveLayoutTest
+  ✓ it define tablas adaptables sin ocultar el desbordamiento del documento                                      0.18s
+  ✓ it no usa contenedores con desplazamiento lateral en las vistas                                              0.15s
+  ✓ it convierte las tablas de datos en tablas apiladas con etiquetas with ('livewire/reportesgral/index.blade.… 0.10s
+  ✓ it convierte las tablas de datos en tablas apiladas con etiquetas with ('livewire/rg/index.blade.php')       0.10s
+  ✓ it convierte las tablas de datos en tablas apiladas con etiquetas with ('livewire/usuarios/index.blade.php'… 0.13s
+  ✓ it convierte las tablas de datos en tablas apiladas con etiquetas with ('livewire/people.blade.php')         0.09s
+  ✓ it convierte las tablas de datos en tablas apiladas con etiquetas with ('livewire/user-groups/index.blade.p… 0.07s
+  ✓ it renderiza el listado de correspondencia como tabla apilada                                                0.15s
+  ✓ it exporta las tablas apiladas en el CSS compilado                                                           0.07s
+
+   PASS  Pruebas\Feature\EstilosOutlineModalTest
+  ✓ exporta componentes reales con dialogo etiquetado                                                            0.66s
+
+  Tests:    23 passed (51 assertions)
+  Duration: 33.27s

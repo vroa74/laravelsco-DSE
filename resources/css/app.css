@@ -125,15 +125,51 @@ body {
   background-color: transparent;
   box-shadow: none;
 }
-/* SUPERFICIE ELEVADA: .surface-elevated y .modal-elevated dan fondo sólido y texto legible a diálogos o capas superpuestas. */
-.surface-elevated, .modal-elevated {
+/* SUPERFICIE DE CAMPO: .surface-elevated conserva el fondo sólido del tema general. */
+.surface-elevated {
   background-color: var(--surface-elevated);
   color: var(--text-primary);
 }
-/* DIÁLOGO ELEVADO: .modal-elevated añade radio y sombra de mayor profundidad, sin abrir ni cerrar el modal. */
+/* DIÁLOGO TEMÁTICO: .modal-elevated usa un panel más claro que el fondo de página y borde definido.
+   El panel al98% delimita el diálogo sin atenuar texto ni controles.
+   En oscuro sigue el azul marino de la referencia aprobada del gestor de miembros. */
 .modal-elevated {
+  --surface-panel: transparent;
+  --surface-elevated: #f1f5f9;
+  --modal-panel: rgb(228 237 247 / .98);
+  --text-primary: #172033;
+  --text-secondary: #334155;
+  --text-muted: #475569;
+  --identity-email: #526174;
+  --border-primary: #64748b;
+  --border-focus: #1d4ed8;
+  --border-error: #b91c1c;
+  --state-hover: rgb(15 23 42 / .07);
+  color-scheme: light;
+  color: var(--text-primary);
+  background-color: var(--modal-panel);
+  background-image: none;
+  border: 1px solid var(--border-primary);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
+  box-shadow: 0 24px 64px rgb(2 6 23 / .48), 0 0 0 1px rgb(255 255 255 / .7);
+  min-width: 0;
+  max-height: calc(100dvh - 3rem);
+  overflow-y: auto;
+}
+/* MODAL OSCURO: azul marino de la referencia aprobada; sustituye el panel blanco rechazado.
+   Mantiene letras claras, campos oscuros, borde perceptible y calendario nativo oscuro. */
+html.dark .modal-elevated {
+  --surface-elevated: #08162b;
+  --modal-panel: rgb(8 22 43 / .98);
+  --text-primary: #f1f5f9;
+  --text-secondary: #d2dce9;
+  --text-muted: #b8c6d9;
+  --identity-email: #a9bbd2;
+  --border-primary: #7289a8;
+  --border-focus: #a9ccff;
+  --border-error: #fca5a5;
+  --state-hover: rgb(169 204 255 / .12);
+  color-scheme: dark;
 }
 /* SOMBRA SUAVE: .shadow-soft da una elevación mínima al elemento que la utiliza. */
 .shadow-soft {
@@ -211,7 +247,7 @@ body {
   color: var(--text-primary);
 }
 
-/* Variante = color; componente = tamaño. Sin relleno ni botones anidados. */
+/* Variante = color; componente = tamaño. Contorno degradado sin botones anidados. */
 /* BOTONES COMPARTIDOS: .btn-base y .btn-icon centran contenido y consumen los colores --action-* de su variante; comparten borde, radio y transiciones. La variante no decide el tamaño. */
 .btn-base, .btn-icon {
   display: inline-flex;
@@ -219,13 +255,15 @@ body {
   justify-content: center;
   gap: .5rem;
   flex-shrink: 0;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-radius: .5rem;
   font-weight: 600;
   line-height: 1.25;
-  background-image: linear-gradient(135deg, var(--action-from), var(--action-to));
-  color: var(--action-text, #fff);
-  transition: filter 150ms ease, transform 150ms ease;
+  /* Primera capa: interior del tema; segunda: borde degradado visible, patrón outline. */
+  background: linear-gradient(var(--surface-elevated), var(--surface-elevated)) padding-box,
+    linear-gradient(135deg, var(--action-from), var(--action-to)) border-box;
+  color: var(--text-primary);
+  transition: background-color 150ms ease, color 150ms ease, transform 150ms ease;
 }
 /* BOTÓN CON TEXTO: .btn-base fija relleno, altura mínima de40px y letra de14px. */
 .btn-base {
@@ -249,9 +287,11 @@ body {
   font-size: .875rem;
   line-height: 1;
 }
-/* BOTÓN EN HOVER: ilumina el degradado de botones habilitados al pasar el puntero; el filtro también afecta su contenido. */
+/* BOTÓN EN HOVER: rellena el interior con el degradado semántico y usa su tinta contrastada; el texto no se filtra. */
 :is(.btn-base, .btn-icon):hover:not(:disabled) {
-  filter: brightness(1.12);
+  background: linear-gradient(135deg, var(--action-from), var(--action-to)) padding-box,
+    linear-gradient(135deg, var(--action-from), var(--action-to)) border-box;
+  color: var(--action-text, #fff);
 }
 /* BOTÓN PRESIONADO: desplaza1px el botón habilitado mientras se pulsa; no ejecuta ninguna acción de negocio. */
 :is(.btn-base, .btn-icon):active:not(:disabled) {
@@ -269,13 +309,13 @@ body {
 }
 /* ACCIÓN VERDE: .btn-success define el degradado de agregar y guardar; combinar con .btn-base o .btn-icon. */
 .btn-success {
-  --action-from: #166534;
-  --action-to: #06705a;
+  --action-from: #15803d;
+  --action-to: #0f766e;
 }
-/* ACCIÓN NARANJA: .btn-warning identifica editar y usa texto oscuro sobre el degradado claro; combinar con el tamaño de botón. */
+/* ACCIÓN NARANJA INTENSA: .btn-warning identifica editar; en hover usa tinta oscura sobre naranja vivo. */
 .btn-warning {
-  --action-from: #ffb24c;
-  --action-to: #f18b33;
+  --action-from: #f97316;
+  --action-to: #f59e0b;
   --action-text: #281407;
 }
 /* ACCIÓN AMARILLA: .btn-view identifica ver o mostrar detalles; no debe reutilizarse para editar. */
@@ -286,28 +326,28 @@ body {
 }
 /* ACCIÓN DESTRUCTIVA ROJA: .btn-danger identifica eliminar; no usar esta variante para exportar documentos. */
 .btn-danger {
-  --action-from: #b91c1c;
-  --action-to: #991b32;
+  --action-from: #dc2626;
+  --action-to: #be123c;
 }
 /* ACCIÓN AZUL: .btn-info y .btn-primary sirven a acciones informativas; .btn-report es alias de compatibilidad y .btn-report-normal identifica el reporte normal. Todas definen solo colores. */
 .btn-info, .btn-primary, .btn-report, .btn-report-normal {
-  --action-from: #1d4ed8;
-  --action-to: #075985;
+  --action-from: #2563eb;
+  --action-to: #0369a1;
 }
 /* REPORTE ESPECIAL: .btn-report-special define un degradado violeta para distinguirlo del normal y de solicitud. */
 .btn-report-special {
-  --action-from: #6941b4;
-  --action-to: #573084;
+  --action-from: #7c3aed;
+  --action-to: #9333ea;
 }
 /* REPORTE DE SOLICITUD: .btn-report-request define el degradado turquesa del tercer tipo de reporte. */
 .btn-report-request {
   --action-from: #0f766e;
   --action-to: #155e75;
 }
-/* EXPORTACIÓN PDF: .btn-export-pdf define magenta para exportar; se distingue del rojo de eliminar. */
+/* EXPORTACIÓN PDF: .btn-export-pdf usa cyan a azul; sustituye el magenta rechazado y nunca indica peligro. */
 .btn-export-pdf {
-  --action-from: #9d2861;
-  --action-to: #7b2358;
+  --action-from: #0e7490;
+  --action-to: #1d4ed8;
 }
 /* EXPORTACIÓN CSV: .btn-export-csv define azul petróleo para exportar tablas. */
 .btn-export-csv {
@@ -316,8 +356,8 @@ body {
 }
 /* ACCIÓN SECUNDARIA: .btn-neutral, .btn-secondary y .btn-ghost comparten degradado azul grisáceo para cancelar o volver; el alias ghost aquí también lleva degradado, no es transparente. */
 .btn-neutral, .btn-secondary, .btn-ghost {
-  --action-from: #354c6b;
-  --action-to: #233950;
+  --action-from: #64748b;
+  --action-to: #475569;
 }
 
 /* Tablas transparentes en un único panel, también como tarjetas móviles. */
@@ -511,6 +551,83 @@ html.dark .bg-institucional__gradient-overlay {
 .sco-ui ::selection {
   background: #1d4ed8;
   color: #fff;
+}
+
+/* FONDO DE MODAL: .sco-modal-backdrop oscurece la página detrás del diálogo con opacidad controlada; no atenúa el contenido del modal. */
+.sco-modal-backdrop {
+  background-color: var(--modal-backdrop-bg, rgba(2, 6, 23, 0.5));
+}
+
+/* CIERRE DE MODAL: .modal-close da contraste propio a la X y un objetivo táctil de44px, sin heredar tintas atenuadas. */
+.modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  border-radius: .5rem;
+  color: var(--text-primary);
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border-primary);
+  transition: color 150ms ease, background-color 150ms ease;
+}
+/* CIERRE EN HOVER: delimita el control al pasar el puntero sin perder contraste. */
+.modal-close:hover {
+  color: var(--text-primary);
+  background-color: var(--state-hover);
+}
+/* CIERRE CON TECLADO: contorno separado visible durante la navegación por Tab. */
+.modal-close:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* CAMPOS DE IDENTIDAD EN LISTAS DE SELECCIÓN: jerarquía visual compartida para nombre, cargo, dirección y correo. */
+/* Nombre: peso seminegrita, color primario. */
+.sco-ui .identity-name, .identity-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+/* Cargo: tamaño menor, tono medio. */
+.sco-ui .identity-role, .identity-role {
+  font-size: .8125rem;
+  color: var(--text-secondary);
+}
+/* Dirección: tono auxiliar distinto del cargo; permite ajuste de línea. */
+.sco-ui .identity-direction, .identity-direction {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  white-space: normal;
+  word-break: break-word;
+}
+/* Correo: tamaño menor, tono apagado, monospace opcional. */
+.sco-ui .identity-email, .identity-email {
+  font-size: .75rem;
+  color: var(--identity-email, var(--text-muted));
+  font-family: inherit;
+}
+/* DIÁLOGOS EN MÓVIL: limita el ancho con margen lateral sin sustituir maxWidth de escritorio. */
+@media (max-width: 639px) {
+  /* PANEL MÓVIL: evita que w-full más márgenes sobresalga de la pantalla. */
+  .modal-elevated {
+    max-width: calc(100vw - 2rem);
+  }
+}
+/* ACCIONES DEL DIÁLOGO: permite envolver botones de pie en móvil sin recortar acciones. */
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: .5rem;
+}
+/* MOVIMIENTO REDUCIDO: elimina animación decorativa de controles compartidos si el sistema lo solicita. */
+@media (prefers-reduced-motion: reduce) {
+  /* CONTROLES SIN TRANSICIÓN: el estado sigue siendo visible de inmediato. */
+  .btn-base, .btn-icon, .modal-close {
+    transition: none;
+  }
 }
 /* ESPERA DE ALPINE: oculta elementos con x-cloak mientras Alpine no los haya inicializado; cuando Alpine elimina el atributo, esta regla deja de afectarles. */
 [x-cloak] {

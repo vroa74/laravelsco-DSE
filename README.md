@@ -826,3 +826,16 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 | `pruebas/herramientas/evaluar-gemini-textos.mjs`, `pruebas/evidencias/ajustes-20261113/evaluacion/` | Tarea útil de texto para Gemini, respuesta y versión revisada sin aplicación automática. |
 
 **Validación:** recibos de detención y liberación de dos intentos Gemini; nuevo intento PDF DeepSeek recibido. Gemini texto HTTP200/JSON válido en4.669s,772 tokens declarados; revisión humana de semántica y node --check. Sin producto modificado, build/pruebas de aplicación, MySQL ni datos reales. Estilos asumidos por Codex y vistas/PDF pendientes; no se declara cierre general.
+
+
+### Contornos degradados y modal azul marino ("up000063")
+
+| Archivo | Cambio |
+| --- | --- |
+| `resources/css/app.css` | Gradient outline, naranja intenso y PDF cyan/azul; modal marino en oscuro según última referencia del CEO, pares temáticos y cierre de44px. |
+| `resources/views/components/modal.blade.php`, `dialog-modal.blade.php` | Backdrop compartido, título accesible, cierre visible y pie adaptable. |
+| `pruebas/Feature/EstilosOutlineModalTest.php`, `pruebas/herramientas/verificar-outline-modal.cjs` | Exportación de componentes reales y revisión offline con Alpine/Livewire local, sin transporte de servidor. |
+| `pruebas/evidencias/ajustes-20261113/estilos/` | Build, regresión, mediciones y12 capturas sintéticas. |
+| `AGENTS.md`, `DOC/sistema/` | Sustituye el panel blanco rechazado y registra validación, límites y estado real de trabajadores. |
+
+**Validación:** Vite10.84s, Pint,23 pruebas/51 aserciones en SQLite :memory:;6 escenarios offline en ambos temas y375/768/1366 sin errores ni desbordamiento. Contraste mínimo de botones4.758:1; Tab, Escape y cierre comprobados con modal abierto. Sin MySQL ni datos reales. Aceptación estética y revisión completa de vistas/fotos/PDF pendientes; no se declara uniformidad integral. Velo claro previo del usuario y parches ajenos fuera del commit; public/build no versionado.
