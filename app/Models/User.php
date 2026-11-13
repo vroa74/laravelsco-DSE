@@ -18,6 +18,12 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    /** Solo el estado activo explícito permite iniciar o mantener una sesión. */
+    public function cuentaActiva(): bool
+    {
+        return in_array($this->status, [true, 1, '1'], true);
+    }
+
     use HasApiTokens;
 
     /** @use HasFactory<UserFactory> */

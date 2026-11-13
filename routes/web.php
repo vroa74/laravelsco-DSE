@@ -18,7 +18,8 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login')->middleware('guest');
 
-Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+Route::post('/login', [LoginController::class, 'login'])
+    ->middleware(['guest', 'throttle:login'])->name('login.post');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // Si alguien abre /logout por GET (enlace directo, recarga, botón atrás) se envía a la página pública
 Route::get('/logout', function () {

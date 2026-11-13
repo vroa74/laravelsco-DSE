@@ -4,6 +4,7 @@ Fase activa: **2 — identidad, autenticación y autorización**, autorizada exp
 
 - Cerrado en código y pruebas sintéticas: estilos comunes y Gradient outline hasta up000065; perfil/fotos efectivos en up000066.
 - Detalle de grupos corregido en up000067: estructura y seis escenarios visuales sintéticos verificados; servidor real pendiente.
+- Autenticación web verificada en up000068: estado activo, limitadores y MFA existente; servidor real pendiente.
 - En curso: aplicación de permisos a rutas/acciones/consultas/reportes/archivos.
 - Pendiente: pruebas de servidor web real autorizadas, aceptación estética final, títulos/rendimiento PDF y demás entregas del plan. Ninguna mejora de rendimiento PDF acreditada.
 - Datos: solo SQLite :memory: sintético. Sin autorización para MySQL, DDL real, importaciones o SQL histórico como fixture.

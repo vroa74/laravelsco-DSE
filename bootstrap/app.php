@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\CheckUserType;
+use App\Http\Middleware\EnsureAccountIsActive;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,9 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->web(append: [EnsureAccountIsActive::class]);
         $middleware->alias([
-            'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-            'check.user.type' => \App\Http\Middleware\CheckUserType::class,
+            'guest' => RedirectIfAuthenticated::class,
+            'check.user.type' => CheckUserType::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

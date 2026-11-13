@@ -4,48 +4,28 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 class LoginController extends Controller
 {
     /**
      * Handle a login request to the application.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request, AuthenticatedSessionController $sessions)
     {
-        $credentials = $request->only('email', 'rfc', 'password');
-
-        // Buscar usuario por email y RFC
-        $user = \App\Models\User::where('email', $credentials['email'])
-            ->where('rfc', $credentials['rfc'])
-            ->first();
-
-        if (! $user) {
-            throw ValidationException::withMessages([
-                'email' => ['Las credenciales proporcionadas no coinciden con nuestros registros.'],
-            ]);
-        }
-
-        // Intentar autenticar con email y password
-        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
-            $request->session()->regenerate();
-
-            return redirect()->intended(config('fortify.home'));
-        }
-
-        throw ValidationException::withMessages([
-            'password' => ['La contraseña proporcionada es incorrecta.'],
-        ]);
+        // Conserva el formulario propio, usando el pipeline de sesión y MFA de Fortify.
+        return $sessions->store($request);
     }
 
     /**
      * Log the user out of the application.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function logout(Request $request)
     {

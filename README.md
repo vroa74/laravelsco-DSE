@@ -885,3 +885,14 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 | `AGENTS.md`, `DOC/sistema/{estado-actual,fase-2}.md` | Corrección menor documentada; Fase2 sigue en curso. |
 
 **Validación:**1 prueba/10 aserciones,57.748s; Pint; Vite11.69s; seis casos sin desbordamiento y cierre44px. SQLite en memoria, sin servidor real, MySQL, datos reales ni cambios de negocio. Las capturas exportadas no acreditan interacción contra el servidor.
+
+### Acceso efectivo y MFA ("up000068")
+
+| Archivo | Cambio |
+| --- | --- |
+| `app/Actions/Fortify/AuthenticateUser.php`, `app/Http/{Controllers/Auth/LoginController,Requests/LoginRequest}.php`, `app/Providers/FortifyServiceProvider.php` | Un solo contrato email/RFC/contraseña con pipeline Fortify, estado activo y limitadores efectivos. |
+| `app/Http/Middleware/EnsureAccountIsActive.php`, `bootstrap/app.php`, `routes/web.php`, `app/Models/User.php` | Estado explícito, sesiones inactivas invalidadas y rechazo de bajas durante MFA; guest en login. |
+| `pruebas/Feature/EffectiveAuthenticationTest.php`, `pruebas/evidencias/fase-2/autenticacion/` | Credenciales, estado, sesión, MFA real, recuperación y límites con fixtures sintéticos. |
+| `AGENTS.md`, `DOC/sistema/{fase-2,estado-actual}.md` | Alcance y evidencia de F2.2; Fase2 permanece abierta. |
+
+**Validación:**12 pruebas/102 aserciones,5.976s; regresión fotos27/129 y login existente3/5; Pint limpio. SQLite en memoria; sin MySQL, servidor real, migraciones ni dependencias cambiadas. No se exige MFA/correo nuevo a todas las cuentas; permisos y auditoría continúan pendientes. Sin frontend modificado: no requiere build.

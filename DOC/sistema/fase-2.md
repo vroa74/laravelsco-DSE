@@ -29,10 +29,20 @@ Evidencia: pruebas/evidencias/ajustes-20261113/fotos/{perfil-efectivo,reproducci
 ## Siguiente trabajo de la fase
 
 - F2.1: Policies y alcance único por recurso; controles del servidor en rutas y Livewire, incluidos exports/descargas. Matriz anterior ya confirmada; no volver a preguntarla.
-- F2.2: comprobar endpoint efectivo de login, cuenta activa, limitación y desafío MFA cuando corresponda. No habilitar por inferencia correo/MFA obligatorio para todas las cuentas heredadas.
+- F2.2: implementado y probado en up000068 según el bloque siguiente; validación del servidor real pendiente.
 - F2.3: auditoría mínima sin secretos, conservando actor e historia.
 - Mantener pendientes de fotos/servidor y PDF visibles; no cerrar fase por una lectura estática o un build.
 
 ## Ajuste menor de grupos — up000067
 
 El detalle ya mantiene encabezado, datos y ambos cierres dentro del panel, con texto largo desplazable y cierre accesible. Una prueba/10 aserciones comprueba DOM y closeModal; seis casos offline en ambos temas y375/768/1366 sin desbordes. Build11.69s y Pint. Evidencia: pruebas/evidencias/ajustes-20261113/grupo-detalle. No altera permisos o membresías, no acredita servidor real y no cierra Fase2.
+
+## Autenticación efectiva — up000068
+
+POST/login efectivo es Auth/LoginController@login y login.post apunta a esa URI. El controlador conserva el LoginRequest propio (ahora subtipo de Fortify) y usa el pipeline del paquete para desafío MFA, autenticación y regeneración. El proveedor enlaza el mismo request a Fortify, evitando un recorrido alterno sin RFC. AuthenticateUser verifica email, RFC, contraseña y estado1 explícito; devuelve fallo genérico y utiliza Timebox del framework. No altera cuentas ni formato de RFC.
+
+Se activan los limitadores ya declarados:5/minuto por correo+IP y por desafío+IP, claves SHA-256 sin identidad legible. El middleware web rechaza sesiones inactivas antes del controlador y comprueba de nuevo el estado al completar MFA; invalida sesión/token y limpia la caché del guard actual. No se habilita correo verificado obligatorio ni MFA obligatorio para cuentas sin confirmación existente.
+
+Pruebas:12/102 en5.976s; regresión fotos27/129 y autenticación anterior3/5; Pint limpio. Antes del parche9 fallos reproducidos: cuenta inactiva admitida, MFA omitido, sin throttling/guest, error diferente para contraseña. El acceso indebidamente permitido llegó a una tabla ausente del fixture; ese500 no se presenta como defecto de la base real. Un test posterior se ajustó al destino intended /rg y se corrigió la caché Sanctum tras logout.
+
+Fronteras: credenciales HTTP→LoginRequest/consulta parametrizada/Hash; sesión→estado del usuario; códigos→Fortify sin implementación criptográfica propia. Datos y archivos sintéticos bajo /pruebas, SQLite :memory:; evidencia en pruebas/evidencias/fase-2/autenticacion. Sin MySQL, schema, vendor, .env o servidor real. Esto verifica sesiones web; autorización de recursos, tokens API y auditoría siguen en F2.1/F2.3.

@@ -1,0 +1,8 @@
+
+   PASS  Tests\Feature\AuthenticationTest
+  ✓ login screen can be rendered                                                                                12.37s
+  ✓ users can authenticate using the login screen                                                                1.82s
+  ✓ users cannot authenticate with invalid password                                                              0.27s
+
+  Tests:    3 passed (5 assertions)
+  Duration: 18.81s
