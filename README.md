@@ -742,6 +742,16 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** build Vite correcto; Pint y detector Impeccable sin incidencias en el alcance ejecutado; 34 pruebas con112 aserciones en SQLite `:memory:` (22/45 UI,11/60 guardias,1/7 exportación). Capturas de siete páginas y componentes compartidos en ambos temas y tres tamaños:48, sin desbordamiento. Medición de contraste y foco en componentes; no sustituye aceptación estética ni prueba dinámica integral. Sin MySQL, aplicación con datos reales, dependencias o configuración privada. Parches backend anteriores y favicon/otros PNG del usuario permanecen fuera del commit. `public/build` se genera localmente y no se versiona.
 
+### Mayor transparencia del escudo ("up000056")
+
+| Archivo | Cambio |
+| --- | --- |
+| `resources/css/app.css` | Escudo global al30% de opacidad: más transparente que el48% anterior. |
+| `AGENTS.md`, `DOC/sistema/estandar-visual.md` | Regla vigente y registro del ajuste sin cambiar tablas ni texto. |
+| `pruebas/evidencias/escudo-30/` | Build y capturas locales en claro/oscuro con medición de opacidad y ancho. |
+
+**Validación:** Vite correcto; opacidad computada0.3 en ambos temas, paneles conservados al0.62 y ancho1366/1366 sin desbordamiento en los snapshots. Sin aplicación con datos reales, MySQL, backend ni dependencias. Aceptación estética pendiente.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.

@@ -1,0 +1,16 @@
+[
+  {
+    "theme": "dark",
+    "opacity": "0.3",
+    "panel": "rgba(7, 24, 51, 0.62)",
+    "scroll": 1366,
+    "width": 1366
+  },
+  {
+    "theme": "light",
+    "opacity": "0.3",
+    "panel": "rgba(241, 247, 255, 0.62)",
+    "scroll": 1366,
+    "width": 1366
+  }
+]

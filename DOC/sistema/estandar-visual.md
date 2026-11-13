@@ -22,7 +22,7 @@ El azul marino translúcido y los degradados solicitados prevalecen sobre prefer
 | Filtrar | info | Azul |
 | Cancelar / volver | neutral | Azul grisáceo |
 
-Escudo: opacidad0.48; equivale a reducir un40% la intensidad anterior de0.8. Esta última petición busca un fondo apenas perceptible, conservando escala, filtro y archivo. No confundir opacidad de la imagen con alfa del panel.
+Escudo: opacidad0.30 (70% transparente), por la nueva petición de atenuar más el fondo; sustituye la opacidad0.48 anterior. Esta última petición busca un fondo apenas perceptible, conservando escala, filtro y archivo. No confundir opacidad de la imagen con alfa del panel.
 
 Superficie oscura: `rgb(7 24 51 / .62)`; clara: `rgb(241 247 255 / .62)`. Sustituyen el alfa0.8 anterior por petición de mayor transparencia. Los controles usan superficie sólida legible y texto contrastado; las tablas no acumulan fondos por fila o celda. Tamaño de icono compartido: 14px; botón de icono 36px o 40px, mínimo táctil 44px en móvil/puntero grueso. No introducir tamaños distintos por CRUD.
 

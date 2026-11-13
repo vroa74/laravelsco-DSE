@@ -161,7 +161,7 @@ body { font-family: var(--font-sans); }
 .bg-institucional__shield {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
   width: min(94vw, 1100px); max-width: none; max-height: 90svh; object-fit: contain;
-  opacity: .48; user-select: none; filter: grayscale(100%) brightness(1.35) contrast(1.1);
+  opacity: .30; user-select: none; filter: grayscale(100%) brightness(1.35) contrast(1.1);
 }
 .bg-institucional__gradient-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgb(217 231 250 / .25), transparent); }
 html.dark .bg-institucional__gradient-base { background: linear-gradient(135deg, #0c1c43, #040d20, #020617); }

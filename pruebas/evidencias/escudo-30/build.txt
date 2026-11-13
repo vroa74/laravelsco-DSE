@@ -1,0 +1,52 @@
+> build
+> vite build
+
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 62 modules transformed.
+rendering chunks...
+computing gzip size...
+public/build/assets/roboto-greek-ext-400-normal-DSIYbWsP.woff        1.47 kB
+public/build/assets/roboto-greek-ext-400-normal-C7ftzq0i.woff2       3.68 kB
+public/build/assets/arimo-greek-ext-400-normal-BJYd2Ub5.woff2        4.56 kB
+public/build/assets/arimo-vietnamese-400-normal-CervLxD7.woff2       4.89 kB
+public/build/assets/roboto-vietnamese-400-normal-Bf76hAzZ.woff       6.08 kB
+public/build/assets/arimo-greek-ext-400-normal-D-e-OuEk.woff         6.18 kB
+public/build/assets/arimo-vietnamese-400-normal-6ktFzlmM.woff        6.43 kB
+public/build/assets/arimo-cyrillic-400-normal-CgTchz7I.woff2         7.32 kB
+public/build/assets/roboto-greek-400-normal-D904r64h.woff            7.42 kB
+public/build/assets/arimo-hebrew-400-normal-mvtLHX7Y.woff2           7.72 kB
+public/build/assets/roboto-vietnamese-400-normal-D2PTxGxD.woff2      8.36 kB
+public/build/assets/roboto-symbols-400-normal-C7tGlxgb.woff          8.75 kB
+public/build/assets/arimo-greek-400-normal-BUS6n_W-.woff2            9.09 kB
+public/build/assets/arimo-cyrillic-400-normal-CF2XIQji.woff          9.30 kB
+public/build/assets/roboto-greek-400-normal-ai2Z1K3C.woff2           9.55 kB
+public/build/assets/arimo-hebrew-400-normal-DuxCN41l.woff            9.70 kB
+public/build/manifest.json                                           9.99 kB │ gzip:  0.99 kB
+public/build/assets/roboto-cyrillic-400-normal-BepgbcUK.woff        10.20 kB
+public/build/assets/roboto-symbols-400-normal-CB1Ce4Gk.woff2        10.73 kB
+public/build/assets/arimo-latin-400-normal-Bqnq6eT5.woff2           11.45 kB
+public/build/assets/arimo-greek-400-normal-DOB3qvmW.woff            11.50 kB
+public/build/assets/roboto-cyrillic-400-normal-CBPI_iaY.woff2       12.10 kB
+public/build/assets/roboto-latin-ext-400-normal-CIveymTr.woff       13.83 kB
+public/build/assets/arimo-latin-400-normal-Cd1L7MI3.woff            14.76 kB
+public/build/assets/roboto-latin-ext-400-normal-C3tdtHj3.woff2      15.04 kB
+public/build/assets/roboto-cyrillic-ext-400-normal-DhDk0Xwi.woff    15.95 kB
+public/build/assets/roboto-cyrillic-ext-400-normal-qHufge6k.woff2   17.37 kB
+public/build/assets/roboto-math-400-normal-D6sS4O5l.woff            18.76 kB
+public/build/assets/roboto-math-400-normal-BEFej5gc.woff2           20.08 kB
+public/build/assets/arimo-cyrillic-ext-400-normal-fkIYAX4U.woff2    20.12 kB
+public/build/assets/roboto-latin-400-normal-D27F5sTu.woff           21.06 kB
+public/build/assets/roboto-latin-400-normal-BqEyEoaF.woff2          21.88 kB
+public/build/assets/arimo-cyrillic-ext-400-normal-VrsG38ur.woff     26.29 kB
+public/build/assets/arimo-latin-ext-400-normal-B-XWcJFt.woff2       52.12 kB
+public/build/assets/arimo-latin-ext-400-normal-CuyoxgRm.woff        71.26 kB
+public/build/assets/app-CMIWRhqA.css                               653.00 kB │ gzip: 63.47 kB
+public/build/assets/app-xmgAw4PF.js                                 57.63 kB │ gzip: 21.38 kB
+
+✓ built in 10.18s
+[PLUGIN_TIMINGS] JavaScript callbacks ran for 10.1s of this 10.2s build (99%).
+The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - plugin vite:css transform (97%, 9.9s, 1 call)
+Additional callback time came from callbacks under 1s.
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
