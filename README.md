@@ -752,6 +752,16 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** Vite correcto; opacidad computada0.3 en ambos temas, paneles conservados al0.62 y ancho1366/1366 sin desbordamiento en los snapshots. Sin aplicación con datos reales, MySQL, backend ni dependencias. Aceptación estética pendiente.
 
+### Escudo más tenue y CSS descriptivo ("up000057")
+
+| Archivo | Cambio |
+| --- | --- |
+| `resources/css/app.css` | Escudo al12% de opacidad y bloques comentados: capas, transparencia, acabado plateado y temas. |
+| `AGENTS.md`, `DOC/sistema/estandar-visual.md` | Regla obligatoria de nombres semánticos, comentarios descriptivos y organización de CSS. |
+| `pruebas/evidencias/escudo-12/` | Build, capturas sintéticas y medición de opacidad en claro/oscuro. |
+
+**Validación:** Vite correcto, opacidad0.12 y tablas al0.62 en ambos temas; ancho1366/1366 sin desbordamiento en snapshots. Sin datos reales, MySQL ni backend. Se conserva fuera del commit el cambio local previo del usuario en el velo claro. Aceptación estética pendiente.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.

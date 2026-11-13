@@ -22,7 +22,7 @@ El azul marino translúcido y los degradados solicitados prevalecen sobre prefer
 | Filtrar | info | Azul |
 | Cancelar / volver | neutral | Azul grisáceo |
 
-Escudo: opacidad0.30 (70% transparente), por la nueva petición de atenuar más el fondo; sustituye la opacidad0.48 anterior. Esta última petición busca un fondo apenas perceptible, conservando escala, filtro y archivo. No confundir opacidad de la imagen con alfa del panel.
+Escudo: opacidad0.12 (88% transparente), por la nueva petición de atenuar un poco más el fondo; se constató un ajuste local previo a0.15 y se conserva el resto del trabajo del usuario. Esta última petición busca un fondo apenas perceptible, conservando escala, filtro y archivo. No confundir opacidad de la imagen con alfa del panel.
 
 Superficie oscura: `rgb(7 24 51 / .62)`; clara: `rgb(241 247 255 / .62)`. Sustituyen el alfa0.8 anterior por petición de mayor transparencia. Los controles usan superficie sólida legible y texto contrastado; las tablas no acumulan fondos por fila o celda. Tamaño de icono compartido: 14px; botón de icono 36px o 40px, mínimo táctil 44px en móvil/puntero grueso. No introducir tamaños distintos por CRUD.
 
@@ -122,3 +122,9 @@ Tokens y material visual: `resources/css/app.css`. Botones, campos y diálogos: 
 Se revisan las plantillas efectivas: Jetstream monta `resources/views/navigation-menu.blade.php`, no su duplicado bajo livewire. Los CRUD montan People, Usuarios/Index, UserGroups/Index y Reportesgral/Index. La barra plegable de navegación se usa hasta 1023px para evitar desbordamiento, conservando los mismos enlaces.
 
 Skills aplicadas: Taste (identidad aprobada y stack existente sobre defaults React/movimiento), UI/UX Pro Max (búsqueda local de contraste en campos) e Impeccable 4.7.0 (context, craft-floor y polish). El contexto permite refinamiento del sistema existente sin crear un rediseño. No se instalaron plugins ni hooks.
+
+## CSS descriptivo obligatorio
+
+- **CSS descriptivo obligatorio:** usar nombres semánticos de clases y variables que expliquen la función del componente o estado; evitar nombres ambiguos como caja1, estilo2 o nuevo. Organizar por bloques con encabezados descriptivos y comentar propiedades visuales importantes (opacidad, capas, filtros, temas y excepciones responsive), indicando qué controlan y cómo modificarlas. Mantener una propiedad por línea en esos bloques para facilitar su localización. Reutilizar tokens/componentes; no copiar estilos por CRUD ni renombrar consumidores sin revisar sus referencias.
+
+El bloque de fondo institucional identifica sus tres capas, transparencia del escudo, acabado plateado y variantes por tema. Los comentarios documentan presentación; no introducen lógica de negocio.

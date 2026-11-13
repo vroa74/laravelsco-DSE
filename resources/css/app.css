@@ -155,18 +155,63 @@ body { font-family: var(--font-sans); }
 }
 @media (prefers-reduced-motion: reduce) { .btn-base, .btn-icon { transition: none; } }
 
-/* Decoración común sin eventos, lectura accesible ni scroll artificial. */
-.bg-institucional { pointer-events: none; position: fixed; inset: 0; z-index: 0; overflow: hidden; }
-.bg-institucional__gradient-base { position: absolute; inset: 0; background: linear-gradient(135deg, #e0ecff, #c2d4ee, #edf4ff); }
-.bg-institucional__shield {
-  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-  width: min(94vw, 1100px); max-width: none; max-height: 90svh; object-fit: contain;
-  opacity: .30; user-select: none; filter: grayscale(100%) brightness(1.35) contrast(1.1);
+/* ========================================================================
+   FONDO INSTITUCIONAL COMPARTIDO — páginas internas y acceso.
+   La decoración no recibe clics y queda fuera de la lectura accesible.
+   ======================================================================== */
+.bg-institucional {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
 }
-.bg-institucional__gradient-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgb(217 231 250 / .25), transparent); }
-html.dark .bg-institucional__gradient-base { background: linear-gradient(135deg, #0c1c43, #040d20, #020617); }
+
+/* CAPA 1: degradado base del fondo en tema claro. */
+.bg-institucional__gradient-base {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #e0ecff, #c2d4ee, #edf4ff);
+}
+
+/* CAPA 2: escudo de Campeche, centrado y adaptable al tamaño de pantalla. */
+.bg-institucional__shield {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(94vw, 1100px);
+  max-width: none;
+  max-height: 90svh;
+  object-fit: contain;
+
+  /* TRANSPARENCIA DEL ESCUDO: 0.12 = 12% visible y 88% transparente.
+     Reducir este valor lo atenúa; aumentarlo hace que destaque más.
+     Esta propiedad no modifica el texto ni el fondo de las tablas. */
+  opacity: .12;
+  user-select: none;
+
+  /* ACABADO PLATEADO: convierte el color a gris y ajusta brillo/contraste. */
+  filter: grayscale(100%) brightness(1.35) contrast(1.1);
+}
+
+/* CAPA 3: velo degradado por encima del escudo, solo en tema claro. */
+.bg-institucional__gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgb(217 231 250 / .25), transparent);
+}
+
+/* TEMA OSCURO: fondo azul marino y mezcla luminosa del escudo plateado. */
+html.dark .bg-institucional__gradient-base {
+  background: linear-gradient(135deg, #0c1c43, #040d20, #020617);
+}
 html.dark .bg-institucional__shield { mix-blend-mode: screen; }
-html.dark .bg-institucional__gradient-overlay { background: linear-gradient(0deg, rgb(2 6 23 / .5), rgb(2 6 23 / .25)); }
+
+/* VELO EN TEMA OSCURO: mantiene la lectura sin cambiar la opacidad del PNG. */
+html.dark .bg-institucional__gradient-overlay {
+  background: linear-gradient(0deg, rgb(2 6 23 / .5), rgb(2 6 23 / .25));
+}
 .sco-ui ::selection { background: #1d4ed8; color: #fff; }
 [x-cloak] { display: none; }
 
