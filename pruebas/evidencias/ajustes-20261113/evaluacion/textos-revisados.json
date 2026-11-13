@@ -1,0 +1,56 @@
+{
+  "estado": "Propuesta revisada; aún no aplicada a vistas",
+  "revision": "Se retiran afirmaciones no acreditadas sobre borrado permanente, parámetros personalizados y alcance del documento.",
+  "textos": [
+    {
+      "id": "agregar",
+      "etiqueta": "Agregar registro",
+      "ayuda": "Crea una nueva entrada en el sistema."
+    },
+    {
+      "id": "editar",
+      "etiqueta": "Editar registro",
+      "ayuda": "Modifica la información del registro seleccionado."
+    },
+    {
+      "id": "ver",
+      "etiqueta": "Ver detalle",
+      "ayuda": "Consulta la información completa del registro."
+    },
+    {
+      "id": "eliminar",
+      "etiqueta": "Eliminar registro",
+      "ayuda": "Elimina el registro seleccionado."
+    },
+    {
+      "id": "exportar_pdf",
+      "etiqueta": "Exportar a PDF",
+      "ayuda": "Exporta la información a un archivo PDF."
+    },
+    {
+      "id": "reporte_normal",
+      "etiqueta": "Reporte normal",
+      "ayuda": "Abre el reporte normal del registro."
+    },
+    {
+      "id": "reporte_especial",
+      "etiqueta": "Reporte especial",
+      "ayuda": "Abre el reporte especial del registro."
+    },
+    {
+      "id": "reporte_solicitud",
+      "etiqueta": "Reporte de solicitud",
+      "ayuda": "Abre el reporte de solicitud del registro."
+    },
+    {
+      "id": "cerrar",
+      "etiqueta": "Cerrar",
+      "ayuda": "Cierra la ventana o diálogo actual."
+    },
+    {
+      "id": "error_foto",
+      "etiqueta": "Error al actualizar foto",
+      "ayuda": "No se pudo guardar la nueva imagen; se conserva la foto anterior."
+    }
+  ]
+}

@@ -814,3 +814,15 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 | `AGENTS.md`, `DOC/sistema/ajustes-20261113.md` | Estado preciso de integración y relevo de PDF a Gemini tras fallo de DeepInfra. |
 
 **Validación:** guardia previa aceptada sin cargar Laravel; PHPUnit directo,21 pruebas/94 aserciones en3.421s; Pint limpio en cinco PHP. SQLite :memory: y archivos/temporales en /pruebas. Sin MySQL, migraciones, datos reales, .env ni servidor web. Pendientes consumo de URL y revisión renderizada de las vistas; no se da por cerrado el defecto visual ni la ronda de estilos/reportes. No requiere build esta entrega PHP; los cambios frontend concurrentes no se incluyen.
+
+
+### Evaluación de agentes y redistribución ("up000062")
+
+| Archivo | Cambio |
+| --- | --- |
+| `AGENTS.md` | CEO y dirección del proyecto, avisos de cierre con colores y criterios para cortar bucles de herramientas. |
+| `DOC/sistema/rendimiento-agentes.md`, `ajustes-20261113.md` | Calificaciones provisionales, evidencia, detenciones confirmadas y nuevos responsables sin compartir escritores. |
+| `pruebas/encargos/20261113-ajustes/05-deepseek-reportes-reasignado.md` | Encargo PDF pequeño para DeepSeek conservando tarea y límites. |
+| `pruebas/herramientas/evaluar-gemini-textos.mjs`, `pruebas/evidencias/ajustes-20261113/evaluacion/` | Tarea útil de texto para Gemini, respuesta y versión revisada sin aplicación automática. |
+
+**Validación:** recibos de detención y liberación de dos intentos Gemini; nuevo intento PDF DeepSeek recibido. Gemini texto HTTP200/JSON válido en4.669s,772 tokens declarados; revisión humana de semántica y node --check. Sin producto modificado, build/pruebas de aplicación, MySQL ni datos reales. Estilos asumidos por Codex y vistas/PDF pendientes; no se declara cierre general.

@@ -1,0 +1,72 @@
+{
+  "fecha": "2026-11-13T18:46:23.942Z",
+  "tarea": "Microtextos sintéticos, sin herramientas ni archivos remotos",
+  "modeloSolicitado": "gemini/gemini-3.1-flash-lite",
+  "modeloRespuesta": "gemini-3.1-flash-lite",
+  "http": 200,
+  "duracionMs": 4669,
+  "usoDeclarado": {
+    "prompt_tokens": 179,
+    "completion_tokens": 593,
+    "total_tokens": 772,
+    "completion_tokens_details": {
+      "reasoning_tokens": 141
+    }
+  },
+  "estructuraValida": true,
+  "aplicada": false,
+  "propuesta": {
+    "textos": [
+      {
+        "id": "agregar",
+        "etiqueta": "Agregar registro",
+        "ayuda": "Crea una nueva entrada en el sistema."
+      },
+      {
+        "id": "editar",
+        "etiqueta": "Editar registro",
+        "ayuda": "Modifica la información del registro seleccionado."
+      },
+      {
+        "id": "ver",
+        "etiqueta": "Ver detalle",
+        "ayuda": "Consulta la información completa del registro."
+      },
+      {
+        "id": "eliminar",
+        "etiqueta": "Eliminar registro",
+        "ayuda": "Borra el registro seleccionado de forma permanente."
+      },
+      {
+        "id": "exportar_pdf",
+        "etiqueta": "Exportar a PDF",
+        "ayuda": "Descarga el documento actual en formato PDF."
+      },
+      {
+        "id": "reporte_normal",
+        "etiqueta": "Reporte normal",
+        "ayuda": "Genera el reporte estándar del sistema."
+      },
+      {
+        "id": "reporte_especial",
+        "etiqueta": "Reporte especial",
+        "ayuda": "Genera un reporte con parámetros personalizados."
+      },
+      {
+        "id": "reporte_solicitud",
+        "etiqueta": "Reporte de solicitud",
+        "ayuda": "Genera el reporte basado en la solicitud actual."
+      },
+      {
+        "id": "cerrar",
+        "etiqueta": "Cerrar",
+        "ayuda": "Cierra la ventana o diálogo actual."
+      },
+      {
+        "id": "error_foto",
+        "etiqueta": "Error al actualizar foto",
+        "ayuda": "No se pudo guardar la nueva imagen; se conserva la foto anterior."
+      }
+    ]
+  }
+}
