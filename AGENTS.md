@@ -6,6 +6,8 @@
 
 **Registro — 12/11/2026, pausa expresa del usuario (up000053):** Se avisa y detiene la tarea de homogeneización global `task_8d50282dc798` / `ctx_af5970bf42a6`; Orca confirma stopped/closed_agent_terminal. Se conserva el estado local de resources en pruebas/reanudacion/20261112-175516, sin revertir ni commitear producto inconcluso. DOC/sistema/reanudacion.md recoge objetivo, estado, pendientes y pasos de reintento del mismo Task. No se deja ejecución remota ni se traslada el proyecto. Pausa solicitada por el usuario; sin build/pruebas adicionales ni acceso a datos. Estandarización global NO terminada; esperar instrucción de reanudar.
 
+**Registro — 12/11/2026, reanudación autorizada (up000054):** El usuario solicita «continuemos». Se leen la nota y checkpoint de pausa, reglas, plan y diferencias locales; no se restaura ni sobrescribe el estado. La implementación global sigue incompleta: resources/css/app.css conserva una base de tokens de206 líneas y las diferencias previas de grupos permanecen. Catálogo de OmniRoute HTTP200 y contexto NVIDIA262144 comprobados; alias local preservado. Se prepara reintento del mismo Task task_8d50282dc798 desde ctx_af5970bf42a6, cuya detención estaba confirmada. Esta entrega solo registra la reanudación y revisiones; no acredita arranque posterior, build, pruebas ni homogeneización terminada. Sin MySQL ni cambios nuevos de producto.
+
 ## Superficies translúcidas en todas las páginas — 12/11/2026
 
 - Aclaración expresa del usuario, con captura de `/dashboard`: el escudo plateado, grande y sin letras debe verse como fondo detrás del contenido en todas las páginas, no solo en acceso. Usar `public/media/img/campechecon.png`, sin alterar el PNG original.

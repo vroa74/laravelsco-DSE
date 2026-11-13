@@ -718,6 +718,16 @@ El README original (`zREADME.md`) mantenía una bitácora de trabajo que se cons
 
 **Validación:** suspensión enviada y detención Orca confirmada; checkpoint local de diferencias y archivos nuevos de resources guardado y nota leída de vuelta. Sin build, pruebas ni datos en esta pausa. No continúa trabajo en la nube; esperar petición de reanudación.
 
+### Reanudación de homogeneización visual ("up000054")
+
+| Archivo | Cambio |
+| --- | --- |
+| `AGENTS.md` | Registra autorización de continuar, estado local incompleto y comprobación del gateway NVIDIA. |
+| `DOC/sistema/reanudacion.md` | Conserva checkpoint y añade el estado actual sin restaurar sobre cambios locales. |
+| `README.md` | Bitácora de la reanudación y límites de lo verificado. |
+
+**Validación:** lectura de reglas/plan/checkpoint, Git y diferencias; catálogo OmniRoute HTTP200 con contexto262144. Sin build, pruebas ni datos de SCO; arranque del trabajador y aplicación global pendientes de verificar.
+
 ### Pendientes fuera de estos commits
 
 - Exponer las rutas de `ReportFileController` o retirar la funcionalidad.

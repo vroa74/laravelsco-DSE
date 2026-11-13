@@ -1,5 +1,7 @@
 # Reanudación de la homogeneización visual
 
+**Reanudación autorizada — 2026-11-12T18:29:33 (up000054):** el usuario indica «continuemos». Estado y checkpoint revisados sin restaurar ni sobrescribir; los tokens CSS iniciados aún no acreditan pantallas unificadas. OmniRoute responde HTTP200 y el catálogo anuncia contexto262144 para NVIDIA Ultra. Se prepara reintento del mismo Task; verificar su recibo antes de afirmar actividad. La pausa siguiente se conserva como antecedente.
+
 Pausa expresa del usuario: 20261112-175516. El equipo se va a apagar temporalmente.
 
 - Último commit antes de esta nota: 22eb650 up000052 - Escudo global y superficies al ochenta por ciento.
